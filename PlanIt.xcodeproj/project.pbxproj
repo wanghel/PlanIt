@@ -15,6 +15,10 @@
 		3B70915A2481943E0007C1EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B7091582481943E0007C1EF /* LaunchScreen.storyboard */; };
 		3B7091652481943E0007C1EF /* PlanItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7091642481943E0007C1EF /* PlanItTests.swift */; };
 		3B7091702481943E0007C1EF /* PlanItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B70916F2481943E0007C1EF /* PlanItUITests.swift */; };
+		3BC4061F2481C8D000EF74FF /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC4061E2481C8D000EF74FF /* CalendarView.swift */; };
+		3BC406212481FD9B00EF74FF /* DaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC406202481FD9B00EF74FF /* DaysView.swift */; };
+		3BC406272482174D00EF74FF /* MyCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC406262482174D00EF74FF /* MyCalendar.swift */; };
+		3BC4062924821DA100EF74FF /* ReminderDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC4062824821DA100EF74FF /* ReminderDayView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +53,10 @@
 		3B70916B2481943E0007C1EF /* PlanItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlanItUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B70916F2481943E0007C1EF /* PlanItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanItUITests.swift; sourceTree = "<group>"; };
 		3B7091712481943E0007C1EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3BC4061E2481C8D000EF74FF /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CalendarView.swift; path = ../CalendarView.swift; sourceTree = "<group>"; };
+		3BC406202481FD9B00EF74FF /* DaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysView.swift; sourceTree = "<group>"; };
+		3BC406262482174D00EF74FF /* MyCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCalendar.swift; sourceTree = "<group>"; };
+		3BC4062824821DA100EF74FF /* ReminderDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +107,13 @@
 		3B70914C2481943C0007C1EF /* PlanIt */ = {
 			isa = PBXGroup;
 			children = (
+				3BC406262482174D00EF74FF /* MyCalendar.swift */,
+				3BC4061E2481C8D000EF74FF /* CalendarView.swift */,
 				3B70914D2481943C0007C1EF /* AppDelegate.swift */,
 				3B70914F2481943C0007C1EF /* SceneDelegate.swift */,
 				3B7091512481943C0007C1EF /* ContentView.swift */,
+				3BC4062824821DA100EF74FF /* ReminderDayView.swift */,
+				3BC406202481FD9B00EF74FF /* DaysView.swift */,
 				3B7091532481943E0007C1EF /* Assets.xcassets */,
 				3B7091582481943E0007C1EF /* LaunchScreen.storyboard */,
 				3B70915B2481943E0007C1EF /* Info.plist */,
@@ -267,8 +279,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BC4062924821DA100EF74FF /* ReminderDayView.swift in Sources */,
+				3BC406212481FD9B00EF74FF /* DaysView.swift in Sources */,
+				3BC406272482174D00EF74FF /* MyCalendar.swift in Sources */,
 				3B70914E2481943C0007C1EF /* AppDelegate.swift in Sources */,
 				3B7091502481943C0007C1EF /* SceneDelegate.swift in Sources */,
+				3BC4061F2481C8D000EF74FF /* CalendarView.swift in Sources */,
 				3B7091522481943C0007C1EF /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

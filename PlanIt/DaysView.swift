@@ -1,0 +1,87 @@
+//
+//  DaysView.swift
+//  PlanIt
+//
+//  Created by Helen Wang on 5/29/20.
+//  Copyright © 2020 Helen Wang. All rights reserved.
+//
+
+import SwiftUI
+
+let pink = Color(red: 1.0, green: 0.8, blue: 0.8)
+let red = Color(red: 1.0, green: 0.6, blue: 0.6)
+let orange = Color(red: 1.0, green: 0.7, blue: 0.6)
+let yellow = Color(red: 1.0, green: 0.9, blue: 0.5)
+let green = Color(red: 0.8, green: 0.97, blue: 0.6)
+let blue = Color(red: 0.7, green: 0.95, blue: 0.9)
+let purple = Color(red: 0.9, green: 0.7, blue: 0.9)
+
+struct LabelImage: View {
+    var img: String
+    var body: some View {
+        Image(img)
+        .resizable()
+            .frame(width: 150)
+    }
+}
+
+struct Slider: View {
+    var day: String
+    var image: String
+    var color: Color
+    var body: some View
+    {
+        
+        Text(day)
+            .font(.title)
+            .fontWeight(.light)
+            .foregroundColor(.white)
+            .padding()
+            .shadow(radius: 10)
+            .frame(width: screenWidth/7, height: screenHeight*0.1)
+            .background(color)
+            .cornerRadius(10)
+        
+    }
+}
+
+struct DaysView: View {
+    var body: some View {
+        
+        HStack(spacing: 0.0) {
+            NavigationLink (destination: ReminderDayView(color: pink)) {
+                Slider(day: "S", image: "planet1", color: pink)
+            }
+            
+            NavigationLink (destination: ReminderDayView(color: red)) {
+                Slider(day: "M", image: "planet1", color: red)
+            }
+             
+            NavigationLink (destination: ReminderDayView(color: orange)) {
+                Slider(day: "T", image: "planet1", color: orange)
+            }
+            
+            NavigationLink (destination: ReminderDayView(color: yellow)) {
+                Slider(day: "W", image: "planet1", color: yellow)
+            }
+            
+            NavigationLink (destination: ReminderDayView(color: green)) {
+                Slider(day: "T", image: "planet1", color: green)
+            }
+             
+            NavigationLink (destination: ReminderDayView(color: blue)) {
+                Slider(day: "F", image: "planet1", color: blue)
+            }
+            
+            NavigationLink (destination: ReminderDayView(color: purple)) {
+                Slider(day: "S", image: "planet1", color: purple)
+            }
+        }
+    }
+}
+
+struct DaysView_Previews: PreviewProvider {
+    static var previews: some View {
+        DaysView()
+    }
+}
