@@ -9,21 +9,17 @@
 import Foundation
 
 class CurrCalendar: ObservableObject {
-    var currDate: Date
     @Published var currMonth: Int
-    var currYear: Int
+    @Published var currYear: Int
     var currDay: Int
-    var currWeekDay: Int
-    var isLeapYear: Bool
     let userCal = Calendar.current
     
+    let daysOfMonthArr = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    
     init (){
-        currDate = Date()
         currMonth = userCal.component(.month, from: Date())
         currYear = userCal.component(.year, from: Date())
         currDay = userCal.component(.day, from: Date())
-        currWeekDay = userCal.component(.weekday, from: Date())
-        isLeapYear = currYear % 4 == 0
     }
     
     /** returns index of weekday the first day falls on in current month */
@@ -46,60 +42,42 @@ class CurrCalendar: ObservableObject {
     
     func setMonth(month: Int) {
         currMonth = month
-        updateWeekDay()
-        updateDate()
     }
     
     func setYear(year: Int) {
         currYear = year
-        isLeapYear = currYear % 4 == 0
-        updateWeekDay()
-        updateDate()
     }
     
     func setDay(day: Int) {
         currDay = day
-        updateWeekDay()
-        updateDate()
     }
     
     func nextMonth() {
-        let nMonth = (currMonth+1)%12
-        if (nMonth == 0){
+        let nMonth = (currMonth-1+1)%12+1
+        if (nMonth == 1){
             setMonth(month: nMonth)
             setYear(year: currYear+1)
-            print("after change")
         } else {
             setMonth(month: nMonth)
         }
     }
     
     func prevMonth() {
-        let pMonth = (currMonth+11)%12
-        if (pMonth == 11){
-            setMonth(month: pMonth)
+        let pMonth = (currMonth-1+11)%12+1
+        if (pMonth == 12){
             setYear(year: currYear-1)
-            print("after change")
+            setMonth(month: pMonth)
         } else {
             setMonth(month: pMonth)
         }
     }
     
-    private func updateWeekDay() {
-        var fdate = DateComponents()
-        fdate.year = currYear
-        fdate.month = currMonth
-        fdate.day = currDay
-        let currDate = userCal.date(from: fdate)
-        currWeekDay = (userCal.component(.weekday, from: currDate!)-1)%7+1
-    }
-    
-    private func updateDate() {
-        var newDate = DateComponents()
-        newDate.year = currYear
-        newDate.month = currMonth
-        newDate.day = currDay
-        currDate = userCal.date(from: newDate)!
+    func getDaysOfMonth() -> Int {
+        if (currMonth == 2 && currYear%4 == 0) {
+            return 29
+        } else {
+            return daysOfMonthArr[currMonth-1]
+        }
     }
     
 }

@@ -20,20 +20,20 @@ struct ContentView: View {
         
         NavigationView {
             
-                   VStack(spacing: 0.0) {
-                       /*Text("Calendar")
-                           .font(.largeTitle)
-                           .fontWeight(.light)
-                           .foregroundColor(Color.black)
-                           .frame(width: screenWidth, height: screenHeight*0.7)*/
-                    /*CalendarView().frame(width: screenWidth, alignment: .top)*/
-                    CalendarView(currCal: CurrCalendar()).frame(width: screenWidth, alignment: .top)
-                       
-                       Spacer()
-                       DaysView()
-                   }.padding(.bottom, 0.0)
-                    .frame(alignment: .bottom)
-                    .navigationBarTitle(Text("Today").fontWeight(.light).foregroundColor(.white))
+            VStack(spacing: 0.0) {
+                /*Text("Calendar")
+                   .font(.largeTitle)
+                   .fontWeight(.light)
+                   .foregroundColor(Color.black)
+                   .frame(width: screenWidth, height: screenHeight*0.7)*/
+                /*CalendarView(currCal: CurrCalendar()).frame(width: screenWidth, alignment: .top)*/
+                MonthView(calendar: CurrCalendar())
+                    .frame(alignment: .top).edgesIgnoringSafeArea(.all)
+
+                Spacer()
+                DaysView()
+            }.padding(.bottom, 0.0)
+                //.frame(alignment: .bottom)
         }
 
         
