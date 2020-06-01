@@ -7,14 +7,19 @@
 //
 
 import UIKit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.tintColor = UIColor.white
+        navigationBarAppearace.barTintColor = UIColor.white
+        //navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         return true
     }
 
@@ -34,4 +39,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-

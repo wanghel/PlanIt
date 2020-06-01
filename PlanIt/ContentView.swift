@@ -15,24 +15,25 @@ let screenHeight = screenSize.height
 
 
 struct ContentView: View {
+    
     var body: some View {
         
         NavigationView {
+            
                    VStack(spacing: 0.0) {
-                           Text("Calendar")
-                               .font(.largeTitle)
-                               .fontWeight(.light)
-                               .foregroundColor(Color.black)
-                               .frame(width: screenWidth, height: screenHeight*0.7)
-                           /*CalendarView().frame(width: screenWidth, height: screenHeight*0.9)(*/
-                           
-                           //DaysView()
+                       /*Text("Calendar")
+                           .font(.largeTitle)
+                           .fontWeight(.light)
+                           .foregroundColor(Color.black)
+                           .frame(width: screenWidth, height: screenHeight*0.7)*/
+                    /*CalendarView().frame(width: screenWidth, alignment: .top)*/
+                    CalendarView(currCal: CurrCalendar()).frame(width: screenWidth, alignment: .top)
                        
                        Spacer()
                        DaysView()
-                   }.padding(.bottom, 10.0).frame(alignment: .bottom).navigationBarTitle(Text("My Custom white title")
-                   .foregroundColor(.white)
-                   .font(.title), displayMode: .inline)
+                   }.padding(.bottom, 0.0)
+                    .frame(alignment: .bottom)
+                    .navigationBarTitle(Text("Today").fontWeight(.light).foregroundColor(.white))
         }
 
         
