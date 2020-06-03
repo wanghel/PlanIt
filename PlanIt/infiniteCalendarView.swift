@@ -49,10 +49,10 @@ struct InfiniteCalendarView: View {
         }
         .onEnded { value in
             let offset : CGSize
-            if (self.lastOffset.height + self.draggedOffset.height > screenHeight/5) {
+            if (self.lastOffset.height + self.draggedOffset.height > screenHeight/3) {
                 offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height - screenHeight * 0.4)
                 self.prevView()
-            } else if (self.lastOffset.height + self.draggedOffset.height < -screenHeight/5) {
+            } else if (self.lastOffset.height + self.draggedOffset.height < -screenHeight/10) {
                 offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height + screenHeight * 0.4)
                 self.nextView()
             } else {
