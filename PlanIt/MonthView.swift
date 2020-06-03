@@ -82,7 +82,9 @@ struct MonthView: View {
             ForEach(0..<6) { week in
                 HStack (spacing: 0.0){
                     ForEach(0..<7) { day in
-                        self.displayDay(week: week, day: day)
+                        //NavigationLink (destination: DayView(day: day)) {
+                            self.displayDay(week: week, day: day)
+                        //}.buttonStyle(PlainButtonStyle())
                         
                     }
                 }

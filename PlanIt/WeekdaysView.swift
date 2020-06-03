@@ -1,5 +1,5 @@
 //
-//  DaysView.swift
+//  WeekdaysView.swift
 //  PlanIt
 //
 //  Created by Helen Wang on 5/29/20.
@@ -15,6 +15,11 @@ let yellow = Color(red: 1.0, green: 0.9, blue: 0.5)
 let green = Color(red: 0.8, green: 0.97, blue: 0.6)
 let blue = Color(red: 0.7, green: 0.95, blue: 0.9)
 let purple = Color(red: 0.9, green: 0.7, blue: 0.9)
+
+let weekDayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+let letterArr = ["S", "M", "T", "W", "T", "F", "S"]
+
+let weekDayColor = [pink, red, orange, yellow, green, blue, purple]
 
 struct LabelImage: View {
     var img: String
@@ -45,11 +50,25 @@ struct Slider: View {
     }
 }
 
-struct DaysView: View {
+struct WeekdaysView: View {
+    @State private var showingReminderView = false
+    
     var body: some View {
         
         HStack(spacing: 0.0) {
-            NavigationLink (destination: ReminderDayView(day: "Sunday", color: pink)) {
+            ForEach(0..<7) { day in
+                Button (action: {
+                    self.showingReminderView.toggle()
+                }){
+                    Slider(day: letterArr[day], image: "planet1", color: weekDayColor[day])
+                }.sheet(isPresented: self.$showingReminderView){
+                    ReminderDayView(day: weekDayArr[day], color: weekDayColor[day])
+                }
+            }
+            
+            
+            
+            /*NavigationLink (destination: ReminderDayView(day: "Sunday", color: pink)) {
                 Slider(day: "S", image: "planet1", color: pink)
             }
             
@@ -75,13 +94,15 @@ struct DaysView: View {
             
             NavigationLink (destination: ReminderDayView(day: "Saturday", color: purple)) {
                 Slider(day: "S", image: "planet1", color: purple)
-            }
+            }*/
+            
         }
+        
     }
 }
 
-struct DaysView_Previews: PreviewProvider {
+struct WeekdaysView_Previews: PreviewProvider {
     static var previews: some View {
-        DaysView()
+        WeekdaysView()
     }
 }
