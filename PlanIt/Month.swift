@@ -1,5 +1,5 @@
 //
-//  CurrCalendar.swift
+//  Month.swift
 //  PlanIt
 //
 //  Created by Helen Wang on 5/29/20.
@@ -8,18 +8,29 @@
 
 import Foundation
 
-class CurrCalendar: ObservableObject {
+class Month: ObservableObject {
     @Published var currMonth: Int
     @Published var currYear: Int
-    var currDay: Int
-    let userCal = Calendar.current
+    private let userCal = Calendar.current
     
-    let daysOfMonthArr = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    private let daysOfMonthArr = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     
-    init (){
+    init () {
         currMonth = userCal.component(.month, from: Date())
         currYear = userCal.component(.year, from: Date())
-        currDay = userCal.component(.day, from: Date())
+    }
+    
+    init (month: Int, year: Int) {
+        currMonth = month
+        currYear = year
+    }
+    
+    private func setMonth(month: Int) {
+        currMonth = month
+    }
+    
+    private func setYear(year: Int) {
+        currYear = year
     }
     
     /** returns index of weekday the first day falls on in current month */
@@ -40,36 +51,28 @@ class CurrCalendar: ObservableObject {
         return (firstDay-1)%7
     }
     
-    func setMonth(month: Int) {
-        currMonth = month
-    }
-    
-    func setYear(year: Int) {
-        currYear = year
-    }
-    
-    func setDay(day: Int) {
-        currDay = day
-    }
-    
-    func nextMonth() {
+    func nextMonth() -> Month {
         let nMonth = (currMonth-1+1)%12+1
+        let next = Month(month: currMonth, year: currYear)
         if (nMonth == 1){
-            setMonth(month: nMonth)
-            setYear(year: currYear+1)
+            next.setMonth(month: nMonth)
+            next.setYear(year: currYear+1)
         } else {
-            setMonth(month: nMonth)
+            next.setMonth(month: nMonth)
         }
+        return next
     }
     
-    func prevMonth() {
+    func prevMonth() -> Month {
         let pMonth = (currMonth-1+11)%12+1
+        let prev = Month(month: currMonth, year: currYear)
         if (pMonth == 12){
-            setYear(year: currYear-1)
-            setMonth(month: pMonth)
+            prev.setYear(year: currYear-1)
+            prev.setMonth(month: pMonth)
         } else {
-            setMonth(month: pMonth)
+            prev.setMonth(month: pMonth)
         }
+        return prev
     }
     
     func getDaysOfMonth() -> Int {
@@ -79,5 +82,11 @@ class CurrCalendar: ObservableObject {
             return daysOfMonthArr[currMonth-1]
         }
     }
+    
+    func equals(month: Month) -> Bool {
+        print(self.currYear == month.currYear && self.currMonth == month.currMonth)
+        return self.currYear == month.currYear && self.currMonth == month.currMonth
+    }
+    
     
 }

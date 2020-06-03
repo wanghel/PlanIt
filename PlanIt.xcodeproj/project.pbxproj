@@ -21,7 +21,7 @@
 		3BB1F32924833A4E007E8E1E /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB1F32824833A4E007E8E1E /* DataStore.swift */; };
 		3BB1F32B24834855007E8E1E /* NavigationBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB1F32A24834855007E8E1E /* NavigationBarModifier.swift */; };
 		3BC406212481FD9B00EF74FF /* WeekdaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC406202481FD9B00EF74FF /* WeekdaysView.swift */; };
-		3BC406272482174D00EF74FF /* CurrCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC406262482174D00EF74FF /* CurrCalendar.swift */; };
+		3BC406272482174D00EF74FF /* Month.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC406262482174D00EF74FF /* Month.swift */; };
 		3BC4062924821DA100EF74FF /* ReminderDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC4062824821DA100EF74FF /* ReminderDayView.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,7 +63,7 @@
 		3BB1F32824833A4E007E8E1E /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		3BB1F32A24834855007E8E1E /* NavigationBarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarModifier.swift; sourceTree = "<group>"; };
 		3BC406202481FD9B00EF74FF /* WeekdaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysView.swift; sourceTree = "<group>"; };
-		3BC406262482174D00EF74FF /* CurrCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrCalendar.swift; sourceTree = "<group>"; };
+		3BC406262482174D00EF74FF /* Month.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Month.swift; sourceTree = "<group>"; };
 		3BC4062824821DA100EF74FF /* ReminderDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,9 +123,9 @@
 				3BC4062824821DA100EF74FF /* ReminderDayView.swift */,
 				3BC406202481FD9B00EF74FF /* WeekdaysView.swift */,
 				3B7D1413248718CA00E30EDF /* infiniteCalendarView.swift */,
+				3BC406262482174D00EF74FF /* Month.swift */,
 				3B7D140B2484485100E30EDF /* MonthView.swift */,
 				3B7D14112485CA3200E30EDF /* DayView.swift */,
-				3BC406262482174D00EF74FF /* CurrCalendar.swift */,
 				3B7091532481943E0007C1EF /* Assets.xcassets */,
 				3B7091582481943E0007C1EF /* LaunchScreen.storyboard */,
 				3B70915B2481943E0007C1EF /* Info.plist */,
@@ -296,7 +296,7 @@
 				3BB1F32924833A4E007E8E1E /* DataStore.swift in Sources */,
 				3BB1F32B24834855007E8E1E /* NavigationBarModifier.swift in Sources */,
 				3BC406212481FD9B00EF74FF /* WeekdaysView.swift in Sources */,
-				3BC406272482174D00EF74FF /* CurrCalendar.swift in Sources */,
+				3BC406272482174D00EF74FF /* Month.swift in Sources */,
 				3B7D1414248718CA00E30EDF /* infiniteCalendarView.swift in Sources */,
 				3B70914E2481943C0007C1EF /* AppDelegate.swift in Sources */,
 				3B7091502481943C0007C1EF /* SceneDelegate.swift in Sources */,

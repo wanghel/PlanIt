@@ -20,8 +20,8 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0.0) {
-                /*MonthView(calendar: CurrCalendar())*/
-                InfiniteCalendarView().frame(height: screenHeight/3)
+                //MonthView(calendar: Month())
+                InfiniteCalendarView().frame(height: screenHeight/2)
                 Spacer()
                 WeekdaysView()
             }

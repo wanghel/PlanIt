@@ -9,47 +9,77 @@
 import SwiftUI
 
 struct InfiniteCalendarView: View {
-    @State private var pMonth : CurrCalendar = CurrCalendar()
-    @State private var cMonth : CurrCalendar = CurrCalendar()
-    @State private var nMonth : CurrCalendar = CurrCalendar()
+    @State private var p1Month : Month = Month().prevMonth()
+    @State private var p2Month : Month = Month().prevMonth().prevMonth()
+    @State private var cMonth : Month = Month()
+    @State private var n1Month : Month = Month().nextMonth()
+    @State private var n2Month : Month = Month().nextMonth().nextMonth()
     
     @State private var draggedOffset = CGSize.zero
+    @State private var lastOffset = CGSize.zero
    
-    init () {
-        pMonth.prevMonth()
-        nMonth.nextMonth()
-    }
     
     private func nextView() {
-        pMonth.nextMonth()
-        cMonth.nextMonth()
-        nMonth.nextMonth()
+        p1Month = p1Month.nextMonth()
+        p2Month = p2Month.nextMonth()
+        cMonth = cMonth.nextMonth()
+        n1Month = n1Month.nextMonth()
+        n2Month = n2Month.nextMonth()
     }
     
     private func prevView() {
-        pMonth.prevMonth()
-        cMonth.prevMonth()
-        nMonth.prevMonth()
+        p1Month = p1Month.prevMonth()
+        p2Month = p2Month.prevMonth()
+        cMonth = cMonth.prevMonth()
+        n1Month = n1Month.prevMonth()
+        n2Month = n2Month.prevMonth()
     }
     
     var body: some View {
-        VStack{
-            MonthView(calendar: pMonth).opacity(0.3).allowsHitTesting(false)
+        VStack {
+            MonthView(calendar: p2Month).opacity(0.2).allowsHitTesting(false)
+            MonthView(calendar: p1Month).opacity(0.2).allowsHitTesting(false)
             MonthView(calendar: cMonth)
-            MonthView(calendar: nMonth).opacity(0.3).allowsHitTesting(false)
-        }.offset(y: self.draggedOffset.height).gesture(DragGesture()
+            MonthView(calendar: n1Month).opacity(0.2).allowsHitTesting(false)
+            MonthView(calendar: n2Month).opacity(0.2).allowsHitTesting(false)
+        }.offset(y: self.lastOffset.height + self.draggedOffset.height)
+        .gesture(DragGesture()
+        .onChanged { value in
+            self.draggedOffset = value.translation
+        }
+        .onEnded { value in
+            let offset : CGSize
+            if (self.lastOffset.height + self.draggedOffset.height > screenHeight/5) {
+                offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height - screenHeight * 0.4)
+                self.prevView()
+            } else if (self.lastOffset.height + self.draggedOffset.height < -screenHeight/5) {
+                offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height + screenHeight * 0.4)
+                self.nextView()
+            } else {
+                offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height)
+            }
+            print(self.draggedOffset.height)
+            self.lastOffset = offset
+            self.draggedOffset = CGSize.zero
+        }).navigationBarTitle(Text(""), displayMode: .inline)
+        .navigationBarItems(leading: Text("Hi, Helen"), trailing: Image(systemName: "person.3"))
+        
+        /*.offset(y: self.draggedOffset.height)
+            .gesture(DragGesture()
             .onChanged { value in
                 self.draggedOffset = value.translation
             }
             .onEnded { value in
-                if (value.translation.height > screenHeight/10) {
+                if (value.translation.height > screenHeight/5) {
                     self.prevView()
-                } else if (value.translation.height < -screenHeight/10) {
+                } else if (value.translation.height < -screenHeight/5) {
                     self.nextView()
                 }
+                print(self.draggedOffset.height)
                 self.draggedOffset = CGSize.zero
-            }
-        )
+            }).navigationBarTitle(Text(""), displayMode: .inline)
+            .navigationBarItems(leading: Text("Hi, Helen"), trailing: Image(systemName: "person.3"))*/
+        
     }
 }
 

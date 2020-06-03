@@ -23,10 +23,11 @@ class PlanItTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        let newCalendar = Calen()
-        let nextMonthCalen = newCalendar.nextMonth()
+        let month1 = Month(month: 6, year: 2020)
+        let month2 = Month()
         
-        XCTAssertEqual(newCalendar.equals(cal: nextMonthCalen), false)
+        XCTAssertEqual(month1.equals(month: month2), true)
+        XCTAssertEqual(month1.currMonth == month2.currMonth, true)
     }
 
     func testPerformanceExample() throws {
