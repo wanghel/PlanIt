@@ -37,11 +37,11 @@ struct InfiniteCalendarView: View {
     
     var body: some View {
         VStack {
-            MonthView(calendar: p2Month).opacity(0.2).allowsHitTesting(false)
-            MonthView(calendar: p1Month).opacity(0.2).allowsHitTesting(false)
+            MonthView(calendar: p2Month).opacity(0.3).allowsHitTesting(false)
+            MonthView(calendar: p1Month).opacity(0.3).allowsHitTesting(false)
             MonthView(calendar: cMonth)
-            MonthView(calendar: n1Month).opacity(0.2).allowsHitTesting(false)
-            MonthView(calendar: n2Month).opacity(0.2).allowsHitTesting(false)
+            MonthView(calendar: n1Month).opacity(0.3).allowsHitTesting(false)
+            MonthView(calendar: n2Month).opacity(0.3).allowsHitTesting(false)
         }.offset(y: self.lastOffset.height + self.draggedOffset.height)
         .gesture(DragGesture()
         .onChanged { value in
@@ -61,8 +61,12 @@ struct InfiniteCalendarView: View {
             print(self.draggedOffset.height)
             self.lastOffset = offset
             self.draggedOffset = CGSize.zero
-        }).navigationBarTitle(Text(""), displayMode: .inline)
-        .navigationBarItems(leading: Text("Hi, Helen"), trailing: Image(systemName: "person.3"))
+        })//.navigationBarTitle(Text(""), displayMode: .inline)
+            //.navigationBarItems(leading: Text("Hi, Helen"), trailing: Image(systemName: "person.3"))
+        
+        
+        
+        
         
         /*.offset(y: self.draggedOffset.height)
             .gesture(DragGesture()

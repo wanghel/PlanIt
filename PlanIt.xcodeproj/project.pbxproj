@@ -18,11 +18,11 @@
 		3B7D140C2484485100E30EDF /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7D140B2484485100E30EDF /* MonthView.swift */; };
 		3B7D14122485CA3200E30EDF /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7D14112485CA3200E30EDF /* DayView.swift */; };
 		3B7D1414248718CA00E30EDF /* infiniteCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7D1413248718CA00E30EDF /* infiniteCalendarView.swift */; };
-		3BB1F32924833A4E007E8E1E /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB1F32824833A4E007E8E1E /* DataStore.swift */; };
-		3BB1F32B24834855007E8E1E /* NavigationBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB1F32A24834855007E8E1E /* NavigationBarModifier.swift */; };
+		3BB1F32924833A4E007E8E1E /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB1F32824833A4E007E8E1E /* TaskStore.swift */; };
 		3BC406212481FD9B00EF74FF /* WeekdaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC406202481FD9B00EF74FF /* WeekdaysView.swift */; };
 		3BC406272482174D00EF74FF /* Month.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC406262482174D00EF74FF /* Month.swift */; };
 		3BC4062924821DA100EF74FF /* ReminderDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC4062824821DA100EF74FF /* ReminderDayView.swift */; };
+		3BC9A55224887E3900FA8A7B /* EventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC9A55124887E3900FA8A7B /* EventStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,11 +60,11 @@
 		3B7D140B2484485100E30EDF /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
 		3B7D14112485CA3200E30EDF /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		3B7D1413248718CA00E30EDF /* infiniteCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = infiniteCalendarView.swift; sourceTree = "<group>"; };
-		3BB1F32824833A4E007E8E1E /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
-		3BB1F32A24834855007E8E1E /* NavigationBarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarModifier.swift; sourceTree = "<group>"; };
+		3BB1F32824833A4E007E8E1E /* TaskStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStore.swift; sourceTree = "<group>"; };
 		3BC406202481FD9B00EF74FF /* WeekdaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysView.swift; sourceTree = "<group>"; };
 		3BC406262482174D00EF74FF /* Month.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Month.swift; sourceTree = "<group>"; };
 		3BC4062824821DA100EF74FF /* ReminderDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDayView.swift; sourceTree = "<group>"; };
+		3BC9A55124887E3900FA8A7B /* EventStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +95,8 @@
 		3B7091412481943C0007C1EF = {
 			isa = PBXGroup;
 			children = (
-				3BB1F32824833A4E007E8E1E /* DataStore.swift */,
+				3BB1F32824833A4E007E8E1E /* TaskStore.swift */,
+				3BC9A55124887E3900FA8A7B /* EventStore.swift */,
 				3B70914C2481943C0007C1EF /* PlanIt */,
 				3B7091632481943E0007C1EF /* PlanItTests */,
 				3B70916E2481943E0007C1EF /* PlanItUITests */,
@@ -118,7 +119,6 @@
 			children = (
 				3B70914D2481943C0007C1EF /* AppDelegate.swift */,
 				3B70914F2481943C0007C1EF /* SceneDelegate.swift */,
-				3BB1F32A24834855007E8E1E /* NavigationBarModifier.swift */,
 				3B7091512481943C0007C1EF /* ContentView.swift */,
 				3BC4062824821DA100EF74FF /* ReminderDayView.swift */,
 				3BC406202481FD9B00EF74FF /* WeekdaysView.swift */,
@@ -292,9 +292,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BC4062924821DA100EF74FF /* ReminderDayView.swift in Sources */,
+				3BC9A55224887E3900FA8A7B /* EventStore.swift in Sources */,
 				3B7D14122485CA3200E30EDF /* DayView.swift in Sources */,
-				3BB1F32924833A4E007E8E1E /* DataStore.swift in Sources */,
-				3BB1F32B24834855007E8E1E /* NavigationBarModifier.swift in Sources */,
+				3BB1F32924833A4E007E8E1E /* TaskStore.swift in Sources */,
 				3BC406212481FD9B00EF74FF /* WeekdaysView.swift in Sources */,
 				3BC406272482174D00EF74FF /* Month.swift in Sources */,
 				3B7D1414248718CA00E30EDF /* infiniteCalendarView.swift in Sources */,
@@ -478,7 +478,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = hwang.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -498,7 +498,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = hwang.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

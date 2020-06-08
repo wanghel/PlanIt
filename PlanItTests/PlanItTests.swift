@@ -28,6 +28,13 @@ class PlanItTests: XCTestCase {
         
         XCTAssertEqual(month1.equals(month: month2), true)
         XCTAssertEqual(month1.currMonth == month2.currMonth, true)
+//        
+//        var components = DateComponents()
+//        components.day = 3
+//        components.month = 6
+//        components.year = 2020
+//        let date = Calendar.current.date(from: components) ?? Date()
+//        XCTAssertEqual(date.compare(date).rawValue, 0)
     }
 
     func testPerformanceExample() throws {

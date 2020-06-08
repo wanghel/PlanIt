@@ -34,12 +34,14 @@ struct MonthView: View {
         let firstWeekday = calendar.getFirstWeekDay()
         let dayOfMonth = calendar.getDaysOfMonth()
         
+        // Blank space at beginning and end of month
         if (currIdx <= firstWeekday || currIdx-firstWeekday > dayOfMonth) {
             return Text("")
                 .frame(width: screenWidth/7, height: screenHeight*0.05)
                 .background(Color.white)
                 .cornerRadius(0.0)
         }
+        // Today's date
         else if (todayDay == currIdx-firstWeekday && todayMonth == calendar.currMonth && todayYear == calendar.currYear) {
             return Text(String(currIdx-firstWeekday))
                 .fontWeight(.bold)
@@ -47,7 +49,9 @@ struct MonthView: View {
                 .frame(width: screenWidth/7, height: screenHeight*0.05)
                 .background(weekDayColor[day])
                 .cornerRadius(15.0)
-        } else {
+        }
+        // Plain days in calendar
+        else {
             return Text(String(currIdx-firstWeekday))
                 .frame(width: screenWidth/7, height: screenHeight*0.05)
                 .background(Color.white)
