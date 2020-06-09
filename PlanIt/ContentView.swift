@@ -13,7 +13,6 @@ let screenWidth = screenSize.width
 let screenHeight = screenSize.height
 
 
-
 struct ContentView: View {
    @State var viewProfile = false
     
@@ -196,14 +195,6 @@ struct BottonBar: View {
                         .font(.system(size: 25))
                         .foregroundColor(.gray)
                 }
-                
-                /*Button(action: {
-                    self.selected = 3
-                }){
-                    Image(systemName: "gear")
-                        .font(.system(size: 25))
-                        .foregroundColor(.gray)
-                }*/
             }
         }.padding()
             .padding(.horizontal)

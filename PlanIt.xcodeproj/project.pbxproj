@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,7 @@
 		3B70915A2481943E0007C1EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B7091582481943E0007C1EF /* LaunchScreen.storyboard */; };
 		3B7091652481943E0007C1EF /* PlanItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7091642481943E0007C1EF /* PlanItTests.swift */; };
 		3B7091702481943E0007C1EF /* PlanItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B70916F2481943E0007C1EF /* PlanItUITests.swift */; };
+		3B7991EE24901AF30003B302 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B7991ED24901AF30003B302 /* GoogleService-Info.plist */; };
 		3B7D140C2484485100E30EDF /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7D140B2484485100E30EDF /* MonthView.swift */; };
 		3B7D14122485CA3200E30EDF /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7D14112485CA3200E30EDF /* DayView.swift */; };
 		3B7D1414248718CA00E30EDF /* infiniteCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7D1413248718CA00E30EDF /* infiniteCalendarView.swift */; };
@@ -22,7 +23,9 @@
 		3BC406212481FD9B00EF74FF /* WeekdaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC406202481FD9B00EF74FF /* WeekdaysView.swift */; };
 		3BC406272482174D00EF74FF /* Month.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC406262482174D00EF74FF /* Month.swift */; };
 		3BC4062924821DA100EF74FF /* ReminderDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC4062824821DA100EF74FF /* ReminderDayView.swift */; };
-		3BC9A55224887E3900FA8A7B /* EventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC9A55124887E3900FA8A7B /* EventStore.swift */; };
+		53F8336B9C3F0E828918DC37 /* Pods_PlanItTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D3DD38F138B75FCF67AEE1A /* Pods_PlanItTests.framework */; };
+		66DD3060FA4AA26E1FC134A1 /* Pods_PlanIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47AE7F0F918325BF5249DD28 /* Pods_PlanIt.framework */; };
+		E36F6A29DE748D213FC55805 /* Pods_PlanIt_PlanItUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968F4C0273114555A6A655D7 /* Pods_PlanIt_PlanItUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +46,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		176599E0DFB655CC44EBAD89 /* Pods-PlanIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt.debug.xcconfig"; path = "Target Support Files/Pods-PlanIt/Pods-PlanIt.debug.xcconfig"; sourceTree = "<group>"; };
+		18813DD2B634027B19DDCD45 /* Pods-PlanIt-PlanItUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt-PlanItUITests.debug.xcconfig"; path = "Target Support Files/Pods-PlanIt-PlanItUITests/Pods-PlanIt-PlanItUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		1D3DD38F138B75FCF67AEE1A /* Pods_PlanItTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlanItTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2812F8F9FA82A6F512EA3D51 /* Pods-PlanIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt.release.xcconfig"; path = "Target Support Files/Pods-PlanIt/Pods-PlanIt.release.xcconfig"; sourceTree = "<group>"; };
 		3B70914A2481943C0007C1EF /* PlanIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B70914D2481943C0007C1EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B70914F2481943C0007C1EF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +64,7 @@
 		3B70916B2481943E0007C1EF /* PlanItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlanItUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B70916F2481943E0007C1EF /* PlanItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanItUITests.swift; sourceTree = "<group>"; };
 		3B7091712481943E0007C1EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3B7991ED24901AF30003B302 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B7D140B2484485100E30EDF /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
 		3B7D14112485CA3200E30EDF /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		3B7D1413248718CA00E30EDF /* infiniteCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = infiniteCalendarView.swift; sourceTree = "<group>"; };
@@ -64,7 +72,11 @@
 		3BC406202481FD9B00EF74FF /* WeekdaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysView.swift; sourceTree = "<group>"; };
 		3BC406262482174D00EF74FF /* Month.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Month.swift; sourceTree = "<group>"; };
 		3BC4062824821DA100EF74FF /* ReminderDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDayView.swift; sourceTree = "<group>"; };
-		3BC9A55124887E3900FA8A7B /* EventStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStore.swift; sourceTree = "<group>"; };
+		47AE7F0F918325BF5249DD28 /* Pods_PlanIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlanIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		91B7BA77637FC86D39075257 /* Pods-PlanItTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanItTests.release.xcconfig"; path = "Target Support Files/Pods-PlanItTests/Pods-PlanItTests.release.xcconfig"; sourceTree = "<group>"; };
+		954A324AF40D77B9D2D789CA /* Pods-PlanIt-PlanItUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt-PlanItUITests.release.xcconfig"; path = "Target Support Files/Pods-PlanIt-PlanItUITests/Pods-PlanIt-PlanItUITests.release.xcconfig"; sourceTree = "<group>"; };
+		968F4C0273114555A6A655D7 /* Pods_PlanIt_PlanItUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlanIt_PlanItUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA2DE28BF5F3C789CA09A150 /* Pods-PlanItTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanItTests.debug.xcconfig"; path = "Target Support Files/Pods-PlanItTests/Pods-PlanItTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66DD3060FA4AA26E1FC134A1 /* Pods_PlanIt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53F8336B9C3F0E828918DC37 /* Pods_PlanItTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E36F6A29DE748D213FC55805 /* Pods_PlanIt_PlanItUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,11 +111,12 @@
 			isa = PBXGroup;
 			children = (
 				3BB1F32824833A4E007E8E1E /* TaskStore.swift */,
-				3BC9A55124887E3900FA8A7B /* EventStore.swift */,
 				3B70914C2481943C0007C1EF /* PlanIt */,
 				3B7091632481943E0007C1EF /* PlanItTests */,
 				3B70916E2481943E0007C1EF /* PlanItUITests */,
 				3B70914B2481943C0007C1EF /* Products */,
+				A9AA6F441EA770545FBCB5BD /* Pods */,
+				6C52983F1A1CB5E81DED3535 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -120,15 +136,16 @@
 				3B70914D2481943C0007C1EF /* AppDelegate.swift */,
 				3B70914F2481943C0007C1EF /* SceneDelegate.swift */,
 				3B7091512481943C0007C1EF /* ContentView.swift */,
-				3BC4062824821DA100EF74FF /* ReminderDayView.swift */,
-				3BC406202481FD9B00EF74FF /* WeekdaysView.swift */,
 				3B7D1413248718CA00E30EDF /* infiniteCalendarView.swift */,
 				3BC406262482174D00EF74FF /* Month.swift */,
 				3B7D140B2484485100E30EDF /* MonthView.swift */,
+				3BC406202481FD9B00EF74FF /* WeekdaysView.swift */,
+				3BC4062824821DA100EF74FF /* ReminderDayView.swift */,
 				3B7D14112485CA3200E30EDF /* DayView.swift */,
 				3B7091532481943E0007C1EF /* Assets.xcassets */,
 				3B7091582481943E0007C1EF /* LaunchScreen.storyboard */,
 				3B70915B2481943E0007C1EF /* Info.plist */,
+				3B7991ED24901AF30003B302 /* GoogleService-Info.plist */,
 				3B7091552481943E0007C1EF /* Preview Content */,
 			);
 			path = PlanIt;
@@ -160,6 +177,29 @@
 			path = PlanItUITests;
 			sourceTree = "<group>";
 		};
+		6C52983F1A1CB5E81DED3535 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				47AE7F0F918325BF5249DD28 /* Pods_PlanIt.framework */,
+				968F4C0273114555A6A655D7 /* Pods_PlanIt_PlanItUITests.framework */,
+				1D3DD38F138B75FCF67AEE1A /* Pods_PlanItTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A9AA6F441EA770545FBCB5BD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				176599E0DFB655CC44EBAD89 /* Pods-PlanIt.debug.xcconfig */,
+				2812F8F9FA82A6F512EA3D51 /* Pods-PlanIt.release.xcconfig */,
+				18813DD2B634027B19DDCD45 /* Pods-PlanIt-PlanItUITests.debug.xcconfig */,
+				954A324AF40D77B9D2D789CA /* Pods-PlanIt-PlanItUITests.release.xcconfig */,
+				DA2DE28BF5F3C789CA09A150 /* Pods-PlanItTests.debug.xcconfig */,
+				91B7BA77637FC86D39075257 /* Pods-PlanItTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -167,9 +207,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3B7091742481943E0007C1EF /* Build configuration list for PBXNativeTarget "PlanIt" */;
 			buildPhases = (
+				60358137EF40FD7BD6389003 /* [CP] Check Pods Manifest.lock */,
 				3B7091462481943C0007C1EF /* Sources */,
 				3B7091472481943C0007C1EF /* Frameworks */,
 				3B7091482481943C0007C1EF /* Resources */,
+				260A218F59C212CADD7E8EEC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -184,6 +226,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3B7091772481943E0007C1EF /* Build configuration list for PBXNativeTarget "PlanItTests" */;
 			buildPhases = (
+				26B4794489195EEE6CF5A858 /* [CP] Check Pods Manifest.lock */,
 				3B70915C2481943E0007C1EF /* Sources */,
 				3B70915D2481943E0007C1EF /* Frameworks */,
 				3B70915E2481943E0007C1EF /* Resources */,
@@ -202,9 +245,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3B70917A2481943E0007C1EF /* Build configuration list for PBXNativeTarget "PlanItUITests" */;
 			buildPhases = (
+				4BF31B74101317AE8436A134 /* [CP] Check Pods Manifest.lock */,
 				3B7091672481943E0007C1EF /* Sources */,
 				3B7091682481943E0007C1EF /* Frameworks */,
 				3B7091692481943E0007C1EF /* Resources */,
+				57D90F9F5F49B6D510990BCD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -265,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B70915A2481943E0007C1EF /* LaunchScreen.storyboard in Resources */,
+				3B7991EE24901AF30003B302 /* GoogleService-Info.plist in Resources */,
 				3B7091572481943E0007C1EF /* Preview Assets.xcassets in Resources */,
 				3B7091542481943E0007C1EF /* Assets.xcassets in Resources */,
 			);
@@ -286,13 +332,115 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		260A218F59C212CADD7E8EEC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PlanIt/Pods-PlanIt-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PlanIt/Pods-PlanIt-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PlanIt/Pods-PlanIt-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		26B4794489195EEE6CF5A858 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PlanItTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4BF31B74101317AE8436A134 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PlanIt-PlanItUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		57D90F9F5F49B6D510990BCD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PlanIt-PlanItUITests/Pods-PlanIt-PlanItUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PlanIt-PlanItUITests/Pods-PlanIt-PlanItUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PlanIt-PlanItUITests/Pods-PlanIt-PlanItUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		60358137EF40FD7BD6389003 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PlanIt-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3B7091462481943C0007C1EF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				3BC4062924821DA100EF74FF /* ReminderDayView.swift in Sources */,
-				3BC9A55224887E3900FA8A7B /* EventStore.swift in Sources */,
 				3B7D14122485CA3200E30EDF /* DayView.swift in Sources */,
 				3BB1F32924833A4E007E8E1E /* TaskStore.swift in Sources */,
 				3BC406212481FD9B00EF74FF /* WeekdaysView.swift in Sources */,
@@ -464,6 +612,7 @@
 		};
 		3B7091752481943E0007C1EF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 176599E0DFB655CC44EBAD89 /* Pods-PlanIt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -475,7 +624,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = hwang.PlanIt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hwang.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -484,6 +633,7 @@
 		};
 		3B7091762481943E0007C1EF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2812F8F9FA82A6F512EA3D51 /* Pods-PlanIt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -495,7 +645,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = hwang.PlanIt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hwang.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -504,6 +654,7 @@
 		};
 		3B7091782481943E0007C1EF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA2DE28BF5F3C789CA09A150 /* Pods-PlanItTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -525,6 +676,7 @@
 		};
 		3B7091792481943E0007C1EF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 91B7BA77637FC86D39075257 /* Pods-PlanItTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -546,6 +698,7 @@
 		};
 		3B70917B2481943E0007C1EF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 18813DD2B634027B19DDCD45 /* Pods-PlanIt-PlanItUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -565,6 +718,7 @@
 		};
 		3B70917C2481943E0007C1EF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 954A324AF40D77B9D2D789CA /* Pods-PlanIt-PlanItUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
