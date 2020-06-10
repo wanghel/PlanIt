@@ -18,11 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
-        
-//        let navigationBarAppearace = UINavigationBar.appearance()
-//        navigationBarAppearace.tintColor = UIColor.white
-//        navigationBarAppearace.barTintColor = UIColor.white
-//        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         return true
     }
 

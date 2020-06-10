@@ -18,7 +18,7 @@
 		3B7991EE24901AF30003B302 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B7991ED24901AF30003B302 /* GoogleService-Info.plist */; };
 		3B7D140C2484485100E30EDF /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7D140B2484485100E30EDF /* MonthView.swift */; };
 		3B7D14122485CA3200E30EDF /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7D14112485CA3200E30EDF /* DayView.swift */; };
-		3B7D1414248718CA00E30EDF /* infiniteCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7D1413248718CA00E30EDF /* infiniteCalendarView.swift */; };
+		3B7D1414248718CA00E30EDF /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7D1413248718CA00E30EDF /* CalendarView.swift */; };
 		3BB1F32924833A4E007E8E1E /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB1F32824833A4E007E8E1E /* TaskStore.swift */; };
 		3BC406212481FD9B00EF74FF /* WeekdaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC406202481FD9B00EF74FF /* WeekdaysView.swift */; };
 		3BC406272482174D00EF74FF /* Month.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC406262482174D00EF74FF /* Month.swift */; };
@@ -67,7 +67,7 @@
 		3B7991ED24901AF30003B302 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B7D140B2484485100E30EDF /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
 		3B7D14112485CA3200E30EDF /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
-		3B7D1413248718CA00E30EDF /* infiniteCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = infiniteCalendarView.swift; sourceTree = "<group>"; };
+		3B7D1413248718CA00E30EDF /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		3BB1F32824833A4E007E8E1E /* TaskStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStore.swift; sourceTree = "<group>"; };
 		3BC406202481FD9B00EF74FF /* WeekdaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysView.swift; sourceTree = "<group>"; };
 		3BC406262482174D00EF74FF /* Month.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Month.swift; sourceTree = "<group>"; };
@@ -135,10 +135,8 @@
 			children = (
 				3B70914D2481943C0007C1EF /* AppDelegate.swift */,
 				3B70914F2481943C0007C1EF /* SceneDelegate.swift */,
-				3B7091512481943C0007C1EF /* ContentView.swift */,
-				3B7D1413248718CA00E30EDF /* infiniteCalendarView.swift */,
-				3BC406262482174D00EF74FF /* Month.swift */,
-				3B7D140B2484485100E30EDF /* MonthView.swift */,
+				3BED3DF224917F4200A3B586 /* ViewModels */,
+				3BED3DF124917ED800A3B586 /* Views */,
 				3BC406202481FD9B00EF74FF /* WeekdaysView.swift */,
 				3BC4062824821DA100EF74FF /* ReminderDayView.swift */,
 				3B7D14112485CA3200E30EDF /* DayView.swift */,
@@ -175,6 +173,24 @@
 				3B7091712481943E0007C1EF /* Info.plist */,
 			);
 			path = PlanItUITests;
+			sourceTree = "<group>";
+		};
+		3BED3DF124917ED800A3B586 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3B7091512481943C0007C1EF /* ContentView.swift */,
+				3B7D1413248718CA00E30EDF /* CalendarView.swift */,
+				3B7D140B2484485100E30EDF /* MonthView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3BED3DF224917F4200A3B586 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				3BC406262482174D00EF74FF /* Month.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		6C52983F1A1CB5E81DED3535 /* Frameworks */ = {
@@ -445,7 +461,7 @@
 				3BB1F32924833A4E007E8E1E /* TaskStore.swift in Sources */,
 				3BC406212481FD9B00EF74FF /* WeekdaysView.swift in Sources */,
 				3BC406272482174D00EF74FF /* Month.swift in Sources */,
-				3B7D1414248718CA00E30EDF /* infiniteCalendarView.swift in Sources */,
+				3B7D1414248718CA00E30EDF /* CalendarView.swift in Sources */,
 				3B70914E2481943C0007C1EF /* AppDelegate.swift in Sources */,
 				3B7091502481943C0007C1EF /* SceneDelegate.swift in Sources */,
 				3B7D140C2484485100E30EDF /* MonthView.swift in Sources */,

@@ -8,7 +8,11 @@ target 'PlanIt' do
   # Pods for PlanIt
 
 # add the Firebase pod for Google Analytics
+pod 'Firebase/Auth'
 pod 'Firebase/Analytics'
+pod 'Firebase/Firestore'
+pod 'FirebaseFirestoreSwift'
+
 
   target 'PlanItTests' do
     inherit! :search_paths
