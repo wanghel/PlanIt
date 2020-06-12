@@ -18,15 +18,11 @@ struct MonthView: View {
     let todayDay: Int = Calendar.current.component(.day, from: Date())
     let todayMonth = Calendar.current.component(.month, from: Date())
     let todayYear = Calendar.current.component(.year, from: Date())
-
-    @ObservedObject var calendar : Month
     
-    init (calendar: Month) {
+    @ObservedObject var calendar : CalendarMonthViewModel
+    
+    init (calendar: CalendarMonthViewModel) {
         self.calendar = calendar
-    }
-    
-    init (month: Int, year: Int) {
-        calendar = Month(month: month, year: year)
     }
     
     func displayDay (week: Int, day: Int) -> some View {
@@ -34,15 +30,24 @@ struct MonthView: View {
         let firstWeekday = calendar.getFirstWeekDay()
         let dayOfMonth = calendar.getDaysOfMonth()
         
-        // Blank space at beginning and end of month
-        if (currIdx <= firstWeekday || currIdx-firstWeekday > dayOfMonth) {
-            return Text("")
+        // Blank space at beginning of month
+        if (currIdx <= firstWeekday) {
+            return Text(String(calendar.prevMonth().getDaysOfMonth()-(firstWeekday-currIdx)))
+                .foregroundColor(.gray)
                 .frame(width: screenWidth/7, height: screenHeight*0.05)
                 .background(Color.white)
                 .cornerRadius(0.0)
         }
-        // Today's date
-        else if (todayDay == currIdx-firstWeekday && todayMonth == calendar.currMonth && todayYear == calendar.currYear) {
+            // Blank space at end of month
+        else if (currIdx-firstWeekday > dayOfMonth) {
+            return Text(String(currIdx-firstWeekday-dayOfMonth))
+                .foregroundColor(.gray)
+                .frame(width: screenWidth/7, height: screenHeight*0.05)
+                .background(Color.white)
+                .cornerRadius(0.0)
+        }
+            // Today's date
+        else if (todayDay == currIdx-firstWeekday && todayMonth == calendar.calendarMonth.month && todayYear == calendar.calendarMonth.year) {
             return Text(String(currIdx-firstWeekday))
                 .fontWeight(.bold)
                 .foregroundColor(Color.white)
@@ -50,9 +55,10 @@ struct MonthView: View {
                 .background(weekDayColor[day])
                 .cornerRadius(15.0)
         }
-        // Plain days in calendar
+            // Plain days in calendar
         else {
             return Text(String(currIdx-firstWeekday))
+                .foregroundColor(.black)
                 .frame(width: screenWidth/7, height: screenHeight*0.05)
                 .background(Color.white)
                 .cornerRadius(0.0)
@@ -61,24 +67,12 @@ struct MonthView: View {
     
     var body: some View {
         VStack {
-             HStack (spacing: 0.0){
-                /*Button(action: {
-                    self.calendar.prevMonth()
-                }) {
-                  Text("prev").padding(.leading).frame(alignment: .leading)
-                }*/
-                
+            HStack (spacing: 0.0){
                 Spacer()
-                  Text("\(monthArr[(calendar.currMonth+11)%12]) \(String(calendar.currYear))").font(.system(size: 30)).fontWeight(.semibold).padding()
+                Text("\(monthArr[(calendar.calendarMonth.month+11)%12]) \(String(calendar.calendarMonth.year))")
+                    .font(.system(size: 30))
+                    .fontWeight(.semibold).padding()
                 Spacer()
-             
-                /*Button(action: {
-                    self.calendar.nextMonth()
-                }) {
-                  Text("next")
-                    .padding(.trailing)
-                    .frame(alignment: .trailing)
-                }*/
             }
             
             HStack (spacing: 0.0) {
@@ -95,19 +89,21 @@ struct MonthView: View {
             ForEach(0..<6) { week in
                 HStack (spacing: 0.0){
                     ForEach(0..<7) { day in
-                        //NavigationLink (destination: DayView(day: day)) {
-                            self.displayDay(week: week, day: day)
-                        //}.buttonStyle(PlainButtonStyle())
+                        self.displayDay(week: week, day: day)
+                            .frame(width: screenWidth/7, height: screenHeight*0.05)
+                            .gesture(TapGesture().onEnded({
+                                print("tapped")
+                            }))
                         
                     }
                 }
             }
-        }.frame(height: screenHeight*0.4)
+        }//.frame(height: screenHeight*0.4)
     }
 }
 
 struct MonthView_Previews: PreviewProvider {
     static var previews: some View {
-        MonthView(calendar: Month())
+        MonthView(calendar: CalendarMonthViewModel())
     }
 }

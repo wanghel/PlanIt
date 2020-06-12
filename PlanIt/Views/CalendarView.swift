@@ -9,15 +9,15 @@
 import SwiftUI
 
 struct CalendarView: View {
-    @State private var p1Month : Month = Month().prevMonth()
-    @State private var p2Month : Month = Month().prevMonth().prevMonth()
-    @State private var cMonth : Month = Month()
-    @State private var n1Month : Month = Month().nextMonth()
-    @State private var n2Month : Month = Month().nextMonth().nextMonth()
+    @State private var p1Month :CalendarMonthViewModel = CalendarMonthViewModel().prevMonth()
+    @State private var p2Month :CalendarMonthViewModel = CalendarMonthViewModel().prevMonth().prevMonth()
+    @State private var cMonth :CalendarMonthViewModel = CalendarMonthViewModel()
+    @State private var n1Month :CalendarMonthViewModel = CalendarMonthViewModel().nextMonth()
+    @State private var n2Month :CalendarMonthViewModel = CalendarMonthViewModel().nextMonth().nextMonth()
     
     @State private var draggedOffset = CGSize.zero
     @State private var lastOffset = CGSize.zero
-   
+    
     
     private func nextView() {
         p1Month = p1Month.nextMonth()
@@ -37,52 +37,47 @@ struct CalendarView: View {
     
     var body: some View {
         VStack {
-            MonthView(calendar: p2Month).opacity(0.3).allowsHitTesting(false)
-            MonthView(calendar: p1Month).opacity(0.6)//.allowsHitTesting(false)
+            MonthView(calendar: p2Month).opacity(0.5)
+                .allowsHitTesting(false)
+            MonthView(calendar: p1Month)
             MonthView(calendar: cMonth)
-            MonthView(calendar: n1Month).opacity(0.6)//.allowsHitTesting(false)
-            MonthView(calendar: n2Month).opacity(0.3).allowsHitTesting(false)
-        }.offset(y: self.lastOffset.height + self.draggedOffset.height)
-        .gesture(DragGesture()
-        .onChanged { value in
-            self.draggedOffset = value.translation
+            MonthView(calendar: n1Month)
+            MonthView(calendar: n2Month).opacity(0.5)
+                .allowsHitTesting(false)
         }
-        .onEnded { value in
-            let offset : CGSize
-            if (self.lastOffset.height + self.draggedOffset.height > screenHeight/3) {
-                offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height - screenHeight * 0.4)
-                self.prevView()
-            } else if (self.lastOffset.height + self.draggedOffset.height < -screenHeight/10) {
-                offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height + screenHeight * 0.4)
-                self.nextView()
-            } else {
-                offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height)
-            }
-            print(self.draggedOffset.height)
-            self.lastOffset = offset
-            self.draggedOffset = CGSize.zero
-        })//.navigationBarTitle(Text(""), displayMode: .inline)
-            //.navigationBarItems(leading: Text("Hi, Helen"), trailing: Image(systemName: "person.3"))
-        
-        
-        
-        
-        
-        /*.offset(y: self.draggedOffset.height)
+        .offset(y: self.lastOffset.height +
+            self.draggedOffset.height)
             .gesture(DragGesture()
-            .onChanged { value in
-                self.draggedOffset = value.translation
+                .onChanged { value in
+                    self.draggedOffset = value.translation
             }
             .onEnded { value in
-                if (value.translation.height > screenHeight/5) {
+                let offset : CGSize
+                if (self.lastOffset.height + self.draggedOffset.height > screenHeight/2) {
+                    offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height - screenHeight * 0.8)
                     self.prevView()
-                } else if (value.translation.height < -screenHeight/5) {
+                    self.prevView()
+                }
+                else if (self.lastOffset.height + self.draggedOffset.height < -screenHeight/2) {
+                    offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height + screenHeight * 0.8)
+                    self.nextView()
                     self.nextView()
                 }
+                else if (self.lastOffset.height + self.draggedOffset.height > screenHeight/10) {
+                    offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height - screenHeight * 0.4)
+                    self.prevView()
+                }
+                else if (self.lastOffset.height + self.draggedOffset.height < -screenHeight/10) {
+                    offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height + screenHeight * 0.4)
+                    self.nextView()
+                }
+                else {
+                    offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height)
+                }
                 print(self.draggedOffset.height)
+                self.lastOffset = offset
                 self.draggedOffset = CGSize.zero
-            }).navigationBarTitle(Text(""), displayMode: .inline)
-            .navigationBarItems(leading: Text("Hi, Helen"), trailing: Image(systemName: "person.3"))*/
+            })
         
     }
 }

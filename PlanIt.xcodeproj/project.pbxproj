@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B1EABB22492C1B200A610CB /* CalendarMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABB12492C1B200A610CB /* CalendarMonth.swift */; };
+		3B1EABC32492F9FB00A610CB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABC22492F9FB00A610CB /* User.swift */; };
+		3B1EABC52492FAA300A610CB /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABC42492FAA300A610CB /* UserViewModel.swift */; };
+		3B1EABC72492FD0D00A610CB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABC62492FD0D00A610CB /* ProfileView.swift */; };
 		3B70914E2481943C0007C1EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B70914D2481943C0007C1EF /* AppDelegate.swift */; };
 		3B7091502481943C0007C1EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B70914F2481943C0007C1EF /* SceneDelegate.swift */; };
 		3B7091522481943C0007C1EF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7091512481943C0007C1EF /* ContentView.swift */; };
@@ -21,7 +25,7 @@
 		3B7D1414248718CA00E30EDF /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7D1413248718CA00E30EDF /* CalendarView.swift */; };
 		3BB1F32924833A4E007E8E1E /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB1F32824833A4E007E8E1E /* TaskStore.swift */; };
 		3BC406212481FD9B00EF74FF /* WeekdaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC406202481FD9B00EF74FF /* WeekdaysView.swift */; };
-		3BC406272482174D00EF74FF /* Month.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC406262482174D00EF74FF /* Month.swift */; };
+		3BC406272482174D00EF74FF /* CalendarMonthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC406262482174D00EF74FF /* CalendarMonthViewModel.swift */; };
 		3BC4062924821DA100EF74FF /* ReminderDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC4062824821DA100EF74FF /* ReminderDayView.swift */; };
 		53F8336B9C3F0E828918DC37 /* Pods_PlanItTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D3DD38F138B75FCF67AEE1A /* Pods_PlanItTests.framework */; };
 		66DD3060FA4AA26E1FC134A1 /* Pods_PlanIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47AE7F0F918325BF5249DD28 /* Pods_PlanIt.framework */; };
@@ -50,6 +54,12 @@
 		18813DD2B634027B19DDCD45 /* Pods-PlanIt-PlanItUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt-PlanItUITests.debug.xcconfig"; path = "Target Support Files/Pods-PlanIt-PlanItUITests/Pods-PlanIt-PlanItUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1D3DD38F138B75FCF67AEE1A /* Pods_PlanItTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlanItTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2812F8F9FA82A6F512EA3D51 /* Pods-PlanIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt.release.xcconfig"; path = "Target Support Files/Pods-PlanIt/Pods-PlanIt.release.xcconfig"; sourceTree = "<group>"; };
+		3B1EABB12492C1B200A610CB /* CalendarMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonth.swift; sourceTree = "<group>"; };
+		3B1EABBF2492E0D600A610CB /* TrackableScrollView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = TrackableScrollView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B1EABC12492E10A00A610CB /* trackable-scroll-view */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "trackable-scroll-view"; sourceTree = "<group>"; };
+		3B1EABC22492F9FB00A610CB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		3B1EABC42492FAA300A610CB /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		3B1EABC62492FD0D00A610CB /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		3B70914A2481943C0007C1EF /* PlanIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B70914D2481943C0007C1EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B70914F2481943C0007C1EF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,7 +80,7 @@
 		3B7D1413248718CA00E30EDF /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		3BB1F32824833A4E007E8E1E /* TaskStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStore.swift; sourceTree = "<group>"; };
 		3BC406202481FD9B00EF74FF /* WeekdaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysView.swift; sourceTree = "<group>"; };
-		3BC406262482174D00EF74FF /* Month.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Month.swift; sourceTree = "<group>"; };
+		3BC406262482174D00EF74FF /* CalendarMonthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonthViewModel.swift; sourceTree = "<group>"; };
 		3BC4062824821DA100EF74FF /* ReminderDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDayView.swift; sourceTree = "<group>"; };
 		47AE7F0F918325BF5249DD28 /* Pods_PlanIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlanIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		91B7BA77637FC86D39075257 /* Pods-PlanItTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanItTests.release.xcconfig"; path = "Target Support Files/Pods-PlanItTests/Pods-PlanItTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -107,6 +117,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B1EABB02492C16100A610CB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3B1EABB12492C1B200A610CB /* CalendarMonth.swift */,
+				3B1EABC22492F9FB00A610CB /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		3B7091412481943C0007C1EF = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +154,7 @@
 			children = (
 				3B70914D2481943C0007C1EF /* AppDelegate.swift */,
 				3B70914F2481943C0007C1EF /* SceneDelegate.swift */,
+				3B1EABB02492C16100A610CB /* Models */,
 				3BED3DF224917F4200A3B586 /* ViewModels */,
 				3BED3DF124917ED800A3B586 /* Views */,
 				3BC406202481FD9B00EF74FF /* WeekdaysView.swift */,
@@ -179,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				3B7091512481943C0007C1EF /* ContentView.swift */,
+				3B1EABC62492FD0D00A610CB /* ProfileView.swift */,
 				3B7D1413248718CA00E30EDF /* CalendarView.swift */,
 				3B7D140B2484485100E30EDF /* MonthView.swift */,
 			);
@@ -188,7 +209,8 @@
 		3BED3DF224917F4200A3B586 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				3BC406262482174D00EF74FF /* Month.swift */,
+				3BC406262482174D00EF74FF /* CalendarMonthViewModel.swift */,
+				3B1EABC42492FAA300A610CB /* UserViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -196,6 +218,8 @@
 		6C52983F1A1CB5E81DED3535 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3B1EABC12492E10A00A610CB /* trackable-scroll-view */,
+				3B1EABBF2492E0D600A610CB /* TrackableScrollView.app */,
 				47AE7F0F918325BF5249DD28 /* Pods_PlanIt.framework */,
 				968F4C0273114555A6A655D7 /* Pods_PlanIt_PlanItUITests.framework */,
 				1D3DD38F138B75FCF67AEE1A /* Pods_PlanItTests.framework */,
@@ -457,14 +481,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BC4062924821DA100EF74FF /* ReminderDayView.swift in Sources */,
+				3B1EABB22492C1B200A610CB /* CalendarMonth.swift in Sources */,
 				3B7D14122485CA3200E30EDF /* DayView.swift in Sources */,
 				3BB1F32924833A4E007E8E1E /* TaskStore.swift in Sources */,
 				3BC406212481FD9B00EF74FF /* WeekdaysView.swift in Sources */,
-				3BC406272482174D00EF74FF /* Month.swift in Sources */,
+				3BC406272482174D00EF74FF /* CalendarMonthViewModel.swift in Sources */,
 				3B7D1414248718CA00E30EDF /* CalendarView.swift in Sources */,
 				3B70914E2481943C0007C1EF /* AppDelegate.swift in Sources */,
+				3B1EABC32492F9FB00A610CB /* User.swift in Sources */,
+				3B1EABC52492FAA300A610CB /* UserViewModel.swift in Sources */,
 				3B7091502481943C0007C1EF /* SceneDelegate.swift in Sources */,
 				3B7D140C2484485100E30EDF /* MonthView.swift in Sources */,
+				3B1EABC72492FD0D00A610CB /* ProfileView.swift in Sources */,
 				3B7091522481943C0007C1EF /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

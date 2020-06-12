@@ -25,7 +25,7 @@ struct LabelImage: View {
     var img: String
     var body: some View {
         Image(img)
-        .resizable()
+            .resizable()
             .frame(width: 150)
     }
 }
@@ -69,32 +69,32 @@ struct WeekdaysView: View {
             
             
             /*NavigationLink (destination: ReminderDayView(day: "Sunday", color: pink)) {
-                Slider(day: "S", image: "planet1", color: pink)
-            }
-            
-            NavigationLink (destination: ReminderDayView(day: "Monday", color: red)) {
-                Slider(day: "M", image: "planet1", color: red)
-            }
+             Slider(day: "S", image: "planet1", color: pink)
+             }
              
-            NavigationLink (destination: ReminderDayView(day: "Tuesday", color: orange)) {
-                Slider(day: "T", image: "planet1", color: orange)
-            }
-            
-            NavigationLink (destination: ReminderDayView(day: "Wednesday", color: yellow)) {
-                Slider(day: "W", image: "planet1", color: yellow)
-            }
-            
-            NavigationLink (destination: ReminderDayView(day: "Thursday", color: green)) {
-                Slider(day: "T", image: "planet1", color: green)
-            }
+             NavigationLink (destination: ReminderDayView(day: "Monday", color: red)) {
+             Slider(day: "M", image: "planet1", color: red)
+             }
              
-            NavigationLink (destination: ReminderDayView(day: "Friday", color: blue)) {
-                Slider(day: "F", image: "planet1", color: blue)
-            }
-            
-            NavigationLink (destination: ReminderDayView(day: "Saturday", color: purple)) {
-                Slider(day: "S", image: "planet1", color: purple)
-            }*/
+             NavigationLink (destination: ReminderDayView(day: "Tuesday", color: orange)) {
+             Slider(day: "T", image: "planet1", color: orange)
+             }
+             
+             NavigationLink (destination: ReminderDayView(day: "Wednesday", color: yellow)) {
+             Slider(day: "W", image: "planet1", color: yellow)
+             }
+             
+             NavigationLink (destination: ReminderDayView(day: "Thursday", color: green)) {
+             Slider(day: "T", image: "planet1", color: green)
+             }
+             
+             NavigationLink (destination: ReminderDayView(day: "Friday", color: blue)) {
+             Slider(day: "F", image: "planet1", color: blue)
+             }
+             
+             NavigationLink (destination: ReminderDayView(day: "Saturday", color: purple)) {
+             Slider(day: "S", image: "planet1", color: purple)
+             }*/
             
         }
         

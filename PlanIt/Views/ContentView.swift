@@ -14,27 +14,15 @@ let screenHeight = screenSize.height
 
 
 struct ContentView: View {
-   @State var viewProfile = false
-    
-    var body: some View {
-        ZStack {
-            MainView(viewProfile: $viewProfile)
-            ProfileView(viewProfile: $viewProfile)
-        }
-        
-    }
-}
-
-struct MainView: View {
     @State var selected = 1
-    @Binding var viewProfile : Bool
+    @State var viewProfile = false
     
     func chooseMainView() -> AnyView {
         switch selected {
         case 1:
             return AnyView(Text("Home"))
         case 2:
-             return AnyView(Text("Reminders"))
+            return AnyView(Text("Reminders"))
         default:
             return AnyView(CalendarView())
         }
@@ -43,7 +31,6 @@ struct MainView: View {
     
     var body: some View {
         ZStack {
-            
             GeometryReader {_ in
                 VStack {
                     self.chooseMainView()
@@ -55,7 +42,8 @@ struct MainView: View {
                 Spacer()
                 BottonBar(selected: $selected)
             }.edgesIgnoringSafeArea(.vertical)
-        
+            
+            ProfileView(viewProfile: $viewProfile)
         }
     }
     
@@ -66,103 +54,34 @@ struct TopBar: View {
     
     var body: some View {
         
-            HStack {
-                Button(action: {
-                    self.viewProfile = true
-                }){
-                    Image(systemName: "person.crop.circle.fill")
-                        .font(.system(size: 30))
-                        .foregroundColor(.black)
-                        .opacity(0.7)
-                }
-                Text("PlanIt")
-                    .font(.system(size: 35))
-                    .fontWeight(.semibold)
+        HStack {
+            Button(action: {
+                self.viewProfile = true
+            }){
+                Image(systemName: "person.crop.circle.fill")
+                    .font(.system(size: 30))
+                    .foregroundColor(.black)
                     .opacity(0.7)
-                    .padding(.horizontal)
-                Spacer()
-                Button(action: {}){
-                    Image(systemName: "plus")
-                        .font(.system(size: 30))
-                        .foregroundColor(.black)
-                        .opacity(0.7)
-                }
-            }.frame(height: screenHeight * 0.06, alignment: .bottom)
-                .padding([.leading, .bottom, .trailing])
-                .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)!)
-                .background(Color.white)
-                .clipped()
-                .shadow(radius: 2)
+            }
+            Text("PlanIt")
+                .font(.system(size: 35))
+                .fontWeight(.semibold)
+                .opacity(0.7)
+                .padding(.horizontal)
+            Spacer()
+            Button(action: {}){
+                Image(systemName: "plus")
+                    .font(.system(size: 30))
+                    .foregroundColor(.black)
+                    .opacity(0.7)
+            }
+        }.frame(height: 60)
+            .padding(.horizontal)
+            .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)!)
+            .background(Color.white)
+            .clipped()
+            .shadow(radius: 2)
         
-    }
-}
-
-struct ProfileView: View {
-    @Binding var viewProfile : Bool
-    var userName : String = "hwang"
-    
-    var body: some View {
-        ZStack {
-            //Profile view main
-            GeometryReader {_ in
-                VStack {
-                Spacer()
-                Text("Profile")
-                Spacer()
-            }.frame(width: screenWidth)
-                .background(Color.white)
-            }
-            
-            // Profile view bar
-            VStack {
-                HStack {
-                    Button(action: {
-                        self.viewProfile = false
-                    }){
-                        Image(systemName: "chevron.down")
-                            .font(.system(size: 25))
-                            .foregroundColor(.black)
-                            .opacity(0.7)
-                    }
-                    Text(userName)
-                        .font(.system(size: 30))
-                        .fontWeight(.semibold)
-                        .opacity(0.7)
-                        .padding(.horizontal)
-                    Spacer()
-                    Button(action: {}){
-                        Image(systemName: "pencil")
-                            .font(.system(size: 30))
-                            .foregroundColor(.black)
-                            .opacity(0.7)
-                            .padding()
-                    }
-                    Button(action: {}){
-                        Image(systemName: "gear")
-                            .font(.system(size: 25))
-                            .foregroundColor(.black)
-                            .opacity(0.7)
-                    }
-                }.frame(height: screenHeight * 0.06, alignment: .bottom)
-                    .padding([.leading, .bottom, .trailing])
-                    .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)!)
-                    .background(Color.white)
-                    .clipped()
-                    .shadow(radius: 2)
-                
-                Spacer()
-            }
-            
-        }.edgesIgnoringSafeArea(.vertical)
-        .offset(y: viewProfile ? 0 : screenHeight)
-        .animation(.default)
-    }
-}
-
-// not sure I need this (changes something in scene delegate)
-class Host: UIHostingController<ContentView> {
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return.lightContent
     }
 }
 
@@ -204,6 +123,13 @@ struct BottonBar: View {
             .shadow(radius: 2)
     }
 }
+
+// not sure I need this (changes something in scene delegate)
+//class Host: UIHostingController<ContentView> {
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return.lightContent
+//    }
+//}
 
 
 struct ContentView_Prviews: PreviewProvider {
