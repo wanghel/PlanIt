@@ -115,7 +115,6 @@ struct ProfileBarView: View {
             .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)!)
             .background(Color.white)
             .clipped()
-            .shadow(radius: 2)
             
             Spacer()
         }

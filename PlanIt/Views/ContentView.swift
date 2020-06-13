@@ -16,6 +16,7 @@ let screenHeight = screenSize.height
 struct ContentView: View {
     @State var selected = 1
     @State var viewProfile = false
+    @State var isShowingDayView = false
     
     func chooseMainView() -> AnyView {
         switch selected {
@@ -24,7 +25,7 @@ struct ContentView: View {
         case 2:
             return AnyView(Text("Reminders"))
         default:
-            return AnyView(CalendarView())
+            return AnyView(CalendarView(isShowingDayView: $isShowingDayView))
         }
         
     }
@@ -40,7 +41,7 @@ struct ContentView: View {
             VStack {
                 TopBar (viewProfile: $viewProfile)
                 Spacer()
-                BottonBar(selected: $selected)
+                BottonBar(selected: $selected, isShowingDayView: $isShowingDayView)
             }.edgesIgnoringSafeArea(.vertical)
             
             ProfileView(viewProfile: $viewProfile)
@@ -80,18 +81,19 @@ struct TopBar: View {
             .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)!)
             .background(Color.white)
             .clipped()
-            .shadow(radius: 2)
         
     }
 }
 
 struct BottonBar: View {
     @Binding var selected : Int
+    @Binding var isShowingDayView : Bool
     
     var body: some View {
         VStack {
             HStack {
                 Button(action: {
+                    self.isShowingDayView = false
                     self.selected = 0
                 }){
                     Image(systemName: self.selected == 0 ? "calendar.circle.fill" : "calendar.circle")
@@ -100,14 +102,16 @@ struct BottonBar: View {
                 }
                 Spacer()
                 Button(action: {
+                    self.isShowingDayView = false
                     self.selected = 1
                 }){
                     Image(systemName: self.selected == 1 ? "house.fill" : "house")
-                        .font(.system(size: 30))
+                        .font(.system(size: 25))
                         .foregroundColor(.gray)
                 }
                 Spacer()
                 Button(action: {
+                    self.isShowingDayView = false
                     self.selected = 2
                 }){
                     Image(systemName: self.selected == 2 ? "bookmark.fill" : "bookmark")
@@ -120,7 +124,6 @@ struct BottonBar: View {
             .padding(.bottom, (UIApplication.shared.windows.last?.safeAreaInsets.bottom)!)
             .background(Color.white)
             .clipped()
-            .shadow(radius: 2)
     }
 }
 

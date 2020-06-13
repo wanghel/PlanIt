@@ -7,11 +7,16 @@
 //
 
 import Foundation
+import Combine
 
 class UserViewModel: ObservableObject{
+    @Published var userRepository = UserRepository()
     @Published var user: User
     
+    private var cancellables = Set<AnyCancellable>()
+    
     init(user: User) {
+        
         self.user = user
     }
 }

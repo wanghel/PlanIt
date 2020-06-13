@@ -19,10 +19,30 @@ struct MonthView: View {
     let todayMonth = Calendar.current.component(.month, from: Date())
     let todayYear = Calendar.current.component(.year, from: Date())
     
-    @ObservedObject var calendar : CalendarMonthViewModel
+    /*@ObservedObject */var calendar : CalendarMonthViewModel
     
-    init (calendar: CalendarMonthViewModel) {
+    @Binding var isShowingDayView : Bool
+    @Binding var dayViewDate : Date
+    
+    /*init (calendar: CalendarMonthViewModel, isShowingDayView: Binding<Bool>) {
         self.calendar = calendar
+        //isShowingDayView = isShowingDayView
+    }*/
+    
+    func getDate(w: Int, d: Int) -> Date {
+        let day = displayDay(week: w, day: d)
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd"
+
+//        let dateFormatterPrint = DateFormatter()
+//        dateFormatterPrint.dateFormat = "MMM dd,yyyy"
+
+        if let date = dateFormatterGet.date(from: "\(calendar.calendarMonth.year)-\(calendar.calendarMonth.month)-\(day)") {
+            return date
+        } else {
+            print("Date could not be formatted")
+           return Date()
+        }
     }
     
     func displayDay (week: Int, day: Int) -> some View {
@@ -66,44 +86,48 @@ struct MonthView: View {
     }
     
     var body: some View {
-        VStack {
-            HStack (spacing: 0.0){
-                Spacer()
-                Text("\(monthArr[(calendar.calendarMonth.month+11)%12]) \(String(calendar.calendarMonth.year))")
-                    .font(.system(size: 30))
-                    .fontWeight(.semibold).padding()
-                Spacer()
-            }
-            
-            HStack (spacing: 0.0) {
-                ForEach(0..<7) { day in
-                    Text(self.weekDayArr[day])
-                        .bold()
-                        .font(.system(size:20))
-                        .foregroundColor(self.weekDayColor[day])
-                        .shadow(radius: 0.5)
-                        .frame(width: screenWidth/7)
-                }
-            }.frame(width: screenWidth)
-            
-            ForEach(0..<6) { week in
+        
+            VStack {
                 HStack (spacing: 0.0){
+                    Spacer()
+                    Text("\(monthArr[(calendar.calendarMonth.month+11)%12]) \(String(calendar.calendarMonth.year))")
+                        .font(.system(size: 30))
+                        .fontWeight(.semibold).padding()
+                    Spacer()
+                }
+                
+                HStack (spacing: 0.0) {
                     ForEach(0..<7) { day in
-                        self.displayDay(week: week, day: day)
-                            .frame(width: screenWidth/7, height: screenHeight*0.05)
-                            .gesture(TapGesture().onEnded({
-                                print("tapped")
-                            }))
-                        
+                        Text(self.weekDayArr[day])
+                            .bold()
+                            .font(.system(size:20))
+                            .foregroundColor(self.weekDayColor[day])
+                            .shadow(radius: 0.5)
+                            .frame(width: screenWidth/7)
+                    }
+                }.frame(width: screenWidth)
+                
+                ForEach(0..<6) { week in
+                    HStack (spacing: 0.0){
+                        ForEach(0..<7) { day in
+                            self.displayDay(week: week, day: day)
+                                .frame(width: screenWidth/7, height: screenHeight*0.05)
+                                .gesture(TapGesture().onEnded({
+                                    self.isShowingDayView.toggle()
+                                    self.dayViewDate = self.getDate(w: week, d: day)
+                                    print("tapped")
+                                }))
+                            
+                        }
                     }
                 }
             }
-        }//.frame(height: screenHeight*0.4)
+            
     }
 }
 
 struct MonthView_Previews: PreviewProvider {
     static var previews: some View {
-        MonthView(calendar: CalendarMonthViewModel())
+        MonthView(calendar: CalendarMonthViewModel(), isShowingDayView: .constant(false), dayViewDate: .constant(Date()))
     }
 }

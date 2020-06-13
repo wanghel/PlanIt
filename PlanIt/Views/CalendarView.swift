@@ -18,6 +18,9 @@ struct CalendarView: View {
     @State private var draggedOffset = CGSize.zero
     @State private var lastOffset = CGSize.zero
     
+    @Binding var isShowingDayView : Bool
+    @State var dayViewDate : Date = Date()
+    
     
     private func nextView() {
         p1Month = p1Month.nextMonth()
@@ -36,54 +39,70 @@ struct CalendarView: View {
     }
     
     var body: some View {
-        VStack {
-            MonthView(calendar: p2Month).opacity(0.5)
-                .allowsHitTesting(false)
-            MonthView(calendar: p1Month)
-            MonthView(calendar: cMonth)
-            MonthView(calendar: n1Month)
-            MonthView(calendar: n2Month).opacity(0.5)
-                .allowsHitTesting(false)
-        }
-        .offset(y: self.lastOffset.height +
-            self.draggedOffset.height)
-            .gesture(DragGesture()
-                .onChanged { value in
-                    self.draggedOffset = value.translation
+        ZStack {
+            GeometryReader { _ in
+                VStack {
+                    MonthView(calendar: self.p2Month, isShowingDayView: self.$isShowingDayView, dayViewDate: self.$dayViewDate)
+                        .clipped()
+                        .opacity(0.5)
+                        .allowsHitTesting(false)
+                    MonthView(calendar: self.p1Month, isShowingDayView: self.$isShowingDayView, dayViewDate: self.$dayViewDate)
+                    .clipped()
+                    MonthView(calendar: self.cMonth, isShowingDayView: self.$isShowingDayView, dayViewDate: self.$dayViewDate)
+                    MonthView(calendar: self.n1Month, isShowingDayView: self.$isShowingDayView, dayViewDate: self.$dayViewDate)
+                    .clipped()
+                    MonthView(calendar: self.n2Month, isShowingDayView: self.$isShowingDayView, dayViewDate: self.$dayViewDate)
+                        .clipped()
+                        .opacity(0.5)
+                        .allowsHitTesting(false)
+                }
+                .offset(y: self.lastOffset.height +
+                    self.draggedOffset.height)
+                    .gesture(DragGesture()
+                        .onChanged { value in
+                            self.draggedOffset = value.translation
+                    }
+                    .onEnded { value in
+                        let offset : CGSize
+                        if (self.lastOffset.height + self.draggedOffset.height > screenHeight/2) {
+                            offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height - screenHeight * 0.8)
+                            self.prevView()
+                            self.prevView()
+                        }
+                        else if (self.lastOffset.height + self.draggedOffset.height < -screenHeight/2) {
+                            offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height + screenHeight * 0.8)
+                            self.nextView()
+                            self.nextView()
+                        }
+                        else if (self.lastOffset.height + self.draggedOffset.height > screenHeight/10) {
+                            offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height - screenHeight * 0.4)
+                            self.prevView()
+                        }
+                        else if (self.lastOffset.height + self.draggedOffset.height < -screenHeight/10) {
+                            offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height + screenHeight * 0.4)
+                            self.nextView()
+                        }
+                        else {
+                            offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height)
+                        }
+                        print(self.draggedOffset.height)
+                        self.lastOffset = offset
+                        self.draggedOffset = CGSize.zero
+                })
             }
-            .onEnded { value in
-                let offset : CGSize
-                if (self.lastOffset.height + self.draggedOffset.height > screenHeight/2) {
-                    offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height - screenHeight * 0.8)
-                    self.prevView()
-                    self.prevView()
-                }
-                else if (self.lastOffset.height + self.draggedOffset.height < -screenHeight/2) {
-                    offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height + screenHeight * 0.8)
-                    self.nextView()
-                    self.nextView()
-                }
-                else if (self.lastOffset.height + self.draggedOffset.height > screenHeight/10) {
-                    offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height - screenHeight * 0.4)
-                    self.prevView()
-                }
-                else if (self.lastOffset.height + self.draggedOffset.height < -screenHeight/10) {
-                    offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height + screenHeight * 0.4)
-                    self.nextView()
-                }
-                else {
-                    offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height)
-                }
-                print(self.draggedOffset.height)
-                self.lastOffset = offset
-                self.draggedOffset = CGSize.zero
-            })
+            
+            //if (isShowingDayView) {
+                DayView(isShowingDayView: $isShowingDayView, dayViewDate: self.$dayViewDate)
+                    //.background(Color.white)
+            //}
+            
+        }
         
     }
 }
 
 struct InfiniteCalendarView_Previews: PreviewProvider {
     static var previews: some View {
-        CalendarView()
+        CalendarView(isShowingDayView: .constant(false))
     }
 }

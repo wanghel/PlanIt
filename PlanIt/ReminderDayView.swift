@@ -52,9 +52,6 @@ struct ReminderDayView: View {
                 
             }
             
-            
-           
-            
         }
         
     }

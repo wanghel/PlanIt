@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct User: Hashable {
+struct User: Codable, Identifiable, Hashable {
+    var id: String = UUID().uuidString
     var userName: String
     var firstName: String
     var lastName: String
