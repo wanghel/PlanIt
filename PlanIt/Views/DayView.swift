@@ -50,7 +50,7 @@ struct DayView: View {
     var body: some View {
         VStack (spacing:0){
             
-            Spacer(minLength: 60 + (UIApplication.shared.windows.last?.safeAreaInsets.top)!)
+            //Spacer(minLength: 60 + (UIApplication.shared.windows.last?.safeAreaInsets.top)!)
             
             DayBarView(isShowingDayView: $isShowingDayView, dayViewDate: $dayViewDate)
             .background(Color.white)
@@ -68,8 +68,7 @@ struct DayView: View {
                 }
             }
             .background(Color.white)
-            
-            Spacer(minLength: 50 + (UIApplication.shared.windows.last?.safeAreaInsets.bottom)!)
+            //Spacer(minLength: 50 + (UIApplication.shared.windows.last?.safeAreaInsets.bottom)!)
         }
         .edgesIgnoringSafeArea(.vertical)
         .offset(x: isShowingDayView ? 0 : -screenWidth)
@@ -92,47 +91,54 @@ struct DayBarView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Spacer(minLength: 100)
-                Button(action: {
-                    self.dayViewDate.addTimeInterval(TimeInterval(-86400))
-                }){
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 25))
-                        .foregroundColor(.black)
-                        .opacity(0.7)
-                }
-                Text(formatDate())
-                    .font(.system(size: 20))
-                    .opacity(0.7)
-                    .padding(.horizontal)
-                Button(action: {
-                    self.dayViewDate.addTimeInterval(TimeInterval(86400))
-                }){
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 25))
-                        .foregroundColor(.black)
-                        .opacity(0.7)
-                }
-                Spacer()
-                Button(action: {
-                    self.isShowingDayView.toggle()
-                }){
-                    HStack (spacing: 5) {
-                        Image(systemName: "calendar")
+            ZStack {
+                
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        self.dayViewDate.addTimeInterval(TimeInterval(-86400))
+                    }){
+                        Image(systemName: "chevron.left")
                             .font(.system(size: 25))
                             .foregroundColor(.black)
-                            .opacity(0.5)
+                            .opacity(0.7)
+                    }
+                    Text(formatDate())
+                        .font(.system(size: 20))
+                        .opacity(0.7)
+                        .padding(.horizontal)
+                    Button(action: {
+                        self.dayViewDate.addTimeInterval(TimeInterval(86400))
+                    }){
                         Image(systemName: "chevron.right")
-                        .font(.system(size: 15))
-                        .foregroundColor(.black)
-                        .opacity(0.5)
+                            .font(.system(size: 25))
+                            .foregroundColor(.black)
+                            .opacity(0.7)
+                    }
+                    Spacer()
+                }
+                    
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        self.isShowingDayView.toggle()
+                    }){
+                        HStack (spacing: 5) {
+                            Image(systemName: "calendar")
+                                .font(.system(size: 25))
+                                .foregroundColor(.black)
+                                .opacity(0.5)
+                            Image(systemName: "chevron.right")
+                            .font(.system(size: 15))
+                            .foregroundColor(.black)
+                            .opacity(0.5)
+                        }
                     }
                 }
+                .frame(height: 40)
+                .padding(.horizontal)
+                .clipped()
             }
-            .frame(height: 40)
-            .padding(.horizontal)
-            .clipped()
         }
     }
 }

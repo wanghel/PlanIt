@@ -18,10 +18,11 @@ struct ContentView: View {
     @State var viewProfile = false
     @State var isShowingDayView = false
     
+    
     func chooseMainView() -> AnyView {
         switch selected {
         case 1:
-            return AnyView(Text("Home"))
+            return AnyView(HomeView())
         case 2:
             return AnyView(Text("Reminders"))
         default:
@@ -35,6 +36,8 @@ struct ContentView: View {
             GeometryReader {_ in
                 VStack {
                     self.chooseMainView()
+                        .padding(.top, 60)
+                        .padding(.bottom, 50)
                 }
             }
             

@@ -19,28 +19,20 @@ struct MonthView: View {
     let todayMonth = Calendar.current.component(.month, from: Date())
     let todayYear = Calendar.current.component(.year, from: Date())
     
-    /*@ObservedObject */var calendar : CalendarMonthViewModel
+    var calendar : CalendarMonthViewModel
     
     @Binding var isShowingDayView : Bool
     @Binding var dayViewDate : Date
     
-    /*init (calendar: CalendarMonthViewModel, isShowingDayView: Binding<Bool>) {
-        self.calendar = calendar
-        //isShowingDayView = isShowingDayView
-    }*/
-    
-    func getDate(w: Int, d: Int) -> Date {
-        let day = displayDay(week: w, day: d)
+    func getDate(day: Int) -> Date {
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyy-MM-dd"
-
-//        let dateFormatterPrint = DateFormatter()
-//        dateFormatterPrint.dateFormat = "MMM dd,yyyy"
 
         if let date = dateFormatterGet.date(from: "\(calendar.calendarMonth.year)-\(calendar.calendarMonth.month)-\(day)") {
             return date
         } else {
-            print("Date could not be formatted")
+            print("Date could not be formatted: ")
+            print("\(calendar.calendarMonth.year)-\(calendar.calendarMonth.month)-\(day)")
            return Date()
         }
     }
@@ -52,19 +44,23 @@ struct MonthView: View {
         
         // Blank space at beginning of month
         if (currIdx <= firstWeekday) {
-            return Text(String(calendar.prevMonth().getDaysOfMonth()-(firstWeekday-currIdx)))
+            return Text(""/*String(calendar.prevMonth().getDaysOfMonth()-(firstWeekday-currIdx))*/)
                 .foregroundColor(.gray)
                 .frame(width: screenWidth/7, height: screenHeight*0.05)
                 .background(Color.white)
                 .cornerRadius(0.0)
+                .gesture(TapGesture().onEnded({
+                }))
         }
             // Blank space at end of month
         else if (currIdx-firstWeekday > dayOfMonth) {
-            return Text(String(currIdx-firstWeekday-dayOfMonth))
+            return Text(""/*String(currIdx-firstWeekday-dayOfMonth)*/)
                 .foregroundColor(.gray)
                 .frame(width: screenWidth/7, height: screenHeight*0.05)
                 .background(Color.white)
                 .cornerRadius(0.0)
+                .gesture(TapGesture().onEnded({
+                }))
         }
             // Today's date
         else if (todayDay == currIdx-firstWeekday && todayMonth == calendar.calendarMonth.month && todayYear == calendar.calendarMonth.year) {
@@ -74,6 +70,11 @@ struct MonthView: View {
                 .frame(width: screenWidth/7, height: screenHeight*0.05)
                 .background(weekDayColor[day])
                 .cornerRadius(15.0)
+                .gesture(TapGesture().onEnded({
+                    self.isShowingDayView.toggle()
+                    self.dayViewDate = self.getDate(day: currIdx-firstWeekday)
+                    //print("tapped")
+                }))
         }
             // Plain days in calendar
         else {
@@ -82,6 +83,11 @@ struct MonthView: View {
                 .frame(width: screenWidth/7, height: screenHeight*0.05)
                 .background(Color.white)
                 .cornerRadius(0.0)
+                .gesture(TapGesture().onEnded({
+                    self.isShowingDayView.toggle()
+                    self.dayViewDate = self.getDate(day: currIdx-firstWeekday)
+                    //print("tapped")
+                }))
         }
     }
     
@@ -111,13 +117,7 @@ struct MonthView: View {
                     HStack (spacing: 0.0){
                         ForEach(0..<7) { day in
                             self.displayDay(week: week, day: day)
-                                .frame(width: screenWidth/7, height: screenHeight*0.05)
-                                .gesture(TapGesture().onEnded({
-                                    self.isShowingDayView.toggle()
-                                    self.dayViewDate = self.getDate(w: week, d: day)
-                                    print("tapped")
-                                }))
-                            
+                                
                         }
                     }
                 }
