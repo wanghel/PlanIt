@@ -16,7 +16,7 @@ let green = Color(red: 0.8, green: 0.97, blue: 0.6)
 let blue = Color(red: 0.7, green: 0.95, blue: 0.9)
 let purple = Color(red: 0.9, green: 0.7, blue: 0.9)
 
-let weekDayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+/*let weekDayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 let letterArr = ["S", "M", "T", "W", "T", "F", "S"]
 
 let weekDayColor = [pink, red, orange, yellow, green, blue, purple]
@@ -99,10 +99,10 @@ struct WeekdaysView: View {
         }
         
     }
-}
+}*/
 
-struct WeekdaysView_Previews: PreviewProvider {
-    static var previews: some View {
-        WeekdaysView()
-    }
-}
+//struct WeekdaysView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WeekdaysView()
+//    }
+//}

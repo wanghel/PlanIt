@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct DayView: View {
-    @ObservedObject var dayEventsVM = DayEventsViewModel()
     @Binding var isShowingDayView : Bool
     
     func printTime(hour: Int) -> String {
@@ -17,6 +16,10 @@ struct DayView: View {
     }
     
     @Binding var dayViewDate: Date
+    
+    @ObservedObject var dayTaskVM = DayTaskViewModel()
+    
+    @State var presentAddNewItem = false
     
     /*func getColor(eventVM: EventViewModel) -> Color {
         switch eventVM.event.color {
@@ -37,45 +40,72 @@ struct DayView: View {
         default:
             return Color.black
         }
-    }
-    
-    func eventBar(eventVM: EventViewModel) -> some View {
-        Rectangle()
-        .size(width: 20, height: CGFloat(eventVM.duration()/30))
-        .fill(getColor(eventVM: eventVM))
-        .cornerRadius(5)
     }*/
-
+    
     
     var body: some View {
         VStack (spacing:0){
-            
-            //Spacer(minLength: 60 + (UIApplication.shared.windows.last?.safeAreaInsets.top)!)
-            
             DayBarView(isShowingDayView: $isShowingDayView, dayViewDate: $dayViewDate)
-            .background(Color.white)
-                
-            ScrollView {
-                ForEach(0..<24) { hour in
-                    HStack {
-                        Text(self.printTime(hour: hour))
-                            .foregroundColor(.gray)
-                            .frame(width: 50, alignment: .trailing)
-                            .padding([.bottom, .leading])
-                        Divider()
-                        Spacer()
+                .background(Color.white)
+            
+            VStack(alignment: .leading) {
+                List {
+                    ForEach(dayTaskVM.taskCellViewModels) { taskCellVM in
+                        TaskCell(taskCellVM: taskCellVM)
                     }
+                    if presentAddNewItem {
+                        TaskCell(taskCellVM: TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: Date()))) { task in
+                            if(task.title != "") {
+                                self.dayTaskVM.addTask(task: task)
+                            }
+                            self.presentAddNewItem.toggle()
+                        }
+                    }
+                    if !presentAddNewItem {
+                        Button (action: {
+                            self.presentAddNewItem.toggle()
+                        }) {
+                            Spacer()
+                        }
+                    }
+                    
                 }
+                
             }
-            .background(Color.white)
-            //Spacer(minLength: 50 + (UIApplication.shared.windows.last?.safeAreaInsets.bottom)!)
+            
         }
         .edgesIgnoringSafeArea(.vertical)
         .offset(x: isShowingDayView ? 0 : -screenWidth)
-        .animation(.default)
+        .animation(.none)
         
     }
 }
+
+
+struct TaskCell: View {
+    @ObservedObject var taskCellVM: TaskCellViewModel
+    
+    var onCommit: (Task) -> (Void) = {_ in }
+    
+    var body: some View {
+        HStack {
+            Image(systemName: taskCellVM.task.completed ? "checkmark.circle.fill" : "circle")
+                .resizable()
+                .frame(width: 20, height: 20)
+                .padding(.trailing)
+            VStack {
+                Spacer()
+                TextField("", text: $taskCellVM.task.title, onCommit: {
+                    self.onCommit(self.taskCellVM.task)
+                })
+                Divider()
+            }
+            
+        }
+    }
+}
+
+
 
 //small nav bar extended from main nav bar
 struct DayBarView: View {
@@ -145,6 +175,7 @@ struct DayBarView: View {
 
 struct DayView_Previews: PreviewProvider {
     static var previews: some View {
-        DayView(dayEventsVM: DayEventsViewModel(), isShowingDayView: .constant(true), dayViewDate: .constant(Date()))
+        DayView(isShowingDayView: .constant(true), dayViewDate: .constant(Date()))
     }
 }
+

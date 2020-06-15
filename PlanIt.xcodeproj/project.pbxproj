@@ -13,11 +13,11 @@
 		3B1EABC72492FD0D00A610CB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABC62492FD0D00A610CB /* ProfileView.swift */; };
 		3B1EABCA2494395800A610CB /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABC92494395800A610CB /* UserRepository.swift */; };
 		3B1EABCC24943DE900A610CB /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABCB24943DE900A610CB /* Event.swift */; };
-		3B1EABCE24943EC200A610CB /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABCD24943EC200A610CB /* EventViewModel.swift */; };
-		3B1EABD024943EE700A610CB /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABCF24943EE700A610CB /* EventView.swift */; };
+		3B1EABCE24943EC200A610CB /* TaskCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABCD24943EC200A610CB /* TaskCellViewModel.swift */; };
 		3B1EABD224944F8000A610CB /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABD124944F8000A610CB /* DayView.swift */; };
-		3B1EABD42494574C00A610CB /* DayEventsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABD32494574C00A610CB /* DayEventsViewModel.swift */; };
+		3B1EABD42494574C00A610CB /* DayTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABD32494574C00A610CB /* DayTaskViewModel.swift */; };
 		3B1EABDA2494A1E200A610CB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABD92494A1E200A610CB /* HomeView.swift */; };
+		3B1EABDC2497F5E600A610CB /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABDB2497F5E600A610CB /* Task.swift */; };
 		3B70914E2481943C0007C1EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B70914D2481943C0007C1EF /* AppDelegate.swift */; };
 		3B7091502481943C0007C1EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B70914F2481943C0007C1EF /* SceneDelegate.swift */; };
 		3B7091522481943C0007C1EF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7091512481943C0007C1EF /* ContentView.swift */; };
@@ -29,7 +29,6 @@
 		3B7991EE24901AF30003B302 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B7991ED24901AF30003B302 /* GoogleService-Info.plist */; };
 		3B7D140C2484485100E30EDF /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7D140B2484485100E30EDF /* MonthView.swift */; };
 		3B7D1414248718CA00E30EDF /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7D1413248718CA00E30EDF /* CalendarView.swift */; };
-		3BB1F32924833A4E007E8E1E /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB1F32824833A4E007E8E1E /* TaskStore.swift */; };
 		3BC406212481FD9B00EF74FF /* WeekdaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC406202481FD9B00EF74FF /* WeekdaysView.swift */; };
 		3BC406272482174D00EF74FF /* CalendarMonthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC406262482174D00EF74FF /* CalendarMonthViewModel.swift */; };
 		3BC4062924821DA100EF74FF /* ReminderDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC4062824821DA100EF74FF /* ReminderDayView.swift */; };
@@ -68,11 +67,11 @@
 		3B1EABC62492FD0D00A610CB /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		3B1EABC92494395800A610CB /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		3B1EABCB24943DE900A610CB /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		3B1EABCD24943EC200A610CB /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
-		3B1EABCF24943EE700A610CB /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
+		3B1EABCD24943EC200A610CB /* TaskCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellViewModel.swift; sourceTree = "<group>"; };
 		3B1EABD124944F8000A610CB /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
-		3B1EABD32494574C00A610CB /* DayEventsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEventsViewModel.swift; sourceTree = "<group>"; };
+		3B1EABD32494574C00A610CB /* DayTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTaskViewModel.swift; sourceTree = "<group>"; };
 		3B1EABD92494A1E200A610CB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		3B1EABDB2497F5E600A610CB /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		3B70914A2481943C0007C1EF /* PlanIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B70914D2481943C0007C1EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B70914F2481943C0007C1EF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,7 +89,6 @@
 		3B7991ED24901AF30003B302 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B7D140B2484485100E30EDF /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
 		3B7D1413248718CA00E30EDF /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
-		3BB1F32824833A4E007E8E1E /* TaskStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStore.swift; sourceTree = "<group>"; };
 		3BC406202481FD9B00EF74FF /* WeekdaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysView.swift; sourceTree = "<group>"; };
 		3BC406262482174D00EF74FF /* CalendarMonthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonthViewModel.swift; sourceTree = "<group>"; };
 		3BC4062824821DA100EF74FF /* ReminderDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDayView.swift; sourceTree = "<group>"; };
@@ -133,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				3B1EABB12492C1B200A610CB /* CalendarMonth.swift */,
+				3B1EABDB2497F5E600A610CB /* Task.swift */,
 				3B1EABC22492F9FB00A610CB /* User.swift */,
 				3B1EABCB24943DE900A610CB /* Event.swift */,
 			);
@@ -150,7 +149,6 @@
 		3B7091412481943C0007C1EF = {
 			isa = PBXGroup;
 			children = (
-				3BB1F32824833A4E007E8E1E /* TaskStore.swift */,
 				3B70914C2481943C0007C1EF /* PlanIt */,
 				3B7091632481943E0007C1EF /* PlanItTests */,
 				3B70916E2481943E0007C1EF /* PlanItUITests */,
@@ -224,7 +222,6 @@
 				3B1EABC62492FD0D00A610CB /* ProfileView.swift */,
 				3B7D1413248718CA00E30EDF /* CalendarView.swift */,
 				3B7D140B2484485100E30EDF /* MonthView.swift */,
-				3B1EABCF24943EE700A610CB /* EventView.swift */,
 				3B1EABD124944F8000A610CB /* DayView.swift */,
 			);
 			path = Views;
@@ -235,8 +232,8 @@
 			children = (
 				3BC406262482174D00EF74FF /* CalendarMonthViewModel.swift */,
 				3B1EABC42492FAA300A610CB /* UserViewModel.swift */,
-				3B1EABCD24943EC200A610CB /* EventViewModel.swift */,
-				3B1EABD32494574C00A610CB /* DayEventsViewModel.swift */,
+				3B1EABCD24943EC200A610CB /* TaskCellViewModel.swift */,
+				3B1EABD32494574C00A610CB /* DayTaskViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -508,9 +505,7 @@
 			files = (
 				3BC4062924821DA100EF74FF /* ReminderDayView.swift in Sources */,
 				3B1EABB22492C1B200A610CB /* CalendarMonth.swift in Sources */,
-				3B1EABD024943EE700A610CB /* EventView.swift in Sources */,
-				3B1EABCE24943EC200A610CB /* EventViewModel.swift in Sources */,
-				3BB1F32924833A4E007E8E1E /* TaskStore.swift in Sources */,
+				3B1EABCE24943EC200A610CB /* TaskCellViewModel.swift in Sources */,
 				3BC406212481FD9B00EF74FF /* WeekdaysView.swift in Sources */,
 				3BC406272482174D00EF74FF /* CalendarMonthViewModel.swift in Sources */,
 				3B7D1414248718CA00E30EDF /* CalendarView.swift in Sources */,
@@ -524,7 +519,8 @@
 				3B7D140C2484485100E30EDF /* MonthView.swift in Sources */,
 				3B1EABC72492FD0D00A610CB /* ProfileView.swift in Sources */,
 				3B7091522481943C0007C1EF /* ContentView.swift in Sources */,
-				3B1EABD42494574C00A610CB /* DayEventsViewModel.swift in Sources */,
+				3B1EABD42494574C00A610CB /* DayTaskViewModel.swift in Sources */,
+				3B1EABDC2497F5E600A610CB /* Task.swift in Sources */,
 				3B1EABD224944F8000A610CB /* DayView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
