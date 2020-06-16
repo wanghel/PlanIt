@@ -9,26 +9,33 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @Binding var viewProfile : Bool
+    @EnvironmentObject var viewControl: ViewControl
     @State var person: User = testUser1
     
     var body: some View {
         ZStack {
             //Profile view main
             GeometryReader {_ in
-                ScrollView {
-                    ProfileMainView()
+                if self.viewControl.showSignIn {
+                    SignInView()
+                    .frame(width: screenWidth)
+                    .background(Color.white)
+                    .padding(.top, 60)
+                } else {
+                    ScrollView {
+                        ProfileMainView()
+                    }
+                    .frame(width: screenWidth)
+                    .background(Color.white)
+                    .padding(.top, 60)
                 }
-                .frame(width: screenWidth)
-                .background(Color.white)
-                .padding(.top, 60)
             }
             
             // Profile view bar
-            ProfileBarView(viewProfile: $viewProfile, person: $person).edgesIgnoringSafeArea(.vertical)
+            ProfileBarView(person: $person).edgesIgnoringSafeArea(.vertical)
             
         }
-        .offset(y: viewProfile ? 0 : screenHeight)
+        .offset(y: viewControl.viewProfile ? 0 : screenHeight)
         .animation(.default)
     }
 }
@@ -77,13 +84,13 @@ struct ProfileMainView: View {
 }
 
 struct ProfileBarView: View {
-    @Binding var viewProfile : Bool
+    @EnvironmentObject var viewControl: ViewControl
     @Binding var person: User
     var body: some View {
         VStack {
             HStack {
                 Button(action: {
-                    self.viewProfile = false
+                    self.viewControl.viewProfile = false
                     print(screenHeight)
                 }){
                     Image(systemName: "chevron.down")

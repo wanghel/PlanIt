@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct CalendarView: View {
+    @EnvironmentObject var viewControl: ViewControl
+    
     @State private var p1Month :CalendarMonthViewModel = CalendarMonthViewModel().prevMonth()
     @State private var p2Month :CalendarMonthViewModel = CalendarMonthViewModel().prevMonth().prevMonth()
     @State private var cMonth :CalendarMonthViewModel = CalendarMonthViewModel()
@@ -17,10 +19,6 @@ struct CalendarView: View {
     
     @State private var draggedOffset = CGSize.zero
     @State private var lastOffset = CGSize.zero
-    
-    @Binding var isShowingDayView : Bool
-    @State var dayViewDate : Date = Date()
-    
     
     private func nextView() {
         p1Month = p1Month.nextMonth()
@@ -42,16 +40,16 @@ struct CalendarView: View {
         ZStack {
             GeometryReader { _ in
                 VStack {
-                    MonthView(calendar: self.p2Month, isShowingDayView: self.$isShowingDayView, dayViewDate: self.$dayViewDate)
+                    MonthView(calendar: self.p2Month)
                         .clipped()
                         .opacity(0.5)
                         .allowsHitTesting(false)
-                    MonthView(calendar: self.p1Month, isShowingDayView: self.$isShowingDayView, dayViewDate: self.$dayViewDate)
+                    MonthView(calendar: self.p1Month)
                     .clipped()
-                    MonthView(calendar: self.cMonth, isShowingDayView: self.$isShowingDayView, dayViewDate: self.$dayViewDate)
-                    MonthView(calendar: self.n1Month, isShowingDayView: self.$isShowingDayView, dayViewDate: self.$dayViewDate)
+                    MonthView(calendar: self.cMonth)
+                    MonthView(calendar: self.n1Month)
                     .clipped()
-                    MonthView(calendar: self.n2Month, isShowingDayView: self.$isShowingDayView, dayViewDate: self.$dayViewDate)
+                    MonthView(calendar: self.n2Month)
                         .clipped()
                         .opacity(0.5)
                         .allowsHitTesting(false)
@@ -91,10 +89,7 @@ struct CalendarView: View {
                 })
             }
             
-            //if (isShowingDayView) {
-                DayView(isShowingDayView: $isShowingDayView, dayViewDate: self.$dayViewDate)
-                    //.background(Color.white)
-            //}
+            DayView()
             
         }
         
@@ -103,6 +98,6 @@ struct CalendarView: View {
 
 struct InfiniteCalendarView_Previews: PreviewProvider {
     static var previews: some View {
-        CalendarView(isShowingDayView: .constant(false))
+        CalendarView()
     }
 }

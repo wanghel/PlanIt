@@ -11,11 +11,9 @@ import SwiftUI
 struct HomeView: View {
     var body: some View {
         VStack {
-            MonthView(calendar: CalendarMonthViewModel(), isShowingDayView: .constant(false), dayViewDate: .constant(Date()))
-                .allowsHitTesting(false)
-            Spacer()
-            Text("Reminders for Today")
-            Spacer()
+            MonthView(calendar: CalendarMonthViewModel())
+            //Spacer()
+            DayView()
         }
         
     }

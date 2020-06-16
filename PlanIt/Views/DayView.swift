@@ -9,13 +9,12 @@
 import SwiftUI
 
 struct DayView: View {
-    @Binding var isShowingDayView : Bool
+    @EnvironmentObject var viewControl: ViewControl
     
     func printTime(hour: Int) -> String {
         return "\(hour%12 == 0 ? 12 : hour%12) \(hour/12 == 0 ? "AM" : "PM")"
     }
     
-    @Binding var dayViewDate: Date
     
     @ObservedObject var dayTaskVM = DayTaskViewModel()
     
@@ -45,7 +44,7 @@ struct DayView: View {
     
     var body: some View {
         VStack (spacing:0){
-            DayBarView(isShowingDayView: $isShowingDayView, dayViewDate: $dayViewDate)
+            DayBarView()
                 .background(Color.white)
             
             VStack(alignment: .leading) {
@@ -75,7 +74,7 @@ struct DayView: View {
             
         }
         .edgesIgnoringSafeArea(.vertical)
-        .offset(x: isShowingDayView ? 0 : -screenWidth)
+        .offset(x: viewControl.isShowingDayView ? 0 : -screenWidth)
         .animation(.none)
         
     }
@@ -89,10 +88,26 @@ struct TaskCell: View {
     
     var body: some View {
         HStack {
+//            Button(action: {
+//                self.taskCellVM.task.completed.toggle()
+//            }) {
+//                Image(systemName: taskCellVM.task.completed ? "checkmark.circle.fill" : "circle")
+//                    .resizable()
+//                    .frame(width: 20, height: 20)
+//                    .padding(.trailing)
+//
+//            }
+//            .frame(width: 20, height: 20)
+//            .padding(.trailing)
+            
             Image(systemName: taskCellVM.task.completed ? "checkmark.circle.fill" : "circle")
                 .resizable()
                 .frame(width: 20, height: 20)
                 .padding(.trailing)
+                .onTapGesture {
+                    self.taskCellVM.task.completed.toggle()
+            }
+            
             VStack {
                 Spacer()
                 TextField("", text: $taskCellVM.task.title, onCommit: {
@@ -109,14 +124,13 @@ struct TaskCell: View {
 
 //small nav bar extended from main nav bar
 struct DayBarView: View {
-    @Binding var isShowingDayView : Bool
-    @Binding var dayViewDate: Date
+    @EnvironmentObject var viewControl: ViewControl
     
     func formatDate() -> String {
         let dateFormatterPrint = DateFormatter()
         dateFormatterPrint.dateFormat = "MMM dd,yyyy"
         
-        return dateFormatterPrint.string(from: dayViewDate)
+        return dateFormatterPrint.string(from: self.viewControl.dateShown)
     }
     
     var body: some View {
@@ -126,7 +140,7 @@ struct DayBarView: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                        self.dayViewDate.addTimeInterval(TimeInterval(-86400))
+                        self.viewControl.dateShown.addTimeInterval(TimeInterval(-86400))
                     }){
                         Image(systemName: "chevron.left")
                             .font(.system(size: 25))
@@ -138,7 +152,7 @@ struct DayBarView: View {
                         .opacity(0.7)
                         .padding(.horizontal)
                     Button(action: {
-                        self.dayViewDate.addTimeInterval(TimeInterval(86400))
+                        self.viewControl.dateShown.addTimeInterval(TimeInterval(86400))
                     }){
                         Image(systemName: "chevron.right")
                             .font(.system(size: 25))
@@ -151,7 +165,7 @@ struct DayBarView: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                        self.isShowingDayView.toggle()
+                        self.viewControl.isShowingDayView.toggle()
                     }){
                         HStack (spacing: 5) {
                             Image(systemName: "calendar")
@@ -175,7 +189,7 @@ struct DayBarView: View {
 
 struct DayView_Previews: PreviewProvider {
     static var previews: some View {
-        DayView(isShowingDayView: .constant(true), dayViewDate: .constant(Date()))
+        DayView()
     }
 }
 

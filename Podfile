@@ -12,7 +12,7 @@ pod 'Firebase/Auth'
 pod 'Firebase/Analytics'
 pod 'Firebase/Firestore'
 pod 'FirebaseFirestoreSwift'
-
+pod 'GoogleSignIn'
 
   target 'PlanItTests' do
     inherit! :search_paths

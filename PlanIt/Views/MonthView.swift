@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct MonthView: View {
+    @EnvironmentObject var viewControl: ViewControl
+    
     let monthArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
     let weekDayArr = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"]
@@ -20,9 +22,6 @@ struct MonthView: View {
     let todayYear = Calendar.current.component(.year, from: Date())
     
     var calendar : CalendarMonthViewModel
-    
-    @Binding var isShowingDayView : Bool
-    @Binding var dayViewDate : Date
     
     func getDate(day: Int) -> Date {
         let dateFormatterGet = DateFormatter()
@@ -71,8 +70,8 @@ struct MonthView: View {
                 .background(weekDayColor[day])
                 .cornerRadius(15.0)
                 .gesture(TapGesture().onEnded({
-                    self.isShowingDayView.toggle()
-                    self.dayViewDate = self.getDate(day: currIdx-firstWeekday)
+                    self.viewControl.isShowingDayView = true
+                    self.viewControl.dateShown = self.getDate(day: currIdx-firstWeekday)
                     //print("tapped")
                 }))
         }
@@ -84,8 +83,8 @@ struct MonthView: View {
                 .background(Color.white)
                 .cornerRadius(0.0)
                 .gesture(TapGesture().onEnded({
-                    self.isShowingDayView.toggle()
-                    self.dayViewDate = self.getDate(day: currIdx-firstWeekday)
+                    self.viewControl.isShowingDayView = true
+                    self.viewControl.dateShown = self.getDate(day: currIdx-firstWeekday)
                     //print("tapped")
                 }))
         }
@@ -128,6 +127,6 @@ struct MonthView: View {
 
 struct MonthView_Previews: PreviewProvider {
     static var previews: some View {
-        MonthView(calendar: CalendarMonthViewModel(), isShowingDayView: .constant(false), dayViewDate: .constant(Date()))
+        MonthView(calendar: CalendarMonthViewModel())
     }
 }

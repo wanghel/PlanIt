@@ -14,19 +14,17 @@ let screenHeight = screenSize.height
 
 
 struct ContentView: View {
-    @State var selected = 1
-    @State var viewProfile = false
-    @State var isShowingDayView = false
+    @EnvironmentObject var viewControl: ViewControl
     
     
     func chooseMainView() -> AnyView {
-        switch selected {
+        switch viewControl.selected {
         case 1:
             return AnyView(HomeView())
         case 2:
             return AnyView(Text("Reminders"))
         default:
-            return AnyView(CalendarView(isShowingDayView: $isShowingDayView))
+            return AnyView(CalendarView())
         }
         
     }
@@ -34,33 +32,32 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             GeometryReader {_ in
-                VStack {
-                    self.chooseMainView()
-                        .padding(.top, 60)
-                        .padding(.bottom, 50)
-                }
+                self.chooseMainView()
+                    .padding(.top, 60)
+                    .padding(.bottom, 50)
             }
             
+            
             VStack {
-                TopBar (viewProfile: $viewProfile)
+                TopBar ()
                 Spacer()
-                BottonBar(selected: $selected, isShowingDayView: $isShowingDayView)
+                BottonBar()
             }.edgesIgnoringSafeArea(.vertical)
             
-            ProfileView(viewProfile: $viewProfile)
+            ProfileView()
         }
     }
     
 }
 
 struct TopBar: View {
-    @Binding var viewProfile : Bool
+    @EnvironmentObject var viewControl: ViewControl
     
     var body: some View {
         
         HStack {
             Button(action: {
-                self.viewProfile = true
+                self.viewControl.viewProfile = true
             }){
                 Image(systemName: "person.crop.circle.fill")
                     .font(.system(size: 30))
@@ -89,35 +86,34 @@ struct TopBar: View {
 }
 
 struct BottonBar: View {
-    @Binding var selected : Int
-    @Binding var isShowingDayView : Bool
+    @EnvironmentObject var viewControl: ViewControl
     
     var body: some View {
         VStack {
             HStack {
                 Button(action: {
-                    self.isShowingDayView = false
-                    self.selected = 0
+                    self.viewControl.isShowingDayView = false
+                    self.viewControl.selected = 0
                 }){
-                    Image(systemName: self.selected == 0 ? "calendar.circle.fill" : "calendar.circle")
+                    Image(systemName: self.viewControl.selected == 0 ? "calendar.circle.fill" : "calendar.circle")
                         .font(.system(size: 25))
                         .foregroundColor(.gray)
                 }
                 Spacer()
                 Button(action: {
-                    self.isShowingDayView = false
-                    self.selected = 1
+                    self.viewControl.isShowingDayView = true
+                    self.viewControl.selected = 1
                 }){
-                    Image(systemName: self.selected == 1 ? "house.fill" : "house")
+                    Image(systemName: self.viewControl.selected == 1 ? "house.fill" : "house")
                         .font(.system(size: 25))
                         .foregroundColor(.gray)
                 }
                 Spacer()
                 Button(action: {
-                    self.isShowingDayView = false
-                    self.selected = 2
+                    self.viewControl.isShowingDayView = false
+                    self.viewControl.selected = 2
                 }){
-                    Image(systemName: self.selected == 2 ? "bookmark.fill" : "bookmark")
+                    Image(systemName: self.viewControl.selected == 2 ? "bookmark.fill" : "bookmark")
                         .font(.system(size: 25))
                         .foregroundColor(.gray)
                 }
