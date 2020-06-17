@@ -13,7 +13,6 @@
 		3B1EABC52492FAA300A610CB /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABC42492FAA300A610CB /* UserViewModel.swift */; };
 		3B1EABC72492FD0D00A610CB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABC62492FD0D00A610CB /* ProfileView.swift */; };
 		3B1EABCA2494395800A610CB /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABC92494395800A610CB /* UserRepository.swift */; };
-		3B1EABCC24943DE900A610CB /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABCB24943DE900A610CB /* Event.swift */; };
 		3B1EABCE24943EC200A610CB /* TaskCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABCD24943EC200A610CB /* TaskCellViewModel.swift */; };
 		3B1EABD224944F8000A610CB /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABD124944F8000A610CB /* DayView.swift */; };
 		3B1EABD42494574C00A610CB /* DayTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABD32494574C00A610CB /* DayTaskViewModel.swift */; };
@@ -71,7 +70,6 @@
 		3B1EABC42492FAA300A610CB /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		3B1EABC62492FD0D00A610CB /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		3B1EABC92494395800A610CB /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
-		3B1EABCB24943DE900A610CB /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		3B1EABCD24943EC200A610CB /* TaskCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellViewModel.swift; sourceTree = "<group>"; };
 		3B1EABD124944F8000A610CB /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		3B1EABD32494574C00A610CB /* DayTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTaskViewModel.swift; sourceTree = "<group>"; };
@@ -143,7 +141,6 @@
 				3B1EABB12492C1B200A610CB /* CalendarMonth.swift */,
 				3B1EABDB2497F5E600A610CB /* Task.swift */,
 				3B1EABC22492F9FB00A610CB /* User.swift */,
-				3B1EABCB24943DE900A610CB /* Event.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -529,7 +526,6 @@
 				3B7D1414248718CA00E30EDF /* CalendarView.swift in Sources */,
 				3BD3F9E22499471A00071FD2 /* TaskRepository.swift in Sources */,
 				3B70914E2481943C0007C1EF /* AppDelegate.swift in Sources */,
-				3B1EABCC24943DE900A610CB /* Event.swift in Sources */,
 				3B1EABCA2494395800A610CB /* UserRepository.swift in Sources */,
 				3B1EABC32492F9FB00A610CB /* User.swift in Sources */,
 				3B1EABC52492FAA300A610CB /* UserViewModel.swift in Sources */,

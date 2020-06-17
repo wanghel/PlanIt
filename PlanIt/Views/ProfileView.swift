@@ -36,11 +36,17 @@ struct ProfileView: View {
                     
                 } else {
                     //NEED TO CHANGE
+                    
                     SignInView()
+                    if(viewControl.showSignUp) {
+                        SignUpView()
+                    }
                 }
                 
                 // Profile view bar
+                
                 ProfileBarView(person: $person).edgesIgnoringSafeArea(.vertical)
+                
                 
             }
             .offset(y: viewControl.viewProfile ? 0 : screenHeight)
@@ -54,6 +60,8 @@ struct ProfileView: View {
 struct ProfileMainView: View {
     //@Binding var person: User
     var person = testUser1
+    @EnvironmentObject var session: SessionStore
+    
     var body: some View {
         VStack {
             Image(systemName: "person.crop.circle.fill").resizable().frame(width: 150, height: 150)
@@ -61,9 +69,9 @@ struct ProfileMainView: View {
                 Text(person.firstName).font(.title)
                 Text(person.lastName).font(.title)
             }
-            Spacer()
-            Text(person.bio)
-            Spacer()
+//                        Spacer()
+//                        Text(person.bio)
+//            Spacer()
             VStack (alignment: .leading) {
                 HStack {
                     Text("Friends")
@@ -78,7 +86,7 @@ struct ProfileMainView: View {
                     Button(action: {}) {
                         HStack {
                             Image(systemName: "person.crop.circle.fill")
-                            Text(friend.firstName + " " + friend.lastName)
+                            Text(friend)
                             Spacer()
                             Image(systemName: "chevron.right")
                                 .foregroundColor(.gray)
@@ -126,6 +134,7 @@ struct ProfileBarView: View {
                 Button(action: {
                     self.session.signOut()
                     self.viewControl.showSignIn.toggle()
+                    self.viewControl.dayTaskVM.taskRepository.reloadData()
                 }){
                     Image(systemName: "gear")
                         .font(.system(size: 25))

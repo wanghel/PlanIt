@@ -12,7 +12,9 @@ class ViewControl: ObservableObject {
     @Published var selected = 1
     @Published var viewProfile = false
     @Published var isShowingDayView = true
-    @Published var dateShown = Date()
+    @Published var dateShown = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month, .day], from: Date()))!
     @Published var showSignIn = true
     @Published var showSignUp = false
+    
+    @Published var dayTaskVM = DayTaskViewModel()
 }

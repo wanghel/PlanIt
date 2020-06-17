@@ -23,10 +23,10 @@ class TaskRepository: ObservableObject {
     
     func loadData() {
         let userId = Auth.auth().currentUser?.uid
+        print(userId)
         db.collection("tasks")
             .order(by: "createdTime")
             .whereField("userId", isEqualTo: userId as Any)
-            //.whereField("dayAssigned", isEqualTo:  as Any)
             .addSnapshotListener { (querySnapshot, error) in
                 if let qs = querySnapshot {
                     self.tasks = qs.documents.compactMap {
@@ -43,6 +43,10 @@ class TaskRepository: ObservableObject {
                 }
                 
         }
+    }
+    
+    func reloadData() {
+        loadData()
     }
     
     func addTask(_ task: Task) {
@@ -64,6 +68,12 @@ class TaskRepository: ObservableObject {
             catch {
                 fatalError("Unable to encode task: \(error.localizedDescription)")
             }
+        }
+    }
+    
+    func deleteTask(_ task: Task) {
+        if let taskID = task.id {
+            db.collection("tasks").document(taskID).delete()
         }
     }
 }

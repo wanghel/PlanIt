@@ -16,6 +16,12 @@ struct SignUpView: View {
     @State var password: String = ""
     @State var error: String = ""
     
+    @State var userName: String = ""
+    @State var firstName: String = ""
+    @State var lastName: String = ""
+    
+    @ObservedObject var userVM = UserViewModel()
+    
     func signUp() {
         session.signUp(email: email, password: password) { (result, error) in
             if let error = error {
@@ -26,6 +32,9 @@ struct SignUpView: View {
             }
             
         }
+        
+       userVM.addUser(user: User(email: email, userName: userName, firstName: firstName, lastName: lastName, friends: []))
+        viewControl.dayTaskVM.taskRepository.reloadData()
     }
     
     var body: some View {
@@ -34,12 +43,27 @@ struct SignUpView: View {
             Text("Create Account")
             Text("Sign up to get started")
             Spacer()
-            TextField("Email address", text: $email)
+            
+            VStack{
+                TextField("Email address", text: $email)
                 .font(.system(size: 14))
                 .padding(12)
             SecureField("Password", text: $password)
                 .font(.system(size: 14))
                 .padding(12)
+            
+            TextField("User Name", text: $userName)
+            .font(.system(size: 14))
+            .padding(12)
+            TextField("First Name", text: $firstName)
+                .font(.system(size: 14))
+                .padding(12)
+            TextField("Last Name", text: $lastName)
+            .font(.system(size: 14))
+            .padding(12)
+                
+            }
+            
             
             Button(action: {
                 self.signUp()

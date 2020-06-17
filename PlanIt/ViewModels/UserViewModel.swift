@@ -11,12 +11,22 @@ import Combine
 
 class UserViewModel: ObservableObject{
     @Published var userRepository = UserRepository()
-    @Published var user: User
+    @Published var user = User(
+        id: "",
+        email: "",
+        userName: "",
+        firstName: "",
+        lastName: "",
+        friends: []
+    )
     
     private var cancellables = Set<AnyCancellable>()
+  
+    init() {
+        self.user = userRepository.user
+    }
     
-    init(user: User) {
-        
-        self.user = user
+    func addUser(user: User) {
+        userRepository.addUser(user)
     }
 }

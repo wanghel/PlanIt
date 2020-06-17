@@ -86,7 +86,7 @@ struct CalendarView: View {
                         print(self.draggedOffset.height)
                         self.lastOffset = offset
                         self.draggedOffset = CGSize.zero
-                })
+                    })
             }
             
             DayView()

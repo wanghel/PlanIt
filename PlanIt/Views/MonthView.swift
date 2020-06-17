@@ -63,6 +63,8 @@ struct MonthView: View {
         }
             // Today's date
         else if (todayDay == currIdx-firstWeekday && todayMonth == calendar.calendarMonth.month && todayYear == calendar.calendarMonth.year) {
+            
+            
             return Text(String(currIdx-firstWeekday))
                 .fontWeight(.bold)
                 .foregroundColor(Color.white)
@@ -77,6 +79,7 @@ struct MonthView: View {
         }
             // Plain days in calendar
         else {
+            
             return Text(String(currIdx-firstWeekday))
                 .foregroundColor(.black)
                 .frame(width: screenWidth/7, height: screenHeight*0.05)
@@ -87,6 +90,7 @@ struct MonthView: View {
                     self.viewControl.dateShown = self.getDate(day: currIdx-firstWeekday)
                     //print("tapped")
                 }))
+            
         }
     }
     
@@ -116,12 +120,13 @@ struct MonthView: View {
                     HStack (spacing: 0.0){
                         ForEach(0..<7) { day in
                             self.displayDay(week: week, day: day)
-                                
+                            
+                            
                         }
                     }
                 }
-            }
-            
+        }
+        
     }
 }
 

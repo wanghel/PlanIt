@@ -17,7 +17,8 @@ struct DayView: View {
     }
     
     
-    @ObservedObject var dayTaskVM = DayTaskViewModel()
+    //@ObservedObject var dayTaskVM = DayTaskViewModel()
+     //@EnvironmentObject var dayTaskVM: DayTaskViewModel
     
     @State var presentAddNewItem = false
     
@@ -44,19 +45,28 @@ struct DayView: View {
     
     
     var body: some View {
-        VStack (spacing:0){
-            DayBarView()
-                .background(Color.white)
+        VStack (spacing:0) {
+            //if self.viewControl.selected == 0 {
+                DayBarView()
+                    .background(Color.white)
+                    .padding(.bottom)
+            //}
             
             VStack(alignment: .leading) {
                 List {
-                    ForEach(dayTaskVM.taskCellViewModels) { taskCellVM in
-                        TaskCell(taskCellVM: taskCellVM)
+                    ForEach(viewControl.dayTaskVM.taskCellViewModels) { taskCellVM in
+                        if(taskCellVM.task.dayAssigned == self.viewControl.dateShown) {
+                            TaskCell(taskCellVM: taskCellVM)
+                            .onDisappear(perform: {
+                                if taskCellVM.task.completed {
+                                    self.viewControl.dayTaskVM.deleteTask(task: taskCellVM.task)
+                                }})
+                        }
                     }
                     if presentAddNewItem {
-                        TaskCell(taskCellVM: TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned:  Date()))) { task in
+                        TaskCell(taskCellVM: TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: self.viewControl.dateShown))) { task in
                             if(task.title != "") {
-                                self.dayTaskVM.addTask(task: task)
+                                self.viewControl.dayTaskVM.addTask(task: task)
                             }
                             self.presentAddNewItem.toggle()
                         }
@@ -76,7 +86,7 @@ struct DayView: View {
         }
         .edgesIgnoringSafeArea(.vertical)
         .offset(x: viewControl.isShowingDayView ? 0 : -screenWidth)
-        .animation(.none)
+        //.animation(.none)
         
     }
 }
@@ -152,26 +162,28 @@ struct DayBarView: View {
                     Spacer()
                 }
                     
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        self.viewControl.isShowingDayView.toggle()
-                    }){
-                        HStack (spacing: 5) {
-                            Image(systemName: "calendar")
-                                .font(.system(size: 25))
-                                .foregroundColor(.black)
-                                .opacity(0.5)
-                            Image(systemName: "chevron.right")
-                            .font(.system(size: 15))
-                            .foregroundColor(.black)
-                            .opacity(0.5)
+                if self.viewControl.selected == 0 {
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            self.viewControl.isShowingDayView.toggle()
+                        }){
+                            HStack (spacing: 5) {
+                                Image(systemName: "calendar")
+                                    .font(.system(size: 25))
+                                    .foregroundColor(.black)
+                                    .opacity(0.5)
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 15))
+                                    .foregroundColor(.black)
+                                    .opacity(0.5)
+                            }
                         }
                     }
+                    .frame(height: 40)
+                    .padding(.horizontal)
+                    .clipped()
                 }
-                .frame(height: 40)
-                .padding(.horizontal)
-                .clipped()
             }
         }
     }
