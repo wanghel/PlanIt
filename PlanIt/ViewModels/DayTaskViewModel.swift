@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import Firebase
 
 class DayTaskViewModel: ObservableObject {
     @Published var taskRepository = TaskRepository()
@@ -27,7 +28,5 @@ class DayTaskViewModel: ObservableObject {
     
     func addTask(task: Task) {
         taskRepository.addTask(task)
-//        let taskVM = TaskCellViewModel(task: task)
-//        self.taskCellViewModels.append(taskVM)
     }
 }

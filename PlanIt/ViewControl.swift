@@ -14,4 +14,5 @@ class ViewControl: ObservableObject {
     @Published var isShowingDayView = true
     @Published var dateShown = Date()
     @Published var showSignIn = true
+    @Published var showSignUp = false
 }

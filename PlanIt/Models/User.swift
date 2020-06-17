@@ -10,6 +10,7 @@ import Foundation
 
 struct User: Codable, Identifiable, Hashable {
     var id: String = UUID().uuidString
+    var email: String?
     var userName: String
     var firstName: String
     var lastName: String

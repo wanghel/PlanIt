@@ -18,14 +18,15 @@ class TaskRepository: ObservableObject {
     @Published var tasks = [Task]()
     
     init() {
-        loadDate()
+        loadData()
     }
     
-    func loadDate() {
+    func loadData() {
         let userId = Auth.auth().currentUser?.uid
         db.collection("tasks")
             .order(by: "createdTime")
             .whereField("userId", isEqualTo: userId as Any)
+            //.whereField("dayAssigned", isEqualTo:  as Any)
             .addSnapshotListener { (querySnapshot, error) in
                 if let qs = querySnapshot {
                     self.tasks = qs.documents.compactMap {

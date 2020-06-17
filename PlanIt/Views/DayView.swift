@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct DayView: View {
     @EnvironmentObject var viewControl: ViewControl
@@ -53,7 +54,7 @@ struct DayView: View {
                         TaskCell(taskCellVM: taskCellVM)
                     }
                     if presentAddNewItem {
-                        TaskCell(taskCellVM: TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: Date()))) { task in
+                        TaskCell(taskCellVM: TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned:  Date()))) { task in
                             if(task.title != "") {
                                 self.dayTaskVM.addTask(task: task)
                             }
@@ -88,17 +89,6 @@ struct TaskCell: View {
     
     var body: some View {
         HStack {
-//            Button(action: {
-//                self.taskCellVM.task.completed.toggle()
-//            }) {
-//                Image(systemName: taskCellVM.task.completed ? "checkmark.circle.fill" : "circle")
-//                    .resizable()
-//                    .frame(width: 20, height: 20)
-//                    .padding(.trailing)
-//
-//            }
-//            .frame(width: 20, height: 20)
-//            .padding(.trailing)
             
             Image(systemName: taskCellVM.task.completed ? "checkmark.circle.fill" : "circle")
                 .resizable()

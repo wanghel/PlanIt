@@ -10,33 +10,44 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var viewControl: ViewControl
+    @EnvironmentObject var session: SessionStore
+    
     @State var person: User = testUser1
     
+    func getUser() {
+        session.listen()
+    }
+    
     var body: some View {
-        ZStack {
-            //Profile view main
-            GeometryReader {_ in
-                if self.viewControl.showSignIn {
-                    SignInView()
-                    .frame(width: screenWidth)
-                    .background(Color.white)
-                    .padding(.top, 60)
-                } else {
-                    ScrollView {
-                        ProfileMainView()
+        Group {
+            
+            ZStack {
+                if (session.session != nil) {
+                    
+                    //Profile view main
+                    GeometryReader {_ in
+                        ScrollView {
+                            ProfileMainView()
+                        }
+                        .frame(width: screenWidth)
+                        .background(Color.white)
+                        .padding(.top, 60)
                     }
-                    .frame(width: screenWidth)
-                    .background(Color.white)
-                    .padding(.top, 60)
+                    
+                } else {
+                    //NEED TO CHANGE
+                    SignInView()
                 }
+                
+                // Profile view bar
+                ProfileBarView(person: $person).edgesIgnoringSafeArea(.vertical)
+                
             }
-            
-            // Profile view bar
-            ProfileBarView(person: $person).edgesIgnoringSafeArea(.vertical)
-            
+            .offset(y: viewControl.viewProfile ? 0 : screenHeight)
+            .animation(.default)
         }
-        .offset(y: viewControl.viewProfile ? 0 : screenHeight)
-        .animation(.default)
+        .onAppear(perform: getUser)
+        
     }
 }
 
@@ -85,6 +96,8 @@ struct ProfileMainView: View {
 
 struct ProfileBarView: View {
     @EnvironmentObject var viewControl: ViewControl
+    @EnvironmentObject var session: SessionStore
+    
     @Binding var person: User
     var body: some View {
         VStack {
@@ -110,7 +123,10 @@ struct ProfileBarView: View {
                         .opacity(0.7)
                         .padding()
                 }
-                Button(action: {}){
+                Button(action: {
+                    self.session.signOut()
+                    self.viewControl.showSignIn.toggle()
+                }){
                     Image(systemName: "gear")
                         .font(.system(size: 25))
                         .foregroundColor(.black)
@@ -131,7 +147,7 @@ struct ProfileBarView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileMainView()
+        ProfileMainView().environmentObject(SessionStore())
         //ContentView()
     }
 }
