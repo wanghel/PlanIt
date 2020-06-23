@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct MonthView: View {
-    @EnvironmentObject var viewControl: ViewControl
+    @EnvironmentObject var viewRouter: ViewRouter
     
     let monthArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
@@ -72,8 +72,8 @@ struct MonthView: View {
                 .background(weekDayColor[day])
                 .cornerRadius(15.0)
                 .gesture(TapGesture().onEnded({
-                    self.viewControl.isShowingDayView = true
-                    self.viewControl.dateShown = self.getDate(day: currIdx-firstWeekday)
+                    self.viewRouter.isShowingDayView = true
+                    self.viewRouter.dateShown = self.getDate(day: currIdx-firstWeekday)
                     //print("tapped")
                 }))
         }
@@ -86,8 +86,8 @@ struct MonthView: View {
                 .background(Color.white)
                 .cornerRadius(0.0)
                 .gesture(TapGesture().onEnded({
-                    self.viewControl.isShowingDayView = true
-                    self.viewControl.dateShown = self.getDate(day: currIdx-firstWeekday)
+                    self.viewRouter.isShowingDayView = true
+                    self.viewRouter.dateShown = self.getDate(day: currIdx-firstWeekday)
                     //print("tapped")
                 }))
             

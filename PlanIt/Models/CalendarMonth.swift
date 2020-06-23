@@ -11,5 +11,4 @@ import Foundation
 struct CalendarMonth {
     var month: Int
     var year: Int
-    
 }

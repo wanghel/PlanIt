@@ -10,23 +10,16 @@ import Foundation
 import Combine
 
 class UserViewModel: ObservableObject{
-    @Published var userRepository = UserRepository()
-    @Published var user = User(
-        id: "",
-        email: "",
-        userName: "",
-        firstName: "",
-        lastName: "",
-        friends: []
-    )
+    //@Published var userRepository = UserRepository()
+    @Published var userProfile: UserProfile?
     
     private var cancellables = Set<AnyCancellable>()
   
-    init() {
-        self.user = userRepository.user
-    }
-    
-    func addUser(user: User) {
-        userRepository.addUser(user)
-    }
+//    init() {
+//        self.userP = userRepository.user
+//    }
+//
+//    func addUser(user: User) {
+//        userRepository.addUser(user)
+//    }
 }

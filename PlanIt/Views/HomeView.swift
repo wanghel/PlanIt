@@ -9,8 +9,11 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject var session: SessionStore
+    
     var body: some View {
         VStack {
+            Text("Welcome back \(session.profile?.firstName ?? "")")
             MonthView(calendar: CalendarMonthViewModel())
             //Spacer()
             DayView()

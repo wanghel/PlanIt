@@ -10,14 +10,14 @@ import SwiftUI
 import Firebase
 
 struct DayView: View {
-    @EnvironmentObject var viewControl: ViewControl
+    @EnvironmentObject var viewRouter: ViewRouter
     
     func printTime(hour: Int) -> String {
         return "\(hour%12 == 0 ? 12 : hour%12) \(hour/12 == 0 ? "AM" : "PM")"
     }
     
     
-    //@ObservedObject var dayTaskVM = DayTaskViewModel()
+    @ObservedObject var dayTaskVM = DayTaskViewModel()
      //@EnvironmentObject var dayTaskVM: DayTaskViewModel
     
     @State var presentAddNewItem = false
@@ -46,7 +46,7 @@ struct DayView: View {
     
     var body: some View {
         VStack (spacing:0) {
-            //if self.viewControl.selected == 0 {
+            //if self.viewRouter.selected == 0 {
                 DayBarView()
                     .background(Color.white)
                     .padding(.bottom)
@@ -54,19 +54,19 @@ struct DayView: View {
             
             VStack(alignment: .leading) {
                 List {
-                    ForEach(viewControl.dayTaskVM.taskCellViewModels) { taskCellVM in
-                        if(taskCellVM.task.dayAssigned == self.viewControl.dateShown) {
+                    ForEach(dayTaskVM.taskCellViewModels) { taskCellVM in
+                        if(taskCellVM.task.dayAssigned == self.viewRouter.dateShown) {
                             TaskCell(taskCellVM: taskCellVM)
                             .onDisappear(perform: {
                                 if taskCellVM.task.completed {
-                                    self.viewControl.dayTaskVM.deleteTask(task: taskCellVM.task)
+                                    self.dayTaskVM.deleteTask(task: taskCellVM.task)
                                 }})
                         }
                     }
                     if presentAddNewItem {
-                        TaskCell(taskCellVM: TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: self.viewControl.dateShown))) { task in
+                        TaskCell(taskCellVM: TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: self.viewRouter.dateShown))) { task in
                             if(task.title != "") {
-                                self.viewControl.dayTaskVM.addTask(task: task)
+                                self.dayTaskVM.addTask(task: task)
                             }
                             self.presentAddNewItem.toggle()
                         }
@@ -85,7 +85,7 @@ struct DayView: View {
             
         }
         .edgesIgnoringSafeArea(.vertical)
-        .offset(x: viewControl.isShowingDayView ? 0 : -screenWidth)
+        .offset(x: viewRouter.isShowingDayView ? 0 : -screenWidth)
         //.animation(.none)
         
     }
@@ -124,13 +124,13 @@ struct TaskCell: View {
 
 //small nav bar extended from main nav bar
 struct DayBarView: View {
-    @EnvironmentObject var viewControl: ViewControl
+    @EnvironmentObject var viewRouter: ViewRouter
     
     func formatDate() -> String {
         let dateFormatterPrint = DateFormatter()
         dateFormatterPrint.dateFormat = "MMM dd,yyyy"
         
-        return dateFormatterPrint.string(from: self.viewControl.dateShown)
+        return dateFormatterPrint.string(from: self.viewRouter.dateShown)
     }
     
     var body: some View {
@@ -140,7 +140,7 @@ struct DayBarView: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                        self.viewControl.dateShown.addTimeInterval(TimeInterval(-86400))
+                        self.viewRouter.dateShown.addTimeInterval(TimeInterval(-86400))
                     }){
                         Image(systemName: "chevron.left")
                             .font(.system(size: 25))
@@ -152,7 +152,7 @@ struct DayBarView: View {
                         .opacity(0.7)
                         .padding(.horizontal)
                     Button(action: {
-                        self.viewControl.dateShown.addTimeInterval(TimeInterval(86400))
+                        self.viewRouter.dateShown.addTimeInterval(TimeInterval(86400))
                     }){
                         Image(systemName: "chevron.right")
                             .font(.system(size: 25))
@@ -162,11 +162,11 @@ struct DayBarView: View {
                     Spacer()
                 }
                     
-                if self.viewControl.selected == 0 {
+                if self.viewRouter.selected == 0 {
                     HStack {
                         Spacer()
                         Button(action: {
-                            self.viewControl.isShowingDayView.toggle()
+                            self.viewRouter.isShowingDayView.toggle()
                         }){
                             HStack (spacing: 5) {
                                 Image(systemName: "calendar")

@@ -14,11 +14,11 @@ let screenHeight = screenSize.height
 
 
 struct ContentView: View {
-    @EnvironmentObject var viewControl: ViewControl
+    @EnvironmentObject var viewRouter: ViewRouter
     
     
     func chooseMainView() -> AnyView {
-        switch viewControl.selected {
+        switch viewRouter.selected {
         case 1:
             return AnyView(HomeView())
         case 2:
@@ -51,13 +51,13 @@ struct ContentView: View {
 }
 
 struct TopBar: View {
-    @EnvironmentObject var viewControl: ViewControl
+    @EnvironmentObject var viewRouter: ViewRouter
     
     var body: some View {
         
         HStack {
             Button(action: {
-                self.viewControl.viewProfile = true
+                self.viewRouter.viewProfile = true
             }){
                 Image(systemName: "person.crop.circle.fill")
                     .font(.system(size: 30))
@@ -86,34 +86,34 @@ struct TopBar: View {
 }
 
 struct BottonBar: View {
-    @EnvironmentObject var viewControl: ViewControl
+    @EnvironmentObject var viewRouter: ViewRouter
     
     var body: some View {
         VStack {
             HStack {
                 Button(action: {
-                    self.viewControl.isShowingDayView = false
-                    self.viewControl.selected = 0
+                    self.viewRouter.isShowingDayView = false
+                    self.viewRouter.selected = 0
                 }){
-                    Image(systemName: self.viewControl.selected == 0 ? "calendar.circle.fill" : "calendar.circle")
+                    Image(systemName: self.viewRouter.selected == 0 ? "calendar.circle.fill" : "calendar.circle")
                         .font(.system(size: 25))
                         .foregroundColor(.gray)
                 }
                 Spacer()
                 Button(action: {
-                    self.viewControl.isShowingDayView = true
-                    self.viewControl.selected = 1
+                    self.viewRouter.isShowingDayView = true
+                    self.viewRouter.selected = 1
                 }){
-                    Image(systemName: self.viewControl.selected == 1 ? "house.fill" : "house")
+                    Image(systemName: self.viewRouter.selected == 1 ? "house.fill" : "house")
                         .font(.system(size: 25))
                         .foregroundColor(.gray)
                 }
                 Spacer()
                 Button(action: {
-                    self.viewControl.isShowingDayView = false
-                    self.viewControl.selected = 2
+                    self.viewRouter.isShowingDayView = false
+                    self.viewRouter.selected = 2
                 }){
-                    Image(systemName: self.viewControl.selected == 2 ? "bookmark.fill" : "bookmark")
+                    Image(systemName: self.viewRouter.selected == 2 ? "bookmark.fill" : "bookmark")
                         .font(.system(size: 25))
                         .foregroundColor(.gray)
                 }

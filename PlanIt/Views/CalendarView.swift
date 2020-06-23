@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct CalendarView: View {
-    @EnvironmentObject var viewControl: ViewControl
+    @EnvironmentObject var viewRouter: ViewRouter
     
     @State private var p1Month :CalendarMonthViewModel = CalendarMonthViewModel().prevMonth()
     @State private var p2Month :CalendarMonthViewModel = CalendarMonthViewModel().prevMonth().prevMonth()

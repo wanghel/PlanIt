@@ -23,7 +23,7 @@ class TaskRepository: ObservableObject {
     
     func loadData() {
         let userId = Auth.auth().currentUser?.uid
-        print(userId)
+        print(userId ?? "no user")
         db.collection("tasks")
             .order(by: "createdTime")
             .whereField("userId", isEqualTo: userId as Any)
