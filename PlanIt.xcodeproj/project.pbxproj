@@ -37,6 +37,8 @@
 		3BD3F9E424995F9900071FD2 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD3F9E324995F9900071FD2 /* AuthView.swift */; };
 		3BD3F9EA2499807C00071FD2 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD3F9E92499807C00071FD2 /* SessionStore.swift */; };
 		3BD3F9EE24A133DD00071FD2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD3F9ED24A133DD00071FD2 /* User.swift */; };
+		3BD3F9F024A1A11500071FD2 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD3F9EF24A1A11500071FD2 /* DetailView.swift */; };
+		3BD3F9F224A2A68000071FD2 /* Date+CustomComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD3F9F124A2A68000071FD2 /* Date+CustomComparison.swift */; };
 		B1133DFB52D4C0C8850EAB65 /* Pods_PlanIt_PlanItUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50AED21F2F6133B885BEA05 /* Pods_PlanIt_PlanItUITests.framework */; };
 		D1C012135705327B625A9C27 /* Pods_PlanIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946F3C0D94FCDA674585D3E7 /* Pods_PlanIt.framework */; };
 /* End PBXBuildFile section */
@@ -100,6 +102,8 @@
 		3BD3F9E324995F9900071FD2 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		3BD3F9E92499807C00071FD2 /* SessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
 		3BD3F9ED24A133DD00071FD2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		3BD3F9EF24A1A11500071FD2 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		3BD3F9F124A2A68000071FD2 /* Date+CustomComparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+CustomComparison.swift"; sourceTree = "<group>"; };
 		4586C7ADD36D0788986F3CD0 /* Pods_PlanItTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlanItTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EC02B10D8A14E9188B3405B /* Pods-PlanIt-PlanItUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt-PlanItUITests.debug.xcconfig"; path = "Target Support Files/Pods-PlanIt-PlanItUITests/Pods-PlanIt-PlanItUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7B71E4FBC96AA5842F301760 /* Pods-PlanIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt.debug.xcconfig"; path = "Target Support Files/Pods-PlanIt/Pods-PlanIt.debug.xcconfig"; sourceTree = "<group>"; };
@@ -229,12 +233,14 @@
 			isa = PBXGroup;
 			children = (
 				3B7091512481943C0007C1EF /* ContentView.swift */,
+				3BD3F9EF24A1A11500071FD2 /* DetailView.swift */,
 				3B1EABD92494A1E200A610CB /* HomeView.swift */,
 				3B1EABC62492FD0D00A610CB /* ProfileView.swift */,
 				3BD3F9E324995F9900071FD2 /* AuthView.swift */,
 				3B7D1413248718CA00E30EDF /* CalendarView.swift */,
 				3B7D140B2484485100E30EDF /* MonthView.swift */,
 				3B1EABD124944F8000A610CB /* DayView.swift */,
+				3BD3F9F124A2A68000071FD2 /* Date+CustomComparison.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -516,6 +522,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BD3F9EA2499807C00071FD2 /* SessionStore.swift in Sources */,
+				3BD3F9F024A1A11500071FD2 /* DetailView.swift in Sources */,
 				3BC4062924821DA100EF74FF /* ReminderDayView.swift in Sources */,
 				3B1EABB22492C1B200A610CB /* CalendarMonth.swift in Sources */,
 				3BD3F9E424995F9900071FD2 /* AuthView.swift in Sources */,
@@ -537,6 +544,7 @@
 				3BD3F9EE24A133DD00071FD2 /* User.swift in Sources */,
 				3B1EABD42494574C00A610CB /* DayTaskViewModel.swift in Sources */,
 				3B1EABDC2497F5E600A610CB /* Task.swift in Sources */,
+				3BD3F9F224A2A68000071FD2 /* Date+CustomComparison.swift in Sources */,
 				3B1EABD224944F8000A610CB /* DayView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

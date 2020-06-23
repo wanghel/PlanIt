@@ -22,7 +22,7 @@ class UserProfileRepository: ObservableObject {
         completion(profile, nil)
       }
       catch let error {
-        print("Error writing city to Firestore: \(error)")
+        print("Error creating profile: \(error)")
         completion(nil, error)
       }
     }

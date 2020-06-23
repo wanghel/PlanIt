@@ -101,7 +101,8 @@ struct MonthView: View {
                     Spacer()
                     Text("\(monthArr[(calendar.calendarMonth.month+11)%12]) \(String(calendar.calendarMonth.year))")
                         .font(.system(size: 30))
-                        .fontWeight(.semibold).padding()
+                        .opacity(0.7)
+                        .padding()
                     Spacer()
                 }
                 

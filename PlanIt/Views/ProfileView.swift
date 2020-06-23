@@ -22,19 +22,18 @@ struct ProfileView: View {
     var body: some View {
         ZStack {
             
+            // Profile view main
+            ScrollView {
+                ProfileMainView(profile: self.$profile)
+            }
+            .frame(width: screenWidth)
+            .background(Color.white)
+            .padding(.top, 60)
             
             if self.viewRouter.showSignIn {
                 AuthView(profile: self.$profile)
                     .padding(.top, 60)
                 
-            } else {
-                // Profile view main
-                ScrollView {
-                    ProfileMainView(profile: self.$profile)
-                }
-                .frame(width: screenWidth)
-                .background(Color.white)
-                .padding(.top, 60)
             }
             
             ProfileBarView(profile: $profile)
@@ -90,6 +89,7 @@ struct ProfileMainView: View {
             Spacer()
         }
         .padding()
+        .animation(.none)
     }
 }
 
@@ -142,6 +142,7 @@ struct ProfileBarView: View {
                 .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)!)
                 .background(Color.white)
                 .clipped()
+                
             } else {
                 AuthBarView()
                     .animation(.none)

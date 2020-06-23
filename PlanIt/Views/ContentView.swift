@@ -15,6 +15,8 @@ let screenHeight = screenSize.height
 
 struct ContentView: View {
     @EnvironmentObject var viewRouter: ViewRouter
+    @EnvironmentObject var session: SessionStore
+    @State var showingDetail = false
     
     
     func chooseMainView() -> AnyView {
@@ -39,7 +41,7 @@ struct ContentView: View {
             
             
             VStack {
-                TopBar ()
+                TopBar (showingDetail: $showingDetail)
                 Spacer()
                 BottonBar()
             }.edgesIgnoringSafeArea(.vertical)
@@ -52,6 +54,7 @@ struct ContentView: View {
 
 struct TopBar: View {
     @EnvironmentObject var viewRouter: ViewRouter
+    @Binding var showingDetail: Bool
     
     var body: some View {
         
@@ -70,12 +73,17 @@ struct TopBar: View {
                 .opacity(0.7)
                 .padding(.horizontal)
             Spacer()
-            Button(action: {}){
+            Button(action: {
+                self.showingDetail.toggle()
+            }){
                 Image(systemName: "plus")
                     .font(.system(size: 30))
                     .foregroundColor(.black)
                     .opacity(0.7)
+            }.sheet(isPresented: $showingDetail) {
+                DetailView(showingDetail: self.$showingDetail)
             }
+            
         }.frame(height: 60)
             .padding(.horizontal)
             .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)!)

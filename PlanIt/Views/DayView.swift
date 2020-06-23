@@ -12,15 +12,14 @@ import Firebase
 struct DayView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     
+    @ObservedObject var dayTaskVM = DayTaskViewModel()
+    
+    @State var presentAddNewItem = false
+    @State var showingDetail = false
+    
     func printTime(hour: Int) -> String {
         return "\(hour%12 == 0 ? 12 : hour%12) \(hour/12 == 0 ? "AM" : "PM")"
     }
-    
-    
-    @ObservedObject var dayTaskVM = DayTaskViewModel()
-     //@EnvironmentObject var dayTaskVM: DayTaskViewModel
-    
-    @State var presentAddNewItem = false
     
     /*func getColor(eventVM: EventViewModel) -> Color {
         switch eventVM.event.color {
@@ -41,22 +40,20 @@ struct DayView: View {
         default:
             return Color.black
         }
-    }*/
+     }*/
     
     
     var body: some View {
         VStack (spacing:0) {
-            //if self.viewRouter.selected == 0 {
-                DayBarView()
-                    .background(Color.white)
-                    .padding(.bottom)
-            //}
+            DayBarView()
+                .background(Color.white)
+                .padding(.bottom)
             
             VStack(alignment: .leading) {
                 List {
                     ForEach(dayTaskVM.taskCellViewModels) { taskCellVM in
-                        if(taskCellVM.task.dayAssigned == self.viewRouter.dateShown) {
-                            TaskCell(taskCellVM: taskCellVM)
+                        if self.viewRouter.dateShown.isSameDay(taskCellVM.task.dayAssigned) {
+                            TaskCell(taskCellVM: taskCellVM, showingDetail: self.$showingDetail)
                             .onDisappear(perform: {
                                 if taskCellVM.task.completed {
                                     self.dayTaskVM.deleteTask(task: taskCellVM.task)
@@ -64,7 +61,7 @@ struct DayView: View {
                         }
                     }
                     if presentAddNewItem {
-                        TaskCell(taskCellVM: TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: self.viewRouter.dateShown))) { task in
+                        TaskCell(taskCellVM: TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: self.viewRouter.dateShown)), showingDetail: $showingDetail) { task in
                             if(task.title != "") {
                                 self.dayTaskVM.addTask(task: task)
                             }
@@ -94,7 +91,8 @@ struct DayView: View {
 
 struct TaskCell: View {
     @ObservedObject var taskCellVM: TaskCellViewModel
-    
+    @Binding var showingDetail: Bool
+    @State var showingInfo = false
     var onCommit: (Task) -> (Void) = {_ in }
     
     var body: some View {
@@ -110,12 +108,24 @@ struct TaskCell: View {
             
             VStack {
                 Spacer()
-                TextField("", text: $taskCellVM.task.title, onCommit: {
-                    self.onCommit(self.taskCellVM.task)
-                })
+                HStack {
+                    TextField("", text: $taskCellVM.task.title, onEditingChanged: {_ in
+                        self.showingInfo.toggle()
+                    }, onCommit: {
+                        self.onCommit(self.taskCellVM.task)
+                    })
+                    if showingInfo {
+                        Image(systemName: "info.circle").onTapGesture {
+                            self.showingDetail.toggle()
+                        }
+                        
+                    }
+                }
                 Divider()
             }
             
+        }.sheet(isPresented: $showingDetail) {
+            DetailView(showingDetail: self.$showingDetail, taskCellVM: self.taskCellVM)
         }
     }
 }

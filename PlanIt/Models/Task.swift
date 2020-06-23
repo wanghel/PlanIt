@@ -16,12 +16,12 @@ struct Task: Identifiable, Codable {
     var title: String
     var completed: Bool
     @ServerTimestamp var createdTime: Timestamp?
-    var dayAssigned: Date?
+    var dayAssigned: Date
 }
 
 #if DEBUG
 let testDataTasks = [
-    Task(title: "task 1", completed: false),
-    Task(title: "task 2", completed: true)
+    Task(title: "task 1", completed: false, dayAssigned: Date()),
+    Task(title: "task 2", completed: true, dayAssigned: Date())
 ]
 #endif

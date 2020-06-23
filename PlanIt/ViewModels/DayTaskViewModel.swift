@@ -11,14 +11,13 @@ import Combine
 import Firebase
 
 class DayTaskViewModel: ObservableObject {
-    //@Published var taskRepository : TaskRepository
-    @Published var session = SessionStore()
+    @Published var taskRepository = SessionStore().taskRepository
     @Published var taskCellViewModels = [TaskCellViewModel]()
     
     private var cancellables = Set<AnyCancellable>()
     
     init() {
-        session.taskRepository.$tasks.map { tasks in
+        taskRepository.$tasks.map { tasks in
             tasks.map { task in
                 TaskCellViewModel(task: task)
             }
@@ -28,10 +27,14 @@ class DayTaskViewModel: ObservableObject {
     }
     
     func addTask(task: Task) {
-        session.taskRepository.addTask(task)
+        taskRepository.addTask(task)
+    }
+    
+    func updateTask(task: Task) {
+        taskRepository.updateTask(task)
     }
     
     func deleteTask(task: Task) {
-        session.taskRepository.deleteTask(task)
+        taskRepository.deleteTask(task)
     }
 }
