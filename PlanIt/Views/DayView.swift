@@ -16,66 +16,41 @@ struct DayView: View {
     
     @State var presentAddNewItem = false
     @State var showingDetail = false
+    @State var detailedTaskCellVM = TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: Date()))
     
     func printTime(hour: Int) -> String {
         return "\(hour%12 == 0 ? 12 : hour%12) \(hour/12 == 0 ? "AM" : "PM")"
     }
     
-    /*func getColor(eventVM: EventViewModel) -> Color {
-        switch eventVM.event.color {
-        case "pink":
-            return pink
-        case "red":
-            return red
-        case "orange":
-            return orange
-        case "yellow":
-            return yellow
-        case "green":
-            return green
-        case "blue":
-            return blue
-        case "purple":
-            return purple
-        default:
-            return Color.black
-        }
-     }*/
-    
-    
     var body: some View {
         VStack (spacing:0) {
             DayBarView()
-                .background(Color.white)
-                .padding(.bottom)
             
-            VStack(alignment: .leading) {
-                List {
-                    ForEach(dayTaskVM.taskCellViewModels) { taskCellVM in
-                        if self.viewRouter.dateShown.isSameDay(taskCellVM.task.dayAssigned) {
-                            TaskCell(taskCellVM: taskCellVM, showingDetail: self.$showingDetail)
+            List {
+                ForEach(dayTaskVM.taskCellViewModels) { taskCellVM in
+                    if self.viewRouter.dateShown.isSameDay(taskCellVM.task.dayAssigned) {
+                        TaskCell(taskCellVM: taskCellVM, showingDetail: self.$showingDetail, detailedTaskCellVM: self.$detailedTaskCellVM)
                             .onDisappear(perform: {
                                 if taskCellVM.task.completed {
                                     self.dayTaskVM.deleteTask(task: taskCellVM.task)
                                 }})
-                        }
                     }
-                    if presentAddNewItem {
-                        TaskCell(taskCellVM: TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: self.viewRouter.dateShown)), showingDetail: $showingDetail) { task in
-                            if(task.title != "") {
-                                self.dayTaskVM.addTask(task: task)
-                            }
-                            self.presentAddNewItem.toggle()
+                }
+                if presentAddNewItem {
+                    TaskCell(taskCellVM: TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: self.viewRouter.dateShown)), showingDetail: $showingDetail, detailedTaskCellVM: $detailedTaskCellVM) { task in
+                        if(task.title != "") {
+                            self.dayTaskVM.addTask(task: task)
                         }
+                        self.presentAddNewItem.toggle()
                     }
-                    if !presentAddNewItem {
-                        Button (action: {
-                            self.presentAddNewItem.toggle()
-                        }) {
-                            Spacer()
-                        }
+                }
+                
+                if !presentAddNewItem {
+                    Button (action: {
+                        self.presentAddNewItem.toggle()
+                    }) {
+                        Spacer()
                     }
-                    
                 }
                 
             }
@@ -83,7 +58,9 @@ struct DayView: View {
         }
         .edgesIgnoringSafeArea(.vertical)
         .offset(x: viewRouter.isShowingDayView ? 0 : -screenWidth)
-        //.animation(.none)
+        .sheet(isPresented: self.$showingDetail) {
+            DetailView(showingDetail: self.$showingDetail, taskCellVM: self.detailedTaskCellVM)
+        }
         
     }
 }
@@ -92,13 +69,14 @@ struct DayView: View {
 struct TaskCell: View {
     @ObservedObject var taskCellVM: TaskCellViewModel
     @Binding var showingDetail: Bool
-    @State var showingInfo = false
+    @Binding var detailedTaskCellVM: TaskCellViewModel
+    //@State var showingInfo = false
     var onCommit: (Task) -> (Void) = {_ in }
     
     var body: some View {
+        
         HStack {
-            
-            Image(systemName: taskCellVM.task.completed ? "checkmark.circle.fill" : "circle")
+            Image(systemName: self.taskCellVM.task.completed ? "checkmark.circle.fill" : "circle")
                 .resizable()
                 .frame(width: 20, height: 20)
                 .padding(.trailing)
@@ -109,24 +87,26 @@ struct TaskCell: View {
             VStack {
                 Spacer()
                 HStack {
-                    TextField("", text: $taskCellVM.task.title, onEditingChanged: {_ in
-                        self.showingInfo.toggle()
-                    }, onCommit: {
+                    TextField("", text: self.$taskCellVM.task.title, onCommit: {
                         self.onCommit(self.taskCellVM.task)
-                    })
-                    if showingInfo {
-                        Image(systemName: "info.circle").onTapGesture {
+                        })
+                    
+                    Image(systemName: "info.circle")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .opacity(0.3)
+                        .onTapGesture {
                             self.showingDetail.toggle()
-                        }
-                        
+                            self.detailedTaskCellVM = self.taskCellVM
+                            print("tapped info of \(self.taskCellVM.task.title)")
                     }
+                    
                 }
                 Divider()
             }
             
-        }.sheet(isPresented: $showingDetail) {
-            DetailView(showingDetail: self.$showingDetail, taskCellVM: self.taskCellVM)
         }
+        
     }
 }
 
@@ -149,46 +129,48 @@ struct DayBarView: View {
                 
                 HStack {
                     Spacer()
-                    Button(action: {
-                        self.viewRouter.dateShown.addTimeInterval(TimeInterval(-86400))
-                    }){
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 25))
-                            .foregroundColor(.black)
-                            .opacity(0.7)
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 25))
+                        .foregroundColor(.black)
+                        .opacity(0.7)
+                        .onTapGesture {
+                            self.viewRouter.dateShown.addTimeInterval(TimeInterval(-86400))
                     }
+                    
                     Text(formatDate())
                         .font(.system(size: 20))
                         .opacity(0.7)
                         .padding(.horizontal)
-                    Button(action: {
-                        self.viewRouter.dateShown.addTimeInterval(TimeInterval(86400))
-                    }){
-                        Image(systemName: "chevron.right")
-                            .font(.system(size: 25))
-                            .foregroundColor(.black)
-                            .opacity(0.7)
+                    
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 25))
+                        .foregroundColor(.black)
+                        .opacity(0.7)
+                        .onTapGesture {
+                            self.viewRouter.dateShown.addTimeInterval(TimeInterval(86400))
                     }
+                    
                     Spacer()
                 }
-                    
+                
                 if self.viewRouter.selected == 0 {
                     HStack {
                         Spacer()
-                        Button(action: {
-                            self.viewRouter.isShowingDayView.toggle()
-                        }){
-                            HStack (spacing: 5) {
-                                Image(systemName: "calendar")
-                                    .font(.system(size: 25))
-                                    .foregroundColor(.black)
-                                    .opacity(0.5)
-                                Image(systemName: "chevron.right")
-                                    .font(.system(size: 15))
-                                    .foregroundColor(.black)
-                                    .opacity(0.5)
-                            }
+                        
+                        HStack (spacing: 5) {
+                            Image(systemName: "calendar")
+                                .font(.system(size: 25))
+                                .foregroundColor(.black)
+                                .opacity(0.5)
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: 15))
+                                .foregroundColor(.black)
+                                .opacity(0.5)
                         }
+                        .onTapGesture {
+                            self.viewRouter.isShowingDayView.toggle()
+                        }
+                        
                     }
                     .frame(height: 40)
                     .padding(.horizontal)
@@ -196,6 +178,7 @@ struct DayBarView: View {
                 }
             }
         }
+        .background(Color.white)
     }
 }
 

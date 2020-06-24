@@ -12,7 +12,6 @@ import Combine
 
 class SessionStore: ObservableObject {
     @Published var session: User?
-    //@Published var profile: UserProfile?
     
     private var profileRepository = UserProfileRepository()
     @Published var taskRepository = TaskRepository()
@@ -103,28 +102,11 @@ class SessionStore: ObservableObject {
         }
     }
     
-    
-    //
-    //    func signUp(email: String, password: String, handler: @escaping AuthDataResultCallback) {
-    //        Auth.auth().createUser(withEmail: email, password: password, completion: handler)
-    //    }
-    //
-    //    func signIn(email: String, password: String, handler: @escaping AuthDataResultCallback) {
-    //        Auth.auth().signIn(withEmail: email, password: password, completion: handler)
-    //    }
-    //
-    //    func signOut() {
-    //        do {
-    //            try Auth.auth().signOut()
-    //            Auth.auth().signInAnonymously()
-    //        } catch {
-    //            print("error signing out")
-    //        }
-    //    }
-    //
-    //    func unbind() {
-    //        if let handle = handle {
-    //            Auth.auth().removeStateDidChangeListener(handle)
-    //        }
-    //    }
+    func updateProfile() {
+        if let profile = profile {
+            do {
+                profileRepository.updateProfile(profile)
+            }
+        }
+    }
 }

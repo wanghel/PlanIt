@@ -30,10 +30,6 @@ class DayTaskViewModel: ObservableObject {
         taskRepository.addTask(task)
     }
     
-    func updateTask(task: Task) {
-        taskRepository.updateTask(task)
-    }
-    
     func deleteTask(task: Task) {
         taskRepository.deleteTask(task)
     }

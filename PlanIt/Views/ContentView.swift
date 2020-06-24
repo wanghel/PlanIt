@@ -18,13 +18,12 @@ struct ContentView: View {
     @EnvironmentObject var session: SessionStore
     @State var showingDetail = false
     
-    
     func chooseMainView() -> AnyView {
         switch viewRouter.selected {
         case 1:
             return AnyView(HomeView())
         case 2:
-            return AnyView(Text("Reminders"))
+            return AnyView(Text("Community"))
         default:
             return AnyView(CalendarView())
         }
@@ -110,6 +109,7 @@ struct BottonBar: View {
                 Spacer()
                 Button(action: {
                     self.viewRouter.isShowingDayView = true
+                    self.viewRouter.dateShown = Date()
                     self.viewRouter.selected = 1
                 }){
                     Image(systemName: self.viewRouter.selected == 1 ? "house.fill" : "house")
@@ -121,7 +121,7 @@ struct BottonBar: View {
                     self.viewRouter.isShowingDayView = false
                     self.viewRouter.selected = 2
                 }){
-                    Image(systemName: self.viewRouter.selected == 2 ? "bookmark.fill" : "bookmark")
+                    Image(systemName: self.viewRouter.selected == 2 ? "magnifyingglass.circle.fill" : "magnifyingglass.circle")
                         .font(.system(size: 25))
                         .foregroundColor(.gray)
                 }

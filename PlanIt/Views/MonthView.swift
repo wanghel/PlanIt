@@ -74,7 +74,6 @@ struct MonthView: View {
                 .gesture(TapGesture().onEnded({
                     self.viewRouter.isShowingDayView = true
                     self.viewRouter.dateShown = self.getDate(day: currIdx-firstWeekday)
-                    //print("tapped")
                 }))
         }
             // Plain days in calendar
@@ -85,11 +84,15 @@ struct MonthView: View {
                 .frame(width: screenWidth/7, height: screenHeight*0.05)
                 .background(Color.white)
                 .cornerRadius(0.0)
+//                .overlay(
+//                    RoundedRectangle(cornerRadius: 15.0)
+//                        .stroke(self.getDate(day: currIdx-firstWeekday).isSameDay(self.viewRouter.dateShown) ? Color.gray : Color.clear, lineWidth: 3)
+//                )
                 .gesture(TapGesture().onEnded({
                     self.viewRouter.isShowingDayView = true
                     self.viewRouter.dateShown = self.getDate(day: currIdx-firstWeekday)
-                    //print("tapped")
                 }))
+                
             
         }
     }
@@ -100,7 +103,7 @@ struct MonthView: View {
                 HStack (spacing: 0.0){
                     Spacer()
                     Text("\(monthArr[(calendar.calendarMonth.month+11)%12]) \(String(calendar.calendarMonth.year))")
-                        .font(.system(size: 30))
+                        .font(.system(size: 25))
                         .opacity(0.7)
                         .padding()
                     Spacer()
@@ -108,21 +111,20 @@ struct MonthView: View {
                 
                 HStack (spacing: 0.0) {
                     ForEach(0..<7) { day in
+                        Spacer()
                         Text(self.weekDayArr[day])
                             .bold()
                             .font(.system(size:20))
                             .foregroundColor(self.weekDayColor[day])
                             .shadow(radius: 0.5)
-                            .frame(width: screenWidth/7)
+                        Spacer()
                     }
-                }.frame(width: screenWidth)
+                }
                 
                 ForEach(0..<6) { week in
                     HStack (spacing: 0.0){
                         ForEach(0..<7) { day in
                             self.displayDay(week: week, day: day)
-                            
-                            
                         }
                     }
                 }

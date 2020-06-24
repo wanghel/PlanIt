@@ -13,8 +13,6 @@ struct DetailView: View {
     @EnvironmentObject var session: SessionStore
     @ObservedObject var dayTaskVM = DayTaskViewModel()
     
-//    @State var title: String = ""
-//    @State var dayAssigned: Date = Date()
     @ObservedObject var taskCellVM: TaskCellViewModel = TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: Date()))
     
     @State var showingDateSelector = false
@@ -25,15 +23,14 @@ struct DetailView: View {
     
     init(showingDetail: Binding<Bool>) {
         self._showingDetail = showingDetail
-        self.taskCellVM = TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: self.viewRouter.dateShown))
+        //self.taskCellVM = TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: self.viewRouter.dateShown))
     }
     
     init(showingDetail: Binding<Bool>, taskCellVM: TaskCellViewModel) {
         self._showingDetail = showingDetail
-//        self.title = title
-//        self.dayAssigned = dayAssigned
         self.taskCellVM = taskCellVM
         addNewTask = false
+        //print("showing \(taskCellVM.task.title)")
     }
     
     var dateFormatter: DateFormatter {
@@ -54,9 +51,7 @@ struct DetailView: View {
                     if self.addNewTask {
                         self.dayTaskVM.addTask(task: self.taskCellVM.task)
                     }
-//                    else {
-//                        self.dayTaskVM.updateTask(task: self.taskCellVM.task)
-//                    }
+                    
                     self.showingDetail.toggle()
                 }) {
                     Text("Done")
