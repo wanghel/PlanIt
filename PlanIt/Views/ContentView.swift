@@ -12,6 +12,34 @@ let screenSize: CGRect = UIScreen.main.bounds
 let screenWidth = screenSize.width
 let screenHeight = screenSize.height
 
+let pink = Color(red: 1.0, green: 0.8, blue: 0.8)
+let red = Color(red: 1.0, green: 0.6, blue: 0.6)
+let orange = Color(red: 1.0, green: 0.7, blue: 0.6)
+let yellow = Color(red: 1.0, green: 0.9, blue: 0.5)
+let green = Color(red: 0.8, green: 0.97, blue: 0.6)
+let blue = Color(red: 0.7, green: 0.95, blue: 0.9)
+let purple = Color(red: 0.9, green: 0.7, blue: 0.9)
+
+/*func getColor(eventVM: EventViewModel) -> Color {
+   switch eventVM.event.color {
+   case "pink":
+       return pink
+   case "red":
+       return red
+   case "orange":
+       return orange
+   case "yellow":
+       return yellow
+   case "green":
+       return green
+   case "blue":
+       return blue
+   case "purple":
+       return purple
+   default:
+       return Color.black
+   }
+}*/
 
 struct ContentView: View {
     @EnvironmentObject var viewRouter: ViewRouter
