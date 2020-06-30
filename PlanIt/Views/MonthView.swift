@@ -11,11 +11,11 @@ import SwiftUI
 struct MonthView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     
-    let monthArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+//    let monthArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
-    let weekDayArr = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"]
-
-    let weekDayColor = [pink, red, orange, yellow, green, blue, purple]
+//    let weekDayArr = ["S", "M", "T", "W", "T", "F", "S"]
+//
+//    let weekDayColor = [pink, red, orange, yellow, green, blue, purple]
     
     let todayDay: Int = Calendar.current.component(.day, from: Date())
     let todayMonth = Calendar.current.component(.month, from: Date())
@@ -36,98 +36,73 @@ struct MonthView: View {
         }
     }
     
-    func displayDay (week: Int, day: Int) -> some View {
-        let currIdx = week*7+day+1
-        let firstWeekday = calendar.getFirstWeekDay()
-        let dayOfMonth = calendar.getDaysOfMonth()
-        
-        // Blank space at beginning of month
-        if (currIdx <= firstWeekday) {
-            return Text(""/*String(calendar.prevMonth().getDaysOfMonth()-(firstWeekday-currIdx))*/)
-                .foregroundColor(.gray)
-                .frame(width: screenWidth/7, height: screenHeight*0.05)
-                .background(Color.white)
-                .cornerRadius(0.0)
-                .gesture(TapGesture().onEnded({
-                }))
-        }
-            // Blank space at end of month
-        else if (currIdx-firstWeekday > dayOfMonth) {
-            return Text(""/*String(currIdx-firstWeekday-dayOfMonth)*/)
-                .foregroundColor(.gray)
-                .frame(width: screenWidth/7, height: screenHeight*0.05)
-                .background(Color.white)
-                .cornerRadius(0.0)
-                .gesture(TapGesture().onEnded({
-                }))
-        }
-            // Today's date
-        else if (todayDay == currIdx-firstWeekday && todayMonth == calendar.calendarMonth.month && todayYear == calendar.calendarMonth.year) {
-            
-            
-            return Text(String(currIdx-firstWeekday))
-                .fontWeight(.bold)
-                .foregroundColor(Color.white)
-                .frame(width: screenWidth/7, height: screenHeight*0.05)
-                .background(weekDayColor[day])
-                .cornerRadius(15.0)
-                .gesture(TapGesture().onEnded({
-                    self.viewRouter.isShowingDayView = true
-                    self.viewRouter.dateShown = self.getDate(day: currIdx-firstWeekday)
-                }))
-        }
-            // Plain days in calendar
-        else {
-            
-            return Text(String(currIdx-firstWeekday))
-                .foregroundColor(.black)
-                .frame(width: screenWidth/7, height: screenHeight*0.05)
-                .background(Color.white)
-                .cornerRadius(0.0)
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 15.0)
-//                        .stroke(self.getDate(day: currIdx-firstWeekday).isSameDay(self.viewRouter.dateShown) ? Color.gray : Color.clear, lineWidth: 3)
-//                )
-                .gesture(TapGesture().onEnded({
-                    self.viewRouter.isShowingDayView = true
-                    self.viewRouter.dateShown = self.getDate(day: currIdx-firstWeekday)
-                }))
-                
-            
-        }
+    func isToday(day: Int) -> Bool {
+        return day == todayDay && calendar.calendarMonth.month == todayMonth && calendar.calendarMonth.year == todayYear
+    }
+    
+    func isSelected(day: Int) -> Bool {
+        return day != -1 && getDate(day: day).isSameDay(viewRouter.dateShown)
     }
     
     var body: some View {
         
             VStack {
-                HStack (spacing: 0.0){
-                    Spacer()
-                    Text("\(monthArr[(calendar.calendarMonth.month+11)%12]) \(String(calendar.calendarMonth.year))")
-                        .font(.system(size: 25))
-                        .opacity(0.7)
-                        .padding()
-                    Spacer()
-                }
+//                HStack {
+//                    Spacer()
+//                    Text("\(monthArr[(calendar.calendarMonth.month+11)%12]) \(String(calendar.calendarMonth.year))")
+//                        .font(.system(size: 25))
+//                        .foregroundColor(.white)
+//                        .opacity(0.7)
+//                        .padding()
+//                    Spacer()
+//                }
                 
-                HStack (spacing: 0.0) {
-                    ForEach(0..<7) { day in
-                        Spacer()
-                        Text(self.weekDayArr[day])
-                            .bold()
-                            .font(.system(size:20))
-                            .foregroundColor(self.weekDayColor[day])
-                            .shadow(radius: 0.5)
-                        Spacer()
-                    }
-                }
                 
-                ForEach(0..<6) { week in
-                    HStack (spacing: 0.0){
-                        ForEach(0..<7) { day in
-                            self.displayDay(week: week, day: day)
+//                HStack {
+//                    ForEach(0..<7) { day in
+//                        HStack (spacing: 0){
+//                            Spacer()
+//                            Text(self.weekDayArr[day])
+//                                .bold()
+//                                .font(.system(size: 15))
+//                                .foregroundColor(self.weekDayColor[day])
+//                            Spacer()
+//                        }
+//                    }
+//                }
+//                .padding(.horizontal)
+                
+                
+                ForEach(calendar.getDays(), id: \.self) { array in
+                    HStack {
+                        ForEach(array, id: \.self) { element in
+                            HStack (spacing: 0){
+                                Spacer()
+                                
+                                Text(element == -1 ? "" : String(element))
+                                    .font(.system(size: 15))
+                                    .foregroundColor(.white)
+                                    .padding(.vertical)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 10.0)
+                                            .fill(self.isToday(day: element) ? orange : Color.clear)
+                                            .frame(width: screenWidth/8, height: 40))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 10.0)
+                                            .stroke(self.isSelected(day: element) ? Color.white : Color.clear, lineWidth: 2)
+                                        .frame(width: screenWidth/8, height: 40))
+                                .gesture(TapGesture().onEnded({
+                                
+                                }))
+                                
+                                Spacer()
+                            }
                         }
                     }
+                    .padding(.horizontal)
                 }
+                
+                
         }
         
     }
@@ -136,5 +111,6 @@ struct MonthView: View {
 struct MonthView_Previews: PreviewProvider {
     static var previews: some View {
         MonthView(calendar: CalendarMonthViewModel())
+        .environmentObject(ViewRouter())
     }
 }

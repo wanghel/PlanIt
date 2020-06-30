@@ -24,4 +24,6 @@ let testDataTasks = [
     Task(title: "task 1", completed: false, dayAssigned: Date()),
     Task(title: "task 2", completed: true, dayAssigned: Date())
 ]
+
+let emptyTask = Task(title: "empty", completed: false, dayAssigned: Date())
 #endif

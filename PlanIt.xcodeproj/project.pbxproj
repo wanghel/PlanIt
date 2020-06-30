@@ -15,9 +15,10 @@
 		3B1EABCA2494395800A610CB /* UserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABC92494395800A610CB /* UserProfileRepository.swift */; };
 		3B1EABCE24943EC200A610CB /* TaskCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABCD24943EC200A610CB /* TaskCellViewModel.swift */; };
 		3B1EABD224944F8000A610CB /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABD124944F8000A610CB /* DayView.swift */; };
-		3B1EABD42494574C00A610CB /* DayTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABD32494574C00A610CB /* DayTaskViewModel.swift */; };
 		3B1EABDA2494A1E200A610CB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABD92494A1E200A610CB /* HomeView.swift */; };
 		3B1EABDC2497F5E600A610CB /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABDB2497F5E600A610CB /* Task.swift */; };
+		3B5D0F2024A7F894002FA7B6 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5D0F1F24A7F894002FA7B6 /* TaskView.swift */; };
+		3B5D0F2224A7FA2B002FA7B6 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5D0F2124A7FA2B002FA7B6 /* TaskViewModel.swift */; };
 		3B70914E2481943C0007C1EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B70914D2481943C0007C1EF /* AppDelegate.swift */; };
 		3B7091502481943C0007C1EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B70914F2481943C0007C1EF /* SceneDelegate.swift */; };
 		3B7091522481943C0007C1EF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7091512481943C0007C1EF /* ContentView.swift */; };
@@ -74,9 +75,10 @@
 		3B1EABC92494395800A610CB /* UserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepository.swift; sourceTree = "<group>"; };
 		3B1EABCD24943EC200A610CB /* TaskCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellViewModel.swift; sourceTree = "<group>"; };
 		3B1EABD124944F8000A610CB /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
-		3B1EABD32494574C00A610CB /* DayTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTaskViewModel.swift; sourceTree = "<group>"; };
 		3B1EABD92494A1E200A610CB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		3B1EABDB2497F5E600A610CB /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		3B5D0F1F24A7F894002FA7B6 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
+		3B5D0F2124A7FA2B002FA7B6 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		3B70914A2481943C0007C1EF /* PlanIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B70914D2481943C0007C1EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B70914F2481943C0007C1EF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				3B1EABC82494392900A610CB /* Repositories */,
 				3BED3DF224917F4200A3B586 /* ViewModels */,
 				3BED3DF124917ED800A3B586 /* Views */,
+				3B1EABD124944F8000A610CB /* DayView.swift */,
 				3BC406202481FD9B00EF74FF /* WeekdaysView.swift */,
 				3BC4062824821DA100EF74FF /* ReminderDayView.swift */,
 				3B7091532481943E0007C1EF /* Assets.xcassets */,
@@ -239,7 +242,7 @@
 				3BD3F9E324995F9900071FD2 /* AuthView.swift */,
 				3B7D1413248718CA00E30EDF /* CalendarView.swift */,
 				3B7D140B2484485100E30EDF /* MonthView.swift */,
-				3B1EABD124944F8000A610CB /* DayView.swift */,
+				3B5D0F1F24A7F894002FA7B6 /* TaskView.swift */,
 				3BD3F9F124A2A68000071FD2 /* Date+CustomComparison.swift */,
 			);
 			path = Views;
@@ -251,7 +254,7 @@
 				3BC406262482174D00EF74FF /* CalendarMonthViewModel.swift */,
 				3B1EABC42492FAA300A610CB /* UserViewModel.swift */,
 				3B1EABCD24943EC200A610CB /* TaskCellViewModel.swift */,
-				3B1EABD32494574C00A610CB /* DayTaskViewModel.swift */,
+				3B5D0F2124A7FA2B002FA7B6 /* TaskViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				3BD3F9E424995F9900071FD2 /* AuthView.swift in Sources */,
 				3B1EABCE24943EC200A610CB /* TaskCellViewModel.swift in Sources */,
 				3BC406212481FD9B00EF74FF /* WeekdaysView.swift in Sources */,
+				3B5D0F2024A7F894002FA7B6 /* TaskView.swift in Sources */,
 				3BC406272482174D00EF74FF /* CalendarMonthViewModel.swift in Sources */,
 				3B7D1414248718CA00E30EDF /* CalendarView.swift in Sources */,
 				3BD3F9E22499471A00071FD2 /* TaskRepository.swift in Sources */,
@@ -536,13 +540,13 @@
 				3B1EABC32492F9FB00A610CB /* UserProfile.swift in Sources */,
 				3B1EABC52492FAA300A610CB /* UserViewModel.swift in Sources */,
 				3B1EABDA2494A1E200A610CB /* HomeView.swift in Sources */,
+				3B5D0F2224A7FA2B002FA7B6 /* TaskViewModel.swift in Sources */,
 				3B7091502481943C0007C1EF /* SceneDelegate.swift in Sources */,
 				3B7D140C2484485100E30EDF /* MonthView.swift in Sources */,
 				3B1EABC72492FD0D00A610CB /* ProfileView.swift in Sources */,
 				3B7091522481943C0007C1EF /* ContentView.swift in Sources */,
 				3BD3F9E02498127B00071FD2 /* ViewRouter.swift in Sources */,
 				3BD3F9EE24A133DD00071FD2 /* User.swift in Sources */,
-				3B1EABD42494574C00A610CB /* DayTaskViewModel.swift in Sources */,
 				3B1EABDC2497F5E600A610CB /* Task.swift in Sources */,
 				3BD3F9F224A2A68000071FD2 /* Date+CustomComparison.swift in Sources */,
 				3B1EABD224944F8000A610CB /* DayView.swift in Sources */,

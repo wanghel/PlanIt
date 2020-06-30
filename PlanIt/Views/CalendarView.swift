@@ -11,88 +11,88 @@ import SwiftUI
 struct CalendarView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     
-    @State private var p1Month :CalendarMonthViewModel = CalendarMonthViewModel().prevMonth()
-    @State private var p2Month :CalendarMonthViewModel = CalendarMonthViewModel().prevMonth().prevMonth()
+    @State private var pMonth :CalendarMonthViewModel = CalendarMonthViewModel().prevMonth()
     @State private var cMonth :CalendarMonthViewModel = CalendarMonthViewModel()
-    @State private var n1Month :CalendarMonthViewModel = CalendarMonthViewModel().nextMonth()
-    @State private var n2Month :CalendarMonthViewModel = CalendarMonthViewModel().nextMonth().nextMonth()
+    @State private var nMonth :CalendarMonthViewModel = CalendarMonthViewModel().nextMonth()
     
     @State private var draggedOffset = CGSize.zero
     @State private var lastOffset = CGSize.zero
     
+    let monthArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    
+    let weekDayArr = ["S", "M", "T", "W", "T", "F", "S"]
+
+    let weekDayColor = [pink, red, orange, yellow, green, blue, purple]
+    
     private func nextView() {
-        p1Month = p1Month.nextMonth()
-        p2Month = p2Month.nextMonth()
+        pMonth = pMonth.nextMonth()
         cMonth = cMonth.nextMonth()
-        n1Month = n1Month.nextMonth()
-        n2Month = n2Month.nextMonth()
+        nMonth = nMonth.nextMonth()
     }
     
     private func prevView() {
-        p1Month = p1Month.prevMonth()
-        p2Month = p2Month.prevMonth()
+        pMonth = pMonth.prevMonth()
         cMonth = cMonth.prevMonth()
-        n1Month = n1Month.prevMonth()
-        n2Month = n2Month.prevMonth()
+        nMonth = nMonth.prevMonth()
     }
     
     var body: some View {
-        ZStack {
-            GeometryReader { _ in
+        NavigationView {
+            ZStack {
+                dnavy
+                    .edgesIgnoringSafeArea(.all)
+                
                 VStack {
-                    MonthView(calendar: self.p2Month)
-                        .clipped()
-                        .opacity(0.5)
-                        .allowsHitTesting(false)
-                    MonthView(calendar: self.p1Month)
-                    .clipped()
-                    MonthView(calendar: self.cMonth)
-                    MonthView(calendar: self.n1Month)
-                    .clipped()
-                    MonthView(calendar: self.n2Month)
-                        .clipped()
-                        .opacity(0.5)
-                        .allowsHitTesting(false)
-                }
-                .offset(y: self.lastOffset.height +
-                    self.draggedOffset.height)
-                    .gesture(DragGesture()
-                        .onChanged { value in
-                            self.draggedOffset = value.translation
+                    HStack {
+                        ForEach(0..<7) { day in
+                            HStack (spacing: 0){
+                                Spacer()
+                                Text(self.weekDayArr[day])
+                                    .bold()
+                                    .font(.system(size: 15))
+                                    .foregroundColor(self.weekDayColor[day])
+                                Spacer()
+                            }
+                        }
                     }
-                    .onEnded { value in
-                        let offset : CGSize
-                        if (self.lastOffset.height + self.draggedOffset.height > screenHeight/2) {
-                            offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height - screenHeight * 0.8)
-                            self.prevView()
-                            self.prevView()
+                    .padding([.horizontal, .top])
+                    .frame(width: screenWidth)
+                    
+                    HStack {
+                        MonthView(calendar: self.pMonth)
+                            .frame(width: screenWidth)
+                        MonthView(calendar: self.cMonth)
+                            .frame(width: screenWidth)
+                        MonthView(calendar: self.nMonth)
+                            .frame(width: screenWidth)
+                    }
+                    .offset(x: self.lastOffset.width +
+                        self.draggedOffset.width)
+                        .gesture(DragGesture()
+                            .onChanged { value in
+                                self.draggedOffset = value.translation
                         }
-                        else if (self.lastOffset.height + self.draggedOffset.height < -screenHeight/2) {
-                            offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height + screenHeight * 0.8)
-                            self.nextView()
-                            self.nextView()
-                        }
-                        else if (self.lastOffset.height + self.draggedOffset.height > screenHeight/10) {
-                            offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height - screenHeight * 0.4)
-                            self.prevView()
-                        }
-                        else if (self.lastOffset.height + self.draggedOffset.height < -screenHeight/10) {
-                            offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height + screenHeight * 0.4)
-                            self.nextView()
-                        }
-                        else {
-                            offset = CGSize(width: self.lastOffset.width, height: self.lastOffset.height + self.draggedOffset.height)
-                        }
-                        print(self.draggedOffset.height)
-                        self.lastOffset = offset
-                        self.draggedOffset = CGSize.zero
-                    })
+                        .onEnded { value in
+                            if(self.draggedOffset.width + self.lastOffset.width > screenWidth/2) {
+                                self.lastOffset = CGSize(width: -screenWidth, height: 0)
+                                self.prevView()
+                                self.lastOffset = CGSize.zero
+                            }
+                            else if (self.draggedOffset.width + self.lastOffset.width < -screenWidth/2) {
+                                self.lastOffset = CGSize(width: screenWidth, height: 0)
+                                self.nextView()
+                                self.lastOffset = CGSize.zero
+                            } else {
+                                self.lastOffset = CGSize.zero
+                            }
+                            self.draggedOffset = CGSize.zero
+                        })
+                    
+                    Spacer()
+                }
             }
-            
-            DayView()
-            
+            .navigationBarTitle("\(monthArr[(cMonth.calendarMonth.month+11)%12]) \(String(cMonth.calendarMonth.year))", displayMode: .inline)
         }
-        
     }
 }
 

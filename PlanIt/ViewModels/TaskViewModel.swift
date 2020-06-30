@@ -1,8 +1,8 @@
 //
-//  DayEventsViewModel.swift
+//  TaskViewModel.swift
 //  PlanIt
 //
-//  Created by Helen Wang on 6/12/20.
+//  Created by Helen Wang on 6/27/20.
 //  Copyright © 2020 Helen Wang. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import Foundation
 import Combine
 import Firebase
 
-class DayTaskViewModel: ObservableObject {
+class TaskViewModel: ObservableObject {
     @Published var taskRepository = SessionStore().taskRepository
     @Published var taskCellViewModels = [TaskCellViewModel]()
     

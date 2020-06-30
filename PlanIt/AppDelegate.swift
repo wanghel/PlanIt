@@ -17,11 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        //UITableView.appearance().tableFooterView = UIView()
         UITableView.appearance().separatorStyle = .none
         FirebaseApp.configure()
         
         Auth.auth().signInAnonymously()
+        
         
         return true
     }
