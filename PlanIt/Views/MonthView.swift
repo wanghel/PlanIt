@@ -17,7 +17,7 @@ struct MonthView: View {
 //
 //    let weekDayColor = [pink, red, orange, yellow, green, blue, purple]
     
-    let todayDay: Int = Calendar.current.component(.day, from: Date())
+    let todayDay = Calendar.current.component(.day, from: Date())
     let todayMonth = Calendar.current.component(.month, from: Date())
     let todayYear = Calendar.current.component(.year, from: Date())
     

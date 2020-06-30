@@ -88,7 +88,7 @@ struct CalendarView: View {
                             self.draggedOffset = CGSize.zero
                         })
                     
-                    Spacer()
+                    TaskView(showWeek: false)
                 }
             }
             .navigationBarTitle("\(monthArr[(cMonth.calendarMonth.month+11)%12]) \(String(cMonth.calendarMonth.year))", displayMode: .inline)

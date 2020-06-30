@@ -25,7 +25,7 @@ struct HomeView: View {
                     Text("This Week's Tasks")
                         .foregroundColor(.white)
                         .font(.largeTitle)
-                    TaskView()
+                    TaskView(showWeek: true)
                 }
             }
             .navigationBarTitle(

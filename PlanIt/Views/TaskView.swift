@@ -10,11 +10,13 @@ import SwiftUI
 
 struct TaskView: View {
     @EnvironmentObject var viewRouter: ViewRouter
-    @EnvironmentObject var session: SessionStore
+    //@EnvironmentObject var session: SessionStore
     @State var showingDetail = false
     @State var detailTaskCellVM = TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: Date()))
     
     @ObservedObject var dayTaskVM = TaskViewModel()
+    
+    let showWeek: Bool
     
     func formatDate(date: Date) -> String {
         let dateFormatterPrint = DateFormatter()
@@ -38,28 +40,21 @@ struct TaskView: View {
     }
     
     func week() -> some View {
-
         ForEach (0..<6) { day in
             VStack {
                 HStack {
-                    Text(self.formatDate(date: self.viewRouter.dateShown.addingTimeInterval(TimeInterval(day * 86400))))
+                    Text(self.formatDate(date: Date().addingTimeInterval(TimeInterval(day * 86400))))
                         .foregroundColor(.white)
                         .opacity(0.7)
                         .padding()
                     Spacer()
                 }
-                
-                self.day(day: day)
-//                ForEach (self.dayTaskVM.taskCellViewModels) { taskCellVM in
-//                    if self.viewRouter.dateShown.addingTimeInterval(TimeInterval(day * 86400)).isSameDay(taskCellVM.task.dayAssigned) {
-//                        TaskCell(dayTaskVM: self.dayTaskVM, taskCellVM: taskCellVM, showingDetail: self.$showingDetail, detailTaskCellVM: self.$detailTaskCellVM)
-//                            .padding([.horizontal,.bottom])
-//                            .onDisappear(perform: {
-//                                if taskCellVM.task.completed {
-//                                    self.dayTaskVM.deleteTask(task: taskCellVM.task)
-//                                }})
-//                    }
-//                }
+                if self.dayTaskVM.taskCellViewModels.count == 0 {
+                    Text("No tasks :)")
+                        .foregroundColor(.white)
+                } else {
+                    self.day(day: day)
+                }
             }
         }
     }
@@ -72,7 +67,12 @@ struct TaskView: View {
                 .frame(width: screenWidth, height: 0)
             // FIGURE IT OUT FUTURE ME
             
-            week()
+            
+            if showWeek {
+                week()
+            } else {
+                day(day: 0)
+            }
 //            ForEach (dayTaskVM.taskCellViewModels) { taskCellVM in
 //                TaskCell(dayTaskVM: self.dayTaskVM, taskCellVM: taskCellVM, showingDetail: self.$showingDetail, detailTaskCellVM: self.$detailTaskCellVM)
 //                    .padding([.horizontal,.bottom])
@@ -207,6 +207,6 @@ struct TaskCell: View  {
 
 struct TaskView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskView()
+        TaskView(showWeek: true)
     }
 }
