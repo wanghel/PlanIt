@@ -11,12 +11,14 @@ import Combine
 import Firebase
 
 class TaskViewModel: ObservableObject {
-    @Published var taskRepository = SessionStore().taskRepository
+//    @Published var taskRepository = SessionStore().taskRepository
+    @Published var taskRepository = TaskRepository()
     @Published var taskCellViewModels = [TaskCellViewModel]()
     
     private var cancellables = Set<AnyCancellable>()
     
     init() {
+        print("created from TASK VM")
         taskRepository.$tasks.map { tasks in
             tasks.map { task in
                 TaskCellViewModel(task: task)

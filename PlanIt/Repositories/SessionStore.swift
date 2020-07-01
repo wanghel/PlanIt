@@ -14,7 +14,7 @@ class SessionStore: ObservableObject {
     @Published var session: User?
     
     private var profileRepository = UserProfileRepository()
-    @Published var taskRepository = TaskRepository()
+    //@Published var taskRepository = TaskRepository()
     
     var didChange = PassthroughSubject<SessionStore, Never>()
     
@@ -25,6 +25,10 @@ class SessionStore: ObservableObject {
     }
     
     var handle: AuthStateDidChangeListenerHandle?
+    
+    init() {
+        print("made another session store")
+    }
     
     func listen() {
         handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
@@ -57,7 +61,7 @@ class SessionStore: ObservableObject {
                 }
                 self.profile = profile
                 
-                self.taskRepository.reloadData()
+                //self.taskRepository.reloadData()
                 completion(profile, nil)
             }
         }
@@ -83,7 +87,7 @@ class SessionStore: ObservableObject {
                 
                 self.profile = profile
                 
-                self.taskRepository.reloadData()
+                //self.taskRepository.reloadData()
                 completion(profile, nil)
             }
         }
@@ -95,7 +99,7 @@ class SessionStore: ObservableObject {
             Auth.auth().signInAnonymously()
             self.session = nil
             self.profile = nil
-            self.taskRepository.reloadData()
+            //self.taskRepository.reloadData()
         }
         catch let signOutError as NSError {
             print("Error signing out: \(signOutError)")

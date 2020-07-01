@@ -90,10 +90,10 @@ struct MonthView: View {
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 10.0)
                                             .stroke(self.isSelected(day: element) ? Color.white : Color.clear, lineWidth: 2)
-                                        .frame(width: screenWidth/8, height: 40))
-                                .gesture(TapGesture().onEnded({
-                                
-                                }))
+                                            .frame(width: screenWidth/8, height: 40))
+                                    .gesture(TapGesture().onEnded({
+                                        self.viewRouter.dateShown = self.getDate(day: element)
+                                    }))
                                 
                                 Spacer()
                             }

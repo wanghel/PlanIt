@@ -10,8 +10,8 @@ import Foundation
 import Combine
 
 class TaskCellViewModel: ObservableObject, Identifiable {
-    @Published var taskRepository = SessionStore().taskRepository
-    //@Published var session =
+//    @Published var taskRepository = SessionStore().taskRepository
+    @Published var taskRepository = TaskRepository()
     @Published var task: Task
     
     var id = ""
@@ -19,7 +19,9 @@ class TaskCellViewModel: ObservableObject, Identifiable {
     
     private var cancellables = Set<AnyCancellable>()
     
+    
     init(task: Task) {
+        print("created from TASK CELL VM")
         self.task = task
         $task.map { task in
             task.completed ? "checkmark.circle.fill" : "circle"

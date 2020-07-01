@@ -27,14 +27,13 @@ struct TaskView: View {
     
     func day(day: Int) -> some View {
         ForEach (dayTaskVM.taskCellViewModels) { taskCellVM in
-//            if self.viewRouter.dateShown.isSameDay(taskCellVM.task.dayAssigned) {
             if self.viewRouter.dateShown.addingTimeInterval(TimeInterval(day * 86400)).isSameDay(taskCellVM.task.dayAssigned) {
-            TaskCell(dayTaskVM: self.dayTaskVM, taskCellVM: taskCellVM, showingDetail: self.$showingDetail, detailTaskCellVM: self.$detailTaskCellVM)
-                .padding([.horizontal,.bottom])
-                .onDisappear(perform: {
-                    if taskCellVM.task.completed {
-                        self.dayTaskVM.deleteTask(task: taskCellVM.task)
-                    }})
+                TaskCell(dayTaskVM: self.dayTaskVM, taskCellVM: taskCellVM, showingDetail: self.$showingDetail, detailTaskCellVM: self.$detailTaskCellVM)
+                    .padding([.horizontal,.bottom])
+                    .onDisappear(perform: {
+                        if taskCellVM.task.completed {
+                            self.dayTaskVM.deleteTask(task: taskCellVM.task)
+                        }})
             }
         }
     }
@@ -49,12 +48,8 @@ struct TaskView: View {
                         .padding()
                     Spacer()
                 }
-                if self.dayTaskVM.taskCellViewModels.count == 0 {
-                    Text("No tasks :)")
-                        .foregroundColor(.white)
-                } else {
-                    self.day(day: day)
-                }
+                
+                self.day(day: day)
             }
         }
     }
@@ -73,6 +68,7 @@ struct TaskView: View {
             } else {
                 day(day: 0)
             }
+            
 //            ForEach (dayTaskVM.taskCellViewModels) { taskCellVM in
 //                TaskCell(dayTaskVM: self.dayTaskVM, taskCellVM: taskCellVM, showingDetail: self.$showingDetail, detailTaskCellVM: self.$detailTaskCellVM)
 //                    .padding([.horizontal,.bottom])

@@ -17,6 +17,7 @@
 		3B1EABD224944F8000A610CB /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABD124944F8000A610CB /* DayView.swift */; };
 		3B1EABDA2494A1E200A610CB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABD92494A1E200A610CB /* HomeView.swift */; };
 		3B1EABDC2497F5E600A610CB /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABDB2497F5E600A610CB /* Task.swift */; };
+		3B32E5B624AD1479005E55B5 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B32E5B524AD1479005E55B5 /* SearchView.swift */; };
 		3B5D0F2024A7F894002FA7B6 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5D0F1F24A7F894002FA7B6 /* TaskView.swift */; };
 		3B5D0F2224A7FA2B002FA7B6 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5D0F2124A7FA2B002FA7B6 /* TaskViewModel.swift */; };
 		3B70914E2481943C0007C1EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B70914D2481943C0007C1EF /* AppDelegate.swift */; };
@@ -40,6 +41,7 @@
 		3BD3F9EE24A133DD00071FD2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD3F9ED24A133DD00071FD2 /* User.swift */; };
 		3BD3F9F024A1A11500071FD2 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD3F9EF24A1A11500071FD2 /* DetailView.swift */; };
 		3BD3F9F224A2A68000071FD2 /* Date+CustomComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD3F9F124A2A68000071FD2 /* Date+CustomComparison.swift */; };
+		3BE7642624AC36B900A3F451 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE7642524AC36B900A3F451 /* SettingsView.swift */; };
 		B1133DFB52D4C0C8850EAB65 /* Pods_PlanIt_PlanItUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50AED21F2F6133B885BEA05 /* Pods_PlanIt_PlanItUITests.framework */; };
 		D1C012135705327B625A9C27 /* Pods_PlanIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946F3C0D94FCDA674585D3E7 /* Pods_PlanIt.framework */; };
 /* End PBXBuildFile section */
@@ -77,6 +79,7 @@
 		3B1EABD124944F8000A610CB /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		3B1EABD92494A1E200A610CB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		3B1EABDB2497F5E600A610CB /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		3B32E5B524AD1479005E55B5 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		3B5D0F1F24A7F894002FA7B6 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		3B5D0F2124A7FA2B002FA7B6 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		3B70914A2481943C0007C1EF /* PlanIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,6 +109,7 @@
 		3BD3F9ED24A133DD00071FD2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3BD3F9EF24A1A11500071FD2 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		3BD3F9F124A2A68000071FD2 /* Date+CustomComparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+CustomComparison.swift"; sourceTree = "<group>"; };
+		3BE7642524AC36B900A3F451 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4586C7ADD36D0788986F3CD0 /* Pods_PlanItTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlanItTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EC02B10D8A14E9188B3405B /* Pods-PlanIt-PlanItUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt-PlanItUITests.debug.xcconfig"; path = "Target Support Files/Pods-PlanIt-PlanItUITests/Pods-PlanIt-PlanItUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7B71E4FBC96AA5842F301760 /* Pods-PlanIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt.debug.xcconfig"; path = "Target Support Files/Pods-PlanIt/Pods-PlanIt.debug.xcconfig"; sourceTree = "<group>"; };
@@ -237,6 +241,8 @@
 			children = (
 				3B7091512481943C0007C1EF /* ContentView.swift */,
 				3BD3F9EF24A1A11500071FD2 /* DetailView.swift */,
+				3BE7642524AC36B900A3F451 /* SettingsView.swift */,
+				3B32E5B524AD1479005E55B5 /* SearchView.swift */,
 				3B1EABD92494A1E200A610CB /* HomeView.swift */,
 				3B1EABC62492FD0D00A610CB /* ProfileView.swift */,
 				3BD3F9E324995F9900071FD2 /* AuthView.swift */,
@@ -545,8 +551,10 @@
 				3B7D140C2484485100E30EDF /* MonthView.swift in Sources */,
 				3B1EABC72492FD0D00A610CB /* ProfileView.swift in Sources */,
 				3B7091522481943C0007C1EF /* ContentView.swift in Sources */,
+				3BE7642624AC36B900A3F451 /* SettingsView.swift in Sources */,
 				3BD3F9E02498127B00071FD2 /* ViewRouter.swift in Sources */,
 				3BD3F9EE24A133DD00071FD2 /* User.swift in Sources */,
+				3B32E5B624AD1479005E55B5 /* SearchView.swift in Sources */,
 				3B1EABDC2497F5E600A610CB /* Task.swift in Sources */,
 				3BD3F9F224A2A68000071FD2 /* Date+CustomComparison.swift in Sources */,
 				3B1EABD224944F8000A610CB /* DayView.swift in Sources */,

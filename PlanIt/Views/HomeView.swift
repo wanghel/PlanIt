@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct HomeView: View {
-    @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var session: SessionStore
+    @EnvironmentObject var viewRouter: ViewRouter
     @State var showingDetail = false
     
     var body: some View {
@@ -19,36 +19,42 @@ struct HomeView: View {
                 dnavy
                     .edgesIgnoringSafeArea(.all)
                 
+//                ReminderDayView()
+//                    .opacity(0.5)
+//                    .frame(width: screenWidth)
+//                    .edgesIgnoringSafeArea(.bottom)
+                
                 
                 VStack (spacing: 0) {
                     //MonthView(calendar: CalendarMonthViewModel())
                     Text("This Week's Tasks")
+                        .padding()
                         .foregroundColor(.white)
                         .font(.largeTitle)
                     TaskView(showWeek: true)
                 }
+                
             }
-            .navigationBarTitle(
-                Text("PlanIt"), displayMode: .inline)
-                .navigationBarItems(leading:
-                    Button(action: {
-                        self.viewRouter.viewProfile = true
-                    }){
-                        Image(systemName: "person.crop.circle.fill")
-                            .font(.system(size: 25))
-                            .foregroundColor(.white)
-                            .opacity(0.7)
-                            .padding(.bottom)
-                    }, trailing:
-                    Button(action: {
-                        self.showingDetail.toggle()
-                    }){
-                        Image(systemName: "plus")
-                            .font(.system(size: 25))
-                            .foregroundColor(.white)
-                            .opacity(0.7)
-                            .padding(.bottom)
-                })
+            .navigationBarTitle("PlanIt", displayMode: .inline)
+            .navigationBarItems(leading:
+                Button(action: {
+                    self.viewRouter.viewProfile = true
+                }){
+                    Image(systemName: "person.crop.circle.fill")
+                        .font(.system(size: 25))
+                        .foregroundColor(.white)
+                        .opacity(0.7)
+                        .padding(.bottom)
+                }, trailing:
+                Button(action: {
+                    self.showingDetail.toggle()
+                }){
+                    Image(systemName: "plus")
+                        .font(.system(size: 25))
+                        .foregroundColor(.white)
+                        .opacity(0.7)
+                        .padding(.bottom)
+            })
         }
         .sheet(isPresented: $showingDetail) {
             DetailView(showingDetail: self.$showingDetail)

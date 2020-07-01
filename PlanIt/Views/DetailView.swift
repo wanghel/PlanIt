@@ -13,7 +13,7 @@ struct DetailView: View {
     //@EnvironmentObject var session: SessionStore
     @ObservedObject var dayTaskVM = TaskViewModel()
     
-    @ObservedObject var taskCellVM: TaskCellViewModel = TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: Date()))
+    @ObservedObject var taskCellVM: TaskCellViewModel
     
     @State var showingDateSelector = false
     
@@ -24,6 +24,7 @@ struct DetailView: View {
     
     init(showingDetail: Binding<Bool>) {
         self._showingDetail = showingDetail
+        self.taskCellVM = TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: Date()))
     }
     
     init(showingDetail: Binding<Bool>, taskCellVM: TaskCellViewModel) {

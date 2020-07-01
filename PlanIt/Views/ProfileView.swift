@@ -34,46 +34,42 @@ struct ProfileView: View {
                 .navigationBarTitle("\(profile?.userName ?? "")", displayMode: .inline)
                 .navigationBarItems(
                     leading:
+                        HStack {
+                            if !self.viewRouter.showSignIn {
+                                Button(action: {
+                                    
+                                }){
+                                    Image(systemName: "pencil")
+                                        .font(.system(size: 25))
+                                        .foregroundColor(.white)
+                                        .opacity(0.7)
+                                        .padding([.bottom, .trailing])
+                                }
+                                
+                                
+                                Button(action: {
+                                    self.session.signOut()
+                                    self.profile = UserProfile(id: "", userName: "", firstName: "", lastName: "", friends: [])
+                                    self.viewRouter.showSignIn.toggle()
+                                }){
+                                    Image(systemName: "delete.right")
+                                        .frame(width: 1, height: 1)
+                                        .foregroundColor(.white)
+                                        .opacity(0.7)
+                                        .padding(.bottom)
+                                }
+                            }
+                    },
+                    trailing:
                     Button(action: {
                         self.viewRouter.viewProfile = false
                     }){
-                        Image(systemName: "chevron.down")
+                        Image(systemName: "chevron.left")
                             .font(.system(size: 25))
                             .foregroundColor(.white)
                             .opacity(0.7)
                             .padding(.bottom)
-                    }
-                    ,
-                    trailing:
-                    HStack {
-                        if !self.viewRouter.showSignIn {
-                            Button(action: {
-                                
-                            }){
-                                Image(systemName: "pencil")
-                                    .font(.system(size: 25))
-                                    .foregroundColor(.white)
-                                    .opacity(0.7)
-                                    .padding([.bottom, .trailing])
-                            }
-                            
-                            
-                            Button(action: {
-                                self.session.signOut()
-                                self.profile = UserProfile(id: "", userName: "", firstName: "", lastName: "", friends: [])
-                                self.viewRouter.showSignIn.toggle()
-                            }){
-                                Text("sign out")
-                                    .font(.system(size: 15))
-                                    .padding(.bottom)
-//                                Image(systemName: "gear")
-//                                    .font(.system(size: 25))
-//                                    .foregroundColor(.white)
-//                                    .opacity(0.7)
-//                                    .padding(.bottom)
-                            }
-                        }
-                })
+                    })
                     .padding(.bottom, (UIApplication.shared.windows.last?.safeAreaInsets.bottom)!)
                     .frame(height: screenHeight)
                     .edgesIgnoringSafeArea(.all)
@@ -85,7 +81,7 @@ struct ProfileView: View {
                 }
             }
         }
-        .offset(y: viewRouter.viewProfile ? 0 : screenHeight)
+        .offset(x: viewRouter.viewProfile ? 0 : -screenWidth)
         .animation(.easeOut)
         .onAppear(perform: getUser)
         

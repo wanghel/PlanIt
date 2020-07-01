@@ -18,6 +18,8 @@ struct CalendarView: View {
     @State private var draggedOffset = CGSize.zero
     @State private var lastOffset = CGSize.zero
     
+    @State var showingDetail = false
+    
     let monthArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     
     let weekDayArr = ["S", "M", "T", "W", "T", "F", "S"]
@@ -92,6 +94,28 @@ struct CalendarView: View {
                 }
             }
             .navigationBarTitle("\(monthArr[(cMonth.calendarMonth.month+11)%12]) \(String(cMonth.calendarMonth.year))", displayMode: .inline)
+            .navigationBarItems(leading:
+                Button(action: {
+                    self.viewRouter.viewProfile = true
+                }){
+                    Image(systemName: "person.crop.circle.fill")
+                        .font(.system(size: 25))
+                        .foregroundColor(.white)
+                        .opacity(0.7)
+                        .padding(.bottom)
+                }, trailing:
+                Button(action: {
+                    self.showingDetail.toggle()
+                }){
+                    Image(systemName: "plus")
+                        .font(.system(size: 25))
+                        .foregroundColor(.white)
+                        .opacity(0.7)
+                        .padding(.bottom)
+            })
+        }
+        .sheet(isPresented: $showingDetail) {
+            DetailView(showingDetail: self.$showingDetail)
         }
     }
 }
