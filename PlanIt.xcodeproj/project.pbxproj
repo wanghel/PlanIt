@@ -18,6 +18,10 @@
 		3B1EABDA2494A1E200A610CB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABD92494A1E200A610CB /* HomeView.swift */; };
 		3B1EABDC2497F5E600A610CB /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABDB2497F5E600A610CB /* Task.swift */; };
 		3B32E5B624AD1479005E55B5 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B32E5B524AD1479005E55B5 /* SearchView.swift */; };
+		3B32E5B924AD21BD005E55B5 /* Andromeda-eR2n.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B32E5B824AD21BD005E55B5 /* Andromeda-eR2n.ttf */; };
+		3B32E5BA24AD274A005E55B5 /* Andromeda-eR2n.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B32E5B824AD21BD005E55B5 /* Andromeda-eR2n.ttf */; };
+		3B32E5BB24AD274A005E55B5 /* Andromeda-eR2n.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B32E5B824AD21BD005E55B5 /* Andromeda-eR2n.ttf */; };
+		3B32E5BF24AD5BC7005E55B5 /* UserProfilesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B32E5BE24AD5BC7005E55B5 /* UserProfilesViewModel.swift */; };
 		3B5D0F2024A7F894002FA7B6 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5D0F1F24A7F894002FA7B6 /* TaskView.swift */; };
 		3B5D0F2224A7FA2B002FA7B6 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5D0F2124A7FA2B002FA7B6 /* TaskViewModel.swift */; };
 		3B70914E2481943C0007C1EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B70914D2481943C0007C1EF /* AppDelegate.swift */; };
@@ -80,6 +84,8 @@
 		3B1EABD92494A1E200A610CB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		3B1EABDB2497F5E600A610CB /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		3B32E5B524AD1479005E55B5 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		3B32E5B824AD21BD005E55B5 /* Andromeda-eR2n.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Andromeda-eR2n.ttf"; sourceTree = "<group>"; };
+		3B32E5BE24AD5BC7005E55B5 /* UserProfilesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilesViewModel.swift; sourceTree = "<group>"; };
 		3B5D0F1F24A7F894002FA7B6 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		3B5D0F2124A7FA2B002FA7B6 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		3B70914A2481943C0007C1EF /* PlanIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,6 +172,14 @@
 			path = Repositories;
 			sourceTree = "<group>";
 		};
+		3B32E5B724AD2178005E55B5 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				3B32E5B824AD21BD005E55B5 /* Andromeda-eR2n.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		3B7091412481943C0007C1EF = {
 			isa = PBXGroup;
 			children = (
@@ -198,8 +212,9 @@
 				3B1EABC82494392900A610CB /* Repositories */,
 				3BED3DF224917F4200A3B586 /* ViewModels */,
 				3BED3DF124917ED800A3B586 /* Views */,
-				3B1EABD124944F8000A610CB /* DayView.swift */,
+				3B32E5B724AD2178005E55B5 /* Fonts */,
 				3BC406202481FD9B00EF74FF /* WeekdaysView.swift */,
+				3B1EABD124944F8000A610CB /* DayView.swift */,
 				3BC4062824821DA100EF74FF /* ReminderDayView.swift */,
 				3B7091532481943E0007C1EF /* Assets.xcassets */,
 				3B7091582481943E0007C1EF /* LaunchScreen.storyboard */,
@@ -259,6 +274,7 @@
 			children = (
 				3BC406262482174D00EF74FF /* CalendarMonthViewModel.swift */,
 				3B1EABC42492FAA300A610CB /* UserViewModel.swift */,
+				3B32E5BE24AD5BC7005E55B5 /* UserProfilesViewModel.swift */,
 				3B1EABCD24943EC200A610CB /* TaskCellViewModel.swift */,
 				3B5D0F2124A7FA2B002FA7B6 /* TaskViewModel.swift */,
 			);
@@ -403,6 +419,7 @@
 				3B7991EE24901AF30003B302 /* GoogleService-Info.plist in Resources */,
 				3B7091572481943E0007C1EF /* Preview Assets.xcassets in Resources */,
 				3B7091542481943E0007C1EF /* Assets.xcassets in Resources */,
+				3B32E5B924AD21BD005E55B5 /* Andromeda-eR2n.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +427,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B32E5BA24AD274A005E55B5 /* Andromeda-eR2n.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +435,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B32E5BB24AD274A005E55B5 /* Andromeda-eR2n.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,6 +549,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B32E5BF24AD5BC7005E55B5 /* UserProfilesViewModel.swift in Sources */,
 				3BD3F9EA2499807C00071FD2 /* SessionStore.swift in Sources */,
 				3BD3F9F024A1A11500071FD2 /* DetailView.swift in Sources */,
 				3BC4062924821DA100EF74FF /* ReminderDayView.swift in Sources */,
@@ -734,7 +754,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hcui.PlanIt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hwang.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -756,7 +776,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hcui.PlanIt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hwang.PlanIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

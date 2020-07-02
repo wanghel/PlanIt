@@ -19,12 +19,16 @@ struct DetailView: View {
     
     @Binding var showingDetail: Bool
     
-    
-    var addNewTask = true
+    private var addNewTask = true
     
     init(showingDetail: Binding<Bool>) {
         self._showingDetail = showingDetail
         self.taskCellVM = TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: Date()))
+    }
+    
+    init(showingDetail: Binding<Bool>, day: Date) {
+        self._showingDetail = showingDetail
+        self.taskCellVM = TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: day))
     }
     
     init(showingDetail: Binding<Bool>, taskCellVM: TaskCellViewModel) {
@@ -40,56 +44,71 @@ struct DetailView: View {
     }
     
     var body: some View {
-        VStack {
-            HStack {
-                Text("Add Todo")
-                    .opacity(0.7)
-                    .font(.title)
-                Spacer()
-                Button(action: {
-                    if self.addNewTask {
-                        self.dayTaskVM.addTask(task: self.taskCellVM.task)
+        ZStack {
+            navy
+                .opacity(0.5)
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack {
+                HStack {
+                    Text("Add Task")
+                        .opacity(0.9)
+                        .font(.custom("GillSans", size: 35))
+                    Spacer()
+                    Button(action: {
+                        if self.addNewTask {
+                            self.dayTaskVM.addTask(task: self.taskCellVM.task)
+                        }
+                        
+                        self.showingDetail.toggle()
+                    }) {
+                        Text("Done")
+                    }
+                }
+                .padding()
+                
+                TextField("Enter title", text: $taskCellVM.task.title)
+                    .padding()
+                    .background(Color.white.opacity(0.8).cornerRadius(10))
+                
+                VStack {
+                    Button (action: {
+                        self.showingDateSelector.toggle()
+                    }) {
+                        HStack {
+                            Text("Date Assigned")
+                                .foregroundColor(.black)
+                                .padding()
+                            Spacer()
+                            Text("\(taskCellVM.task.dayAssigned, formatter: dateFormatter)")
+                                .foregroundColor(.gray)
+                                .padding()
+                        }
                     }
                     
-                    self.showingDetail.toggle()
-                }) {
-                    Text("Done")
+                    if showingDateSelector {
+                        HStack {
+                            Spacer()
+                            DatePicker("", selection: $taskCellVM.task.dayAssigned, displayedComponents: .date)
+                                .labelsHidden()
+                            Spacer()
+                        }
+                        
+                    }
                 }
-            }
-            .padding()
-            
-            TextField("Enter title", text: $taskCellVM.task.title)
-                .padding()
-            
-            Button (action: {
-                self.showingDateSelector.toggle()
-            }) {
-                HStack {
-                    Text("Date Assigned")
-                        .foregroundColor(.black)
-                        .padding()
-                    Spacer()
-                    Text("\(taskCellVM.task.dayAssigned, formatter: dateFormatter)")
-                    .foregroundColor(.gray)
-                    .padding()
-                }
-            }
-            
-            if showingDateSelector {
-                DatePicker("", selection: $taskCellVM.task.dayAssigned, in: Date()..., displayedComponents: .date)
-                    .labelsHidden()
+                .background(Color.white.opacity(0.8).cornerRadius(10))
                 
+                Spacer()
             }
-            
-            Spacer()
+            .foregroundColor(.white)
+            .padding()
         }
-
-        .padding()
     }
 }
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
         DetailView(showingDetail: .constant(true))
+            .environmentObject(ViewRouter())
     }
 }

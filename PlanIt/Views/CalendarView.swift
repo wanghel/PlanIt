@@ -90,7 +90,15 @@ struct CalendarView: View {
                             self.draggedOffset = CGSize.zero
                         })
                     
-                    TaskView(showWeek: false)
+                    ScrollView {
+                        ZStack {
+                        Text("No tasks :)")
+                            .foregroundColor(.white)
+                            .font(.custom("GillSans", size: 20))
+                            
+                        TaskView()
+                        }
+                    }
                 }
             }
             .navigationBarTitle("\(monthArr[(cMonth.calendarMonth.month+11)%12]) \(String(cMonth.calendarMonth.year))", displayMode: .inline)
@@ -101,7 +109,7 @@ struct CalendarView: View {
                     Image(systemName: "person.crop.circle.fill")
                         .font(.system(size: 25))
                         .foregroundColor(.white)
-                        .opacity(0.7)
+                        .opacity(0.9)
                         .padding(.bottom)
                 }, trailing:
                 Button(action: {
@@ -110,12 +118,12 @@ struct CalendarView: View {
                     Image(systemName: "plus")
                         .font(.system(size: 25))
                         .foregroundColor(.white)
-                        .opacity(0.7)
+                        .opacity(0.9)
                         .padding(.bottom)
             })
         }
         .sheet(isPresented: $showingDetail) {
-            DetailView(showingDetail: self.$showingDetail)
+            DetailView(showingDetail: self.$showingDetail, day: self.viewRouter.dateShown)
         }
     }
 }

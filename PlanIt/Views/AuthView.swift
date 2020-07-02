@@ -24,7 +24,6 @@ struct AuthView: View {
             }
         }
         .padding(.horizontal)
-        .padding(.bottom, (UIApplication.shared.windows.last?.safeAreaInsets.bottom)! * 2)
     }
 }
 
@@ -55,30 +54,42 @@ struct SignInView: View {
     
     var body: some View {
         VStack {
-            Spacer()
-            Text("Sign In to continue")
-            Spacer()
-            
             HStack {
-                Text("Email")
-                    .font(.system(size: 14))
+                Image(systemName: "envelope")
+                    .font(.system(size: 20))
                 TextField("Email address", text: $email)
                     .textContentType(.emailAddress)
                     .font(.system(size: 14))
                     .padding()
+                
             }
+            .padding(.horizontal)
+            .background(navy.cornerRadius(15))
+            
+            
             HStack {
-                Text("Password")
-                    .font(.system(size: 14))
+                Image(systemName: "lock")
+                    .font(.system(size: 20))
                 SecureField("Password", text: $password)
                     .font(.system(size: 14))
                     .padding()
             }
+            .padding(.horizontal)
+            .background(navy.cornerRadius(10))
+            
             Button(action: {
                 self.signIn()
             }) {
-                Text("Sign In")
+                HStack {
+                    Spacer()
+                    Text("SIGN IN")
+                    .font(.system(size: 15))
+                    Spacer()
+                }
+                    .padding()
+                .background(Color.blue.cornerRadius(10).opacity(0.5))
             }
+            .padding(50)
             
             if (error != "") {
                 Text(error)
@@ -89,13 +100,16 @@ struct SignInView: View {
             Spacer()
             HStack {
                 Text("I'm a new user")
+                .font(.system(size: 20))
                 Text("Create new account")
+                    .font(.system(size: 20))
                     .foregroundColor(.blue)
                     .onTapGesture {
                         self.viewRouter.showSignUp.toggle()
                 }
             }
         }
+        .padding()
         .foregroundColor(.white)
         .background(dnavy)
     }
@@ -105,8 +119,10 @@ struct SignUpView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var session: SessionStore
     
+    
     @State var email: String = ""
     @State var password: String = ""
+    @State var confirmPassword: String = ""
     @State var error: String = ""
     
     @State var userName: String = ""
@@ -115,73 +131,122 @@ struct SignUpView: View {
     
     @Binding var profile: UserProfile?
     
-    //@ObservedObject var userVM = UserViewModel()
+    @ObservedObject var userProfilesVM = UserProfilesViewModel()
     
     func signUp() {
-        session.signUp(email: email, password: password, userName: userName, firstName: firstName, lastName: lastName) { (result, error) in
-            if let error = error {
-                self.error = error.localizedDescription
-            } else {
-                self.email = ""
-                self.password = ""
-                self.profile = result
-                self.viewRouter.showSignIn.toggle()
-                self.viewRouter.showSignUp.toggle()
+        var completeSignUp = true
+        
+        for profile in userProfilesVM.userVM {
+            if profile.profile.userName.lowercased() == userName.lowercased() {
+                self.error = "Username already taken. Please choose another username."
+                completeSignUp = false
+            }
+        }
+        
+        if password != confirmPassword {
+            self.error = "Passwords don't match. Please confirm your password again."
+            completeSignUp = false
+        }
+        
+        if completeSignUp {
+            session.signUp(email: email, password: password, userName: userName, firstName: firstName, lastName: lastName) { (result, error) in
+                if let error = error {
+                    self.error = error.localizedDescription
+                } else {
+                    self.email = ""
+                    self.password = ""
+                    self.profile = result
+                    self.viewRouter.showSignIn.toggle()
+                    self.viewRouter.showSignUp.toggle()
+                }
             }
         }
     }
     
     var body: some View {
         VStack {
-            Spacer()
-            Text("Sign up to get started")
-            Spacer()
-            
             VStack{
                 HStack {
                     Text("Email")
-                    .font(.system(size: 14))
+                        .font(.system(size: 14))
+                    Spacer()
                     TextField("Email address", text: $email)
                         .textContentType(.emailAddress)
                         .font(.system(size: 14))
                         .padding()
-                        .background(navy)
+                        .background(navy.cornerRadius(15))
+                        .frame(width: 270)
                 }
+                
                 HStack {
                     Text("Password")
-                    .font(.system(size: 14))
+                        .font(.system(size: 14))
+                    Spacer()
                     SecureField("Password", text: $password)
                         .font(.system(size: 14))
                         .padding()
+                        .background(navy.cornerRadius(15))
+                        .frame(width: 270)
                 }
+                
                 HStack {
-                    Text("User Name")
-                    .font(.system(size: 14))
+                    Text("Confirm Password")
+                        .font(.system(size: 14))
+                    Spacer()
+                    SecureField("Confirm Password", text: $confirmPassword)
+                        .font(.system(size: 14))
+                        .padding()
+                        .background(navy.cornerRadius(15))
+                        .frame(width: 270)
+                }
+                
+                HStack {
+                    Text("Username")
+                        .font(.system(size: 14))
+                    Spacer()
                     TextField("User Name", text: $userName)
                         .font(.system(size: 14))
                         .padding()
+                        .background(navy.cornerRadius(15))
+                        .frame(width: 270)
                 }
+                
                 HStack {
                     Text("First Name")
-                    .font(.system(size: 14))
+                        .font(.system(size: 14))
+                    Spacer()
                     TextField("First Name", text: $firstName)
                         .font(.system(size: 14))
                         .padding()
+                        .background(navy.cornerRadius(15))
+                        .frame(width: 270)
                 }
+                
                 HStack {
                     Text("Last Name")
-                    .font(.system(size: 14))
+                        .font(.system(size: 14))
+                    Spacer()
                     TextField("Last Name", text: $lastName)
                         .font(.system(size: 14))
                         .padding()
+                        .background(navy.cornerRadius(15))
+                        .frame(width: 270)
                 }
             }
             
             Button(action: {
                 self.signUp()
             }) {
-                Text("Create Account")
+                HStack {
+                    Spacer()
+                    Text("Create Account")
+                        .font(.system(size: 15))
+                    Spacer()
+                }
+                .padding()
+                .background(Color.blue.cornerRadius(10).opacity(0.5))
             }
+            .padding(50)
             
             if (error != "") {
                 Text(error)
@@ -191,7 +256,9 @@ struct SignUpView: View {
             Spacer()
             HStack {
                 Text("I'm a previous user")
+                    .font(.system(size: 20))
                 Text("Sign In")
+                    .font(.system(size: 20))
                     .foregroundColor(.blue)
                     .onTapGesture {
                         self.viewRouter.showSignUp.toggle()
@@ -199,6 +266,7 @@ struct SignUpView: View {
             }
             
         }
+        .padding()
         .foregroundColor(.white)
         .background(dnavy)
         
@@ -208,5 +276,6 @@ struct SignUpView: View {
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
         SignInView(profile: .constant(testUser2))
+            .environmentObject(ViewRouter())
     }
 }

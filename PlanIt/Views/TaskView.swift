@@ -16,67 +16,33 @@ struct TaskView: View {
     
     @ObservedObject var dayTaskVM = TaskViewModel()
     
-    let showWeek: Bool
+    private var dayFromCurr: Int = 0
     
-    func formatDate(date: Date) -> String {
-        let dateFormatterPrint = DateFormatter()
-        dateFormatterPrint.dateFormat = "EEEE, MMM d, yyyy"
-        
-        return dateFormatterPrint.string(from: date)
+    init() {}
+    
+    init(dayFromCurr: Int) {
+        self.dayFromCurr = dayFromCurr
     }
     
-    func day(day: Int) -> some View {
-        ForEach (dayTaskVM.taskCellViewModels) { taskCellVM in
-            if self.viewRouter.dateShown.addingTimeInterval(TimeInterval(day * 86400)).isSameDay(taskCellVM.task.dayAssigned) {
-                TaskCell(dayTaskVM: self.dayTaskVM, taskCellVM: taskCellVM, showingDetail: self.$showingDetail, detailTaskCellVM: self.$detailTaskCellVM)
-                    .padding([.horizontal,.bottom])
-                    .onDisappear(perform: {
-                        if taskCellVM.task.completed {
-                            self.dayTaskVM.deleteTask(task: taskCellVM.task)
-                        }})
-            }
-        }
-    }
-    
-    func week() -> some View {
-        ForEach (0..<6) { day in
-            VStack {
-                HStack {
-                    Text(self.formatDate(date: Date().addingTimeInterval(TimeInterval(day * 86400))))
-                        .foregroundColor(.white)
-                        .opacity(0.7)
-                        .padding()
-                    Spacer()
-                }
-                
-                self.day(day: day)
-            }
-        }
-    }
     
     var body: some View {
-        ScrollView {
-            
+        //ScrollView {
+        VStack {
             // IDK WHY DOING THIS MAKES THE DATA LOAD
             Text("")
                 .frame(width: screenWidth, height: 0)
             // FIGURE IT OUT FUTURE ME
             
-            
-            if showWeek {
-                week()
-            } else {
-                day(day: 0)
+            ForEach (dayTaskVM.taskCellViewModels) { taskCellVM in
+                if self.viewRouter.dateShown.addingTimeInterval(TimeInterval(self.dayFromCurr * 86400)).isSameDay(taskCellVM.task.dayAssigned) {
+                    TaskCell(dayTaskVM: self.dayTaskVM, taskCellVM: taskCellVM, showingDetail: self.$showingDetail, detailTaskCellVM: self.$detailTaskCellVM)
+                        .padding([.horizontal,.bottom])
+                        .onDisappear(perform: {
+                            if taskCellVM.task.completed {
+                                self.dayTaskVM.deleteTask(task: taskCellVM.task)
+                            }})
+                }
             }
-            
-//            ForEach (dayTaskVM.taskCellViewModels) { taskCellVM in
-//                TaskCell(dayTaskVM: self.dayTaskVM, taskCellVM: taskCellVM, showingDetail: self.$showingDetail, detailTaskCellVM: self.$detailTaskCellVM)
-//                    .padding([.horizontal,.bottom])
-//                    .onDisappear(perform: {
-//                        if taskCellVM.task.completed {
-//                            self.dayTaskVM.deleteTask(task: taskCellVM.task)
-//                        }})
-//            }
             
         }
         .sheet(isPresented: self.$showingDetail) {
@@ -203,6 +169,6 @@ struct TaskCell: View  {
 
 struct TaskView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskView(showWeek: true)
+        TaskView()
     }
 }

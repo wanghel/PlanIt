@@ -26,7 +26,7 @@ struct SettingsView: View {
                                 }
                                 .padding()
                                 .background(navy)
-                                .cornerRadius(15)
+                                .cornerRadius(10)
                     }
                     
                     
@@ -41,7 +41,7 @@ struct SettingsView: View {
                                     
                                 .padding()
                                 .background(navy)
-                                .cornerRadius(15)
+                                .cornerRadius(10)
                                 
                     }
                     
@@ -56,7 +56,7 @@ struct SettingsView: View {
                                     
                                 .padding()
                                 .background(navy)
-                                .cornerRadius(15)
+                                .cornerRadius(10)
                     }
                 }
                 .padding()

@@ -13,6 +13,13 @@ struct HomeView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @State var showingDetail = false
     
+    func formatDate(date: Date) -> String {
+        let dateFormatterPrint = DateFormatter()
+        dateFormatterPrint.dateFormat = "EEEE, MMM d, yyyy"
+        
+        return dateFormatterPrint.string(from: date)
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -27,15 +34,47 @@ struct HomeView: View {
                 
                 VStack (spacing: 0) {
                     //MonthView(calendar: CalendarMonthViewModel())
-                    Text("This Week's Tasks")
+                    Text("~THIS WEEK~")
+                    .tracking(10)
                         .padding()
                         .foregroundColor(.white)
-                        .font(.largeTitle)
-                    TaskView(showWeek: true)
+                        .font(.custom("GillSans", size: 30))
+                        .opacity(0.9)
+                    
+                    ScrollView {
+                        // IDK WHY DOING THIS MAKES THE DATA LOAD
+                        Text("")
+                            .frame(width: screenWidth, height: 0)
+                        // FIGURE IT OUT FUTURE ME
+                        
+                        ForEach (0..<7) { day in
+                            VStack {
+                                HStack {
+                                    Text(self.formatDate(date: Date().addingTimeInterval(TimeInterval(day * 86400))))
+                                        .foregroundColor(.white)
+                                        .font(.custom("GillSans", size: 15))
+                                        .opacity(0.9)
+                                        .padding(10)
+                                        .background(blue.opacity(0.2).cornerRadius(15))
+                                    Spacer()
+                                }
+                                .padding(.vertical)
+                                
+                                ZStack {
+                                    Text("No tasks :)")
+                                        .foregroundColor(.white)
+                                        .font(.custom("GillSans", size: 20))
+                                    
+                                    TaskView(dayFromCurr: day)
+                                }
+                            }
+                        }
+                    }
+                    
                 }
                 
             }
-            .navigationBarTitle("PlanIt", displayMode: .inline)
+            .navigationBarTitle("PLANIT", displayMode: .inline)
             .navigationBarItems(leading:
                 Button(action: {
                     self.viewRouter.viewProfile = true
@@ -43,7 +82,7 @@ struct HomeView: View {
                     Image(systemName: "person.crop.circle.fill")
                         .font(.system(size: 25))
                         .foregroundColor(.white)
-                        .opacity(0.7)
+                        .opacity(0.9)
                         .padding(.bottom)
                 }, trailing:
                 Button(action: {
@@ -52,7 +91,7 @@ struct HomeView: View {
                     Image(systemName: "plus")
                         .font(.system(size: 25))
                         .foregroundColor(.white)
-                        .opacity(0.7)
+                        .opacity(0.9)
                         .padding(.bottom)
             })
         }
@@ -65,5 +104,7 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+        .environmentObject(SessionStore())
+        .environmentObject(ViewRouter())
     }
 }

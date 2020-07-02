@@ -52,7 +52,7 @@ class SessionStore: ObservableObject {
             guard let user = result?.user else { return }
             print("User \(user.uid) signed up.")
             
-            let userProfile = UserProfile(id: user.uid, userName: userName,firstName: firstName, lastName: lastName, friends: [])
+            let userProfile = UserProfile(id: user.uid, userName: userName.lowercased(), firstName: firstName, lastName: lastName, friends: [])
             self.profileRepository.createProfile(profile: userProfile) { (profile, error) in
                 if let error = error {
                     print("Error while fetching the user profile: \(error)")

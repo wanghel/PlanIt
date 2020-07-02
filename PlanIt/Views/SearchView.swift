@@ -11,8 +11,11 @@ import SwiftUI
 struct SearchView: View {
     @EnvironmentObject var session: SessionStore
     @ObservedObject var dayTaskVM = TaskViewModel()
+    @ObservedObject var userProfilesVM = UserProfilesViewModel()
     
     @State var searchText = ""
+    @State var searchUsers = true
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -20,8 +23,32 @@ struct SearchView: View {
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack (spacing: 0){
-                    SearchBarView(searchText: $searchText)
+                    
+                    VStack {
+                        SearchBarView(searchText: $searchText)
+                            .padding(.bottom)
                         
+                        if searchText != "" {
+                            HStack {
+                                Button (action : {self.searchUsers = true}) {
+                                    Spacer()
+                                    Image(systemName: "person.2")
+                                        .foregroundColor(searchUsers ? .white : .gray)
+                                    Spacer()
+                                }
+                                Text("|")
+                                Button (action : {self.searchUsers = false}) {
+                                    Spacer()
+                                    Image(systemName: "calendar")
+                                        .foregroundColor(searchUsers ? .gray : .white)
+                                    Spacer()
+                                }
+                            }
+                            .padding(.bottom)
+                        }
+                    }
+                    .padding([.horizontal])
+                    .background(ddnavy)
                     
                     ScrollView {
                         // IDK WHY DOING THIS MAKES THE DATA LOAD
@@ -29,22 +56,48 @@ struct SearchView: View {
                             .frame(width: screenWidth, height: 0)
                         // FIGURE IT OUT FUTURE ME
                         
-                        ForEach (dayTaskVM.taskCellViewModels.filter{$0.task.title.lowercased().contains(searchText.lowercased())}) { taskCellVM in
-                            HStack {
-                                Text(taskCellVM.task.title)
-                                    .foregroundColor(.white)
-                                    .padding()
+                        VStack (spacing: 0){
+                            
+                            if searchUsers {
+                                ForEach (userProfilesVM.userVM.filter{$0.profile.userName.lowercased().contains(searchText.lowercased())}) { userVM in
                                     
-                                Spacer()
+                                    NavigationLink (destination: Text(userVM.profile.userName)
+                                        .foregroundColor(.black)) {
+                                            HStack {
+                                                Text(userVM.profile.userName)
+                                                    .padding()
+                                                Spacer()
+                                                Image(systemName: "chevron.right")
+                                            }
+                                    }
+                                    .padding(.horizontal)
+                                    
+                                }
+                            } else {
+                                ForEach (dayTaskVM.taskCellViewModels.filter{$0.task.title.lowercased().contains(searchText.lowercased())}) { taskCellVM in
+                                    
+                                    NavigationLink (destination: Text(taskCellVM.task.title)
+                                        .foregroundColor(.black)) {
+                                            HStack {
+                                                Text(taskCellVM.task.title)
+                                                    .padding()
+                                                Spacer()
+                                                Image(systemName: "chevron.right")
+                                            }
+                                    }
+                                    .padding(.horizontal)
+                                    
+                                }
                             }
-                            .background(Color.white.opacity(0.7))
-                            .padding(.horizontal)
+                            
                         }
+                        .background(Color.white.opacity(0.7).cornerRadius(10))
                     }
                     
                     Spacer()
                 }
-                .padding()
+                .foregroundColor(.white)
+//                .padding()
                 
             }
             .navigationBarTitle("Search", displayMode: .inline)
@@ -56,6 +109,7 @@ struct SearchBarView: View {
     @Binding var searchText: String
     var body: some View {
         HStack {
+            Image(systemName: "magnifyingglass")
             TextField("Search", text: $searchText)
             
             if self.searchText != "" {
@@ -66,10 +120,10 @@ struct SearchBarView: View {
                 }
             }
         }
-        .padding()
+        .padding(10)
         .background(
             Color.white.opacity(0.7)
-            .cornerRadius(15))
+            .cornerRadius(10))
     }
 }
 

@@ -23,6 +23,7 @@ let purple = Color(red: 0.9, green: 0.7, blue: 0.9)
 let navy = Color(red: 0.3, green: 0.3, blue: 0.30)
 //let dnavy = Color(red: 0.18, green: 0.15, blue: 0.20)
 let dnavy = Color(red: 0.15, green: 0.15, blue: 0.15)
+let ddnavy = Color(red: 0.05, green: 0.05, blue: 0.05)
 
 /*func getColor(eventVM: EventViewModel) -> Color {
    switch eventVM.event.color {
@@ -55,7 +56,7 @@ struct ContentView: View {
         UITabBar.appearance().barTintColor = UIColor.init(displayP3Red: 0.05, green: 0.05, blue: 0.05, alpha: 1)//(displayP3Red: 0.02, green: 0, blue: 0.05, alpha: 1)
         
         UINavigationBar.appearance().barTintColor = UIColor.init(displayP3Red: 0.05, green: 0.05, blue: 0.05, alpha: 1)//(displayP3Red: 0.02, green: 0, blue: 0.05, alpha: 1)
-        UINavigationBar.appearance().titleTextAttributes = [.font: UIFont(name: "Helvetica Neue", size: 30)!, .foregroundColor: UIColor.white]
+        UINavigationBar.appearance().titleTextAttributes = [.font: UIFont(name: "andromeda"/*"Helvetica Neue"*/, size: 30)!, .foregroundColor: UIColor.white]
         
     }
     

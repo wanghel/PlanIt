@@ -27,10 +27,7 @@ class TaskRepository: ObservableObject {
         print(userId ?? "no user")
         print("loading data")
         db.collection("tasks")
-//            .order(by: "dayAssigned")
             .order(by: "createdTime")
-//            .whereField("dayAssigned", isGreaterThanOrEqualTo: Timestamp(date: from))
-//            .whereField("dayAssigned", isLessThan: Timestamp(date: to))
             .whereField("userId", isEqualTo: userId as Any)
             .addSnapshotListener { (querySnapshot, error) in
                 if let qs = querySnapshot {
