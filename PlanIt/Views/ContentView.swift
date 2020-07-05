@@ -103,6 +103,7 @@ struct ContentView: View {
     
 }
 
+#if DEBUG
 struct ContentView_Prviews: PreviewProvider {
     static var previews: some View {
         ContentView()
@@ -111,3 +112,4 @@ struct ContentView_Prviews: PreviewProvider {
         .environment(\.colorScheme, .dark)
     }
 }
+#endif

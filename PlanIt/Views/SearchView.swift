@@ -61,7 +61,9 @@ struct SearchView: View {
                             if searchUsers {
                                 ForEach (userProfilesVM.userVM.filter{$0.profile.userName.lowercased().contains(searchText.lowercased())}) { userVM in
                                     
-                                    NavigationLink (destination: Text(userVM.profile.userName)
+                                    NavigationLink (destination:
+                                        UserProfilesView(friendProfile: userVM.profile)
+//                                        UserProfilesView(friendProfileVM: userVM)
                                         .foregroundColor(.black)) {
                                             HStack {
                                                 Text(userVM.profile.userName)

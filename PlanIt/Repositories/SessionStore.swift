@@ -14,6 +14,7 @@ class SessionStore: ObservableObject {
     @Published var session: User?
     
     private var profileRepository = UserProfileRepository()
+    
     //@Published var taskRepository = TaskRepository()
     
     var didChange = PassthroughSubject<SessionStore, Never>()
@@ -23,6 +24,14 @@ class SessionStore: ObservableObject {
             self.didChange.send(self)
         }
     }
+    
+//    @Published var profileVM: UserViewModel? {
+//        didSet {
+//            self.didChange.send(self)
+//        }
+//    }
+    
+//    @Published var friendProfiles: [UserProfile]?
     
     var handle: AuthStateDidChangeListenerHandle?
     
@@ -34,6 +43,7 @@ class SessionStore: ObservableObject {
         handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
             if let user = user {
                 self.profile = UserProfile(id: user.uid, userName: "", firstName: "", lastName: "", friends: [])
+//                self.profileVM = UserViewModel(profile: UserProfile(id: user.uid, userName: "", firstName: "", lastName: ""))
             }
             else {
                 self.session = nil
@@ -60,8 +70,20 @@ class SessionStore: ObservableObject {
                     return
                 }
                 self.profile = profile
+//                self.profileVM = UserViewModel(profile: profile!)
                 
-                //self.taskRepository.reloadData()
+//                self.profileRepository.fetchFriends(userId: user.uid) { (friends, error) in
+//                    if let error = error {
+//                        print("Error while fetching the user profile: \(error)")
+//                        completion(nil, error)
+//                        return
+//                    }
+//
+//
+////                    self.profileVM?.friends = friends ?? []
+//                    self.friendProfiles = friends
+//                }
+                
                 completion(profile, nil)
             }
         }
@@ -86,8 +108,20 @@ class SessionStore: ObservableObject {
                 }
                 
                 self.profile = profile
+//                self.profileVM = UserViewModel(profile: profile!)
                 
-                //self.taskRepository.reloadData()
+//                self.profileRepository.fetchFriends(userId: user.uid) { (friends, error) in
+//                    if let error = error {
+//                        print("Error while fetching the user profile: \(error)")
+//                        completion(nil, error)
+//                        return
+//                    }
+//
+////                    self.profileVM?.friends = friends ?? []
+//                    self.friendProfiles = friends
+//
+//                }
+                
                 completion(profile, nil)
             }
         }
@@ -99,7 +133,8 @@ class SessionStore: ObservableObject {
             Auth.auth().signInAnonymously()
             self.session = nil
             self.profile = nil
-            //self.taskRepository.reloadData()
+//            self.profileVM = nil
+//            self.friendProfiles = nil
         }
         catch let signOutError as NSError {
             print("Error signing out: \(signOutError)")
@@ -108,9 +143,21 @@ class SessionStore: ObservableObject {
     
     func updateProfile() {
         if let profile = profile {
+//        if let profileVM = profileVM {
             do {
                 profileRepository.updateProfile(profile)
+//                profileRepository.updateProfile(profileVM.profile)
             }
         }
     }
+    
+    
+//    func updateFriends(friendProfile: UserProfile) {
+//        if let profile = profile {
+//            do {
+//                profileRepository.addFriend(profile, friendProfile: friendProfile)
+////                profileRepository.addFriend(self.profileVM!.profile, friendProfile: friendProfile)
+//            }
+//        }
+//    }
 }

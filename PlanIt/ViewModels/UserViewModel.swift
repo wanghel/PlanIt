@@ -9,15 +9,18 @@
 import Foundation
 import Combine
 
-class UserViewModel: ObservableObject, Identifiable{
+class UserViewModel: ObservableObject, Identifiable {
     @Published var userProfileRepository = UserProfileRepository()
     @Published var profile: UserProfile
+    
+//    @Published var friends: [UserProfile] = []
     
     private var cancellables = Set<AnyCancellable>()
     
     var id = ""
   
     init(profile: UserProfile) {
+        print("created from USER VM")
         self.profile = profile
         
         $profile.compactMap { profile in
@@ -33,6 +36,18 @@ class UserViewModel: ObservableObject, Identifiable{
                 self.userProfileRepository.updateProfile(profile)
         }
         .store(in: &cancellables)
+        
+        
     }
-
+    
+//    func addFriend (userProfile: UserProfile?) {
+//        print(profile.userName)
+//        print(userProfile!.userName)
+//        if let userProfile = userProfile {
+//            userProfileRepository.addFriend(userProfile, friendProfile: profile)
+//        } else {
+//            print("error adding friends")
+//        }
+//    }
+    
 }

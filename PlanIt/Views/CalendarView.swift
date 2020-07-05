@@ -92,11 +92,14 @@ struct CalendarView: View {
                     
                     ScrollView {
                         ZStack {
-                        Text("No tasks :)")
-                            .foregroundColor(.white)
-                            .font(.custom("GillSans", size: 20))
+                            VStack {
+                                Text("No tasks :)")
+                                    .foregroundColor(.white)
+                                    .font(.custom("GillSans", size: 20))
+                                Spacer()
+                            }
                             
-                        TaskView()
+                            TaskView()
                         }
                     }
                 }

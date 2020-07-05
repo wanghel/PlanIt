@@ -22,6 +22,7 @@
 		3B32E5BA24AD274A005E55B5 /* Andromeda-eR2n.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B32E5B824AD21BD005E55B5 /* Andromeda-eR2n.ttf */; };
 		3B32E5BB24AD274A005E55B5 /* Andromeda-eR2n.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B32E5B824AD21BD005E55B5 /* Andromeda-eR2n.ttf */; };
 		3B32E5BF24AD5BC7005E55B5 /* UserProfilesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B32E5BE24AD5BC7005E55B5 /* UserProfilesViewModel.swift */; };
+		3B32E5C124AEB0A9005E55B5 /* UserProfilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B32E5C024AEB0A9005E55B5 /* UserProfilesView.swift */; };
 		3B5D0F2024A7F894002FA7B6 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5D0F1F24A7F894002FA7B6 /* TaskView.swift */; };
 		3B5D0F2224A7FA2B002FA7B6 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5D0F2124A7FA2B002FA7B6 /* TaskViewModel.swift */; };
 		3B70914E2481943C0007C1EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B70914D2481943C0007C1EF /* AppDelegate.swift */; };
@@ -86,6 +87,7 @@
 		3B32E5B524AD1479005E55B5 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		3B32E5B824AD21BD005E55B5 /* Andromeda-eR2n.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Andromeda-eR2n.ttf"; sourceTree = "<group>"; };
 		3B32E5BE24AD5BC7005E55B5 /* UserProfilesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilesViewModel.swift; sourceTree = "<group>"; };
+		3B32E5C024AEB0A9005E55B5 /* UserProfilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilesView.swift; sourceTree = "<group>"; };
 		3B5D0F1F24A7F894002FA7B6 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		3B5D0F2124A7FA2B002FA7B6 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		3B70914A2481943C0007C1EF /* PlanIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -259,8 +261,9 @@
 				3BE7642524AC36B900A3F451 /* SettingsView.swift */,
 				3B32E5B524AD1479005E55B5 /* SearchView.swift */,
 				3B1EABD92494A1E200A610CB /* HomeView.swift */,
-				3B1EABC62492FD0D00A610CB /* ProfileView.swift */,
 				3BD3F9E324995F9900071FD2 /* AuthView.swift */,
+				3B1EABC62492FD0D00A610CB /* ProfileView.swift */,
+				3B32E5C024AEB0A9005E55B5 /* UserProfilesView.swift */,
 				3B7D1413248718CA00E30EDF /* CalendarView.swift */,
 				3B7D140B2484485100E30EDF /* MonthView.swift */,
 				3B5D0F1F24A7F894002FA7B6 /* TaskView.swift */,
@@ -574,6 +577,7 @@
 				3BE7642624AC36B900A3F451 /* SettingsView.swift in Sources */,
 				3BD3F9E02498127B00071FD2 /* ViewRouter.swift in Sources */,
 				3BD3F9EE24A133DD00071FD2 /* User.swift in Sources */,
+				3B32E5C124AEB0A9005E55B5 /* UserProfilesView.swift in Sources */,
 				3B32E5B624AD1479005E55B5 /* SearchView.swift in Sources */,
 				3B1EABDC2497F5E600A610CB /* Task.swift in Sources */,
 				3BD3F9F224A2A68000071FD2 /* Date+CustomComparison.swift in Sources */,

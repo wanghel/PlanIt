@@ -63,14 +63,44 @@ class UserProfileRepository: ObservableObject {
         }
     }
     
+//    func fetchFriends(userId: String, completion: @escaping (_ profiles: [UserProfile]?, _ error: Error?) -> Void) {
+//        db.collection("users").document(userId).collection("friends").getDocuments { (snapshot, error) in
+//            var profiles = [UserProfile]()
+//            if let snapshot = snapshot {
+//                profiles = snapshot.documents.compactMap {
+//                    document in
+//                    do {
+//                        let x = try document.data(as: UserProfile.self)
+//                        return x
+//                    }
+//                    catch {
+//                        print(error)
+//                    }
+//                    return nil
+//                }
+//            }
+//
+//            completion(profiles, error)
+//        }
+//        
+//    }
+    
     func updateProfile(_ userProfile: UserProfile) {
-        
         do {
             try db.collection("users").document(userProfile.id).setData(from: userProfile)
         }
         catch {
             fatalError("Unable to encode user: \(error.localizedDescription)")
         }
-        
     }
+    
+//    func addFriend(_ userProfile: UserProfile, friendProfile: UserProfile) {
+//        do {
+//            try db.collection("users").document(userProfile.id).collection("friends").document(friendProfile.id).setData(from: friendProfile)
+//            try db.collection("users").document(friendProfile.id).collection("friends").document(userProfile.id).setData(from: userProfile)
+//        }
+//        catch {
+//            fatalError("Unable to encode user: \(error.localizedDescription)")
+//        }
+//    }
 }

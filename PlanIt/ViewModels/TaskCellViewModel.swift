@@ -43,4 +43,6 @@ class TaskCellViewModel: ObservableObject, Identifiable {
         }
         .store(in: &cancellables)
     }
+    
+    
 }

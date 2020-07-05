@@ -11,14 +11,17 @@ import SwiftUI
 struct AuthView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @Binding var profile: UserProfile?
+//    @Binding var profileVM: UserViewModel?
     
     var body: some View {
         ZStack {
             
             SignInView(profile: $profile)
+//            SignInView(profileVM: $profileVM)
             
             if viewRouter.showSignUp {
                 SignUpView(profile: $profile)
+//                SignUpView(profileVM: $profileVM)
                 .transition(.opacity)
                 .animation(.default)
             }
@@ -36,6 +39,7 @@ struct SignInView: View {
     @State var error: String = ""
     
     @Binding var profile: UserProfile?
+//    @Binding var profileVM: UserViewModel?
     
     func signIn() {
         session.signIn(email: email, password: password) { (result, error) in
@@ -46,6 +50,7 @@ struct SignInView: View {
                 self.email = ""
                 self.password = ""
                 self.profile = result
+//                self.profileVM = UserViewModel(profile: result!)
                 self.viewRouter.showSignIn.toggle()
             }
         }
@@ -130,6 +135,7 @@ struct SignUpView: View {
     @State var lastName: String = ""
     
     @Binding var profile: UserProfile?
+//    @Binding var profileVM: UserViewModel?
     
     @ObservedObject var userProfilesVM = UserProfilesViewModel()
     
@@ -156,6 +162,7 @@ struct SignUpView: View {
                     self.email = ""
                     self.password = ""
                     self.profile = result
+//                    self.profileVM = UserViewModel(profile: result!)
                     self.viewRouter.showSignIn.toggle()
                     self.viewRouter.showSignUp.toggle()
                 }
@@ -276,6 +283,8 @@ struct SignUpView: View {
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
         SignInView(profile: .constant(testUser2))
-            .environmentObject(ViewRouter())
+        .environmentObject(ViewRouter())
+//        SignInView(profileVM: .constant(UserViewModel(profile: testUser2)))
+//            .environmentObject(ViewRouter())
     }
 }

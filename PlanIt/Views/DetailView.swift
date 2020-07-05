@@ -69,6 +69,7 @@ struct DetailView: View {
                 
                 TextField("Enter title", text: $taskCellVM.task.title)
                     .padding()
+                    .foregroundColor(.black)
                     .background(Color.white.opacity(0.8).cornerRadius(10))
                 
                 VStack {

@@ -14,6 +14,7 @@ struct ProfileView: View {
     
     //@State var profile: UserProfile? = testUser1
     @State var profile: UserProfile?
+//    @State var profileVM: UserViewModel?
     
     func getUser() {
         session.listen()
@@ -26,14 +27,17 @@ struct ProfileView: View {
                     .edgesIgnoringSafeArea(.all)
                 
                     ProfileMainView(profile: self.$profile)
+//                ProfileMainView(profileVM: self.$profileVM)
                 
                 
                 if self.viewRouter.showSignIn {
                     AuthView(profile: self.$profile)
+//                    AuthView(profileVM: self.$profileVM)
                 }
             }
             .frame(width: screenWidth)
             .navigationBarTitle("\(self.viewRouter.showSignIn ? self.viewRouter.showSignUp ? "Sign up": "Sign In" : profile?.userName.lowercased() ?? "")", displayMode: .inline)
+//                .navigationBarTitle("\(self.viewRouter.showSignIn ? self.viewRouter.showSignUp ? "Sign up": "Sign In" : profileVM?.profile.userName.lowercased() ?? "")", displayMode: .inline)
             .navigationBarItems(
                 leading:
                     HStack {
@@ -51,6 +55,7 @@ struct ProfileView: View {
                             Button(action: {
                                 self.session.signOut()
                                 self.profile = UserProfile(id: "", userName: "", firstName: "", lastName: "", friends: [])
+//                                self.profileVM = UserViewModel(profile: UserProfile(id: "", userName: "", firstName: "", lastName: ""))
                                 self.viewRouter.showSignIn.toggle()
                             }){
                                 Image(systemName: "delete.right")
@@ -82,6 +87,7 @@ struct ProfileView: View {
 
 struct ProfileMainView: View {
     @Binding var profile: UserProfile?
+//    @Binding var profileVM: UserViewModel?
     
     @EnvironmentObject var session: SessionStore
     
@@ -99,6 +105,8 @@ struct ProfileMainView: View {
                 HStack {
                     Text(profile?.firstName ?? "").font(.title)
                     Text(profile?.lastName ?? "").font(.title)
+//                    Text(profileVM?.profile.firstName ?? "").font(.title)
+//                    Text(profileVM?.profile.lastName ?? "").font(.title)
                 }
                 .padding()
                 
@@ -110,18 +118,18 @@ struct ProfileMainView: View {
                             Text("more")
                         }
                     }
-                    ForEach(profile?.friends ?? [], id: \.self) { friend in
-                        Button(action: {}) {
-                            HStack {
-                                Image(systemName: "person.crop.circle.fill")
-                                Text(friend.userName)
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray)
-                            }
-                            .padding()
-                        }
-                    }
+//                    ForEach(profile?.friends ?? [], id: \.self) { friendID in
+//                        Button(action: {}) {
+//                            HStack {
+//                                Image(systemName: "person.crop.circle.fill")
+//                                Text(friend.userName)
+//                                Spacer()
+//                                Image(systemName: "chevron.right")
+//                                    .foregroundColor(.gray)
+//                            }
+//                            .padding()
+//                        }
+//                    }
                 }
                 Spacer()
             }
@@ -139,5 +147,8 @@ struct ProfileView_Previews: PreviewProvider {
         ProfileMainView(profile: .constant(testUser1))
             .environmentObject(SessionStore())
             .environmentObject(ViewRouter())
+//        ProfileMainView(profileVM: .constant(UserViewModel(profile: testUser1)))
+//        .environmentObject(SessionStore())
+//        .environmentObject(ViewRouter())
     }
 }

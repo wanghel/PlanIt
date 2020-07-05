@@ -61,9 +61,12 @@ struct HomeView: View {
                                 .padding(.vertical)
                                 
                                 ZStack {
+                                    VStack {
                                     Text("No tasks :)")
                                         .foregroundColor(.white)
                                         .font(.custom("GillSans", size: 20))
+                                        Spacer()
+                                    }
                                     
                                     TaskView(dayFromCurr: day)
                                 }

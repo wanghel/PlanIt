@@ -18,14 +18,14 @@ class TaskRepository: ObservableObject {
     @Published var tasks = [Task]()
     
     init() {
-        print("Created another taskrepository")
+//        print("Created another taskrepository")
         loadData()
     }
     
     func loadData() {
         let userId = Auth.auth().currentUser?.uid
-        print(userId ?? "no user")
-        print("loading data")
+//        print(userId ?? "no user")
+//        print("loading data")
         db.collection("tasks")
             .order(by: "createdTime")
             .whereField("userId", isEqualTo: userId as Any)
@@ -47,10 +47,6 @@ class TaskRepository: ObservableObject {
         }
     }
     
-//    func reloadData() {
-//        loadData()
-//        print("reload data")
-//    }
     
     func addTask(_ task: Task) {
         do {
