@@ -42,15 +42,15 @@ struct ProfileView: View {
                 leading:
                     HStack {
                         if !self.viewRouter.showSignIn {
-                            Button(action: {
-                                
-                            }){
-                                Image(systemName: "pencil")
-                                    .font(.system(size: 25))
-                                    .foregroundColor(.white)
-                                    .opacity(0.9)
-                                    .padding([.bottom, .trailing])
-                            }
+//                            Button(action: {
+//
+//                            }){
+//                                Image(systemName: "pencil")
+//                                    .font(.system(size: 25))
+//                                    .foregroundColor(.white)
+//                                    .opacity(0.9)
+//                                    .padding([.bottom, .trailing])
+//                            }
                             
                             Button(action: {
                                 self.session.signOut()

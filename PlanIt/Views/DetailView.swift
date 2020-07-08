@@ -21,6 +21,7 @@ struct DetailView: View {
     
     private var addNewTask = true
     
+    
     init(showingDetail: Binding<Bool>) {
         self._showingDetail = showingDetail
         self.taskCellVM = TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: Date()))

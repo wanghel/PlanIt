@@ -67,6 +67,7 @@ struct ContentView: View {
             
             TabView(selection: $currentTab) {
                     HomeView()
+                        .onAppear(perform: {self.viewRouter.dateShown = Date()})
                 .tabItem {
                     Image(systemName: currentTab == 1 ? "house.fill" : "house")
                         .font(.system(size: 23))

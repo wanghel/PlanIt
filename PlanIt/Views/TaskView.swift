@@ -14,15 +14,17 @@ struct TaskView: View {
     @State var showingDetail = false
     @State var detailTaskCellVM = TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: Date()))
     
-    @ObservedObject var dayTaskVM = TaskViewModel()
+    @ObservedObject var taskVM = TaskViewModel()
     
-    private var dayFromCurr: Int = 0
+//    @State var presentAddNewTask = false
     
-    init() {}
-    
-    init(dayFromCurr: Int) {
-        self.dayFromCurr = dayFromCurr
-    }
+//    private var dayFromCurr: Int = 0
+//
+//    init() {}
+//
+//    init(dayFromCurr: Int) {
+//        self.dayFromCurr = dayFromCurr
+//    }
     
     
     var body: some View {
@@ -33,17 +35,33 @@ struct TaskView: View {
                 .frame(width: screenWidth, height: 0)
             // FIGURE IT OUT FUTURE ME
             
-            ForEach (dayTaskVM.taskCellViewModels) { taskCellVM in
-                if self.viewRouter.dateShown.addingTimeInterval(TimeInterval(self.dayFromCurr * 86400)).isSameDay(taskCellVM.task.dayAssigned) {
-                    TaskCell(dayTaskVM: self.dayTaskVM, taskCellVM: taskCellVM, showingDetail: self.$showingDetail, detailTaskCellVM: self.$detailTaskCellVM)
+            ForEach (taskVM.taskCellViewModels) { taskCellVM in
+//                if self.viewRouter.dateShown.addingTimeInterval(TimeInterval(self.dayFromCurr * 86400)).isSameDay(taskCellVM.task.dayAssigned) {
+                if self.viewRouter.dateShown.isSameDay(taskCellVM.task.dayAssigned) {
+                    TaskCell(dayTaskVM: self.taskVM, taskCellVM: taskCellVM, showingDetail: self.$showingDetail, detailTaskCellVM: self.$detailTaskCellVM)
                         .padding([.horizontal,.bottom])
                         .onDisappear(perform: {
                             if taskCellVM.task.completed {
-                                self.dayTaskVM.deleteTask(task: taskCellVM.task)
+                                self.taskVM.deleteTask(task: taskCellVM.task)
                             }})
                 }
             }
             
+//            if presentAddNewTask {
+//                TaskCell(taskVM: taskVM, taskCellVM: TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: Date())), showingDetail: $showingDetail, detailTaskCellVM: $detailTaskCellVM) { task in
+//                    self.taskVM.addTask(task: task)
+//                    self.presentAddNewTask.toggle()
+//                }
+//            }
+//
+//            Spacer()
+//
+//            Button(action: {
+//                self.presentAddNewTask.toggle()
+//            }) {
+//                Text("Add new task")
+//                    .foregroundColor(.white)
+//            }
         }
         .sheet(isPresented: self.$showingDetail) {
             DetailView(showingDetail: self.$showingDetail, taskCellVM: self.detailTaskCellVM)
@@ -57,7 +75,8 @@ struct TaskCell: View  {
     @ObservedObject var taskCellVM: TaskCellViewModel
     @Binding var showingDetail: Bool
     @Binding var detailTaskCellVM: TaskCellViewModel
-    //var onCommit: (Task) -> (Void) = {_ in }
+    
+//    var onCommit: (Task) -> (Void) = {_ in }
     
     @State private var draggedOffset = CGSize.zero
     @State private var lastOffset = CGSize.zero
@@ -173,3 +192,4 @@ struct TaskView_Previews: PreviewProvider {
         TaskView()
     }
 }
+

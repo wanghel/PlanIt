@@ -59,7 +59,7 @@ struct SearchView: View {
                         VStack (spacing: 0){
                             
                             if searchUsers {
-                                ForEach (userProfilesVM.userVM.filter{$0.profile.userName.lowercased().contains(searchText.lowercased())}) { userVM in
+                                ForEach (userProfilesVM.userVM.filter{$0.profile.userName.lowercased().contains(searchText.lowercased()) && $0.profile.id != session.profile?.id}) { userVM in
                                     
                                     NavigationLink (destination:
                                         UserProfilesView(friendProfile: userVM.profile)

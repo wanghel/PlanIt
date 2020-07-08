@@ -12,7 +12,7 @@ import Firebase
 //struct DayView: View {
 //    @EnvironmentObject var viewRouter: ViewRouter
 //    
-//    @ObservedObject var dayTaskVM = DayTaskViewModel()
+//    @ObservedObject var taskVM = DayTaskViewModel()
 //    
 //    @State var presentAddNewItem = false
 //    @State var showingDetail = false

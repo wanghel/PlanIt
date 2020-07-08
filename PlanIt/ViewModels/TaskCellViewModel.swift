@@ -37,12 +37,11 @@ class TaskCellViewModel: ObservableObject, Identifiable {
         
         $task
             .dropFirst()
-            .debounce(for: 0.7, scheduler: RunLoop.main)
+            .debounce(for: 1, scheduler: RunLoop.main)
             .sink { task in
                 self.taskRepository.updateTask(task)
         }
         .store(in: &cancellables)
     }
-    
     
 }

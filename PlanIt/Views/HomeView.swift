@@ -34,7 +34,7 @@ struct HomeView: View {
                 
                 VStack (spacing: 0) {
                     //MonthView(calendar: CalendarMonthViewModel())
-                    Text("~THIS WEEK~")
+                    Text("~TODAY~")
                     .tracking(10)
                         .padding()
                         .foregroundColor(.white)
@@ -47,31 +47,57 @@ struct HomeView: View {
                             .frame(width: screenWidth, height: 0)
                         // FIGURE IT OUT FUTURE ME
                         
-                        ForEach (0..<7) { day in
-                            VStack {
-                                HStack {
-                                    Text(self.formatDate(date: Date().addingTimeInterval(TimeInterval(day * 86400))))
-                                        .foregroundColor(.white)
-                                        .font(.custom("GillSans", size: 15))
-                                        .opacity(0.9)
-                                        .padding(10)
-                                        .background(blue.opacity(0.2).cornerRadius(15))
-                                    Spacer()
-                                }
-                                .padding(.vertical)
-                                
-                                ZStack {
-                                    VStack {
+                        //loading 7 days is too much CONDENSE CODE LATER
+//                        ForEach (0..<1) { day in
+//                            VStack {
+//                                HStack {
+//                                    Text(self.formatDate(date: Date().addingTimeInterval(TimeInterval(day * 86400))))
+//                                        .foregroundColor(.white)
+//                                        .font(.custom("GillSans", size: 15))
+//                                        .opacity(0.9)
+//                                        .padding(10)
+//                                        .background(blue.opacity(0.2).cornerRadius(15))
+//                                    Spacer()
+//                                }
+//                                .padding(.vertical)
+//
+//                                ZStack {
+//                                    VStack {
+//                                    Text("No tasks :)")
+//                                        .foregroundColor(.white)
+//                                        .font(.custom("GillSans", size: 20))
+//                                        Spacer()
+//                                    }
+//
+//                                    TaskView(dayFromCurr: day)
+//                                }
+//                            }
+//                        }
+                        
+                        VStack {
+//                            HStack {
+//                                Text(self.formatDate(date: Date()))
+//                                    .foregroundColor(.white)
+//                                    .font(.custom("GillSans", size: 15))
+//                                    .opacity(0.9)
+//                                    .padding(10)
+//                                    .background(blue.opacity(0.2).cornerRadius(15))
+//                                Spacer()
+//                            }
+//                            .padding(.vertical)
+                            
+                            ZStack {
+                                VStack {
                                     Text("No tasks :)")
                                         .foregroundColor(.white)
                                         .font(.custom("GillSans", size: 20))
-                                        Spacer()
-                                    }
-                                    
-                                    TaskView(dayFromCurr: day)
+                                    Spacer()
                                 }
+                                
+                                TaskView()
                             }
                         }
+                        
                     }
                     
                 }
