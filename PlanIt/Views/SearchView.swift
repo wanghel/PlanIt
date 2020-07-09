@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SearchView: View {
     @EnvironmentObject var session: SessionStore
-    @ObservedObject var dayTaskVM = TaskViewModel()
+    @ObservedObject var dayTaskVM = TaskViewModel(taskRepository: TaskRepository())
     @ObservedObject var userProfilesVM = UserProfilesViewModel()
     
     @State var searchText = ""

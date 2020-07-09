@@ -12,9 +12,9 @@ struct TaskView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     //@EnvironmentObject var session: SessionStore
     @State var showingDetail = false
-    @State var detailTaskCellVM = TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: Date()))
+    @State var detailTaskCellVM = TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: Date()), taskRepository: TaskRepository())
     
-    @ObservedObject var taskVM = TaskViewModel()
+    @ObservedObject var taskVM = TaskViewModel(taskRepository: TaskRepository())
     
 //    @State var presentAddNewTask = false
     

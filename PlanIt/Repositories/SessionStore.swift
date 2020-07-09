@@ -12,6 +12,7 @@ import Combine
 
 class SessionStore: ObservableObject {
     @Published var session: User?
+    @Published var isLoggedIn: Bool?
     
     private var profileRepository = UserProfileRepository()
     

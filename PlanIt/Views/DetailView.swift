@@ -10,8 +10,8 @@ import SwiftUI
 
 struct DetailView: View {
     @EnvironmentObject var viewRouter: ViewRouter
-    //@EnvironmentObject var session: SessionStore
-    @ObservedObject var dayTaskVM = TaskViewModel()
+//    @EnvironmentObject var session: SessionStore
+    @ObservedObject var dayTaskVM = TaskViewModel(taskRepository: TaskRepository())
     
     @ObservedObject var taskCellVM: TaskCellViewModel
     
@@ -24,12 +24,12 @@ struct DetailView: View {
     
     init(showingDetail: Binding<Bool>) {
         self._showingDetail = showingDetail
-        self.taskCellVM = TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: Date()))
+        self.taskCellVM = TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: Date()), taskRepository: TaskRepository())
     }
     
     init(showingDetail: Binding<Bool>, day: Date) {
         self._showingDetail = showingDetail
-        self.taskCellVM = TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: day))
+        self.taskCellVM = TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: day), taskRepository: TaskRepository())
     }
     
     init(showingDetail: Binding<Bool>, taskCellVM: TaskCellViewModel) {

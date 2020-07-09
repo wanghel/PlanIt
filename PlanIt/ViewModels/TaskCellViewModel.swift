@@ -11,7 +11,8 @@ import Combine
 
 class TaskCellViewModel: ObservableObject, Identifiable {
 //    @Published var taskRepository = SessionStore().taskRepository
-    @Published var taskRepository = TaskRepository()
+    @Published var taskRepository: TaskRepository// = TaskRepository()
+    
     @Published var task: Task
     
     var id = ""
@@ -20,9 +21,11 @@ class TaskCellViewModel: ObservableObject, Identifiable {
     private var cancellables = Set<AnyCancellable>()
     
     
-    init(task: Task) {
+    init(task: Task, taskRepository: TaskRepository) {
         print("created from TASK CELL VM")
         self.task = task
+        self.taskRepository = taskRepository
+        
         $task.map { task in
             task.completed ? "checkmark.circle.fill" : "circle"
         }
@@ -37,7 +40,7 @@ class TaskCellViewModel: ObservableObject, Identifiable {
         
         $task
             .dropFirst()
-            .debounce(for: 1, scheduler: RunLoop.main)
+            .debounce(for: 0.6, scheduler: RunLoop.main)
             .sink { task in
                 self.taskRepository.updateTask(task)
         }
