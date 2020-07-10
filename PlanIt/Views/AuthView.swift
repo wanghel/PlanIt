@@ -10,15 +10,15 @@ import SwiftUI
 
 //struct AuthView: View {
 //    @EnvironmentObject var viewRouter: ViewRouter
-//    @Binding var profile: UserProfile?
+//    @Binding var profileVM: UserProfile?
 //
 //    var body: some View {
 //        ZStack {
 //
-//            SignInView(profile: $profile)
+//            SignInView(profileVM: $profileVM)
 //
 //            if viewRouter.showSignUp {
-//                SignUpView(profile: $profile)
+//                SignUpView(profileVM: $profileVM)
 //                .transition(.opacity)
 //                .animation(.default)
 //            }
@@ -35,7 +35,7 @@ import SwiftUI
 //    @State var password: String = ""
 //    @State var error: String = ""
 //
-//    @Binding var profile: UserProfile?
+//    @Binding var profileVM: UserProfile?
 //
 //    func signIn() {
 //        session.signIn(email: email, password: password) { (result, error) in
@@ -45,7 +45,7 @@ import SwiftUI
 //            else {
 //                self.email = ""
 //                self.password = ""
-//                self.profile = result
+//                self.profileVM = result
 //                self.viewRouter.showSignIn.toggle()
 //            }
 //        }
@@ -129,15 +129,15 @@ import SwiftUI
 //    @State var firstName: String = ""
 //    @State var lastName: String = ""
 //
-//    @Binding var profile: UserProfile?
+//    @Binding var profileVM: UserProfile?
 //
 //    @ObservedObject var userProfilesVM = UserProfilesViewModel()
 //
 //    func signUp() {
 //        var completeSignUp = true
 //
-//        for profile in userProfilesVM.userVM {
-//            if profile.profile.userName.lowercased() == userName.lowercased() {
+//        for profileVM in userProfilesVM.userVM {
+//            if profileVM.profile.userName.lowercased() == userName.lowercased() {
 //                self.error = "Username already taken. Please choose another username."
 //                completeSignUp = false
 //            }
@@ -155,7 +155,7 @@ import SwiftUI
 //                } else {
 //                    self.email = ""
 //                    self.password = ""
-//                    self.profile = result
+//                    self.profileVM = result
 ////                    self.profileVM = UserViewModel(profile: result!)
 //                    self.viewRouter.showSignIn.toggle()
 //                    self.viewRouter.showSignUp.toggle()
@@ -276,15 +276,15 @@ import SwiftUI
 
 struct AuthView: View {
     @EnvironmentObject var viewRouter: ViewRouter
-    @Binding var profile: User?
+    @Binding var profileVM: UserViewModel?
     
     var body: some View {
         ZStack {
             
-            SignInView(profile: $profile)
+            SignInView(profileVM: $profileVM)
             
             if viewRouter.showSignUp {
-                SignUpView(profile: $profile)
+                SignUpView(profile: $profileVM)
                 .transition(.opacity)
                 .animation(.default)
             }
@@ -301,7 +301,7 @@ struct SignInView: View {
     @State var password: String = ""
     @State var error: String = ""
     
-    @Binding var profile: User?
+    @Binding var profileVM: UserViewModel?
     
     func signIn() {
         session.signIn(email: email, password: password) { (result, error) in
@@ -311,7 +311,7 @@ struct SignInView: View {
             else {
                 self.email = ""
                 self.password = ""
-                self.profile = result
+                self.profileVM = UserViewModel(profile: result ?? User(id: ""))
                 self.viewRouter.showSignIn.toggle()
             }
         }
@@ -395,7 +395,7 @@ struct SignUpView: View {
     @State var firstName: String = ""
     @State var lastName: String = ""
     
-    @Binding var profile: User?
+    @Binding var profile: UserViewModel?
     
     @ObservedObject var userProfilesVM = UserProfilesViewModel()
     
@@ -421,8 +421,7 @@ struct SignUpView: View {
                 } else {
                     self.email = ""
                     self.password = ""
-                    self.profile = result
-//                    self.profileVM = UserViewModel(profile: result!)
+                    self.profile = UserViewModel(profile: result ?? User(id: ""))
                     self.viewRouter.showSignIn.toggle()
                     self.viewRouter.showSignUp.toggle()
                 }
@@ -542,7 +541,8 @@ struct SignUpView: View {
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView(profile: .constant(testUser2))
-        .environmentObject(ViewRouter())
+        ContentView()
+//        SignInView(profile: .constant(testUser2))
+//        .environmentObject(ViewRouter())
     }
 }

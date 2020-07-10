@@ -116,51 +116,59 @@ struct UserProfilesView: View {
     @ObservedObject var userProfilesVM = UserProfilesViewModel()
 //    @State var profile: UserProfile?
     
-    @State var friendProfile: User
+//    @ObservedObject var profileVM: UserViewModel
+    @ObservedObject var friendProfile: UserViewModel
+    
+    func getUser() {
+        session.listen()
+    }
     
     var body: some View {
         ZStack {
             dnavy
                 .edgesIgnoringSafeArea(.all)
             
+            
             ScrollView {
                 VStack {
                     
                     HStack {
-                        Image(systemName: "person.crop.circle.fill").resizable()
+                        Image(systemName: "person.crop.circle.fill")
+                            .resizable()
                             .frame(width: 150, height: 150)
                         
                         Spacer()
                         
                         VStack {
                             HStack {
-                                Text(friendProfile.firstName ?? "").font(.title)
-                                Text(friendProfile.lastName ?? "").font(.title)
+                                Text(friendProfile.profile.firstName ?? "").font(.title)
+                                Text(friendProfile.profile.lastName ?? "").font(.title)
                             }
                             
-                            Text(friendProfile.userName ?? "")
+                            Text(friendProfile.profile.userName ?? "")
                                 .font(.system(size: 15))
                             
                             Spacer()
                             
                             Button(action: {
-                                if (self.session.profile?.friends ?? []).contains(where: { friendID in
-                                    return friendID == self.friendProfile.id }) {
+                                if (self.session.profileVM?.profile.friends ?? []).contains(where: { friendID in
+                                    return friendID == self.friendProfile.profile.id }) {
                                     print("DOES CONTAIN")
-                                    self.session.profile?.friends?.removeAll(where: {$0 == self.friendProfile.id})
-                                    self.session.updateProfile()
+                                    self.session.profileVM?.profile.friends?.removeAll(where: {$0 == self.friendProfile.id})
+                                    //                                    self.session.updateProfile()
                                     
                                 } else {
                                     print("DOES NOT CONTAIN")
-                                    self.session.profile?.friends?.append(self.friendProfile.id)
-                                    self.session.updateProfile()
+                                    
+                                    self.session.profileVM?.profile.friends?.append(self.friendProfile.id)
+                                    //                                    self.session.updateProfile()
                                     
                                 }
-                                print(self.friendProfile.friends)
+                                print(self.friendProfile.profile.friends)
                             }) {
                                 HStack {
-                                    if (self.session.profile?.friends ?? []).contains { friendID in
-                                        return friendID == self.friendProfile.id } {
+                                    if (self.session.profileVM?.profile.friends ?? []).contains { friendID in
+                                        return friendID == self.friendProfile.profile.id } {
                                         Text("Friends")
                                         Image(systemName: "checkmark")
                                     } else {
@@ -171,6 +179,8 @@ struct UserProfilesView: View {
                                 .padding(15)
                                 .background(Color.blue.opacity(0.4))
                                 .cornerRadius(15)
+                                
+                                
                             }
                         }
                         .padding([.horizontal, .top])
@@ -180,8 +190,9 @@ struct UserProfilesView: View {
                     
                     NavigationLink(destination:
                         Text("Friends")
-                        .navigationBarTitle("\(friendProfile.userName ?? "")'s friends", displayMode: .inline)) {
-//                            .navigationBarTitle("\(friendProfileVM.profile.userName)'s friends", displayMode: .inline)) {
+                            .navigationBarTitle("\(friendProfile.profile.userName ?? "")'s friends", displayMode: .inline)) {
+                                //                            .navigationBarTitle("\(friendProfileVM.profile.userName)'s friends", displayMode: .inline))
+                                
                                 HStack {
                                     Text("Friends")
                                     Spacer()
@@ -193,7 +204,7 @@ struct UserProfilesView: View {
                     
                     NavigationLink(destination:
                         Text("Calendar")
-                            .navigationBarTitle("\(friendProfile.userName ?? "")'s calendar", displayMode: .inline)) {
+                            .navigationBarTitle("\(friendProfile.profile.userName ?? "")'s calendar", displayMode: .inline)) {
                                 HStack {
                                     Text("Calendar")
                                     Spacer()
@@ -210,7 +221,9 @@ struct UserProfilesView: View {
                 .foregroundColor(.white)
                 .animation(.none)
             }
+            
         }
+//        .onAppear(perform: getUser)
     }
 }
 
@@ -240,6 +253,7 @@ struct UserProfilesView: View {
 
 struct UserProfilesView_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfilesView(friendProfile: testUser3)
+        ContentView()
+//        UserProfilesView(friendProfile: testUser3)
     }
 }

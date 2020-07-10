@@ -47,6 +47,7 @@ let ddnavy = Color(red: 0.05, green: 0.05, blue: 0.05)
 }*/
 
 struct ContentView: View {
+    @EnvironmentObject var session: SessionStore
     @EnvironmentObject var viewRouter: ViewRouter
     
     @State private var currentTab = 1
@@ -96,7 +97,8 @@ struct ContentView: View {
                 }.tag(4)
             }
             .accentColor(.white)
-            
+            .environmentObject(session)
+                
             ProfileView()
         }
         

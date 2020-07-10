@@ -10,7 +10,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct User: Identifiable, Codable {
+struct User: Identifiable, Codable, Hashable {
 //    var uid: String
     var id: String
     var email: String?

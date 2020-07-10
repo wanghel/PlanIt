@@ -138,8 +138,8 @@ struct ProfileView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var session: SessionStore
     
-    @State var profile: User?
-//    @State var profileVM: UserViewModel?
+//    @State var profile: User?
+    @State var profileVM: UserViewModel?
     
     func getUser() {
         session.listen()
@@ -151,15 +151,15 @@ struct ProfileView: View {
                 dnavy
                     .edgesIgnoringSafeArea(.all)
                 
-                    ProfileMainView(profile: self.$profile)
+                ProfileMainView(/*profileVM: self.profileVM ?? UserViewModel(profile: User(id: ""))*/)
                 
                 
                 if self.viewRouter.showSignIn {
-                    AuthView(profile: self.$profile)
+                    AuthView(profileVM: self.$profileVM)
                 }
             }
             .frame(width: screenWidth)
-            .navigationBarTitle("\(self.viewRouter.showSignIn ? self.viewRouter.showSignUp ? "Sign up": "Sign In" : profile?.userName?.lowercased() ?? "")", displayMode: .inline)
+            .navigationBarTitle("\(self.viewRouter.showSignIn ? self.viewRouter.showSignUp ? "Sign up": "Sign In" : profileVM?.profile.userName?.lowercased() ?? "")", displayMode: .inline)
             .navigationBarItems(
                 leading:
                     HStack {
@@ -176,7 +176,7 @@ struct ProfileView: View {
                             
                             Button(action: {
                                 self.session.signOut()
-                                self.profile = User(id: "", userName: "", firstName: "", lastName: "", friends: [])
+                                self.profileVM = UserViewModel(profile: User(id: ""))
                                 self.viewRouter.showSignIn.toggle()
                             }){
                                 Image(systemName: "delete.right")
@@ -207,9 +207,12 @@ struct ProfileView: View {
 }
 
 struct ProfileMainView: View {
-    @Binding var profile: User?
+//    @Binding var profile: User?
+//    @ObservedObject var profileVM: UserViewModel
     
     @EnvironmentObject var session: SessionStore
+    
+    @ObservedObject var userProfilesVM = UserProfilesViewModel()
     
     var body: some View {
         ZStack {
@@ -223,8 +226,8 @@ struct ProfileMainView: View {
                     .frame(width: 150, height: 150)
                 
                 HStack {
-                    Text(profile?.firstName ?? "").font(.title)
-                    Text(profile?.lastName ?? "").font(.title)
+                    Text(session.profileVM?.profile.firstName ?? "").font(.title)
+                    Text(session.profileVM?.profile.lastName ?? "").font(.title)
                 }
                 .padding()
                 
@@ -236,20 +239,39 @@ struct ProfileMainView: View {
                             Text("more")
                         }
                     }
-                    ForEach(profile?.friends ?? [], id: \.self) { friendID in
-                        Button(action: {}) {
+                    
+                    ForEach(session.profileVM?.friends ?? [], id: \.self) { friend in
+                        NavigationLink(destination: Text(friend.userName ?? "")) {
                             HStack {
                                 Image(systemName: "person.crop.circle.fill")
-                                Text(friendID)
+                                Text("\(friend.firstName ?? "") \(friend.lastName ?? "")")
                                 Spacer()
                                 Image(systemName: "chevron.right")
                                     .foregroundColor(.gray)
                             }
                             .padding()
                         }
+//                        Button(action: {}) {
+//                            HStack {
+//                                Image(systemName: "person.crop.circle.fill")
+//                                Text("\(friend.firstName ?? "") \(friend.lastName ?? "")")
+//                                Spacer()
+//                                Image(systemName: "chevron.right")
+//                                    .foregroundColor(.gray)
+//                            }
+//                            .padding()
+//                        }
                     }
+                    
                 }
                 Spacer()
+                
+//                Button(action: {
+//                    print("method 1 :\(self.session.profileVM?.profile.friends!)")
+//                    print("method 2 :\(self.session.profileVM?.friends)")
+//                }) {
+//                    Text("PRESS")
+//                }
             }
             .foregroundColor(.white)
             .padding()
@@ -261,9 +283,10 @@ struct ProfileMainView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileMainView(profile: .constant(testUser1))
-            .environmentObject(SessionStore())
-            .environmentObject(ViewRouter())
+        ContentView()
+//        ProfileMainView(profile: .constant(testUser1))
+//            .environmentObject(SessionStore())
+//            .environmentObject(ViewRouter())
 
     }
 }

@@ -24,7 +24,7 @@ class SessionStore: ObservableObject {
 //        }
 //    }
     
-    @Published var profile: User? {
+    @Published var profileVM: UserViewModel? {
         didSet {
             self.didChange.send(self)
         }
@@ -43,7 +43,7 @@ class SessionStore: ObservableObject {
         handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
             if let user = user {
 //                self.profile = UserProfile(id: user.uid, userName: "", firstName: "", lastName: "", friends: [])
-                self.profile = User(id: user.uid, userName: "", firstName: "", lastName: "", friends: [])
+                self.profileVM = UserViewModel(profile: User(id: user.uid))
             }
             else {
                 self.session = nil
@@ -120,7 +120,9 @@ class SessionStore: ObservableObject {
                     completion(nil, error)
                     return
                 }
-                self.profile = profile
+                if let profile = profile {
+                    self.profileVM = UserViewModel(profile: profile)
+                }
                 completion(profile, nil)
             }
         }
@@ -144,7 +146,9 @@ class SessionStore: ObservableObject {
                     return
                 }
                 
-                self.profile = profile
+                if let profile = profile {
+                    self.profileVM = UserViewModel(profile: profile)
+                }
                 
                 completion(profile, nil)
             }
@@ -156,20 +160,20 @@ class SessionStore: ObservableObject {
             try Auth.auth().signOut()
             Auth.auth().signInAnonymously()
             self.session = nil
-            self.profile = nil
+            self.profileVM = nil
         }
         catch let signOutError as NSError {
             print("Error signing out: \(signOutError)")
         }
     }
     
-    func updateProfile() {
-        if let profile = profile {
-            do {
-                profileRepository.updateProfile(profile)
-            }
-        }
-    }
+//    func updateProfile() {
+//        if let profile = profile {
+//            do {
+//                profileRepository.updateProfile(profile)
+//            }
+//        }
+//    }
     
     
 }

@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -58,6 +59,8 @@ struct SettingsView: View {
                                 .background(navy)
                                 .cornerRadius(10)
                     }
+                    
+                    
                 }
                 .padding()
                 

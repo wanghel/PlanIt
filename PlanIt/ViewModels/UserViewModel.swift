@@ -47,14 +47,14 @@ class UserViewModel: ObservableObject, Identifiable {
     @Published var userProfileRepository = UserProfileRepository()
     @Published var profile: User
     
-    @Published var friends: [User] = []
+    @Published var friends = [User]()
     
     private var cancellables = Set<AnyCancellable>()
     
     var id = ""
   
     init(profile: User) {
-        print("created from USER VM")
+//        print("created from USER VM")
         self.profile = profile
         
         $profile.compactMap { profile in
@@ -67,24 +67,31 @@ class UserViewModel: ObservableObject, Identifiable {
             .dropFirst()
             .debounce(for: 0.7, scheduler: RunLoop.main)
             .sink { profile in
+                print("PROFILE CHANGED")
                 self.userProfileRepository.updateProfile(profile)
+                self.fetchFriendProfiles()
         }
         .store(in: &cancellables)
         
         
-        //fetch friends?
+        fetchFriendProfiles()
+    }
+    
+    func fetchFriendProfiles() {
+        self.friends.removeAll()
         for friend in profile.friends ?? [] {
             self.userProfileRepository.fetchProfile(userId: friend) { (profile, error) in
                 if let error = error {
                     print("Error while fetching the user profile: \(error)")
                     return
                 }
-
+//                print("fetched friend \(profile)")
                 if let profile = profile {
                     self.friends.append(profile)
                 }
             }
         }
+        
     }
     
 }
