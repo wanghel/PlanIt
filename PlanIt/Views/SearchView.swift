@@ -8,104 +8,6 @@
 
 import SwiftUI
 
-//struct SearchView: View {
-//    @EnvironmentObject var session: SessionStore
-//    @ObservedObject var dayTaskVM = TaskViewModel(taskRepository: TaskRepository())
-//    @ObservedObject var userProfilesVM = UserProfilesViewModel()
-//
-//    @State var searchText = ""
-//    @State var searchUsers = true
-//
-//    var body: some View {
-//        NavigationView {
-//            ZStack {
-//                dnavy
-//                    .edgesIgnoringSafeArea(.all)
-//
-//                VStack (spacing: 0){
-//
-//                    VStack {
-//                        SearchBarView(searchText: $searchText)
-//                            .padding(.bottom)
-//
-//                        if searchText != "" {
-//                            HStack {
-//                                Button (action : {self.searchUsers = true}) {
-//                                    Spacer()
-//                                    Image(systemName: "person.2")
-//                                        .foregroundColor(searchUsers ? .white : .gray)
-//                                    Spacer()
-//                                }
-//                                Text("|")
-//                                Button (action : {self.searchUsers = false}) {
-//                                    Spacer()
-//                                    Image(systemName: "calendar")
-//                                        .foregroundColor(searchUsers ? .gray : .white)
-//                                    Spacer()
-//                                }
-//                            }
-//                            .padding(.bottom)
-//                        }
-//                    }
-//                    .padding([.horizontal])
-//                    .background(ddnavy)
-//
-//                    ScrollView {
-//                        // IDK WHY DOING THIS MAKES THE DATA LOAD
-//                        Text("")
-//                            .frame(width: screenWidth, height: 0)
-//                        // FIGURE IT OUT FUTURE ME
-//
-//                        VStack (spacing: 0){
-//
-//                            if searchUsers {
-//                                ForEach (userProfilesVM.userVM.filter{$0.profile.userName.lowercased().contains(searchText.lowercased()) && $0.profile.id != session.profile?.id}) { userVM in
-//
-//                                    NavigationLink (destination:
-//                                        UserProfilesView(friendProfile: userVM.profile)
-////                                        UserProfilesView(friendProfileVM: userVM)
-//                                        .foregroundColor(.black)) {
-//                                            HStack {
-//                                                Text(userVM.profile.userName)
-//                                                    .padding()
-//                                                Spacer()
-//                                                Image(systemName: "chevron.right")
-//                                            }
-//                                    }
-//                                    .padding(.horizontal)
-//
-//                                }
-//                            } else {
-//                                ForEach (dayTaskVM.taskCellViewModels.filter{$0.task.title.lowercased().contains(searchText.lowercased())}) { taskCellVM in
-//
-//                                    NavigationLink (destination: Text(taskCellVM.task.title)
-//                                        .foregroundColor(.black)) {
-//                                            HStack {
-//                                                Text(taskCellVM.task.title)
-//                                                    .padding()
-//                                                Spacer()
-//                                                Image(systemName: "chevron.right")
-//                                            }
-//                                    }
-//                                    .padding(.horizontal)
-//
-//                                }
-//                            }
-//
-//                        }
-//                        .background(Color.white.opacity(0.7).cornerRadius(10))
-//                    }
-//
-//                    Spacer()
-//                }
-//                .foregroundColor(.white)
-//
-//            }
-//            .navigationBarTitle("Search", displayMode: .inline)
-//        }
-//    }
-//}
-
 struct SearchView: View {
     @EnvironmentObject var session: SessionStore
     @ObservedObject var dayTaskVM = TaskViewModel(taskRepository: TaskRepository())
@@ -160,8 +62,7 @@ struct SearchView: View {
                                 ForEach (userProfilesVM.userVM.filter{$0.profile.userName?.lowercased().contains(searchText.lowercased()) ?? false && $0.profile.id != session.profileVM?.profile.id}) { userVM in
                                     
                                     NavigationLink (destination:
-                                        UserProfilesView(/*profileVM: self.session.profileVM ?? UserViewModel(profile: User(id: "")), */friendProfile: userVM)
-//                                        UserProfilesView(friendProfileVM: userVM)
+                                        UserProfilesView(friendProfile: userVM)
                                         .foregroundColor(.black)) {
                                             HStack {
                                                 Text(userVM.profile.userName ?? "")

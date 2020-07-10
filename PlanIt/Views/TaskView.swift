@@ -10,25 +10,22 @@ import SwiftUI
 
 struct TaskView: View {
     @EnvironmentObject var viewRouter: ViewRouter
-    //@EnvironmentObject var session: SessionStore
-    @State var showingDetail = false
-    @State var detailTaskCellVM = TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: Date()), taskRepository: TaskRepository())
     
     @ObservedObject var taskVM = TaskViewModel(taskRepository: TaskRepository())
     
-//    @State var presentAddNewTask = false
+    @State var showingDetail = false
+    @State var detailTaskCellVM = TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: Date()), taskRepository: TaskRepository())
     
-    private var dayFromCurr: Int = 0
-
-    init() {}
-
-    init(dayFromCurr: Int) {
-        self.dayFromCurr = dayFromCurr
-    }
-    
+//    private var dayFromCurr: Int = 0
+//
+//    init() {}
+//
+//    init(dayFromCurr: Int) {
+//        self.dayFromCurr = dayFromCurr
+//    }
+//
     
     var body: some View {
-        //ScrollView {
         VStack {
             // IDK WHY DOING THIS MAKES THE DATA LOAD
             Text("")
@@ -36,8 +33,8 @@ struct TaskView: View {
             // FIGURE IT OUT FUTURE ME
             
             ForEach (taskVM.taskCellViewModels) { taskCellVM in
-                if self.viewRouter.dateShown.addingTimeInterval(TimeInterval(self.dayFromCurr * 86400)).isSameDay(taskCellVM.task.dayAssigned) {
-//                if self.viewRouter.dateShown.isSameDay(taskCellVM.task.dayAssigned) {
+//                if self.viewRouter.dateShown.addingTimeInterval(TimeInterval(self.dayFromCurr * 86400)).isSameDay(taskCellVM.task.dayAssigned) {
+                if self.viewRouter.dateShown.isSameDay(taskCellVM.task.dayAssigned) {
                     TaskCell(dayTaskVM: self.taskVM, taskCellVM: taskCellVM, showingDetail: self.$showingDetail, detailTaskCellVM: self.$detailTaskCellVM)
                         .padding([.horizontal,.bottom])
                         .onDisappear(perform: {

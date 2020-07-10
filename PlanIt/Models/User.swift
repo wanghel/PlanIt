@@ -19,10 +19,6 @@ struct User: Identifiable, Codable, Hashable {
     var lastName: String?
     
     var friends: [String]?
-    
-//    static func ==(lhs: User, rhs: User) -> Bool {
-//        return lhs.id == rhs.id
-//    }
 }
 
 #if DEBUG

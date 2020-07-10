@@ -69,17 +69,6 @@ struct HomeView: View {
 //                        }
                         
                         VStack {
-//                            HStack {
-//                                Text(self.formatDate(date: Date()))
-//                                    .foregroundColor(.white)
-//                                    .font(.custom("GillSans", size: 15))
-//                                    .opacity(0.9)
-//                                    .padding(10)
-//                                    .background(blue.opacity(0.2).cornerRadius(15))
-//                                Spacer()
-//                            }
-//                            .padding(.vertical)
-                            
                             ZStack {
                                 VStack {
                                     Text("No tasks :)")

@@ -13,9 +13,9 @@ import FirebaseFirestoreSwift
 
 
 class TaskRepository: ObservableObject {
-    let db = Firestore.firestore()
-    
     @Published var tasks = [Task]()
+    
+    let db = Firestore.firestore()
     
     init() {
 //        print("Created another taskrepository")

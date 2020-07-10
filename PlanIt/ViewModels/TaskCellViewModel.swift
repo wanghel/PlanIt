@@ -1,5 +1,5 @@
 //
-//  EventViewModel.swift
+//  TaskCellViewModel.swift
 //  PlanIt
 //
 //  Created by Helen Wang on 6/12/20.
@@ -10,8 +10,7 @@ import Foundation
 import Combine
 
 class TaskCellViewModel: ObservableObject, Identifiable {
-//    @Published var taskRepository = SessionStore().taskRepository
-    @Published var taskRepository: TaskRepository// = TaskRepository()
+    @Published var taskRepository: TaskRepository
     
     @Published var task: Task
     

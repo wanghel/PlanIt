@@ -1,5 +1,5 @@
 //
-//  InfiniteCalendarView.swift
+//  CalendarView.swift
 //  PlanIt
 //
 //  Created by Helen Wang on 6/2/20.

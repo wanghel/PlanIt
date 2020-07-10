@@ -9,44 +9,9 @@
 import Foundation
 import Combine
 
-//class UserViewModel: ObservableObject, Identifiable {
-//    @Published var userProfileRepository = UserProfileRepository()
-//    @Published var profile: UserProfile
-//
-////    @Published var friends: [UserProfile] = []
-//
-//    private var cancellables = Set<AnyCancellable>()
-//
-//    var id = ""
-//
-//    init(profile: UserProfile) {
-//        print("created from USER VM")
-//        self.profile = profile
-//
-//        $profile.compactMap { profile in
-//            profile.id
-//        }
-//        .assign(to: \.id, on: self)
-//        .store(in: &cancellables)
-//
-//        $profile
-//            .dropFirst()
-//            .debounce(for: 0.7, scheduler: RunLoop.main)
-//            .sink { profile in
-//                self.userProfileRepository.updateProfile(profile)
-//        }
-//        .store(in: &cancellables)
-//
-//
-//    }
-//
-//}
-
-
 class UserViewModel: ObservableObject, Identifiable {
     @Published var userProfileRepository = UserProfileRepository()
     @Published var profile: User
-    
     @Published var friends = [User]()
     
     private var cancellables = Set<AnyCancellable>()
@@ -54,7 +19,6 @@ class UserViewModel: ObservableObject, Identifiable {
     var id = ""
   
     init(profile: User) {
-//        print("created from USER VM")
         self.profile = profile
         
         $profile.compactMap { profile in
@@ -73,7 +37,6 @@ class UserViewModel: ObservableObject, Identifiable {
         }
         .store(in: &cancellables)
         
-        
         fetchFriendProfiles()
     }
     
@@ -85,7 +48,6 @@ class UserViewModel: ObservableObject, Identifiable {
                     print("Error while fetching the user profile: \(error)")
                     return
                 }
-//                print("fetched friend \(profile)")
                 if let profile = profile {
                     self.friends.append(profile)
                 }

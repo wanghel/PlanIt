@@ -13,12 +13,9 @@ import FirebaseFirestoreSwift
 
 
 class UserProfileRepository: ObservableObject {
-    
-
-    let db = Firestore.firestore()
-    
-//    @Published var userProfiles = [UserProfile]()
     @Published var userProfiles = [User]()
+    
+    let db = Firestore.firestore()
     
     init() {
         loadData()

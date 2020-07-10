@@ -11,8 +11,7 @@ import Combine
 import Firebase
 
 class TaskViewModel: ObservableObject {
-//    @Published var taskRepository = SessionStore().taskRepository
-    @Published var taskRepository: TaskRepository //= TaskRepository()
+    @Published var taskRepository: TaskRepository
     @Published var taskCellViewModels = [TaskCellViewModel]()
     
     private var cancellables = Set<AnyCancellable>()
