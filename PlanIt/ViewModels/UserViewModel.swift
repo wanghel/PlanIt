@@ -10,6 +10,7 @@ import Foundation
 import Combine
 
 class UserViewModel: ObservableObject, Identifiable {
+    
     @Published var userProfileRepository = UserProfileRepository()
     @Published var profile: User
     @Published var friends = [User]()

@@ -20,11 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITableView.appearance().separatorStyle = .none
         FirebaseApp.configure()
         
-//        if Auth.auth().currentUser == nil {
+        if Auth.auth().currentUser == nil {
             Auth.auth().signInAnonymously()
-//        } else {
-//            print("Current user: \(Auth.auth().currentUser?.uid ?? "")")
-//        }
+        } else {
+            print("Current user: \(Auth.auth().currentUser?.uid ?? "")")
+        }
         
         
         return true

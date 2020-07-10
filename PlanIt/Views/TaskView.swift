@@ -95,7 +95,8 @@ struct TaskCell: View  {
                 }*/)
                     .foregroundColor(.white)
                     .font(.system(size: 20))
-                    .padding()
+                    .padding(.vertical)
+                
                 Spacer()
             }
             .clipped()

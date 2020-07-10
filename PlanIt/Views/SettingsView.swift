@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @EnvironmentObject var viewRouter: ViewRouter
+    @EnvironmentObject var session: SessionStore
     
     var body: some View {
         NavigationView {
@@ -54,12 +56,25 @@ struct SettingsView: View {
                                     Spacer()
                                     Image(systemName: "chevron.right")
                                 }
-                                    
                                 .padding()
                                 .background(navy)
                                 .cornerRadius(10)
                     }
                     
+                    Button(action: {
+                        self.session.signOut()
+//                        self.profileVM = UserViewModel(profile: User(id: ""))
+                        self.viewRouter.showSignIn.toggle()
+                    }){
+                        HStack {
+                            Text("Log out")
+                            Spacer()
+                        }
+                        .padding()
+                        .background(navy)
+                        .cornerRadius(10)
+                    }
+                    .padding(.vertical)
                     
                 }
                 .padding()

@@ -12,7 +12,7 @@ struct ProfileView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var session: SessionStore
     
-    @State var profileVM: UserViewModel?
+//    @State var profileVM: UserViewModel?
     
     func getUser() {
         session.listen()
@@ -28,36 +28,30 @@ struct ProfileView: View {
                 
                 
                 if self.viewRouter.showSignIn {
-                    AuthView(profileVM: self.$profileVM)
+//                    AuthView(profileVM: self.$profileVM)
+                    AuthView()
                 }
             }
             .frame(width: screenWidth)
-            .navigationBarTitle("\(self.viewRouter.showSignIn ? self.viewRouter.showSignUp ? "Sign up": "Sign In" : profileVM?.profile.userName?.lowercased() ?? "")", displayMode: .inline)
+//            .navigationBarTitle("\(self.viewRouter.showSignIn ? self.viewRouter.showSignUp ? "Sign up": "Sign In" : profileVM?.profile.userName?.lowercased() ?? "")", displayMode: .inline)
+                .navigationBarTitle("\(self.viewRouter.showSignIn ? self.viewRouter.showSignUp ? "Sign up": "Sign In" : session.profileVM?.profile.userName?.lowercased() ?? "")", displayMode: .inline)
             .navigationBarItems(
                 leading:
                     HStack {
+                        
                         if !self.viewRouter.showSignIn {
-//                            Button(action: {
-//
-//                            }){
-//                                Image(systemName: "pencil")
-//                                    .font(.system(size: 25))
-//                                    .foregroundColor(.white)
-//                                    .opacity(0.9)
-//                                    .padding([.bottom, .trailing])
-//                            }
-                            
-                            Button(action: {
-                                self.session.signOut()
-                                self.profileVM = UserViewModel(profile: User(id: ""))
-                                self.viewRouter.showSignIn.toggle()
-                            }){
-                                Image(systemName: "delete.right")
-                                    .frame(width: 1, height: 1)
-                                    .foregroundColor(.white)
-                                    .opacity(0.9)
-                                    .padding([.bottom, .leading])
+                            NavigationLink(destination:
+                                //Text("profile edit")
+                                ProfileEditView()
+                                .environmentObject(session)
+                            ) {
+                                Image(systemName: "pencil")
+                                .font(.system(size: 25))
+                                .foregroundColor(.white)
+                                .opacity(0.9)
+                                .padding([.bottom, .trailing])
                             }
+                            
                         }
                 },
                 trailing:
@@ -74,6 +68,7 @@ struct ProfileView: View {
         .offset(x: viewRouter.viewProfile ? 0 : -screenWidth)
         .animation(.easeOut)
         .onAppear(perform: getUser)
+        .navigationBarBackButtonHidden(true)
         
     }
     
@@ -83,6 +78,10 @@ struct ProfileMainView: View {
     @EnvironmentObject var session: SessionStore
     
     @ObservedObject var userProfilesVM = UserProfilesViewModel()
+    
+    func getUser() {
+        session.listen()
+    }
     
     var body: some View {
         ZStack {
@@ -111,7 +110,8 @@ struct ProfileMainView: View {
                     }
                     
                     ForEach(session.profileVM?.friends ?? [], id: \.self) { friend in
-                        NavigationLink(destination: Text(friend.userName ?? "")) {
+                        
+                        NavigationLink(destination: UserProfilesView(friendProfile: UserViewModel(profile: friend))) {
                             HStack {
                                 Image(systemName: "person.crop.circle.fill")
                                 Text("\(friend.firstName ?? "") \(friend.lastName ?? "")")
@@ -120,6 +120,7 @@ struct ProfileMainView: View {
                                     .foregroundColor(.gray)
                             }
                             .padding()
+                            
                         }
                     }
                     
@@ -138,6 +139,100 @@ struct ProfileMainView: View {
             .animation(.none)
             }
         }
+    .onAppear(perform: getUser)
+    }
+}
+
+struct ProfileEditView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var viewRouter: ViewRouter
+    @EnvironmentObject var session: SessionStore
+    
+    @State var userName: String = ""
+    @State var firstName: String = ""
+    @State var lastName: String = ""
+    
+    func setValue() -> Void {
+        userName = session.profileVM?.profile.userName ?? ""
+        firstName = session.profileVM?.profile.firstName ?? ""
+        lastName = session.profileVM?.profile.lastName ?? ""
+    }
+    
+    func goBack(){
+        self.presentationMode.wrappedValue.dismiss()
+    }
+    
+    var body: some View {
+        ZStack {
+            dnavy
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack {
+                HStack {
+                    Text("Username")
+                        .font(.system(size: 14))
+                    Spacer()
+                    TextField("User Name", text: $userName)
+                        .font(.system(size: 14))
+                        .padding()
+                        .background(navy.cornerRadius(10))
+                        .frame(width: 270)
+                }
+                
+                HStack {
+                    Text("First Name")
+                        .font(.system(size: 14))
+                    Spacer()
+                    TextField("First Name", text: $firstName)
+                        .font(.system(size: 14))
+                        .padding()
+                        .background(navy.cornerRadius(10))
+                        .frame(width: 270)
+                }
+                
+                HStack {
+                    Text("Last Name")
+                        .font(.system(size: 14))
+                    Spacer()
+                    TextField("Last Name", text: $lastName)
+                        .font(.system(size: 14))
+                        .padding()
+                        .background(navy.cornerRadius(10))
+                        .frame(width: 270)
+                }
+                
+                Button(action: {
+                    if let currUser = self.session.profileVM?.profile {
+                        self.session.profileVM = UserViewModel(profile: User(id: currUser.id, email: currUser.email, userName: self.userName, firstName: self.firstName, lastName: self.lastName, friends: currUser.friends))
+                    }
+                }) {
+                    Text("DONE")
+                }
+                
+            }
+            
+            
+        }
+        .foregroundColor(.white)
+        .onAppear(perform: setValue)
+        .navigationBarItems(leading:
+            Button(action: {
+                self.goBack()
+            }) {
+                Text("Cancel")
+                    .foregroundColor(.white)
+            }, trailing:
+            Button(action: {
+                if let currUser = self.session.profileVM?.profile {
+                    self.session.profileVM?.profile = User(id: currUser.id, email: currUser.email, userName: self.userName, firstName: self.firstName, lastName: self.lastName, friends: currUser.friends)
+                }
+                sleep(1)
+                self.goBack()
+            }) {
+                Text("Done")
+                    .foregroundColor(.white)
+        })
+        
     }
 }
 

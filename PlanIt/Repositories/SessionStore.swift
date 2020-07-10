@@ -31,8 +31,20 @@ class SessionStore: ObservableObject {
     
     func listen() {
         handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
+            
             if let user = user {
-                self.profileVM = UserViewModel(profile: User(id: user.uid))
+                self.profileRepository.fetchProfile(userId: user.uid) { (profile, error) in
+                    if let error = error {
+                        print("Error while fetching the user profile: \(error)")
+                        self.profileVM = UserViewModel(profile: User(id: user.uid))
+                    }
+                    
+                    if let profile = profile {
+                        self.profileVM = UserViewModel(profile: profile)
+                    }
+                }
+                print(user.uid)
+                
             }
             else {
                 self.session = nil

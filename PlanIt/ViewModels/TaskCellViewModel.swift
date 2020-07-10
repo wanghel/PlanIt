@@ -21,7 +21,7 @@ class TaskCellViewModel: ObservableObject, Identifiable {
     
     
     init(task: Task, taskRepository: TaskRepository) {
-        print("created from TASK CELL VM")
+//        print("created from TASK CELL VM")
         self.task = task
         self.taskRepository = taskRepository
         
