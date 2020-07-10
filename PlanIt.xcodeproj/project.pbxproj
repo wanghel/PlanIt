@@ -158,7 +158,6 @@
 			children = (
 				3B1EABB12492C1B200A610CB /* CalendarMonth.swift */,
 				3B1EABDB2497F5E600A610CB /* Task.swift */,
-				3B1EABC22492F9FB00A610CB /* UserProfile.swift */,
 				3BD3F9ED24A133DD00071FD2 /* User.swift */,
 			);
 			path = Models;
@@ -216,6 +215,7 @@
 				3BED3DF124917ED800A3B586 /* Views */,
 				3B32E5B724AD2178005E55B5 /* Fonts */,
 				3BC406202481FD9B00EF74FF /* WeekdaysView.swift */,
+				3B1EABC22492F9FB00A610CB /* UserProfile.swift */,
 				3B1EABD124944F8000A610CB /* DayView.swift */,
 				3BC4062824821DA100EF74FF /* ReminderDayView.swift */,
 				3B7091532481943E0007C1EF /* Assets.xcassets */,
