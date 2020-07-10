@@ -9,6 +9,26 @@
 import Foundation
 import Combine
 
+//class UserProfilesViewModel : ObservableObject {
+//    @Published var userProfileRepository = UserProfileRepository()
+//    @Published var userVM = [UserViewModel]()
+//
+//    private var cancellables = Set<AnyCancellable>()
+//
+//    init() {
+//        print("created from USER PROFILES VM")
+//        userProfileRepository.$userProfiles.map { profiles in
+//            profiles.map { profile in
+//                UserViewModel(profile: profile)
+//            }
+//        }
+//        .assign(to: \.userVM, on: self)
+//        .store(in: &cancellables)
+//    }
+//
+//
+//}
+
 class UserProfilesViewModel : ObservableObject {
     @Published var userProfileRepository = UserProfileRepository()
     @Published var userVM = [UserViewModel]()
@@ -28,3 +48,4 @@ class UserProfilesViewModel : ObservableObject {
     
     
 }
+

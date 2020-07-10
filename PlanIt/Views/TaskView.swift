@@ -18,13 +18,13 @@ struct TaskView: View {
     
 //    @State var presentAddNewTask = false
     
-//    private var dayFromCurr: Int = 0
-//
-//    init() {}
-//
-//    init(dayFromCurr: Int) {
-//        self.dayFromCurr = dayFromCurr
-//    }
+    private var dayFromCurr: Int = 0
+
+    init() {}
+
+    init(dayFromCurr: Int) {
+        self.dayFromCurr = dayFromCurr
+    }
     
     
     var body: some View {
@@ -36,8 +36,8 @@ struct TaskView: View {
             // FIGURE IT OUT FUTURE ME
             
             ForEach (taskVM.taskCellViewModels) { taskCellVM in
-//                if self.viewRouter.dateShown.addingTimeInterval(TimeInterval(self.dayFromCurr * 86400)).isSameDay(taskCellVM.task.dayAssigned) {
-                if self.viewRouter.dateShown.isSameDay(taskCellVM.task.dayAssigned) {
+                if self.viewRouter.dateShown.addingTimeInterval(TimeInterval(self.dayFromCurr * 86400)).isSameDay(taskCellVM.task.dayAssigned) {
+//                if self.viewRouter.dateShown.isSameDay(taskCellVM.task.dayAssigned) {
                     TaskCell(dayTaskVM: self.taskVM, taskCellVM: taskCellVM, showingDetail: self.$showingDetail, detailTaskCellVM: self.$detailTaskCellVM)
                         .padding([.horizontal,.bottom])
                         .onDisappear(perform: {

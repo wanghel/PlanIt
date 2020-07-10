@@ -16,21 +16,20 @@ class SessionStore: ObservableObject {
     
     private var profileRepository = UserProfileRepository()
     
-    //@Published var taskRepository = TaskRepository()
-    
     var didChange = PassthroughSubject<SessionStore, Never>()
     
-    @Published var profile: UserProfile? {
+//    @Published var profile: UserProfile? {
+//        didSet {
+//            self.didChange.send(self)
+//        }
+//    }
+    
+    @Published var profile: User? {
         didSet {
             self.didChange.send(self)
         }
     }
     
-//    @Published var profileVM: UserViewModel? {
-//        didSet {
-//            self.didChange.send(self)
-//        }
-//    }
     
 //    @Published var friendProfiles: [UserProfile]?
     
@@ -43,8 +42,8 @@ class SessionStore: ObservableObject {
     func listen() {
         handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
             if let user = user {
-                self.profile = UserProfile(id: user.uid, userName: "", firstName: "", lastName: "", friends: [])
-//                self.profileVM = UserViewModel(profile: UserProfile(id: user.uid, userName: "", firstName: "", lastName: ""))
+//                self.profile = UserProfile(id: user.uid, userName: "", firstName: "", lastName: "", friends: [])
+                self.profile = User(id: user.uid, userName: "", firstName: "", lastName: "", friends: [])
             }
             else {
                 self.session = nil
@@ -52,7 +51,57 @@ class SessionStore: ObservableObject {
         })
     }
     
-    func signUp(email: String, password: String, userName: String, firstName: String, lastName: String, completion: @escaping (_ profile: UserProfile?, _ error: Error?) -> Void) {
+//    func signUp(email: String, password: String, userName: String, firstName: String, lastName: String, completion: @escaping (_ profile: UserProfile?, _ error: Error?) -> Void) {
+//        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+//            if let error = error {
+//                print("Error signing up: \(error)")
+//                completion(nil, error)
+//                return
+//            }
+//
+//            guard let user = result?.user else { return }
+//            print("User \(user.uid) signed up.")
+//
+//            let userProfile = UserProfile(id: user.uid, userName: userName.lowercased(), firstName: firstName, lastName: lastName, friends: [])
+//
+//            self.profileRepository.createProfile(profile: userProfile) { (profile, error) in
+//                if let error = error {
+//                    print("Error while fetching the user profile: \(error)")
+//                    completion(nil, error)
+//                    return
+//                }
+//                self.profile = profile
+//                completion(profile, nil)
+//            }
+//        }
+//    }
+//
+//    func signIn(email: String, password: String, completion: @escaping (_ profile: UserProfile?, _ error: Error?) -> Void) {
+//        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+//            if let error = error {
+//                print("Error signing in: \(error)")
+//                completion(nil, error)
+//                return
+//            }
+//
+//            guard let user = result?.user else { return }
+//            print("User \(user.uid) signed in.")
+//
+//            self.profileRepository.fetchProfile(userId: user.uid) { (profile, error) in
+//                if let error = error {
+//                    print("Error while fetching the user profile: \(error)")
+//                    completion(nil, error)
+//                    return
+//                }
+//
+//                self.profile = profile
+//
+//                completion(profile, nil)
+//            }
+//        }
+//    }
+    
+    func signUp(email: String, password: String, userName: String, firstName: String, lastName: String, completion: @escaping (_ profile: User?, _ error: Error?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 print("Error signing up: \(error)")
@@ -63,7 +112,8 @@ class SessionStore: ObservableObject {
             guard let user = result?.user else { return }
             print("User \(user.uid) signed up.")
             
-            let userProfile = UserProfile(id: user.uid, userName: userName.lowercased(), firstName: firstName, lastName: lastName, friends: [])
+            let userProfile = User(id: user.uid, userName: userName.lowercased(), firstName: firstName, lastName: lastName, friends: [])
+            
             self.profileRepository.createProfile(profile: userProfile) { (profile, error) in
                 if let error = error {
                     print("Error while fetching the user profile: \(error)")
@@ -71,26 +121,12 @@ class SessionStore: ObservableObject {
                     return
                 }
                 self.profile = profile
-//                self.profileVM = UserViewModel(profile: profile!)
-                
-//                self.profileRepository.fetchFriends(userId: user.uid) { (friends, error) in
-//                    if let error = error {
-//                        print("Error while fetching the user profile: \(error)")
-//                        completion(nil, error)
-//                        return
-//                    }
-//
-//
-////                    self.profileVM?.friends = friends ?? []
-//                    self.friendProfiles = friends
-//                }
-                
                 completion(profile, nil)
             }
         }
     }
     
-    func signIn(email: String, password: String, completion: @escaping (_ profile: UserProfile?, _ error: Error?) -> Void) {
+    func signIn(email: String, password: String, completion: @escaping (_ profile: User?, _ error: Error?) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 print("Error signing in: \(error)")
@@ -109,19 +145,6 @@ class SessionStore: ObservableObject {
                 }
                 
                 self.profile = profile
-//                self.profileVM = UserViewModel(profile: profile!)
-                
-//                self.profileRepository.fetchFriends(userId: user.uid) { (friends, error) in
-//                    if let error = error {
-//                        print("Error while fetching the user profile: \(error)")
-//                        completion(nil, error)
-//                        return
-//                    }
-//
-////                    self.profileVM?.friends = friends ?? []
-//                    self.friendProfiles = friends
-//
-//                }
                 
                 completion(profile, nil)
             }
@@ -134,8 +157,6 @@ class SessionStore: ObservableObject {
             Auth.auth().signInAnonymously()
             self.session = nil
             self.profile = nil
-//            self.profileVM = nil
-//            self.friendProfiles = nil
         }
         catch let signOutError as NSError {
             print("Error signing out: \(signOutError)")
@@ -144,21 +165,11 @@ class SessionStore: ObservableObject {
     
     func updateProfile() {
         if let profile = profile {
-//        if let profileVM = profileVM {
             do {
                 profileRepository.updateProfile(profile)
-//                profileRepository.updateProfile(profileVM.profile)
             }
         }
     }
     
     
-//    func updateFriends(friendProfile: UserProfile) {
-//        if let profile = profile {
-//            do {
-//                profileRepository.addFriend(profile, friendProfile: friendProfile)
-////                profileRepository.addFriend(self.profileVM!.profile, friendProfile: friendProfile)
-//            }
-//        }
-//    }
 }

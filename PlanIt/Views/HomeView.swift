@@ -26,12 +26,6 @@ struct HomeView: View {
                 dnavy
                     .edgesIgnoringSafeArea(.all)
                 
-//                ReminderDayView()
-//                    .opacity(0.5)
-//                    .frame(width: screenWidth)
-//                    .edgesIgnoringSafeArea(.bottom)
-                
-                
                 VStack (spacing: 0) {
                     //MonthView(calendar: CalendarMonthViewModel())
                     Text("~TODAY~")
