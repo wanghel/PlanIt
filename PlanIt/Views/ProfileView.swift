@@ -83,63 +83,56 @@ struct ProfileMainView: View {
         session.listen()
     }
     
+    
     var body: some View {
         ZStack {
             dnavy
                 .edgesIgnoringSafeArea(.all)
             
             ScrollView {
-            VStack {
-                
-                Image(systemName: "person.crop.circle.fill").resizable()
-                    .frame(width: 150, height: 150)
-                
-                HStack {
-                    Text(session.profileVM?.profile.firstName ?? "").font(.title)
-                    Text(session.profileVM?.profile.lastName ?? "").font(.title)
-                }
-                .padding()
-                
-                VStack (alignment: .leading) {
-                    HStack {
-                        Text("Friends")
-                        Spacer()
-                        Button(action: {}) {
-                            Text("more")
-                        }
-                    }
+                VStack {
                     
-                    ForEach(session.profileVM?.friends ?? [], id: \.self) { friend in
-                        
-                        NavigationLink(destination: UserProfilesView(friendProfile: UserViewModel(profile: friend))) {
-                            HStack {
-                                Image(systemName: "person.crop.circle.fill")
-                                Text("\(friend.firstName ?? "") \(friend.lastName ?? "")")
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray)
+                    Image(systemName: "person.crop.circle.fill").resizable()
+                        .frame(width: 150, height: 150)
+                    
+                    Text(session.profileVM?.profile.name ?? "").font(.title)
+                        .padding()
+                    
+                    Text(session.profileVM?.profile.bio ?? "").font(.body)
+                        .padding()
+                    
+                    VStack (alignment: .leading) {
+                        HStack {
+                            Text("Friends")
+                            Spacer()
+                            Button(action: {}) {
+                                Text("more")
                             }
-                            .padding()
-                            
                         }
+                        
+                        ForEach(session.profileVM?.friends ?? [], id: \.self) { friend in
+                            NavigationLink(destination: UserProfilesView(friendProfile: UserViewModel(profile: friend)) ) {
+                                HStack {
+                                    Image(systemName: "person.crop.circle.fill")
+                                    Text("\(friend.name ?? "")")
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.gray)
+                                }
+                                .padding()
+                            }
+                        }
+                        
                     }
+                    Spacer()
                     
                 }
-                Spacer()
-                
-//                Button(action: {
-//                    print("method 1 :\(self.session.profileVM?.profile.friends!)")
-//                    print("method 2 :\(self.session.profileVM?.friends)")
-//                }) {
-//                    Text("PRESS")
-//                }
-            }
-            .foregroundColor(.white)
-            .padding()
-            .animation(.none)
+                .foregroundColor(.white)
+                .padding()
+                .animation(.none)
             }
         }
-    .onAppear(perform: getUser)
+        .onAppear(perform: getUser)
     }
 }
 
@@ -149,13 +142,13 @@ struct ProfileEditView: View {
     @EnvironmentObject var session: SessionStore
     
     @State var userName: String = ""
-    @State var firstName: String = ""
-    @State var lastName: String = ""
+    @State var name: String = ""
+    @State var bio: String = ""
     
     func setValue() -> Void {
         userName = session.profileVM?.profile.userName ?? ""
-        firstName = session.profileVM?.profile.firstName ?? ""
-        lastName = session.profileVM?.profile.lastName ?? ""
+        name = session.profileVM?.profile.name ?? ""
+        bio = session.profileVM?.profile.bio ?? ""
     }
     
     func goBack(){
@@ -180,10 +173,10 @@ struct ProfileEditView: View {
                 }
                 
                 HStack {
-                    Text("First Name")
+                    Text("Name")
                         .font(.system(size: 14))
                     Spacer()
-                    TextField("First Name", text: $firstName)
+                    TextField("Name", text: $name)
                         .font(.system(size: 14))
                         .padding()
                         .background(navy.cornerRadius(10))
@@ -191,22 +184,14 @@ struct ProfileEditView: View {
                 }
                 
                 HStack {
-                    Text("Last Name")
+                    Text("Bio")
                         .font(.system(size: 14))
                     Spacer()
-                    TextField("Last Name", text: $lastName)
+                    TextField("Bio", text: $bio)
                         .font(.system(size: 14))
                         .padding()
                         .background(navy.cornerRadius(10))
                         .frame(width: 270)
-                }
-                
-                Button(action: {
-                    if let currUser = self.session.profileVM?.profile {
-                        self.session.profileVM = UserViewModel(profile: User(id: currUser.id, email: currUser.email, userName: self.userName, firstName: self.firstName, lastName: self.lastName, friends: currUser.friends))
-                    }
-                }) {
-                    Text("DONE")
                 }
                 
             }
@@ -224,7 +209,7 @@ struct ProfileEditView: View {
             }, trailing:
             Button(action: {
                 if let currUser = self.session.profileVM?.profile {
-                    self.session.profileVM?.profile = User(id: currUser.id, email: currUser.email, userName: self.userName, firstName: self.firstName, lastName: self.lastName, friends: currUser.friends)
+                    self.session.profileVM?.profile = User(id: currUser.id, email: currUser.email, userName: self.userName, name: self.name, bio: self.bio, friends: currUser.friends)
                 }
                 sleep(1)
                 self.goBack()

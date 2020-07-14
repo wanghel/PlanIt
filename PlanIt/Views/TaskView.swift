@@ -14,7 +14,7 @@ struct TaskView: View {
     @ObservedObject var taskVM = TaskViewModel(taskRepository: TaskRepository())
     
     @State var showingDetail = false
-    @State var detailTaskCellVM = TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: Date()), taskRepository: TaskRepository())
+    @State var detailTaskCellVM = TaskCellViewModel(task: Task(title: "", description: "", priority: TaskPriority.none, completed: false, dayAssigned: Date()), taskRepository: TaskRepository())
     
 //    private var dayFromCurr: Int = 0
 //
@@ -23,7 +23,6 @@ struct TaskView: View {
 //    init(dayFromCurr: Int) {
 //        self.dayFromCurr = dayFromCurr
 //    }
-//
     
     var body: some View {
         VStack {
@@ -31,6 +30,7 @@ struct TaskView: View {
             Text("")
                 .frame(width: screenWidth, height: 0)
             // FIGURE IT OUT FUTURE ME
+            
             
             ForEach (taskVM.taskCellViewModels) { taskCellVM in
 //                if self.viewRouter.dateShown.addingTimeInterval(TimeInterval(self.dayFromCurr * 86400)).isSameDay(taskCellVM.task.dayAssigned) {
@@ -79,8 +79,35 @@ struct TaskCell: View  {
     @State private var lastOffset = CGSize.zero
     @State private var showInfo = false
     
+    func getPriorityColor(priority: TaskPriority) -> Color {
+        switch priority {
+        case .none:
+            return .black
+        case .low:
+            return green
+        case .medium:
+            return yellow
+        case .high:
+            return red
+        }
+    }
+    
+    func getPriorityIndicator(priority: TaskPriority) -> String {
+        switch priority {
+        case .none:
+            return ""
+        case .low:
+            return "!"
+        case .medium:
+            return "!!"
+        case .high:
+            return "!!!"
+        }
+    }
+    
     var body: some View {
         ZStack {
+            
             HStack {
                 Image(systemName: self.taskCellVM.task.completed ? "checkmark.circle.fill" : "circle")
                     .resizable()
@@ -97,16 +124,22 @@ struct TaskCell: View  {
                     .font(.system(size: 20))
                     .padding(.vertical)
                 
+                Text(getPriorityIndicator(priority: self.taskCellVM.task.priority))
+                    .foregroundColor(.white)
+                    .bold()
+                    .shadow(radius: 5)
+                    .padding([.trailing, .vertical])
+                
                 Spacer()
             }
             .clipped()
             .background(
                 RoundedRectangle(cornerRadius: 15)
                     .fill(navy)
-                    .shadow(radius: 5)
+                    .shadow(color: getPriorityColor(priority: self.taskCellVM.task.priority), radius: 5)
             )
                 .offset(x: self.draggedOffset.width + self.lastOffset.width)
-                .gesture(DragGesture(minimumDistance: 30)
+                .gesture(DragGesture(minimumDistance: 20)
                     .onChanged { value in
                         self.draggedOffset = value.translation
                 }
@@ -120,6 +153,7 @@ struct TaskCell: View  {
                     self.lastOffset = offset
                     self.draggedOffset = CGSize.zero
                 })
+                .frame(width: screenWidth * 0.90)
             
             
             // Info and Delete buttons
@@ -161,8 +195,9 @@ struct TaskCell: View  {
                         self.dayTaskVM.deleteTask(task: self.taskCellVM.task)
                 }
             }
+            .frame(width: screenWidth * 0.9)
             .offset(x: self.draggedOffset.width + self.lastOffset.width + 150)
-            .gesture(DragGesture(minimumDistance: 30)
+            .gesture(DragGesture(minimumDistance: 20)
             .onChanged { value in
                 self.draggedOffset = value.translation
             }
@@ -170,6 +205,153 @@ struct TaskCell: View  {
                 let offset: CGSize
                 if (self.draggedOffset.width + self.lastOffset.width < -100) {
                     offset = CGSize(width: -150, height: 0)
+                } else {
+                    offset = CGSize.zero
+                }
+                self.lastOffset = offset
+                self.draggedOffset = CGSize.zero
+            })
+                
+            
+            
+        }
+        .background(dnavy)
+        
+    }
+}
+
+
+struct FriendTaskView: View {
+    @EnvironmentObject var viewRouter: ViewRouter
+    
+    @ObservedObject var friendProfile: UserViewModel
+    @ObservedObject var taskVM: TaskViewModel
+    
+    init(friendProfile: UserViewModel){
+        self.friendProfile = friendProfile
+        self.taskVM = TaskViewModel(taskRepository: TaskRepository(friendId: friendProfile.id))
+    }
+    
+    var body: some View {
+        VStack {
+            // IDK WHY DOING THIS MAKES THE DATA LOAD
+            Text("")
+                .frame(width: screenWidth, height: 0)
+            // FIGURE IT OUT FUTURE ME
+            
+            ForEach (taskVM.taskCellViewModels) { taskCellVM in
+                if self.viewRouter.dateShown.isSameDay(taskCellVM.task.dayAssigned) {
+                    FriendTaskCellView(dayTaskVM: self.taskVM, taskCellVM: taskCellVM/*, showingDetail: self.$showingDetail, detailTaskCellVM: self.$detailTaskCellVM*/)
+                        .padding([.horizontal,.bottom])
+                }
+            }
+        }
+    }
+}
+
+struct FriendTaskCellView: View  {
+    @ObservedObject var dayTaskVM: TaskViewModel
+    @ObservedObject var taskCellVM: TaskCellViewModel
+    
+    
+    @State private var draggedOffset = CGSize.zero
+    @State private var lastOffset = CGSize.zero
+    @State private var showInfo = false
+    
+    func getPriorityColor(priority: TaskPriority) -> Color {
+        switch priority {
+        case .none:
+            return .black
+        case .low:
+            return green
+        case .medium:
+            return yellow
+        case .high:
+            return red
+        }
+    }
+    
+    func getPriorityIndicator(priority: TaskPriority) -> String {
+        switch priority {
+        case .none:
+            return ""
+        case .low:
+            return "!"
+        case .medium:
+            return "!!"
+        case .high:
+            return "!!!"
+        }
+    }
+    
+    var body: some View {
+        ZStack {
+            HStack {
+                Text(self.taskCellVM.task.title)
+                    .foregroundColor(.white)
+                    .font(.system(size: 20))
+                    .padding()
+                
+                Spacer()
+                
+                Text(getPriorityIndicator(priority: self.taskCellVM.task.priority))
+                    .foregroundColor(.white)
+                    .bold()
+                    .shadow(radius: 5)
+                    .padding([.trailing, .vertical])
+            }
+            .clipped()
+            .background(
+                RoundedRectangle(cornerRadius: 15)
+                    .fill(navy)
+                    .shadow(color: getPriorityColor(priority: self.taskCellVM.task.priority), radius: 5)
+            )
+                .offset(x: self.draggedOffset.width + self.lastOffset.width)
+                .gesture(DragGesture(minimumDistance: 20)
+                    .onChanged { value in
+                        self.draggedOffset = value.translation
+                }
+                .onEnded { value in
+                    let offset: CGSize
+                    if (self.draggedOffset.width + self.lastOffset.width < -100) {
+                        offset = CGSize(width: -80, height: 0)
+                    } else {
+                        offset = CGSize.zero
+                    }
+                    self.lastOffset = offset
+                    self.draggedOffset = CGSize.zero
+                })
+                .frame(width: screenWidth * 0.90)
+            
+            // Info and Delete buttons
+            HStack {
+                Spacer()
+                HStack {
+                    Image(systemName: "info.circle")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                        .foregroundColor(.white)
+                        .padding()
+                }
+                .clipped()
+                .background(
+                    RoundedRectangle(cornerRadius: 15)
+                        .fill(blue)
+                        .shadow(radius: 5)
+                )
+                
+                
+            }
+            .frame(width: screenWidth * 0.9)
+            .offset(x: self.draggedOffset.width + self.lastOffset.width + 80)
+            .gesture(DragGesture(minimumDistance: 20)
+            .onChanged { value in
+                self.draggedOffset = value.translation
+            }
+            .onEnded { value in
+                let offset: CGSize
+                if (self.draggedOffset.width + self.lastOffset.width < -100) {
+                    offset = CGSize(width: -80, height: 0)
                 } else {
                     offset = CGSize.zero
                 }

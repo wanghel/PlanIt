@@ -53,7 +53,7 @@ class SessionStore: ObservableObject {
     }
     
     
-    func signUp(email: String, password: String, userName: String, firstName: String, lastName: String, completion: @escaping (_ profile: User?, _ error: Error?) -> Void) {
+    func signUp(email: String, password: String, userName: String, name: String, bio: String, completion: @escaping (_ profile: User?, _ error: Error?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 print("Error signing up: \(error)")
@@ -64,7 +64,7 @@ class SessionStore: ObservableObject {
             guard let user = result?.user else { return }
             print("User \(user.uid) signed up.")
             
-            let userProfile = User(id: user.uid, userName: userName.lowercased(), firstName: firstName, lastName: lastName, friends: [])
+            let userProfile = User(id: user.uid, userName: userName.lowercased(), name: name, bio: bio, friends: [])
             
             self.profileRepository.createProfile(profile: userProfile) { (profile, error) in
                 if let error = error {

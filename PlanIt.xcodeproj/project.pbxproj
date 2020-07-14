@@ -314,7 +314,7 @@
 				3B7091462481943C0007C1EF /* Sources */,
 				3B7091472481943C0007C1EF /* Frameworks */,
 				3B7091482481943C0007C1EF /* Resources */,
-				3729D93415DC9567B8185D82 /* [CP] Embed Pods Frameworks */,
+				B10264A9C60BB0B7056A6F9C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -352,7 +352,7 @@
 				3B7091672481943E0007C1EF /* Sources */,
 				3B7091682481943E0007C1EF /* Frameworks */,
 				3B7091692481943E0007C1EF /* Resources */,
-				7DED36D1FD4E47016EBBD940 /* [CP] Embed Pods Frameworks */,
+				BA3AA9B4A812D35011108518 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -439,23 +439,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3729D93415DC9567B8185D82 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PlanIt/Pods-PlanIt-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PlanIt/Pods-PlanIt-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PlanIt/Pods-PlanIt-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		37FD9FF372815CF034B9082E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -478,23 +461,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7DED36D1FD4E47016EBBD940 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PlanIt-PlanItUITests/Pods-PlanIt-PlanItUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PlanIt-PlanItUITests/Pods-PlanIt-PlanItUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PlanIt-PlanItUITests/Pods-PlanIt-PlanItUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		856C83787AB3C056A1C7311C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -515,6 +481,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B10264A9C60BB0B7056A6F9C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PlanIt/Pods-PlanIt-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PlanIt/Pods-PlanIt-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PlanIt/Pods-PlanIt-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BA3AA9B4A812D35011108518 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PlanIt-PlanItUITests/Pods-PlanIt-PlanItUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PlanIt-PlanItUITests/Pods-PlanIt-PlanItUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PlanIt-PlanItUITests/Pods-PlanIt-PlanItUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CD086659390A0E88D148D3E0 /* [CP] Check Pods Manifest.lock */ = {

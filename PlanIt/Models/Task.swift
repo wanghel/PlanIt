@@ -10,10 +10,19 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+enum TaskPriority: Int, Codable {
+    case none = 0
+    case low = 1
+    case medium = 2
+    case high = 3
+}
+
 struct Task: Identifiable, Codable {
     @DocumentID var id: String?
     var userId: String?
     var title: String
+    var description: String
+    var priority: TaskPriority
     var completed: Bool
     @ServerTimestamp var createdTime: Timestamp?
     var dayAssigned: Date
@@ -21,9 +30,9 @@ struct Task: Identifiable, Codable {
 
 #if DEBUG
 let testDataTasks = [
-    Task(title: "task 1", completed: false, dayAssigned: Date()),
-    Task(title: "task 2", completed: true, dayAssigned: Date())
+    Task(title: "task 1", description: "", priority: TaskPriority.high, completed: false, dayAssigned: Date()),
+    Task(title: "task 2", description: "", priority: TaskPriority.low, completed: true, dayAssigned: Date())
 ]
 
-let emptyTask = Task(title: "empty", completed: false, dayAssigned: Date())
+let emptyTask = Task(title: "", description: "", priority: TaskPriority.none, completed: false, dayAssigned: Date())
 #endif

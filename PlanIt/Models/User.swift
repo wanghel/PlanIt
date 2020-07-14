@@ -15,9 +15,8 @@ struct User: Identifiable, Codable, Hashable {
     var id: String
     var email: String?
     var userName: String?
-    var firstName: String?
-    var lastName: String?
-    
+    var name: String?
+    var bio: String?
     var friends: [String]?
 }
 
@@ -27,28 +26,24 @@ struct User: Identifiable, Codable, Hashable {
 let testUser2 = User(
     id: "2",
     userName: "euni",
-    firstName: "Eunice",
-    lastName: "Choi",
-    //bio: "some Eunice bio",
+    name: "Eunice",
+    bio: "some Eunice bio",
     friends: []
 )
 
 let testUser3 = User(
     id: "3",
     userName: "meridienmach",
-    firstName: "Meridien",
-    lastName: "Mach",
-    //bio: "some Mer bio",
+    name: "Meridien",
+    bio: "some Mer bio",
     friends: ["1"]
 )
 
 let testUser1 = User(
     id: "1",
     userName: "helenwang1004",
-    firstName: "Helen",
-    lastName: "Wang",
-    //bio: "some Helen bio",
-//    friends: [testUser2, testUser3]
+    name: "Helen",
+    bio: "some Helen bio",
     friends: ["3"]
 )
 

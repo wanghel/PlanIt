@@ -32,8 +32,7 @@ struct UserProfilesView: View {
                         
                         VStack {
                             HStack {
-                                Text(friendProfile.profile.firstName ?? "").font(.title)
-                                Text(friendProfile.profile.lastName ?? "").font(.title)
+                                Text(friendProfile.profile.name ?? "").font(.title)
                             }
                             
                             Text(friendProfile.profile.userName ?? "")
@@ -75,6 +74,13 @@ struct UserProfilesView: View {
                     }
                     .padding()
                     
+                    HStack {
+                        Text(friendProfile.profile.bio ?? "")
+                            .font(.body)
+                            .padding()
+                        Spacer()
+                    }
+                    
                     NavigationLink(destination:
                         Text("Friends")
                             .navigationBarTitle("\(friendProfile.profile.userName ?? "")'s friends", displayMode: .inline)) {
@@ -88,7 +94,7 @@ struct UserProfilesView: View {
                     }
                     
                     NavigationLink(destination:
-                        Text("Calendar")
+                        FriendCalendarView(friendProfile: friendProfile)
                             .navigationBarTitle("\(friendProfile.profile.userName ?? "")'s calendar", displayMode: .inline)) {
                                 HStack {
                                     Text("Calendar")
@@ -108,6 +114,7 @@ struct UserProfilesView: View {
             }
             
         }
+        .foregroundColor(.white)
     }
 }
 
@@ -134,6 +141,12 @@ struct UserProfilesView: View {
 //        }
 //    }
 //}
+
+
+
+
+
+
 
 struct UserProfilesView_Previews: PreviewProvider {
     static var previews: some View {

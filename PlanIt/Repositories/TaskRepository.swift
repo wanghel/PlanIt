@@ -22,6 +22,10 @@ class TaskRepository: ObservableObject {
         loadData()
     }
     
+    init(friendId: String) {
+        loadData(friendId: friendId)
+    }
+    
     func loadData() {
         let userId = Auth.auth().currentUser?.uid
 //        print(userId ?? "no user")
@@ -46,6 +50,30 @@ class TaskRepository: ObservableObject {
                 
         }
     }
+    
+    func loadData(friendId: String) {
+//            print(friendId ?? "no user")
+//            print("loading data")
+            db.collection("tasks")
+                .order(by: "createdTime")
+                .whereField("userId", isEqualTo: friendId as Any)
+                .addSnapshotListener { (querySnapshot, error) in
+                    if let qs = querySnapshot {
+                        self.tasks = qs.documents.compactMap {
+                            document in
+                            do {
+                                let x = try document.data(as: Task.self)
+                                return x
+                            }
+                            catch {
+                                print(error)
+                            }
+                            return nil
+                        }
+                    }
+                    
+            }
+        }
     
     
     func addTask(_ task: Task) {

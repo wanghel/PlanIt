@@ -85,11 +85,11 @@ struct MonthView: View {
                                     .padding(.vertical)
                                     .background(
                                         RoundedRectangle(cornerRadius: 10.0)
-                                            .fill(self.isToday(day: element) ? orange : Color.clear)
+                                            .fill(self.isToday(day: element) ? .gray : Color.clear)
                                             .frame(width: screenWidth/8, height: 40))
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 10.0)
-                                            .stroke(self.isSelected(day: element) ? Color.white : Color.clear, lineWidth: 2)
+                                            .stroke(self.isSelected(day: element) ? Color.gray : Color.clear, lineWidth: 2)
                                             .frame(width: screenWidth/8, height: 40))
                                     .gesture(TapGesture().onEnded({
                                         self.viewRouter.dateShown = self.getDate(day: element)

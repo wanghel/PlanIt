@@ -129,8 +129,8 @@ struct SignUpView: View {
     @State var error: String = ""
     
     @State var userName: String = ""
-    @State var firstName: String = ""
-    @State var lastName: String = ""
+    @State var name: String = ""
+    @State var bio: String = ""
     
 //    @Binding var profileVM: UserViewModel?
     
@@ -152,7 +152,7 @@ struct SignUpView: View {
         }
         
         if completeSignUp {
-            session.signUp(email: email, password: password, userName: userName, firstName: firstName, lastName: lastName) { (result, error) in
+            session.signUp(email: email, password: password, userName: userName, name: name, bio: bio) { (result, error) in
                 if let error = error {
                     self.error = error.localizedDescription
                 } else {
@@ -216,10 +216,10 @@ struct SignUpView: View {
                 }
                 
                 HStack {
-                    Text("First Name")
+                    Text("Name")
                         .font(.system(size: 14))
                     Spacer()
-                    TextField("First Name", text: $firstName)
+                    TextField("Name", text: $name)
                         .font(.system(size: 14))
                         .padding()
                         .background(navy.cornerRadius(10))
@@ -227,10 +227,10 @@ struct SignUpView: View {
                 }
                 
                 HStack {
-                    Text("Last Name")
+                    Text("Bio")
                         .font(.system(size: 14))
                     Spacer()
-                    TextField("Last Name", text: $lastName)
+                    TextField("Bio", text: $bio)
                         .font(.system(size: 14))
                         .padding()
                         .background(navy.cornerRadius(10))

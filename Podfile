@@ -12,6 +12,7 @@ pod 'Firebase/Auth'
 pod 'Firebase/Analytics'
 pod 'Firebase/Firestore'
 pod 'FirebaseFirestoreSwift'
+pod 'Firebase/Storage'
 
   target 'PlanItTests' do
     inherit! :search_paths

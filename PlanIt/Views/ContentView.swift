@@ -57,7 +57,7 @@ struct ContentView: View {
         UITabBar.appearance().barTintColor = UIColor.init(displayP3Red: 0.05, green: 0.05, blue: 0.05, alpha: 1)//(displayP3Red: 0.02, green: 0, blue: 0.05, alpha: 1)
         
         UINavigationBar.appearance().barTintColor = UIColor.init(displayP3Red: 0.05, green: 0.05, blue: 0.05, alpha: 1)//(displayP3Red: 0.02, green: 0, blue: 0.05, alpha: 1)
-        UINavigationBar.appearance().titleTextAttributes = [.font: UIFont(name: "andromeda"/*"Helvetica Neue"*/, size: 30)!, .foregroundColor: UIColor.white]
+        UINavigationBar.appearance().titleTextAttributes = [.font: UIFont(name: "andromeda"/*"Helvetica Neue"*/, size: 25)!, .foregroundColor: UIColor.white]
         
     }
     
@@ -101,6 +101,7 @@ struct ContentView: View {
                 
             ProfileView()
         }
+        .foregroundColor(.white)
         
     }
     

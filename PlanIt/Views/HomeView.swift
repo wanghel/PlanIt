@@ -30,9 +30,9 @@ struct HomeView: View {
                     //MonthView(calendar: CalendarMonthViewModel())
                     Text("~TODAY~")
                     .tracking(10)
-                        .padding()
+                        .padding([.horizontal, .top])
                         .foregroundColor(.white)
-                        .font(.custom("GillSans", size: 30))
+                        .font(.custom("GillSans", size: 25))
                         .opacity(0.9)
                     
                     ScrollView {
@@ -69,17 +69,9 @@ struct HomeView: View {
 //                        }
                         
                         VStack {
-                            ZStack {
-                                VStack {
-                                    Text("No tasks :)")
-                                        .foregroundColor(.white)
-                                        .font(.custom("GillSans", size: 20))
-                                    Spacer()
-                                }
-                                
-                                TaskView()
-                            }
+                            TaskView()
                         }
+                        .padding(.top)
                         
                     }
                     
