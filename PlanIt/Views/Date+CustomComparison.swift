@@ -22,5 +22,30 @@ extension Date {
         return calendar.component(component, from: self)
     }
     
+    func begDay() -> Date {
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd"
+        
+        let year = Calendar.current.component(.year, from: self)
+        let month = Calendar.current.component(.month, from: self)
+        let day = Calendar.current.component(.day, from: self)
+        
+        if let date = dateFormatterGet.date(from: "\(year)-\(month)-\(day)") {
+            return date
+        } else {
+            print("Date could not be formatted: ")
+            print("\(year)-\(month)-\(day)")
+           return Date()
+        }
+    }
+    
+    func endDay() -> Date {
+        let startDay = self.begDay()
+        var components = DateComponents()
+        components.day = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startDay)!
+    }
+    
 }
 

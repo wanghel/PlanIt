@@ -42,7 +42,7 @@ struct HomeView: View {
                         // FIGURE IT OUT FUTURE ME
                         
                         //loading 7 days is too much CONDENSE CODE LATER
-//                        ForEach (0..<1) { day in
+//                        ForEach (0..<7) { day in
 //                            VStack {
 //                                HStack {
 //                                    Text(self.formatDate(date: Date().addingTimeInterval(TimeInterval(day * 86400))))
@@ -63,13 +63,13 @@ struct HomeView: View {
 //                                        Spacer()
 //                                    }
 //
-//                                    TaskView(dayFromCurr: day)
+//                                    TaskView(date: self.viewRouter.dateShown.addingTimeInterval(TimeInterval(day * 86400)))
 //                                }
 //                            }
 //                        }
                         
                         VStack {
-                            TaskView()
+                            TaskView(date: viewRouter.dateShown)
                         }
                         .padding(.top)
                         

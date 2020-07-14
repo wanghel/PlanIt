@@ -22,8 +22,17 @@ class TaskRepository: ObservableObject {
         loadData()
     }
     
+    init(date: Date) {
+    //        print("Created another taskrepository")
+            loadData(date: date)
+    }
+    
     init(friendId: String) {
         loadData(friendId: friendId)
+    }
+    
+    init(friendId: String, date: Date) {
+        loadData(friendId: friendId, date: date)
     }
     
     func loadData() {
@@ -33,6 +42,36 @@ class TaskRepository: ObservableObject {
         db.collection("tasks")
             .order(by: "createdTime")
             .whereField("userId", isEqualTo: userId as Any)
+            .addSnapshotListener { (querySnapshot, error) in
+                if let qs = querySnapshot {
+                    self.tasks = qs.documents.compactMap {
+                        document in
+                        do {
+                            let x = try document.data(as: Task.self)
+                            return x
+                        }
+                        catch {
+                            print(error)
+                        }
+                        return nil
+                    }
+                }
+                
+        }
+    }
+    
+    func loadData(date: Date) {
+        let userId = Auth.auth().currentUser?.uid
+//            let timestamp = Timestamp(date: date)
+        let begTimestamp = Timestamp(date: date.begDay())
+        let endTimestamp = Timestamp(date: date.endDay())
+        print("filtered date")
+        db.collection("tasks")
+            .order(by: "dayAssigned")
+            .order(by: "createdTime")
+            .whereField("userId", isEqualTo: userId as Any)
+            .whereField("dayAssigned", isGreaterThanOrEqualTo: begTimestamp)
+            .whereField("dayAssigned", isLessThanOrEqualTo: endTimestamp)
             .addSnapshotListener { (querySnapshot, error) in
                 if let qs = querySnapshot {
                     self.tasks = qs.documents.compactMap {
@@ -74,6 +113,34 @@ class TaskRepository: ObservableObject {
                     
             }
         }
+    
+    func loadData(friendId: String, date: Date) {
+        let begTimestamp = Timestamp(date: date.begDay())
+        let endTimestamp = Timestamp(date: date.endDay())
+        
+        db.collection("tasks")
+            .order(by: "dayAssigned")
+            .order(by: "createdTime")
+            .whereField("userId", isEqualTo: friendId as Any)
+            .whereField("dayAssigned", isGreaterThanOrEqualTo: begTimestamp)
+            .whereField("dayAssigned", isLessThanOrEqualTo: endTimestamp)
+            .addSnapshotListener { (querySnapshot, error) in
+                if let qs = querySnapshot {
+                    self.tasks = qs.documents.compactMap {
+                        document in
+                        do {
+                            let x = try document.data(as: Task.self)
+                            return x
+                        }
+                        catch {
+                            print(error)
+                        }
+                        return nil
+                    }
+                }
+                
+        }
+    }
     
     
     func addTask(_ task: Task) {

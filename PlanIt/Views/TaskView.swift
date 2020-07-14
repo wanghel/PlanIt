@@ -11,18 +11,19 @@ import SwiftUI
 struct TaskView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     
-    @ObservedObject var taskVM = TaskViewModel(taskRepository: TaskRepository())
+    @ObservedObject var taskVM: TaskViewModel
     
     @State var showingDetail = false
     @State var detailTaskCellVM = TaskCellViewModel(task: Task(title: "", description: "", priority: TaskPriority.none, completed: false, dayAssigned: Date()), taskRepository: TaskRepository())
     
-//    private var dayFromCurr: Int = 0
-//
-//    init() {}
-//
-//    init(dayFromCurr: Int) {
-//        self.dayFromCurr = dayFromCurr
-//    }
+    
+    init() {
+        taskVM = TaskViewModel(taskRepository: TaskRepository())
+    }
+    
+    init(date: Date) {
+        taskVM = TaskViewModel(taskRepository: TaskRepository(date: date))
+    }
     
     var body: some View {
         VStack {
@@ -31,34 +32,16 @@ struct TaskView: View {
                 .frame(width: screenWidth, height: 0)
             // FIGURE IT OUT FUTURE ME
             
-            
             ForEach (taskVM.taskCellViewModels) { taskCellVM in
-//                if self.viewRouter.dateShown.addingTimeInterval(TimeInterval(self.dayFromCurr * 86400)).isSameDay(taskCellVM.task.dayAssigned) {
-                if self.viewRouter.dateShown.isSameDay(taskCellVM.task.dayAssigned) {
+//                if self.viewRouter.dateShown.isSameDay(taskCellVM.task.dayAssigned) {
                     TaskCell(dayTaskVM: self.taskVM, taskCellVM: taskCellVM, showingDetail: self.$showingDetail, detailTaskCellVM: self.$detailTaskCellVM)
                         .padding([.horizontal,.bottom])
                         .onDisappear(perform: {
                             if taskCellVM.task.completed {
                                 self.taskVM.deleteTask(task: taskCellVM.task)
                             }})
-                }
-            }
-            
-//            if presentAddNewTask {
-//                TaskCell(taskVM: taskVM, taskCellVM: TaskCellViewModel(task: Task(title: "", completed: false, dayAssigned: Date())), showingDetail: $showingDetail, detailTaskCellVM: $detailTaskCellVM) { task in
-//                    self.taskVM.addTask(task: task)
-//                    self.presentAddNewTask.toggle()
 //                }
-//            }
-//
-//            Spacer()
-//
-//            Button(action: {
-//                self.presentAddNewTask.toggle()
-//            }) {
-//                Text("Add new task")
-//                    .foregroundColor(.white)
-//            }
+            }
         }
         .sheet(isPresented: self.$showingDetail) {
             DetailView(showingDetail: self.$showingDetail, taskCellVM: self.detailTaskCellVM)
@@ -72,8 +55,6 @@ struct TaskCell: View  {
     @ObservedObject var taskCellVM: TaskCellViewModel
     @Binding var showingDetail: Bool
     @Binding var detailTaskCellVM: TaskCellViewModel
-    
-//    var onCommit: (Task) -> (Void) = {_ in }
     
     @State private var draggedOffset = CGSize.zero
     @State private var lastOffset = CGSize.zero
@@ -117,9 +98,7 @@ struct TaskCell: View  {
                     .onTapGesture {
                         self.taskCellVM.task.completed.toggle()
                 }
-                TextField("", text: self.$taskCellVM.task.title/*, onCommit: {
-                    self.onCommit(self.taskCellVM.task)
-                }*/)
+                TextField("", text: self.$taskCellVM.task.title)
                     .foregroundColor(.white)
                     .font(.system(size: 20))
                     .padding(.vertical)
@@ -232,6 +211,11 @@ struct FriendTaskView: View {
         self.taskVM = TaskViewModel(taskRepository: TaskRepository(friendId: friendProfile.id))
     }
     
+    init(friendProfile: UserViewModel, date: Date){
+        self.friendProfile = friendProfile
+        self.taskVM = TaskViewModel(taskRepository: TaskRepository(friendId: friendProfile.id, date: date))
+    }
+    
     var body: some View {
         VStack {
             // IDK WHY DOING THIS MAKES THE DATA LOAD
@@ -240,10 +224,10 @@ struct FriendTaskView: View {
             // FIGURE IT OUT FUTURE ME
             
             ForEach (taskVM.taskCellViewModels) { taskCellVM in
-                if self.viewRouter.dateShown.isSameDay(taskCellVM.task.dayAssigned) {
+//                if self.viewRouter.dateShown.isSameDay(taskCellVM.task.dayAssigned) {
                     FriendTaskCellView(dayTaskVM: self.taskVM, taskCellVM: taskCellVM/*, showingDetail: self.$showingDetail, detailTaskCellVM: self.$detailTaskCellVM*/)
                         .padding([.horizontal,.bottom])
-                }
+//                }
             }
         }
     }
