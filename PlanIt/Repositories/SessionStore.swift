@@ -12,7 +12,6 @@ import Combine
 
 class SessionStore: ObservableObject {
     @Published var session: User?
-//    @Published var isLoggedIn: Bool?
     
     @Published var profileVM: UserViewModel? {
         didSet {
