@@ -13,12 +13,12 @@ struct HomeView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @State var showingDetail = false
     
-    func formatDate(date: Date) -> String {
-        let dateFormatterPrint = DateFormatter()
-        dateFormatterPrint.dateFormat = "EEEE, MMM d, yyyy"
-        
-        return dateFormatterPrint.string(from: date)
-    }
+//    func formatDate(date: Date) -> String {
+//        let dateFormatterPrint = DateFormatter()
+//        dateFormatterPrint.dateFormat = "EEEE, MMM d, yyyy"
+//        
+//        return dateFormatterPrint.string(from: date)
+//    }
     
     var body: some View {
         NavigationView {
@@ -27,7 +27,6 @@ struct HomeView: View {
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack (spacing: 0) {
-                    //MonthView(calendar: CalendarMonthViewModel())
                     Text("~TODAY~")
                     .tracking(10)
                         .padding([.horizontal, .top])
@@ -36,10 +35,10 @@ struct HomeView: View {
                         .opacity(0.9)
                     
                     ScrollView {
-                        // IDK WHY DOING THIS MAKES THE DATA LOAD
+                        // FORCES SCROLLVIEW TO SHOW IN CASE ARRAY IS EMPTY
                         Text("")
                             .frame(width: screenWidth, height: 0)
-                        // FIGURE IT OUT FUTURE ME
+                        // FORCES SCROLLVIEW TO SHOW IN CASE ARRAY IS EMPTY
                         
                         //loading 7 days is too much CONDENSE CODE LATER
 //                        ForEach (0..<7) { day in

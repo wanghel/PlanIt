@@ -22,6 +22,7 @@ struct CalendarView: View {
             ZStack {
                 dnavy
                     .edgesIgnoringSafeArea(.all)
+                
                 VStack {
                     ZStack {
                         if !showSmallCalendar {
