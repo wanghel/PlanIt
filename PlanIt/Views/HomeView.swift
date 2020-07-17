@@ -101,6 +101,7 @@ struct HomeView: View {
         .sheet(isPresented: $showingDetail) {
             DetailView(showingDetail: self.$showingDetail)
         }
+        .onAppear(perform: {print(Date().localString())})
     }
 }
 

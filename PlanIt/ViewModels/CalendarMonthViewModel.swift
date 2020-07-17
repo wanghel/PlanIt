@@ -14,15 +14,14 @@ class CalendarMonthViewModel: ObservableObject {
     @Published var calendarMonth: CalendarMonth
     
     private let userCal = Calendar.current
-    
     private let daysOfMonthArr = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     
     init () {
         calendarMonth = CalendarMonth(month: userCal.component(.month, from: Date()), year: userCal.component(.year, from: Date()))
     }
     
-    init (calendarMonth: CalendarMonth) {
-        self.calendarMonth = calendarMonth
+    init (date: Date) {
+        calendarMonth = CalendarMonth(month: userCal.component(.month, from: date), year: userCal.component(.year, from: date))
     }
     
     private func setMonth(month: Int) {
@@ -58,18 +57,31 @@ class CalendarMonthViewModel: ObservableObject {
         }
     }
     
-    func nextMonth() -> CalendarMonthViewModel {
+//    func nextMonth() -> CalendarMonthViewModel {
+//        //let nMonth = (calendarMonth.month-1+1)%12+1
+//        let nMonth = (calendarMonth.month)%12+1
+//        let next = CalendarMonthViewModel(calendarMonth: CalendarMonth(month: nMonth, year: nMonth == 1 ? calendarMonth.year+1 : calendarMonth.year))
+//        return next
+//    }
+//
+//    func prevMonth() -> CalendarMonthViewModel {
+//        //let pMonth = (calendarMonth.month-1+11)%12+1
+//        let pMonth = (calendarMonth.month+10)%12+1
+//        let prev = CalendarMonthViewModel(calendarMonth: CalendarMonth(month: pMonth, year: pMonth == 12 ? calendarMonth.year-1 : calendarMonth.year))
+//        return prev
+//    }
+    
+    func nextMonth() {
         //let nMonth = (calendarMonth.month-1+1)%12+1
+        print("NEXT MONTH WORKED")
         let nMonth = (calendarMonth.month)%12+1
-        let next = CalendarMonthViewModel(calendarMonth: CalendarMonth(month: nMonth, year: nMonth == 1 ? calendarMonth.year+1 : calendarMonth.year))
-        return next
+        calendarMonth = CalendarMonth(month: nMonth, year: nMonth == 1 ? calendarMonth.year+1 : calendarMonth.year)
     }
     
-    func prevMonth() -> CalendarMonthViewModel {
+    func prevMonth() {
         //let pMonth = (calendarMonth.month-1+11)%12+1
         let pMonth = (calendarMonth.month+10)%12+1
-        let prev = CalendarMonthViewModel(calendarMonth: CalendarMonth(month: pMonth, year: pMonth == 12 ? calendarMonth.year-1 : calendarMonth.year))
-        return prev
+        calendarMonth = CalendarMonth(month: pMonth, year: pMonth == 12 ? calendarMonth.year-1 : calendarMonth.year)
     }
     
     func getDays() -> [[Int]] {
@@ -77,10 +89,6 @@ class CalendarMonthViewModel: ObservableObject {
         var days : [[Int]] = Array(repeating: Array(repeating: 0, count: 7), count: 6)
         let firstWeekday = self.getFirstWeekDay()
         let dayOfMonth = self.getDaysOfMonth()
-        
-//        let todayDay: Int = Calendar.current.component(.day, from: Date())
-//        let todayMonth = Calendar.current.component(.month, from: Date())
-//        let todayYear = Calendar.current.component(.year, from: Date())
         
         for week in 0...5 {
             for day in 0...6 {

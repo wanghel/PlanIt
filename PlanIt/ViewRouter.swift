@@ -13,7 +13,7 @@ class ViewRouter: ObservableObject {
     @Published var selected = 1
     @Published var viewProfile = false
     @Published var isShowingDayView = true
-    @Published var dateShown = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month, .day], from: Date()))!
+    @Published var dateShown = Date()//Calendar.current.date(from: Calendar.current.dateComponents([.year, .month, .day], from: Date()))!
     @Published var showSignIn = Auth.auth().currentUser!.isAnonymous //true
     @Published var showSignUp = false
 }
