@@ -14,6 +14,15 @@ struct UserProfilesView: View {
     @ObservedObject var userProfilesVM = UserProfilesViewModel()
     @ObservedObject var friendProfile: UserViewModel
     
+    func isFriend(friendId: String) -> Bool {
+        for friend in session.profileVM?.profile.friends ?? [] {
+            if friendId == friend {
+                return true
+            }
+        }
+        return false
+    }
+    
     var body: some View {
         ZStack {
             dnavy
@@ -81,17 +90,34 @@ struct UserProfilesView: View {
                         Spacer()
                     }
                     
-                    NavigationLink(destination:
-                        Text("Friends")
-                            .navigationBarTitle("\(friendProfile.profile.userName ?? "")'s friends", displayMode: .inline)) {
-                                HStack {
-                                    Text("Friends")
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                }
-                                .padding()
-                                .background(navy)
+                    
+                    if friendProfile.profile.isPrivate ?? false && !self.isFriend(friendId: friendProfile.profile.id) {
+                        HStack {
+                            Image(systemName: "lock.slash.fill")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                            
+                            VStack {
+                                Text("This user is private.")
+                                    .bold()
+                                Text("Friend this user to see their to-do list.")
+                            }
+                            .padding(.leading)
+                        }
+                        .padding()
                     }
+                    
+//                    NavigationLink(destination:
+//                        Text("Friends")
+//                            .navigationBarTitle("\(friendProfile.profile.userName ?? "")'s friends", displayMode: .inline)) {
+//                                HStack {
+//                                    Text("Friends")
+//                                    Spacer()
+//                                    Image(systemName: (!(friendProfile.profile.isPrivate ?? false) || self.isFriend(friendId: friendProfile.profile.id)) ? "chevron.right" : "lock.slash.fill")
+//                                }
+//                                .padding()
+//                                .background(navy)
+//                    }
                     
                     NavigationLink(destination:
                         FriendCalendarView(friendProfile: friendProfile)
@@ -99,12 +125,12 @@ struct UserProfilesView: View {
                                 HStack {
                                     Text("Calendar")
                                     Spacer()
-                                    Image(systemName: "chevron.right")
+                                    Image(systemName: (!(friendProfile.profile.isPrivate ?? false) || self.isFriend(friendId: friendProfile.profile.id)) ? "chevron.right" : "lock.slash.fill")
                                 }
                                     
                                 .padding()
                                 .background(navy)
-                    }
+                    }.disabled(friendProfile.profile.isPrivate ?? false && !self.isFriend(friendId: friendProfile.profile.id))
                     
                     
                     Spacer()
@@ -119,37 +145,11 @@ struct UserProfilesView: View {
 }
 
 
-//struct FriendsView: View {
-//    @Binding var profile: UserProfile?
-//    @ObservedObject var userProfilesVM = UserProfilesViewModel()
-//
-//    var body: some View {
-//        VStack (alignment: .leading) {
-//            ForEach(profile?.friends ?? [], id: \.self) { friend in
-//                Button(action: {}) {
-//                    HStack {
-//                        Image(systemName: "person.crop.circle.fill")
-//                        Text(friend.userName)
-//                        Spacer()
-//                        Image(systemName: "chevron.right")
-//                            .foregroundColor(.gray)
-//                    }
-//                    .padding()
-//                }
-//            }
-//            Text("Friends")
-//        }
-//    }
-//}
-
-
-
-
-
 
 
 struct UserProfilesView_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfilesView(friendProfile: UserViewModel(profile: testUser3))
+        ContentView()
+//        UserProfilesView(friendProfile: UserViewModel(profile: testUser3))
     }
 }

@@ -16,6 +16,7 @@ struct SearchView: View {
     @State var searchText = ""
     @State var searchUsers = true
     
+    
     var body: some View {
         NavigationView {
             ZStack {

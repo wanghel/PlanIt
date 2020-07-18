@@ -15,14 +15,17 @@ struct DetailView: View {
     @ObservedObject var taskCellVM: TaskCellViewModel
     
     @State var showingDateSelector = false
+    @State var showingPrivacySelector = false
+    @State var privacy = 0
     
     @Binding var showingDetail: Bool
     
     private var addNewTask = true
+    var privacyOptions = ["public", "friends", "private"]
     
     init(showingDetail: Binding<Bool>) {
         self._showingDetail = showingDetail
-        self.taskCellVM = TaskCellViewModel(task: Task(title: "", description: "", priority: TaskPriority.none, completed: false, dayAssigned: Date()), taskRepository: TaskRepository())
+        self.taskCellVM = TaskCellViewModel(task: Task(title: "", description: "",priority: TaskPriority.none, completed: false, dayAssigned: Date()), taskRepository: TaskRepository())
     }
     
     init(showingDetail: Binding<Bool>, day: Date) {
@@ -73,6 +76,9 @@ struct DetailView: View {
                 
                 VStack {
                     Button (action: {
+                        if self.showingPrivacySelector {
+                            self.showingPrivacySelector.toggle()
+                        }
                         self.showingDateSelector.toggle()
                     }) {
                         HStack {
@@ -142,6 +148,7 @@ struct DetailView: View {
                     Spacer()
                 }
                 .padding()
+                
                 
                 TextField("Enter description", text: $taskCellVM.task.description)
                 .padding()

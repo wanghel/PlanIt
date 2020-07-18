@@ -18,6 +18,7 @@ struct User: Identifiable, Codable, Hashable {
     var name: String?
     var bio: String?
     var friends: [String]?
+    var isPrivate: Bool?
 }
 
 #if DEBUG
