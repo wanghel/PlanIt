@@ -20,7 +20,7 @@ struct SearchView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                dnavy
+                darkerBackground
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack (spacing: 0){
@@ -49,7 +49,7 @@ struct SearchView: View {
                         }
                     }
                     .padding([.horizontal])
-                    .background(ddnavy)
+                    .background(darkestBackground)
                     
                     ScrollView {
                         // IDK WHY DOING THIS MAKES THE DATA LOAD

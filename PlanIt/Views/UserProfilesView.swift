@@ -25,7 +25,7 @@ struct UserProfilesView: View {
     
     var body: some View {
         ZStack {
-            dnavy
+            darkerBackground
                 .edgesIgnoringSafeArea(.all)
             
             
@@ -129,7 +129,7 @@ struct UserProfilesView: View {
                                 }
                                     
                                 .padding()
-                                .background(navy)
+                                .background(darkBackground)
                     }.disabled(friendProfile.profile.isPrivate ?? false && !self.isFriend(friendId: friendProfile.profile.id))
                     
                     

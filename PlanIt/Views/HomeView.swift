@@ -23,7 +23,7 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                dnavy
+                darkerBackground
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack (spacing: 0) {

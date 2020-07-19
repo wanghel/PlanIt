@@ -47,7 +47,7 @@ struct DetailView: View {
     
     var body: some View {
         ZStack {
-            navy
+            darkBackground
                 .opacity(0.5)
                 .edgesIgnoringSafeArea(.all)
             

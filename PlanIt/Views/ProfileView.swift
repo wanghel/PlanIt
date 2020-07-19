@@ -21,7 +21,7 @@ struct ProfileView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                dnavy
+                darkerBackground
                     .edgesIgnoringSafeArea(.all)
                 
                 ProfileMainView()
@@ -86,7 +86,7 @@ struct ProfileMainView: View {
     
     var body: some View {
         ZStack {
-            dnavy
+            darkerBackground
                 .edgesIgnoringSafeArea(.all)
             
             ScrollView {
@@ -157,7 +157,7 @@ struct ProfileEditView: View {
     
     var body: some View {
         ZStack {
-            dnavy
+            darkerBackground
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
@@ -168,7 +168,7 @@ struct ProfileEditView: View {
                     TextField("User Name", text: $userName)
                         .font(.system(size: 14))
                         .padding()
-                        .background(navy.cornerRadius(10))
+                        .background(darkBackground.cornerRadius(10))
                         .frame(width: 270)
                 }
                 
@@ -179,7 +179,7 @@ struct ProfileEditView: View {
                     TextField("Name", text: $name)
                         .font(.system(size: 14))
                         .padding()
-                        .background(navy.cornerRadius(10))
+                        .background(darkBackground.cornerRadius(10))
                         .frame(width: 270)
                 }
                 
@@ -190,7 +190,7 @@ struct ProfileEditView: View {
                     TextField("Bio", text: $bio)
                         .font(.system(size: 14))
                         .padding()
-                        .background(navy.cornerRadius(10))
+                        .background(darkBackground.cornerRadius(10))
                         .frame(width: 270)
                 }
                 

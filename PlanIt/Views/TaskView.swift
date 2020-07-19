@@ -114,7 +114,7 @@ struct TaskCell: View  {
             .clipped()
             .background(
                 RoundedRectangle(cornerRadius: 15)
-                    .fill(navy)
+                    .fill(darkBackground)
                     .shadow(color: getPriorityColor(priority: self.taskCellVM.task.priority), radius: 5)
             )
                 .offset(x: self.draggedOffset.width + self.lastOffset.width)
@@ -194,7 +194,7 @@ struct TaskCell: View  {
             
             
         }
-        .background(dnavy)
+        .background(darkerBackground)
         
     }
 }
@@ -287,7 +287,7 @@ struct FriendTaskCellView: View  {
             .clipped()
             .background(
                 RoundedRectangle(cornerRadius: 15)
-                    .fill(navy)
+                    .fill(darkBackground)
                     .shadow(color: getPriorityColor(priority: self.taskCellVM.task.priority), radius: 5)
             )
                 .offset(x: self.draggedOffset.width + self.lastOffset.width)
@@ -345,7 +345,7 @@ struct FriendTaskCellView: View  {
             
             
         }
-        .background(dnavy)
+        .background(darkerBackground)
         
     }
 }

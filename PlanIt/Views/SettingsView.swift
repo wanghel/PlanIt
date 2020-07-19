@@ -15,7 +15,7 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                dnavy
+                darkerBackground
                     .edgesIgnoringSafeArea(.all)
                 
                 ScrollView {
@@ -28,7 +28,7 @@ struct SettingsView: View {
                                     Image(systemName: "chevron.right")
                                 }
                                 .padding()
-                                .background(navy)
+                                .background(darkBackground)
                                 .cornerRadius(10)
                     }
                     
@@ -43,7 +43,7 @@ struct SettingsView: View {
                                 }
                                     
                                 .padding()
-                                .background(navy)
+                                .background(darkBackground)
                                 .cornerRadius(10)
                                 
                     }
@@ -57,21 +57,21 @@ struct SettingsView: View {
                                     Image(systemName: "chevron.right")
                                 }
                                 .padding()
-                                .background(navy)
+                                .background(darkBackground)
                                 .cornerRadius(10)
                     }
                     
                     Button(action: {
                         self.session.signOut()
 //                        self.profileVM = UserViewModel(profile: User(id: ""))
-                        self.viewRouter.showSignIn.toggle()
+                        self.viewRouter.showSignIn = true
                     }){
                         HStack {
                             Text("Log out")
                             Spacer()
                         }
                         .padding()
-                        .background(navy)
+                        .background(darkBackground)
                         .cornerRadius(10)
                     }
                     .padding(.vertical)

@@ -20,7 +20,7 @@ struct CalendarView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                dnavy
+                darkerBackground
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack {
@@ -277,7 +277,7 @@ struct LargeCalendarView: View {
     
     var body: some View {
         ZStack {
-            dnavy
+            darkerBackground
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
@@ -406,7 +406,7 @@ struct FriendCalendarView: View {
     
     var body: some View {
         ZStack {
-            dnavy
+            darkerBackground
                 .edgesIgnoringSafeArea(.all)
             
             VStack {

@@ -19,32 +19,12 @@ let yellow = Color(red: 1.0, green: 0.9, blue: 0.5)
 let green = Color(red: 0.8, green: 0.97, blue: 0.6)
 let blue = Color(red: 0.7, green: 0.95, blue: 0.9)
 let purple = Color(red: 0.9, green: 0.7, blue: 0.9)
-//let navy = Color(red: 0.28, green: 0.25, blue: 0.30)
-let navy = Color(red: 0.3, green: 0.3, blue: 0.30)
-//let dnavy = Color(red: 0.18, green: 0.15, blue: 0.20)
-let dnavy = Color(red: 0.15, green: 0.15, blue: 0.15)
-let ddnavy = Color(red: 0.05, green: 0.05, blue: 0.05)
+//let darkBackground = Color(red: 0.28, green: 0.25, blue: 0.30)
+let darkBackground = Color(red: 0.3, green: 0.3, blue: 0.30)
+//let darkerBackground = Color(red: 0.18, green: 0.15, blue: 0.20)
+let darkerBackground = Color(red: 0.15, green: 0.15, blue: 0.15)
+let darkestBackground = Color(red: 0.05, green: 0.05, blue: 0.05)
 
-/*func getColor(eventVM: EventViewModel) -> Color {
-   switch eventVM.event.color {
-   case "pink":
-       return pink
-   case "red":
-       return red
-   case "orange":
-       return orange
-   case "yellow":
-       return yellow
-   case "green":
-       return green
-   case "blue":
-       return blue
-   case "purple":
-       return purple
-   default:
-       return Color.black
-   }
-}*/
 
 struct ContentView: View {
     @EnvironmentObject var session: SessionStore
@@ -63,7 +43,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            dnavy
+            darkerBackground
             .edgesIgnoringSafeArea(.all)
             
             TabView(selection: $currentTab) {

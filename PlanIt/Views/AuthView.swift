@@ -67,7 +67,7 @@ struct SignInView: View {
                 
             }
             .padding(.horizontal)
-            .background(navy.cornerRadius(10))
+            .background(darkBackground.cornerRadius(10))
             
             
             HStack {
@@ -78,7 +78,7 @@ struct SignInView: View {
                     .padding()
             }
             .padding(.horizontal)
-            .background(navy.cornerRadius(10))
+            .background(darkBackground.cornerRadius(10))
             
             Button(action: {
                 self.signIn()
@@ -114,7 +114,7 @@ struct SignInView: View {
         }
         .padding()
         .foregroundColor(.white)
-        .background(dnavy)
+        .background(darkerBackground)
     }
 }
 
@@ -178,7 +178,7 @@ struct SignUpView: View {
                         .textContentType(.emailAddress)
                         .font(.system(size: 14))
                         .padding()
-                        .background(navy.cornerRadius(10))
+                        .background(darkBackground.cornerRadius(10))
                         .frame(width: 270)
                 }
                 
@@ -189,7 +189,7 @@ struct SignUpView: View {
                     SecureField("Password", text: $password)
                         .font(.system(size: 14))
                         .padding()
-                        .background(navy.cornerRadius(10))
+                        .background(darkBackground.cornerRadius(10))
                         .frame(width: 270)
                 }
                 
@@ -200,7 +200,7 @@ struct SignUpView: View {
                     SecureField("Confirm Password", text: $confirmPassword)
                         .font(.system(size: 14))
                         .padding()
-                        .background(navy.cornerRadius(10))
+                        .background(darkBackground.cornerRadius(10))
                         .frame(width: 270)
                 }
                 
@@ -211,7 +211,7 @@ struct SignUpView: View {
                     TextField("User Name", text: $userName)
                         .font(.system(size: 14))
                         .padding()
-                        .background(navy.cornerRadius(10))
+                        .background(darkBackground.cornerRadius(10))
                         .frame(width: 270)
                 }
                 
@@ -222,7 +222,7 @@ struct SignUpView: View {
                     TextField("Name", text: $name)
                         .font(.system(size: 14))
                         .padding()
-                        .background(navy.cornerRadius(10))
+                        .background(darkBackground.cornerRadius(10))
                         .frame(width: 270)
                 }
                 
@@ -233,7 +233,7 @@ struct SignUpView: View {
                     TextField("Bio", text: $bio)
                         .font(.system(size: 14))
                         .padding()
-                        .background(navy.cornerRadius(10))
+                        .background(darkBackground.cornerRadius(10))
                         .frame(width: 270)
                 }
             }
@@ -272,7 +272,7 @@ struct SignUpView: View {
         }
         .padding()
         .foregroundColor(.white)
-        .background(dnavy)
+        .background(darkerBackground)
         
     }
 }
