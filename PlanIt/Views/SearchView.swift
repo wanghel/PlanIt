@@ -70,6 +70,7 @@ struct SearchView: View {
                                                     .padding()
                                                 Spacer()
                                                 Image(systemName: "chevron.right")
+                                                .padding()
                                             }
                                     }
                                     .padding(.horizontal)
@@ -85,6 +86,7 @@ struct SearchView: View {
                                                     .padding()
                                                 Spacer()
                                                 Image(systemName: "chevron.right")
+                                                .padding()
                                             }
                                     }
                                     .padding(.horizontal)

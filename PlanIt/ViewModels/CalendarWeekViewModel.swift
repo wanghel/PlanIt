@@ -12,12 +12,12 @@ class CalendarWeekViewModel: ObservableObject {
     @Published var calendarWeek: CalendarWeek
     @Published var week = [Int]()
     
-    var date: Date //= Date()
+    var date: Date
     private let userCal = Calendar.current
     private let daysOfMonthArr = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     
     init() {
-        print("load wrong small calendar")
+//        print("load wrong small calendar")
         self.date = Date()
         calendarWeek = CalendarWeek(day: userCal.component(.day, from: Date()), month: userCal.component(.month, from: Date()), year: userCal.component(.year, from: Date()))
         week = loadWeek()
@@ -38,7 +38,7 @@ class CalendarWeekViewModel: ObservableObject {
         var calendarWeekPointer = CalendarWeek(day: userCal.component(.day, from: date), month: userCal.component(.month, from: date), year: userCal.component(.year, from: date))
         
         arr[weekday-1] = calendarWeekPointer.day
-        print("middle day: \(calendarWeekPointer.day)")
+//        print("middle day: \(calendarWeekPointer.day)")
         if weekday-2 >= 0 {
             for day in (0..<(weekday-1)).reversed() {
                 calendarWeekPointer = getPrevDay(week: calendarWeekPointer)

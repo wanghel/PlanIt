@@ -86,7 +86,7 @@ struct HomeView: View {
                         .font(.system(size: 25))
                         .foregroundColor(.white)
                         .opacity(0.9)
-                        .padding(.bottom)
+                        .padding([.bottom, .horizontal])
                 }, trailing:
                 Button(action: {
                     self.showingDetail.toggle()
@@ -95,7 +95,7 @@ struct HomeView: View {
                         .font(.system(size: 25))
                         .foregroundColor(.white)
                         .opacity(0.9)
-                        .padding(.bottom)
+                        .padding([.bottom, .horizontal])
             })
         }
         .sheet(isPresented: $showingDetail) {

@@ -18,7 +18,7 @@ class TaskViewModel: ObservableObject {
     
     init(taskRepository: TaskRepository) {
         self.taskRepository = taskRepository
-        print("created from TASK VM")
+//        print("created from TASK VM")
         taskRepository.$tasks.map { tasks in
             tasks.map { task in
                 TaskCellViewModel(task: task, taskRepository: taskRepository)

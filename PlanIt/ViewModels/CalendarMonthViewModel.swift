@@ -73,7 +73,7 @@ class CalendarMonthViewModel: ObservableObject {
     
     func nextMonth() {
         //let nMonth = (calendarMonth.month-1+1)%12+1
-        print("NEXT MONTH WORKED")
+//        print("NEXT MONTH WORKED")
         let nMonth = (calendarMonth.month)%12+1
         calendarMonth = CalendarMonth(month: nMonth, year: nMonth == 1 ? calendarMonth.year+1 : calendarMonth.year)
     }
@@ -85,7 +85,7 @@ class CalendarMonthViewModel: ObservableObject {
     }
     
     func getDays() -> [[Int]] {
-        print("called get days")
+//        print("called get days")
         var days : [[Int]] = Array(repeating: Array(repeating: 0, count: 7), count: 6)
         let firstWeekday = self.getFirstWeekDay()
         let dayOfMonth = self.getDaysOfMonth()

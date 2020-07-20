@@ -264,9 +264,9 @@
 				3B1EABC62492FD0D00A610CB /* ProfileView.swift */,
 				3B32E5C024AEB0A9005E55B5 /* UserProfilesView.swift */,
 				3B7D1413248718CA00E30EDF /* CalendarView.swift */,
-				3B7D140B2484485100E30EDF /* MonthView.swift */,
 				3B5D0F1F24A7F894002FA7B6 /* TaskView.swift */,
 				3BD3F9F124A2A68000071FD2 /* Date+CustomComparison.swift */,
+				3B7D140B2484485100E30EDF /* MonthView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

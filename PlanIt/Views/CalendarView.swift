@@ -38,6 +38,7 @@ struct CalendarView: View {
                                     print(self.viewRouter.dateShown)
                                 }) {
                                     Image(systemName: "chevron.compact.up")
+                                    .padding()
                                 }
                             }
                             
@@ -54,6 +55,7 @@ struct CalendarView: View {
                                     }
                                 }) {
                                     Image(systemName: "chevron.compact.down")
+                                    .padding()
                                 }
                             }
                         }
@@ -78,7 +80,7 @@ struct CalendarView: View {
                         .font(.system(size: 25))
                         .foregroundColor(.white)
                         .opacity(0.9)
-                        .padding(.bottom)
+                        .padding([.bottom, .horizontal])
                 }, trailing:
                 Button(action: {
                     self.showingDetail.toggle()
@@ -87,12 +89,12 @@ struct CalendarView: View {
                         .font(.system(size: 25))
                         .foregroundColor(.white)
                         .opacity(0.9)
-                        .padding(.bottom)
+                        .padding([.bottom, .horizontal])
             })
         }
-        
-            .sheet(isPresented: $showingDetail) {
-                DetailView(showingDetail: self.$showingDetail, day: self.viewRouter.dateShown)
+            
+        .sheet(isPresented: $showingDetail) {
+            DetailView(showingDetail: self.$showingDetail, day: self.viewRouter.dateShown)
         }
     }
     
@@ -189,11 +191,11 @@ struct WeekView: View {
             ForEach(0..<7) { day in
                     VStack {
                         Text(self.weekdays[day])
-                            .font(.system(size: 15))
+                            .font(.system(size: 13))
                             .bold()
                             .shadow(radius: 5)
                         Text(String(self.week.week[day]))
-                            .font(.system(size: 20))
+                            .font(.system(size: 17))
                             .bold()
                             .shadow(radius: 5)
                     }
@@ -423,6 +425,7 @@ struct FriendCalendarView: View {
                                 }
                             }) {
                                 Image(systemName: "chevron.compact.up")
+                                .padding()
                             }
                         }
                         
@@ -439,6 +442,7 @@ struct FriendCalendarView: View {
                                 }
                             }) {
                                 Image(systemName: "chevron.compact.down")
+                                .padding()
                             }
                         }
                     }

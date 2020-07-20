@@ -16,7 +16,7 @@ class UserProfilesViewModel : ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     init() {
-        print("created from USER PROFILES VM")
+//        print("created from USER PROFILES VM")
         userProfileRepository.$userProfiles.map { profiles in
             profiles.map { profile in
                 UserViewModel(profile: profile)
