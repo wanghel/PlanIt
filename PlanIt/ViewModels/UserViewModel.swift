@@ -19,6 +19,8 @@ class UserViewModel: ObservableObject, Identifiable {
     
     private var cancellables = Set<AnyCancellable>()
     
+    var didChange = PassthroughSubject<[User], Never>()
+    
     var id = ""
   
     init(profile: User) {
@@ -45,6 +47,7 @@ class UserViewModel: ObservableObject, Identifiable {
     
     func fetchFriendProfiles() {
         self.friends.removeAll()
+        
         for friend in profile.friends ?? [] {
             self.userProfileRepository.fetchProfile(userId: friend) { (profile, error) in
                 if let error = error {
@@ -58,6 +61,7 @@ class UserViewModel: ObservableObject, Identifiable {
         }
 
     }
+    
     
     func fetchProfilePic() {
         self.userProfileRepository.fetchImage(profile.id) {

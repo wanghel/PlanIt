@@ -26,6 +26,7 @@ struct Task: Identifiable, Codable {
     var completed: Bool
     @ServerTimestamp var createdTime: Timestamp?
     var dayAssigned: Date
+    var sentFrom: String?
 }
 
 #if DEBUG

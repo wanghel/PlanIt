@@ -26,7 +26,7 @@ struct TaskView: View {
     }
     
     var body: some View {
-        VStack {
+        VStack (spacing: 0) {
             // IDK WHY DOING THIS MAKES THE DATA LOAD
             Text("")
                 .frame(width: screenWidth, height: 0)
@@ -61,7 +61,7 @@ struct TaskCell: View  {
     func getPriorityColor(priority: TaskPriority) -> Color {
         switch priority {
         case .none:
-            return .black
+            return .clear
         case .low:
             return green
         case .medium:
@@ -113,7 +113,10 @@ struct TaskCell: View  {
             .background(
                 RoundedRectangle(cornerRadius: 15)
                     .fill(darkBackground)
-                    .shadow(color: getPriorityColor(priority: self.taskCellVM.task.priority), radius: 5)
+                    .background(RoundedRectangle(cornerRadius: 15)
+                        .stroke(getPriorityColor(priority: self.taskCellVM.task.priority), lineWidth: 4)
+                        .opacity(0.5))
+//                    .shadow(color: getPriorityColor(priority: self.taskCellVM.task.priority), radius: 5)
             )
                 .offset(x: self.draggedOffset.width + self.lastOffset.width)
                 .gesture(DragGesture(minimumDistance: 20)
@@ -241,7 +244,7 @@ struct FriendTaskCellView: View  {
     func getPriorityColor(priority: TaskPriority) -> Color {
         switch priority {
         case .none:
-            return .black
+            return .clear
         case .low:
             return green
         case .medium:
@@ -284,7 +287,10 @@ struct FriendTaskCellView: View  {
             .background(
                 RoundedRectangle(cornerRadius: 15)
                     .fill(darkBackground)
-                    .shadow(color: getPriorityColor(priority: self.taskCellVM.task.priority), radius: 5)
+                    .background(RoundedRectangle(cornerRadius: 15)
+                        .stroke(getPriorityColor(priority: self.taskCellVM.task.priority), lineWidth: 4)
+                        .opacity(0.5))
+//                    .shadow(color: getPriorityColor(priority: self.taskCellVM.task.priority), radius: 5)
             )
                 .offset(x: self.draggedOffset.width + self.lastOffset.width)
                 .gesture(DragGesture(minimumDistance: 20)

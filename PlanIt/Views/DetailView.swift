@@ -70,9 +70,7 @@ struct DetailView: View {
                 .padding()
                 
                 TextField("Enter title", text: $taskCellVM.task.title)
-                    .padding()
-                    .foregroundColor(.black)
-                    .background(Color.white.opacity(0.8).cornerRadius(10))
+                    .padding()                    .background(Color.white.opacity(0.2).cornerRadius(10))
                 
                 VStack {
                     Button (action: {
@@ -83,11 +81,10 @@ struct DetailView: View {
                     }) {
                         HStack {
                             Text("Date Assigned")
-                                .foregroundColor(.black)
                                 .padding()
                             Spacer()
                             Text("\(taskCellVM.task.dayAssigned, formatter: dateFormatter)")
-                                .foregroundColor(.gray)
+                                .opacity(0.7)
                                 .padding()
                         }
                     }
@@ -102,10 +99,11 @@ struct DetailView: View {
                         
                     }
                 }
-                .background(Color.white.opacity(0.8).cornerRadius(10))
+                .background(Color.white.opacity(0.2).cornerRadius(10))
                 
                 HStack {
                     Text("Priority")
+                        .padding(.trailing)
                     
                     Button(action: {
                         self.taskCellVM.task.priority = TaskPriority.none
@@ -149,12 +147,10 @@ struct DetailView: View {
                 }
                 .padding()
                 
-                
                 TextField("Enter description", text: $taskCellVM.task.description)
-                .padding()
-                .foregroundColor(.black)
-                .background(Color.white.opacity(0.8).cornerRadius(10))
-                
+                    .opacity(0.1)
+                    .padding()
+                    .background(Color.white.opacity(0.2).cornerRadius(10))
                 Spacer()
             }
             .foregroundColor(.white)

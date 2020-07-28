@@ -29,6 +29,7 @@ struct ContentView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     
     @State private var currentTab = 1
+    @State var showSplash: Bool = true
     
     init () {
         UITabBar.appearance().isTranslucent = true
@@ -78,6 +79,12 @@ struct ContentView: View {
             .environmentObject(session)
                 
             ProfileView()
+            
+            if showSplash {
+                SplashView(showSplash: self.$showSplash)
+                .zIndex(1)
+            }
+            
         }
         .foregroundColor(.white)
         
