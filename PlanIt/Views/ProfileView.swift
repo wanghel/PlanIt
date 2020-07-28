@@ -12,7 +12,7 @@ struct ProfileView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var session: SessionStore
     
-//    @State var profileVM: UserViewModel?
+//    @State var image = Image(systemName: "person.crop.circle.fill")
     
     func getUser() {
         session.listen()
@@ -33,7 +33,6 @@ struct ProfileView: View {
                 }
             }
             .frame(width: screenWidth)
-//            .navigationBarTitle("\(self.viewRouter.showSignIn ? self.viewRouter.showSignUp ? "Sign up": "Sign In" : profileVM?.profile.userName?.lowercased() ?? "")", displayMode: .inline)
                 .navigationBarTitle("\(self.viewRouter.showSignIn ? self.viewRouter.showSignUp ? "Sign up": "Sign In" : session.profileVM?.profile.userName?.lowercased() ?? "")", displayMode: .inline)
             .navigationBarItems(
                 leading:
@@ -80,9 +79,22 @@ struct ProfileMainView: View {
     @ObservedObject var userProfilesVM = UserProfilesViewModel()
     
     func getUser() {
+        print("on appear get user")
         session.listen()
     }
     
+    // !!! DOESN'T WORK YET !!!
+    func getFriendProfilePic(friend: UserViewModel) -> Image {
+        friend.fetchProfilePic()
+        
+        if let image = friend.profilePic {
+            print("succeed")
+            return Image(uiImage: image)
+        } else {
+            print("failed")
+            return Image(systemName: "person.crop.circle.fill")
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -92,8 +104,14 @@ struct ProfileMainView: View {
             ScrollView {
                 VStack {
                     
-                    Image(systemName: "person.crop.circle.fill").resizable()
-                        .frame(width: 150, height: 150)
+                    Image(uiImage: session.profilePic ?? UIImage())
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .opacity(0.9)
+                        .frame(width: 160, height: 160)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.gray, lineWidth: 4).frame(width: 160, height: 160))
+                    
                     
                     Text(session.profileVM?.profile.name ?? "").font(.title)
                         .padding()
@@ -113,7 +131,9 @@ struct ProfileMainView: View {
                         ForEach(session.profileVM?.friends ?? [], id: \.self) { friend in
                             NavigationLink(destination: UserProfilesView(friendProfile: UserViewModel(profile: friend)) ) {
                                 HStack {
-                                    Image(systemName: "person.crop.circle.fill")
+//                                    Image(systemName: "person.crop.circle.fill")
+                                    //!!! DOESN"T WORK YET !!!
+                                    self.getFriendProfilePic(friend: UserViewModel(profile: friend))
                                     Text("\(friend.name ?? "")")
                                     Spacer()
                                     Image(systemName: "chevron.right")
@@ -145,14 +165,26 @@ struct ProfileEditView: View {
     @State var name: String = ""
     @State var bio: String = ""
     
+    @State var showImagePicker: Bool = false
+    @State var image: UIImage?
+    
     func setValue() -> Void {
         userName = session.profileVM?.profile.userName ?? ""
         name = session.profileVM?.profile.name ?? ""
         bio = session.profileVM?.profile.bio ?? ""
+        image = session.profilePic
     }
     
     func goBack(){
         self.presentationMode.wrappedValue.dismiss()
+    }
+    
+    func getProfilePic() -> Image {
+        if image == nil {
+            return Image(systemName: "person.crop.circle.fill")
+        } else {
+            return Image(uiImage: image ?? UIImage())
+        }
     }
     
     var body: some View {
@@ -160,40 +192,60 @@ struct ProfileEditView: View {
             darkerBackground
                 .edgesIgnoringSafeArea(.all)
             
-            VStack {
-                HStack {
-                    Text("Username")
-                        .font(.system(size: 14))
+            ScrollView {
+                VStack {
+                    
+                    HStack {
+                        Button(action: {self.showImagePicker.toggle()}) {
+                            getProfilePic()
+                                .renderingMode(.original)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .opacity(0.9)
+                                .frame(width: 160, height: 160)
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(Color.gray, lineWidth: 4).frame(width: 160, height: 160))
+                        }
+                    }
+                    .padding()
+                    
+                    HStack {
+                        Text("Username")
+                            .font(.system(size: 14))
+                        Spacer()
+                        TextField("User Name", text: $userName)
+                            .font(.system(size: 14))
+                            .padding()
+                            .background(darkBackground.cornerRadius(10))
+                            .frame(width: 270)
+                    }
+                    
+                    HStack {
+                        Text("Name")
+                            .font(.system(size: 14))
+                        Spacer()
+                        TextField("Name", text: $name)
+                            .font(.system(size: 14))
+                            .padding()
+                            .background(darkBackground.cornerRadius(10))
+                            .frame(width: 270)
+                    }
+                    
+                    HStack {
+                        Text("Bio")
+                            .font(.system(size: 14))
+                        Spacer()
+                        TextField("Bio", text: $bio)
+                            .font(.system(size: 14))
+                            .padding()
+                            .background(darkBackground.cornerRadius(10))
+                            .frame(width: 270)
+                    }
+                    
                     Spacer()
-                    TextField("User Name", text: $userName)
-                        .font(.system(size: 14))
-                        .padding()
-                        .background(darkBackground.cornerRadius(10))
-                        .frame(width: 270)
+                    
                 }
-                
-                HStack {
-                    Text("Name")
-                        .font(.system(size: 14))
-                    Spacer()
-                    TextField("Name", text: $name)
-                        .font(.system(size: 14))
-                        .padding()
-                        .background(darkBackground.cornerRadius(10))
-                        .frame(width: 270)
-                }
-                
-                HStack {
-                    Text("Bio")
-                        .font(.system(size: 14))
-                    Spacer()
-                    TextField("Bio", text: $bio)
-                        .font(.system(size: 14))
-                        .padding()
-                        .background(darkBackground.cornerRadius(10))
-                        .frame(width: 270)
-                }
-                
+                .padding()
             }
             
             
@@ -210,17 +262,24 @@ struct ProfileEditView: View {
             Button(action: {
                 if let currUser = self.session.profileVM?.profile {
                     self.session.profileVM?.profile = User(id: currUser.id, email: currUser.email, userName: self.userName, name: self.name, bio: self.bio, friends: currUser.friends)
+                    
+                    self.session.profilePic = self.image
                 }
-                sleep(1)
                 self.goBack()
             }) {
                 Text("Done")
                     .foregroundColor(.white)
         })
+            .sheet(isPresented: $showImagePicker) {
+                ImagePickerView(sourceType: .photoLibrary) { image in
+                    self.image = image
+                }
+        }
         
     }
 }
 
+#if DEBUG
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileMainView()
@@ -229,3 +288,4 @@ struct ProfileView_Previews: PreviewProvider {
 
     }
 }
+#endif

@@ -22,8 +22,6 @@ struct User: Identifiable, Codable, Hashable {
 }
 
 #if DEBUG
-
-
 let testUser2 = User(
     id: "2",
     userName: "euni",
@@ -47,5 +45,4 @@ let testUser1 = User(
     bio: "some Helen bio",
     friends: ["3"]
 )
-
 #endif

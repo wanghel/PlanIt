@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import FirebaseStorage
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
@@ -62,11 +63,38 @@ class UserProfileRepository: ObservableObject {
     
       func updateProfile(_ userProfile: User) {
           do {
-              try db.collection("users").document(userProfile.id).setData(from: userProfile)
+            try db.collection("users").document(userProfile.id).setData(from: userProfile)
           }
           catch {
               fatalError("Unable to encode user: \(error.localizedDescription)")
           }
       }
     
+        
+    func fetchImage(_ id: String, completion: @escaping (_ image: UIImage?, _ error: Error?) -> Void) {
+            let ref = Storage.storage().reference(withPath: "images/\(id).jpg")
+            print("get image: images/\(id).jpg")
+            ref.getData(maxSize: 4 * 1024 * 1024) { data, error in
+                completion(UIImage(data: data ?? Data()), error)
+            }
+            
+        }
+    
+    func updateImage(_ id: String, _ image: UIImage?) {
+        if let image = image {
+            let data = image.pngData()
+            
+            let ref = Storage.storage().reference().child("images/\(id).jpg")
+            
+            if let data = data {
+                print("changed picture")
+                ref.putData(data, metadata: nil) { (metadata, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                    
+                }
+            }
+        }
+    }
 }

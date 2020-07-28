@@ -19,11 +19,9 @@ let yellow = Color(red: 1.0, green: 0.9, blue: 0.5)
 let green = Color(red: 0.8, green: 0.97, blue: 0.6)
 let blue = Color(red: 0.7, green: 0.95, blue: 0.9)
 let purple = Color(red: 0.9, green: 0.7, blue: 0.9)
-//let darkBackground = Color(red: 0.28, green: 0.25, blue: 0.30)
 let darkBackground = Color(red: 0.3, green: 0.3, blue: 0.30)
-//let darkerBackground = Color(red: 0.18, green: 0.15, blue: 0.20)
 let darkerBackground = Color(red: 0.15, green: 0.15, blue: 0.15)
-let darkestBackground = Color(red: 0.05, green: 0.05, blue: 0.05)
+let darkestBackground = Color(red: 0.12, green: 0.12, blue: 0.12)
 
 
 struct ContentView: View {
@@ -34,11 +32,11 @@ struct ContentView: View {
     
     init () {
         UITabBar.appearance().isTranslucent = true
-        UITabBar.appearance().barTintColor = UIColor.init(displayP3Red: 0.05, green: 0.05, blue: 0.05, alpha: 1)//(displayP3Red: 0.02, green: 0, blue: 0.05, alpha: 1)
+        UITabBar.appearance().barTintColor = UIColor.init(displayP3Red: 0.05, green: 0.05, blue: 0.05, alpha: 1)
         
-        UINavigationBar.appearance().barTintColor = UIColor.init(displayP3Red: 0.05, green: 0.05, blue: 0.05, alpha: 1)//(displayP3Red: 0.02, green: 0, blue: 0.05, alpha: 1)
-        UINavigationBar.appearance().titleTextAttributes = [.font: UIFont(name: "andromeda"/*"Helvetica Neue"*/, size: 25)!, .foregroundColor: UIColor.white]
-        
+        UINavigationBar.appearance().barTintColor = UIColor.init(displayP3Red: 0.05, green: 0.05, blue: 0.05, alpha: 1)
+        UINavigationBar.appearance().titleTextAttributes = [.font: UIFont(name: "andromeda", size: 27)!, .foregroundColor: UIColor.white]
+        UINavigationBar.appearance().shadowImage = UIImage()
     }
     
     var body: some View {

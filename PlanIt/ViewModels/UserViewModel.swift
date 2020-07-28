@@ -8,11 +8,13 @@
 
 import Foundation
 import Combine
+import UIKit
 
 class UserViewModel: ObservableObject, Identifiable {
     
     @Published var userProfileRepository = UserProfileRepository()
     @Published var profile: User
+    @Published var profilePic: UIImage?
     @Published var friends = [User]()
     
     private var cancellables = Set<AnyCancellable>()
@@ -54,7 +56,21 @@ class UserViewModel: ObservableObject, Identifiable {
                 }
             }
         }
-        
+
+    }
+    
+    func fetchProfilePic() {
+        self.userProfileRepository.fetchImage(profile.id) {
+            (image, error) in
+            if let error = error {
+                print("Error while fetching user profile picture: \(error.localizedDescription)")
+            }
+
+            if let image = image {
+                print("set image")
+                self.profilePic = image
+            }
+        }
     }
     
 }

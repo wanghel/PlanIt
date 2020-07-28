@@ -10,6 +10,7 @@ import SwiftUI
 
 struct CalendarView: View {
     @EnvironmentObject var viewRouter: ViewRouter
+    @EnvironmentObject var session: SessionStore
     
     @State var showSmallCalendar = false
     @State var showingDetail = false
@@ -76,11 +77,22 @@ struct CalendarView: View {
                 Button(action: {
                     self.viewRouter.viewProfile = true
                 }){
-                    Image(systemName: "person.crop.circle.fill")
-                        .font(.system(size: 25))
-                        .foregroundColor(.white)
+//                    Image(systemName: "person.crop.circle.fill")
+//                        .font(.system(size: 25))
+//                        .foregroundColor(.white)
+//                        .opacity(0.9)
+//                        .padding([.bottom, .horizontal])
+                    
+                    Image(uiImage: session.profilePic ?? UIImage())
+                        .renderingMode(.original)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
                         .opacity(0.9)
-                        .padding([.bottom, .horizontal])
+                        .frame(width: 32, height: 32)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.gray, lineWidth: 1).frame(width: 32, height: 32))
+                        .padding()
+                    
                 }, trailing:
                 Button(action: {
                     self.showingDetail.toggle()
@@ -89,7 +101,7 @@ struct CalendarView: View {
                         .font(.system(size: 25))
                         .foregroundColor(.white)
                         .opacity(0.9)
-                        .padding([.bottom, .horizontal])
+                        .padding()
             })
         }
             
@@ -116,18 +128,12 @@ struct SmallCalendarView: View {
     }
     
     private func nextView() {
-//        pWeek = pWeek.getNextWeek()
-//        cWeek = cWeek.getNextWeek()
-//        nWeek = nWeek.getNextWeek()
         pWeek.getNextWeek()
         cWeek.getNextWeek()
         nWeek.getNextWeek()
     }
     
     private func prevView() {
-//        pWeek = pWeek.getPrevWeek()
-//        cWeek = cWeek.getPrevWeek()
-//        nWeek = nWeek.getPrevWeek()
         pWeek.getPrevWeek()
         cWeek.getPrevWeek()
         nWeek.getPrevWeek()
@@ -200,11 +206,15 @@ struct WeekView: View {
                             .shadow(radius: 5)
                     }
                     .padding()
-                    .frame(width: screenWidth/7, height: self.getDate(year: self.week.calendarWeek.year, month: self.week.calendarWeek.month, day: self.week.week[day]).isSameDay(self.viewRouter.dateShown) ? 70 : 60)
+                    .frame(width: screenWidth/7, height: 60)
                     .background(
-                        RoundedRectangle(cornerRadius: self.getDate(year: self.week.calendarWeek.year, month: self.week.calendarWeek.month, day: self.week.week[day]).isSameDay(self.viewRouter.dateShown) ? 5 : 0)
-                            .fill(self.getDate(year: self.week.calendarWeek.year, month: self.week.calendarWeek.month, day: self.week.week[day]).isSameDay(self.viewRouter.dateShown) ? self.color[day] : Color.gray)
-                                .opacity(0.9))
+                        VStack {
+                            RoundedRectangle(cornerRadius: self.getDate(year: self.week.calendarWeek.year, month: self.week.calendarWeek.month, day: self.week.week[day]).isSameDay(self.viewRouter.dateShown) ? 5 : 0)
+                                .fill(self.getDate(year: self.week.calendarWeek.year, month: self.week.calendarWeek.month, day: self.week.week[day]).isSameDay(self.viewRouter.dateShown) ? self.color[day] : Color.gray)
+                                .opacity(0.9)
+                                .frame(height: self.getDate(year: self.week.calendarWeek.year, month: self.week.calendarWeek.month, day: self.week.week[day]).isSameDay(self.viewRouter.dateShown) ? 70 : 60)
+                            Spacer()
+                    })
                         .onTapGesture {
                             let weekday = Calendar.current.component(.weekday, from: self.week.date)
                             var date = self.viewRouter.dateShown
@@ -217,10 +227,7 @@ struct WeekView: View {
                             }
                             self.viewRouter.dateShown = date
                             self.week.date = date
-                            print(date)
-                            
                 }
-                
                 
             }
         }
@@ -283,6 +290,7 @@ struct LargeCalendarView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
+                
                 HStack {
                     ForEach(0..<7) { day in
                         HStack (spacing: 0){
@@ -412,6 +420,12 @@ struct FriendCalendarView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
+                Text("\(monthArr[(viewRouter.dateShown.get(.month)+11)%12]) \(String(viewRouter.dateShown.get(.year)))")
+                    .font(Font.custom("andromeda", size: 23))
+                    .padding()
+                    .frame(width: screenWidth, alignment: .center)
+                    .background(darkestBackground)
+                
                 ZStack {
                     if !showSmallCalendar {
                         VStack {
@@ -459,10 +473,11 @@ struct FriendCalendarView: View {
     }
 }
 
+#if DEBUG
 struct InfiniteCalendarView_Previews: PreviewProvider {
     static var previews: some View {
         CalendarView()
             .environmentObject(ViewRouter())
     }
 }
-
+#endif

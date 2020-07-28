@@ -6,7 +6,7 @@ target 'PlanIt' do
   use_frameworks!
 
   # Pods for PlanIt
-
+  
 # add the Firebase pod for Google Analytics
 pod 'Firebase/Auth'
 pod 'Firebase/Analytics'

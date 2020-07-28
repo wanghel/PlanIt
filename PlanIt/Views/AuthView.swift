@@ -277,6 +277,7 @@ struct SignUpView: View {
     }
 }
 
+#if DEBUG
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
 //        SignInView(profileVM: .constant(UserViewModel(profile: testUser2)))
@@ -284,3 +285,4 @@ struct SignInView_Previews: PreviewProvider {
         ContentView()
     }
 }
+#endif

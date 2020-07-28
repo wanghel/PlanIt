@@ -163,9 +163,11 @@ struct DetailView: View {
     }
 }
 
+#if DEBUG
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
         DetailView(showingDetail: .constant(true))
             .environmentObject(ViewRouter())
     }
 }
+#endif

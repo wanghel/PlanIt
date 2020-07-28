@@ -130,6 +130,7 @@ struct SearchBarView: View {
     }
 }
 
+#if DEBUG
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
         SearchView()
@@ -137,3 +138,4 @@ struct SearchView_Previews: PreviewProvider {
 //        SearchBarView()
     }
 }
+#endif

@@ -19,6 +19,13 @@ class SessionStore: ObservableObject {
         }
     }
     
+    @Published var profilePic: UIImage? {
+        didSet {
+            self.didChange.send(self)
+            self.profileRepository.updateImage(profileVM?.id ?? "", profilePic)
+        }
+    }
+    
     private var profileRepository = UserProfileRepository()
     
     var didChange = PassthroughSubject<SessionStore, Never>()
@@ -41,6 +48,19 @@ class SessionStore: ObservableObject {
                     if let profile = profile {
                         self.profileVM = UserViewModel(profile: profile)
                     }
+                    
+                    if self.profilePic == nil {
+                        self.profileRepository.fetchImage(user.uid) {
+                            (image, error) in
+                            if let error = error {
+                                print("Error while fetching user profile picture: \(error)")
+                            }
+                            if let image = image {
+                                self.profilePic = image
+                            }
+                        }
+                    }
+                    
                 }
                 print(user.uid)
                 
@@ -76,6 +96,7 @@ class SessionStore: ObservableObject {
                 }
                 completion(profile, nil)
             }
+            
         }
     }
     
@@ -103,6 +124,7 @@ class SessionStore: ObservableObject {
                 
                 completion(profile, nil)
             }
+            
         }
     }
     
@@ -112,6 +134,7 @@ class SessionStore: ObservableObject {
             Auth.auth().signInAnonymously()
             self.session = nil
             self.profileVM = nil
+            self.profilePic = nil
         }
         catch let signOutError as NSError {
             print("Error signing out: \(signOutError)")

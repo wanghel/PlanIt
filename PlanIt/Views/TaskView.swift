@@ -33,14 +33,12 @@ struct TaskView: View {
             // FIGURE IT OUT FUTURE ME
             
             ForEach (taskVM.taskCellViewModels) { taskCellVM in
-//                if self.viewRouter.dateShown.isSameDay(taskCellVM.task.dayAssigned) {
                     TaskCell(dayTaskVM: self.taskVM, taskCellVM: taskCellVM, showingDetail: self.$showingDetail, detailTaskCellVM: self.$detailTaskCellVM)
                         .padding([.horizontal,.bottom])
                         .onDisappear(perform: {
                             if taskCellVM.task.completed {
                                 self.taskVM.deleteTask(task: taskCellVM.task)
                             }})
-//                }
             }
         }
         .sheet(isPresented: self.$showingDetail) {
@@ -224,10 +222,8 @@ struct FriendTaskView: View {
             // FIGURE IT OUT FUTURE ME
             
             ForEach (taskVM.taskCellViewModels) { taskCellVM in
-//                if self.viewRouter.dateShown.isSameDay(taskCellVM.task.dayAssigned) {
                     FriendTaskCellView(dayTaskVM: self.taskVM, taskCellVM: taskCellVM/*, showingDetail: self.$showingDetail, detailTaskCellVM: self.$detailTaskCellVM*/)
                         .padding([.horizontal,.bottom])
-//                }
             }
         }
     }
@@ -351,9 +347,10 @@ struct FriendTaskCellView: View  {
 }
 
 
+#if DEBUG
 struct TaskView_Previews: PreviewProvider {
     static var previews: some View {
         TaskView()
     }
 }
-
+#endif

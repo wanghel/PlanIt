@@ -121,7 +121,7 @@ struct UserProfilesView: View {
                     
                     NavigationLink(destination:
                         FriendCalendarView(friendProfile: friendProfile)
-                            .navigationBarTitle("\(friendProfile.profile.userName ?? "")'s calendar", displayMode: .inline)) {
+                            .navigationBarTitle("\(friendProfile.profile.userName ?? "")", displayMode: .inline)) {
                                 HStack {
                                     Text("Calendar")
                                     Spacer()
@@ -146,10 +146,11 @@ struct UserProfilesView: View {
 
 
 
-
+#if DEBUG
 struct UserProfilesView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
 //        UserProfilesView(friendProfile: UserViewModel(profile: testUser3))
     }
 }
+#endif
