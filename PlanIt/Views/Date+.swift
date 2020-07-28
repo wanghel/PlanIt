@@ -1,5 +1,5 @@
 //
-//  Date+CustomComparison.swift
+//  Date+.swift
 //  PlanIt
 //
 //  Created by Helen Wang on 6/23/20.

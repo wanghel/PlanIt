@@ -47,7 +47,7 @@
 		3BD3F9EA2499807C00071FD2 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD3F9E92499807C00071FD2 /* SessionStore.swift */; };
 		3BD3F9EE24A133DD00071FD2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD3F9ED24A133DD00071FD2 /* User.swift */; };
 		3BD3F9F024A1A11500071FD2 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD3F9EF24A1A11500071FD2 /* DetailView.swift */; };
-		3BD3F9F224A2A68000071FD2 /* Date+CustomComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD3F9F124A2A68000071FD2 /* Date+CustomComparison.swift */; };
+		3BD3F9F224A2A68000071FD2 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD3F9F124A2A68000071FD2 /* Date+.swift */; };
 		3BE7642624AC36B900A3F451 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE7642524AC36B900A3F451 /* SettingsView.swift */; };
 		B1133DFB52D4C0C8850EAB65 /* Pods_PlanIt_PlanItUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50AED21F2F6133B885BEA05 /* Pods_PlanIt_PlanItUITests.framework */; };
 		D1C012135705327B625A9C27 /* Pods_PlanIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946F3C0D94FCDA674585D3E7 /* Pods_PlanIt.framework */; };
@@ -120,7 +120,7 @@
 		3BD3F9E92499807C00071FD2 /* SessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
 		3BD3F9ED24A133DD00071FD2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3BD3F9EF24A1A11500071FD2 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
-		3BD3F9F124A2A68000071FD2 /* Date+CustomComparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+CustomComparison.swift"; sourceTree = "<group>"; };
+		3BD3F9F124A2A68000071FD2 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		3BE7642524AC36B900A3F451 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4586C7ADD36D0788986F3CD0 /* Pods_PlanItTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlanItTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EC02B10D8A14E9188B3405B /* Pods-PlanIt-PlanItUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanIt-PlanItUITests.debug.xcconfig"; path = "Target Support Files/Pods-PlanIt-PlanItUITests/Pods-PlanIt-PlanItUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -220,6 +220,7 @@
 				3BED3DF124917ED800A3B586 /* Views */,
 				3B32E5B724AD2178005E55B5 /* Fonts */,
 				3BC406202481FD9B00EF74FF /* WeekdaysView.swift */,
+				3B7D140B2484485100E30EDF /* MonthView.swift */,
 				3B1EABC22492F9FB00A610CB /* UserProfile.swift */,
 				3B7091532481943E0007C1EF /* Assets.xcassets */,
 				3B7091582481943E0007C1EF /* LaunchScreen.storyboard */,
@@ -271,8 +272,7 @@
 				3B7D1413248718CA00E30EDF /* CalendarView.swift */,
 				3B5D0F1F24A7F894002FA7B6 /* TaskView.swift */,
 				3BB86C3724CB325C00D00CB0 /* ImagePickerView.swift */,
-				3BD3F9F124A2A68000071FD2 /* Date+CustomComparison.swift */,
-				3B7D140B2484485100E30EDF /* MonthView.swift */,
+				3BD3F9F124A2A68000071FD2 /* Date+.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -589,7 +589,7 @@
 				3B32E5C124AEB0A9005E55B5 /* UserProfilesView.swift in Sources */,
 				3B32E5B624AD1479005E55B5 /* SearchView.swift in Sources */,
 				3B1EABDC2497F5E600A610CB /* Task.swift in Sources */,
-				3BD3F9F224A2A68000071FD2 /* Date+CustomComparison.swift in Sources */,
+				3BD3F9F224A2A68000071FD2 /* Date+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

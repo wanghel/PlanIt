@@ -63,7 +63,6 @@ struct SettingsView: View {
                     
                     Button(action: {
                         self.session.signOut()
-//                        self.profileVM = UserViewModel(profile: User(id: ""))
                         self.viewRouter.showSignIn = true
                     }){
                         HStack {

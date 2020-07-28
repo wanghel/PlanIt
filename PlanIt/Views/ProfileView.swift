@@ -12,8 +12,6 @@ struct ProfileView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var session: SessionStore
     
-//    @State var image = Image(systemName: "person.crop.circle.fill")
-    
     func getUser() {
         session.listen()
     }
@@ -271,6 +269,7 @@ struct ProfileEditView: View {
                     .foregroundColor(.white)
         })
             .sheet(isPresented: $showImagePicker) {
+                
                 ImagePickerView(sourceType: .photoLibrary) { image in
                     self.image = image
                 }

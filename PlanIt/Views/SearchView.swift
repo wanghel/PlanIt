@@ -52,10 +52,10 @@ struct SearchView: View {
                     .background(darkestBackground)
                     
                     ScrollView {
-                        // IDK WHY DOING THIS MAKES THE DATA LOAD
+                        // FORCES SCROLLVIEW TO SHOW IN CASE ARRAY IS EMPTY
                         Text("")
                             .frame(width: screenWidth, height: 0)
-                        // FIGURE IT OUT FUTURE ME
+                        // FORCES SCROLLVIEW TO SHOW IN CASE ARRAY IS EMPTY
                         
                         VStack (spacing: 0){
                             

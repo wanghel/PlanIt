@@ -10,16 +10,13 @@ import SwiftUI
 
 struct AuthView: View {
     @EnvironmentObject var viewRouter: ViewRouter
-//    @Binding var profileVM: UserViewModel?
     
     var body: some View {
         ZStack {
             
-//            SignInView(profileVM: $profileVM)
             SignInView()
             
             if viewRouter.showSignUp {
-//                SignUpView(profile: $profileVM)
                 SignUpView()
                 .transition(.opacity)
                 .animation(.default)
@@ -37,7 +34,6 @@ struct SignInView: View {
     @State var password: String = ""
     @State var error: String = ""
     
-//    @Binding var profileVM: UserViewModel?
     
     func signIn() {
         session.signIn(email: email, password: password) { (result, error) in
@@ -47,7 +43,6 @@ struct SignInView: View {
             else {
                 self.email = ""
                 self.password = ""
-//                self.profileVM = UserViewModel(profile: result ?? User(id: ""))
                 self.session.profileVM = UserViewModel(profile: result ?? User(id: ""))
                 self.viewRouter.showSignIn.toggle()
             }
@@ -132,7 +127,6 @@ struct SignUpView: View {
     @State var name: String = ""
     @State var bio: String = ""
     
-//    @Binding var profileVM: UserViewModel?
     
     @ObservedObject var userProfilesVM = UserProfilesViewModel()
     
@@ -158,7 +152,6 @@ struct SignUpView: View {
                 } else {
                     self.email = ""
                     self.password = ""
-//                    self.profileVM = UserViewModel(profile: result ?? User(id: ""))
                     self.session.profileVM = UserViewModel(profile: result ?? User(id: ""))
                     self.viewRouter.showSignIn.toggle()
                     self.viewRouter.showSignUp.toggle()

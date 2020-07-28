@@ -57,35 +57,18 @@ class CalendarMonthViewModel: ObservableObject {
         }
     }
     
-//    func nextMonth() -> CalendarMonthViewModel {
-//        //let nMonth = (calendarMonth.month-1+1)%12+1
-//        let nMonth = (calendarMonth.month)%12+1
-//        let next = CalendarMonthViewModel(calendarMonth: CalendarMonth(month: nMonth, year: nMonth == 1 ? calendarMonth.year+1 : calendarMonth.year))
-//        return next
-//    }
-//
-//    func prevMonth() -> CalendarMonthViewModel {
-//        //let pMonth = (calendarMonth.month-1+11)%12+1
-//        let pMonth = (calendarMonth.month+10)%12+1
-//        let prev = CalendarMonthViewModel(calendarMonth: CalendarMonth(month: pMonth, year: pMonth == 12 ? calendarMonth.year-1 : calendarMonth.year))
-//        return prev
-//    }
     
     func nextMonth() {
-        //let nMonth = (calendarMonth.month-1+1)%12+1
-//        print("NEXT MONTH WORKED")
         let nMonth = (calendarMonth.month)%12+1
         calendarMonth = CalendarMonth(month: nMonth, year: nMonth == 1 ? calendarMonth.year+1 : calendarMonth.year)
     }
     
     func prevMonth() {
-        //let pMonth = (calendarMonth.month-1+11)%12+1
         let pMonth = (calendarMonth.month+10)%12+1
         calendarMonth = CalendarMonth(month: pMonth, year: pMonth == 12 ? calendarMonth.year-1 : calendarMonth.year)
     }
     
     func getDays() -> [[Int]] {
-//        print("called get days")
         var days : [[Int]] = Array(repeating: Array(repeating: 0, count: 7), count: 6)
         let firstWeekday = self.getFirstWeekDay()
         let dayOfMonth = self.getDaysOfMonth()

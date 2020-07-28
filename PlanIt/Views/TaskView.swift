@@ -27,10 +27,10 @@ struct TaskView: View {
     
     var body: some View {
         VStack (spacing: 0) {
-            // IDK WHY DOING THIS MAKES THE DATA LOAD
+            // FORCES SCROLLVIEW TO SHOW IN CASE ARRAY IS EMPTY
             Text("")
                 .frame(width: screenWidth, height: 0)
-            // FIGURE IT OUT FUTURE ME
+            // FORCES SCROLLVIEW TO SHOW IN CASE ARRAY IS EMPTY
             
             ForEach (taskVM.taskCellViewModels) { taskCellVM in
                     TaskCell(dayTaskVM: self.taskVM, taskCellVM: taskCellVM, showingDetail: self.$showingDetail, detailTaskCellVM: self.$detailTaskCellVM)
@@ -219,10 +219,10 @@ struct FriendTaskView: View {
     
     var body: some View {
         VStack {
-            // IDK WHY DOING THIS MAKES THE DATA LOAD
+            // FORCES SCROLLVIEW TO SHOW IN CASE ARRAY IS EMPTY
             Text("")
                 .frame(width: screenWidth, height: 0)
-            // FIGURE IT OUT FUTURE ME
+            // FORCES SCROLLVIEW TO SHOW IN CASE ARRAY IS EMPTY
             
             ForEach (taskVM.taskCellViewModels) { taskCellVM in
                     FriendTaskCellView(dayTaskVM: self.taskVM, taskCellVM: taskCellVM/*, showingDetail: self.$showingDetail, detailTaskCellVM: self.$detailTaskCellVM*/)
