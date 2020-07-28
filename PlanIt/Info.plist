@@ -36,8 +36,6 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Andromeda-eR2n.ttf</string>
-		<string>Omegacentauri-Eaapj.ttf</string>
-		<string>EarthOrbiterExtraBold-azvJ.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

@@ -38,8 +38,6 @@
 		3BAA810024BF807D00A239D6 /* CalendarWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAA80FF24BF807D00A239D6 /* CalendarWeek.swift */; };
 		3BAA810224BF80F300A239D6 /* CalendarWeekViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAA810124BF80F300A239D6 /* CalendarWeekViewModel.swift */; };
 		3BB86C3824CB325C00D00CB0 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB86C3724CB325C00D00CB0 /* ImagePickerView.swift */; };
-		3BB86C3E24CFB99600D00CB0 /* Omegacentauri-Eaapj.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3BB86C3D24CFB99600D00CB0 /* Omegacentauri-Eaapj.ttf */; };
-		3BB86C4024CFBA0800D00CB0 /* EarthOrbiterExtraBold-azvJ.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3BB86C3F24CFBA0800D00CB0 /* EarthOrbiterExtraBold-azvJ.otf */; };
 		3BC406212481FD9B00EF74FF /* WeekdaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC406202481FD9B00EF74FF /* WeekdaysView.swift */; };
 		3BC406272482174D00EF74FF /* CalendarMonthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC406262482174D00EF74FF /* CalendarMonthViewModel.swift */; };
 		3BD3F9E02498127B00071FD2 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD3F9DF2498127B00071FD2 /* ViewRouter.swift */; };
@@ -112,8 +110,6 @@
 		3BAA80FF24BF807D00A239D6 /* CalendarWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWeek.swift; sourceTree = "<group>"; };
 		3BAA810124BF80F300A239D6 /* CalendarWeekViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWeekViewModel.swift; sourceTree = "<group>"; };
 		3BB86C3724CB325C00D00CB0 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
-		3BB86C3D24CFB99600D00CB0 /* Omegacentauri-Eaapj.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omegacentauri-Eaapj.ttf"; sourceTree = "<group>"; };
-		3BB86C3F24CFBA0800D00CB0 /* EarthOrbiterExtraBold-azvJ.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EarthOrbiterExtraBold-azvJ.otf"; sourceTree = "<group>"; };
 		3BC406202481FD9B00EF74FF /* WeekdaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysView.swift; sourceTree = "<group>"; };
 		3BC406262482174D00EF74FF /* CalendarMonthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonthViewModel.swift; sourceTree = "<group>"; };
 		3BD3F9DF2498127B00071FD2 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
@@ -184,8 +180,6 @@
 			isa = PBXGroup;
 			children = (
 				3B32E5B824AD21BD005E55B5 /* Andromeda-eR2n.ttf */,
-				3BB86C3D24CFB99600D00CB0 /* Omegacentauri-Eaapj.ttf */,
-				3BB86C3F24CFBA0800D00CB0 /* EarthOrbiterExtraBold-azvJ.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -428,10 +422,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B70915A2481943E0007C1EF /* LaunchScreen.storyboard in Resources */,
-				3BB86C4024CFBA0800D00CB0 /* EarthOrbiterExtraBold-azvJ.otf in Resources */,
 				3B7991EE24901AF30003B302 /* GoogleService-Info.plist in Resources */,
 				3B7091572481943E0007C1EF /* Preview Assets.xcassets in Resources */,
-				3BB86C3E24CFB99600D00CB0 /* Omegacentauri-Eaapj.ttf in Resources */,
 				3B7091542481943E0007C1EF /* Assets.xcassets in Resources */,
 				3B32E5B924AD21BD005E55B5 /* Andromeda-eR2n.ttf in Resources */,
 			);
