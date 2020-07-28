@@ -1,6 +1,4 @@
 # PlanIt
-Calendar reminder iOS app
-
 > PlanIt is a ToDo list app developed using Swift4, Xcode 11, iOS 13, and Firebase.
 
 This project was made for fun to familiarize myself with SwiftUI and using MVVM design. <br />
