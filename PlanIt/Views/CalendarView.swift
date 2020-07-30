@@ -17,7 +17,6 @@ struct CalendarView: View {
     
     let monthArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     
-    
     var body: some View {
         NavigationView {
             ZStack {
@@ -77,20 +76,7 @@ struct CalendarView: View {
                 Button(action: {
                     self.viewRouter.viewProfile = true
                 }){
-//                    Image(systemName: "person.crop.circle.fill")
-//                        .font(.system(size: 25))
-//                        .foregroundColor(.white)
-//                        .opacity(0.9)
-//                        .padding([.bottom, .horizontal])
-                    
-                    Image(uiImage: session.profilePic ?? UIImage())
-                        .renderingMode(.original)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .opacity(0.9)
-                        .frame(width: 32, height: 32)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.gray, lineWidth: 1).frame(width: 32, height: 32))
+                    ProfilePicView(image: session.profilePic, size: 32)
                         .padding()
                     
                 }, trailing:
@@ -421,7 +407,7 @@ struct FriendCalendarView: View {
             
             VStack {
                 Text("\(monthArr[(viewRouter.dateShown.get(.month)+11)%12]) \(String(viewRouter.dateShown.get(.year)))")
-                    .font(Font.custom("andromeda", size: 23))
+                    .font(.custom("andromeda", size: 23))
                     .padding()
                     .frame(width: screenWidth, alignment: .center)
                     .background(darkestBackground)

@@ -10,16 +10,17 @@ import Foundation
 import Combine
 
 class UserProfilesViewModel : ObservableObject {
-    @Published var userProfileRepository = UserProfileRepository()
+    @Published var userProfileRepository: UserProfileRepository //= UserProfileRepository()
     @Published var userVM = [UserViewModel]()
     
     private var cancellables = Set<AnyCancellable>()
     
-    init() {
+    init(userProfileRepository: UserProfileRepository) {
+        self.userProfileRepository = userProfileRepository
 //        print("created from USER PROFILES VM")
         userProfileRepository.$userProfiles.map { profiles in
             profiles.map { profile in
-                UserViewModel(profile: profile)
+                UserViewModel(profile: profile, userProfileRepository: userProfileRepository)
             }
         }
         .assign(to: \.userVM, on: self)

@@ -12,6 +12,8 @@ struct ProfileView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var session: SessionStore
     
+    @ObservedObject var userProfilesVM = UserProfilesViewModel(userProfileRepository: UserProfileRepository())
+    
     func getUser() {
         session.listen()
     }
@@ -22,7 +24,7 @@ struct ProfileView: View {
                 darkerBackground
                     .edgesIgnoringSafeArea(.all)
                 
-                ProfileMainView()
+                ProfileMainView(userProfilesVM: userProfilesVM)
                 
                 
                 if self.viewRouter.showSignIn {
@@ -74,7 +76,7 @@ struct ProfileView: View {
 struct ProfileMainView: View {
     @EnvironmentObject var session: SessionStore
     
-    @ObservedObject var userProfilesVM = UserProfilesViewModel()
+    @ObservedObject var userProfilesVM: UserProfilesViewModel //= UserProfilesViewModel()
     
     func getUser() {
         print("on appear get user")
@@ -82,17 +84,18 @@ struct ProfileMainView: View {
     }
     
     // !!! DOESN'T WORK YET !!!
-    func getFriendProfilePic(friend: UserViewModel) -> Image {
-        friend.fetchProfilePic()
-        
-        if let image = friend.profilePic {
-            print("succeed")
-            return Image(uiImage: image)
-        } else {
-            print("failed")
-            return Image(systemName: "person.crop.circle.fill")
-        }
-    }
+//    func getFriendProfilePic(friend: UserViewModel) -> Image {
+//        friend.fetchProfilePic()
+//
+//        if let image = friend.profilePic {
+//            print("succeed")
+//            return Image(uiImage: image)
+//        } else {
+//            print("failed")
+//            return Image(systemName: "person.crop.circle.fill")
+//        }
+//    }
+    
     
     var body: some View {
         ZStack {
@@ -101,14 +104,7 @@ struct ProfileMainView: View {
             
             ScrollView {
                 VStack {
-                    
-                    Image(uiImage: session.profilePic ?? UIImage())
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .opacity(0.9)
-                        .frame(width: 160, height: 160)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.gray, lineWidth: 4).frame(width: 160, height: 160))
+                    ProfilePicView(image: session.profilePic, size: 160)
                     
                     
                     Text(session.profileVM?.profile.name ?? "").font(.title)
@@ -127,11 +123,11 @@ struct ProfileMainView: View {
                         }
                         
                         ForEach(session.profileVM?.friends ?? [], id: \.self) { friend in
-                            NavigationLink(destination: UserProfilesView(friendProfile: UserViewModel(profile: friend)) ) {
+                            NavigationLink(destination: UserProfilesView(userProfilesVM: self.userProfilesVM, friendProfile: UserViewModel(profile: friend, userProfileRepository: self.userProfilesVM.userProfileRepository)) ) {
                                 HStack {
-//                                    Image(systemName: "person.crop.circle.fill")
+                                    Image(systemName: "person.crop.circle.fill")
                                     //!!! DOESN"T WORK YET !!!
-                                    self.getFriendProfilePic(friend: UserViewModel(profile: friend))
+//                                    self.getFriendProfilePic(friend: UserViewModel(profile: friend))
                                     Text("\(friend.name ?? "")")
                                     Spacer()
                                     Image(systemName: "chevron.right")
@@ -177,14 +173,6 @@ struct ProfileEditView: View {
         self.presentationMode.wrappedValue.dismiss()
     }
     
-    func getProfilePic() -> Image {
-        if image == nil {
-            return Image(systemName: "person.crop.circle.fill")
-        } else {
-            return Image(uiImage: image ?? UIImage())
-        }
-    }
-    
     var body: some View {
         ZStack {
             darkerBackground
@@ -195,14 +183,7 @@ struct ProfileEditView: View {
                     
                     HStack {
                         Button(action: {self.showImagePicker.toggle()}) {
-                            getProfilePic()
-                                .renderingMode(.original)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .opacity(0.9)
-                                .frame(width: 160, height: 160)
-                                .clipShape(Circle())
-                                .overlay(Circle().stroke(Color.gray, lineWidth: 4).frame(width: 160, height: 160))
+                            ProfilePicView(image: image, size: 160)
                         }
                     }
                     .padding()
@@ -263,6 +244,7 @@ struct ProfileEditView: View {
                     
                     self.session.profilePic = self.image
                 }
+                sleep(1)
                 self.goBack()
             }) {
                 Text("Done")
@@ -281,7 +263,7 @@ struct ProfileEditView: View {
 #if DEBUG
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileMainView()
+        ProfileMainView(userProfilesVM: UserProfilesViewModel(userProfileRepository: UserProfileRepository()))
             .environmentObject(SessionStore())
             .environmentObject(ViewRouter())
 

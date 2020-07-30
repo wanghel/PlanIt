@@ -11,7 +11,7 @@ import SwiftUI
 struct UserProfilesView: View {
     @EnvironmentObject var session: SessionStore
     
-    @ObservedObject var userProfilesVM = UserProfilesViewModel()
+    @ObservedObject var userProfilesVM: UserProfilesViewModel //= UserProfilesViewModel(userProfileRepository: UserProfileRepository())
     @ObservedObject var friendProfile: UserViewModel
     
     func isFriend(friendId: String) -> Bool {
@@ -23,6 +23,18 @@ struct UserProfilesView: View {
         return false
     }
     
+    func setProfilePic() {
+        userProfilesVM.userProfileRepository.fetchImage(friendProfile.id) { (image, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                self.friendProfile.profilePic = image
+            }
+        }
+    }
+    
+    
     var body: some View {
         ZStack {
             darkerBackground
@@ -33,9 +45,8 @@ struct UserProfilesView: View {
                 VStack {
                     
                     HStack {
-                        Image(systemName: "person.crop.circle.fill")
-                            .resizable()
-                            .frame(width: 150, height: 150)
+                        ProfilePicView(image: self.friendProfile.profilePic, size: 160)
+                            .padding()
                         
                         Spacer()
                         
@@ -141,6 +152,7 @@ struct UserProfilesView: View {
             
         }
         .foregroundColor(.white)
+//        .onAppear(perform: setProfilePic)
     }
 }
 

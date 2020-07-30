@@ -12,7 +12,7 @@ import UIKit
 
 class UserViewModel: ObservableObject, Identifiable {
     
-    @Published var userProfileRepository = UserProfileRepository()
+    @Published var userProfileRepository: UserProfileRepository //= UserProfileRepository()
     @Published var profile: User
     @Published var profilePic: UIImage?
     @Published var friends = [User]()
@@ -23,7 +23,8 @@ class UserViewModel: ObservableObject, Identifiable {
     
     var id = ""
   
-    init(profile: User) {
+    init(profile: User, userProfileRepository: UserProfileRepository) {
+        self.userProfileRepository = userProfileRepository
         self.profile = profile
         
         $profile.compactMap { profile in
@@ -42,12 +43,24 @@ class UserViewModel: ObservableObject, Identifiable {
         }
         .store(in: &cancellables)
         
+        
         fetchFriendProfiles()
+        
+        userProfileRepository.fetchImage(profile.id) { (image, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                self.profilePic = image
+            }
+        }
+        
     }
     
     func fetchFriendProfiles() {
+        print("fetched friends")
         self.friends.removeAll()
-        
+
         for friend in profile.friends ?? [] {
             self.userProfileRepository.fetchProfile(userId: friend) { (profile, error) in
                 if let error = error {
@@ -63,18 +76,18 @@ class UserViewModel: ObservableObject, Identifiable {
     }
     
     
-    func fetchProfilePic() {
-        self.userProfileRepository.fetchImage(profile.id) {
-            (image, error) in
-            if let error = error {
-                print("Error while fetching user profile picture: \(error.localizedDescription)")
-            }
-
-            if let image = image {
-                print("set image")
-                self.profilePic = image
-            }
-        }
-    }
+//    func fetchProfilePic() {
+//        self.userProfileRepository.fetchImage(profile.id) {
+//            (image, error) in
+//            if let error = error {
+//                print("Error while fetching user profile picture: \(error.localizedDescription)")
+//            }
+//
+//            if let image = image {
+//                print("set image \(self.profile.id)")
+//                self.profilePic = image
+//            }
+//        }
+//    }
     
 }

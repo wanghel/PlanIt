@@ -11,7 +11,7 @@ import SwiftUI
 struct SearchView: View {
     @EnvironmentObject var session: SessionStore
     @ObservedObject var dayTaskVM = TaskViewModel(taskRepository: TaskRepository())
-    @ObservedObject var userProfilesVM = UserProfilesViewModel()
+    @ObservedObject var userProfilesVM = UserProfilesViewModel(userProfileRepository: UserProfileRepository())
     
     @State var searchText = ""
     @State var searchUsers = true
@@ -63,15 +63,15 @@ struct SearchView: View {
                                 ForEach (userProfilesVM.userVM.filter{$0.profile.userName?.lowercased().contains(searchText.lowercased()) ?? false && $0.profile.id != session.profileVM?.profile.id}) { userVM in
                                     
                                     NavigationLink (destination:
-                                        UserProfilesView(friendProfile: userVM)
-                                        .foregroundColor(.black)) {
-                                            HStack {
-                                                Text(userVM.profile.userName ?? "")
-                                                    .padding()
-                                                Spacer()
-                                                Image(systemName: "chevron.right")
-                                                .padding()
-                                            }
+                                        UserProfilesView(userProfilesVM: self.userProfilesVM, friendProfile: userVM)
+                                            .foregroundColor(.black)) {
+                                                HStack {
+                                                    Text(userVM.profile.userName ?? "")
+                                                        .padding()
+                                                    Spacer()
+                                                    Image(systemName: "chevron.right")
+                                                        .padding()
+                                                }
                                     }
                                     .padding(.horizontal)
                                     

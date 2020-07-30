@@ -19,7 +19,7 @@ struct SplashView: View {
             VStack {
                 Spacer ()
                 Text("PlanIt")
-                    .font(Font.custom("andromeda", size: 40))
+                    .font(.custom("andromeda", size: 40))
                 Spacer ()
             }
         }

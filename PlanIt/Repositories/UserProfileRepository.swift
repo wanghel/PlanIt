@@ -75,7 +75,11 @@ class UserProfileRepository: ObservableObject {
             let ref = Storage.storage().reference(withPath: "images/\(id).jpg")
             print("get image: images/\(id).jpg")
             ref.getData(maxSize: 4 * 1024 * 1024) { data, error in
-                completion(UIImage(data: data ?? Data()), error)
+                if let data = data {
+                    completion(UIImage(data: data), error)
+                } else {
+                    completion(nil, error)
+                }
             }
             
         }

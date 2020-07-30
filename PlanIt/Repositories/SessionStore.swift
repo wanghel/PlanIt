@@ -41,19 +41,19 @@ class SessionStore: ObservableObject {
             if let user = user {
                 self.profileRepository.fetchProfile(userId: user.uid) { (profile, error) in
                     if let error = error {
-                        print("Error while fetching the user profile: \(error)")
-                        self.profileVM = UserViewModel(profile: User(id: user.uid))
+                        print("Error while fetching the user profile: \(error.localizedDescription)")
+                        self.profileVM = UserViewModel(profile: User(id: user.uid), userProfileRepository: self.profileRepository)
                     }
                     
                     if let profile = profile {
-                        self.profileVM = UserViewModel(profile: profile)
+                        self.profileVM = UserViewModel(profile: profile, userProfileRepository: self.profileRepository)
                     }
                     
                     if self.profilePic == nil {
                         self.profileRepository.fetchImage(user.uid) {
                             (image, error) in
                             if let error = error {
-                                print("Error while fetching user profile picture: \(error)")
+                                print("Error while fetching user profile picture: \(error.localizedDescription)")
                             }
                             if let image = image {
                                 self.profilePic = image
@@ -92,7 +92,7 @@ class SessionStore: ObservableObject {
                     return
                 }
                 if let profile = profile {
-                    self.profileVM = UserViewModel(profile: profile)
+                    self.profileVM = UserViewModel(profile: profile, userProfileRepository: self.profileRepository)
                 }
                 completion(profile, nil)
             }
@@ -119,7 +119,7 @@ class SessionStore: ObservableObject {
                 }
                 
                 if let profile = profile {
-                    self.profileVM = UserViewModel(profile: profile)
+                    self.profileVM = UserViewModel(profile: profile, userProfileRepository: self.profileRepository)
                 }
                 
                 completion(profile, nil)

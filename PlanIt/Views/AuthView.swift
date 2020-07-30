@@ -43,7 +43,7 @@ struct SignInView: View {
             else {
                 self.email = ""
                 self.password = ""
-                self.session.profileVM = UserViewModel(profile: result ?? User(id: ""))
+                self.session.profileVM = UserViewModel(profile: result ?? User(id: ""), userProfileRepository: UserProfileRepository())
                 self.viewRouter.showSignIn.toggle()
             }
         }
@@ -128,7 +128,7 @@ struct SignUpView: View {
     @State var bio: String = ""
     
     
-    @ObservedObject var userProfilesVM = UserProfilesViewModel()
+    @ObservedObject var userProfilesVM = UserProfilesViewModel(userProfileRepository: UserProfileRepository())
     
     func signUp() {
         var completeSignUp = true
@@ -152,7 +152,7 @@ struct SignUpView: View {
                 } else {
                     self.email = ""
                     self.password = ""
-                    self.session.profileVM = UserViewModel(profile: result ?? User(id: ""))
+                    self.session.profileVM = UserViewModel(profile: result ?? User(id: ""), userProfileRepository: self.userProfilesVM.userProfileRepository)
                     self.viewRouter.showSignIn.toggle()
                     self.viewRouter.showSignUp.toggle()
                 }

@@ -35,6 +35,7 @@
 		3B7991EE24901AF30003B302 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B7991ED24901AF30003B302 /* GoogleService-Info.plist */; };
 		3B7D140C2484485100E30EDF /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7D140B2484485100E30EDF /* MonthView.swift */; };
 		3B7D1414248718CA00E30EDF /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7D1413248718CA00E30EDF /* CalendarView.swift */; };
+		3B82E51424D262B1009E8531 /* ProfilePicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B82E51324D262B1009E8531 /* ProfilePicView.swift */; };
 		3BAA810024BF807D00A239D6 /* CalendarWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAA80FF24BF807D00A239D6 /* CalendarWeek.swift */; };
 		3BAA810224BF80F300A239D6 /* CalendarWeekViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAA810124BF80F300A239D6 /* CalendarWeekViewModel.swift */; };
 		3BB86C3824CB325C00D00CB0 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB86C3724CB325C00D00CB0 /* ImagePickerView.swift */; };
@@ -108,6 +109,7 @@
 		3B7991ED24901AF30003B302 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B7D140B2484485100E30EDF /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
 		3B7D1413248718CA00E30EDF /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		3B82E51324D262B1009E8531 /* ProfilePicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePicView.swift; sourceTree = "<group>"; };
 		3BAA80FF24BF807D00A239D6 /* CalendarWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWeek.swift; sourceTree = "<group>"; };
 		3BAA810124BF80F300A239D6 /* CalendarWeekViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWeekViewModel.swift; sourceTree = "<group>"; };
 		3BB86C3724CB325C00D00CB0 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				3B1EABD92494A1E200A610CB /* HomeView.swift */,
 				3BD3F9E324995F9900071FD2 /* AuthView.swift */,
 				3B1EABC62492FD0D00A610CB /* ProfileView.swift */,
+				3B82E51324D262B1009E8531 /* ProfilePicView.swift */,
 				3B32E5C024AEB0A9005E55B5 /* UserProfilesView.swift */,
 				3B7D1413248718CA00E30EDF /* CalendarView.swift */,
 				3B5D0F1F24A7F894002FA7B6 /* TaskView.swift */,
@@ -590,6 +593,7 @@
 				3B32E5B624AD1479005E55B5 /* SearchView.swift in Sources */,
 				3B1EABDC2497F5E600A610CB /* Task.swift in Sources */,
 				3BD3F9F224A2A68000071FD2 /* Date+.swift in Sources */,
+				3B82E51424D262B1009E8531 /* ProfilePicView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
